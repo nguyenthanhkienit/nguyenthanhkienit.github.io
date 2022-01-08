@@ -47,27 +47,20 @@ function send_mail() {
     if (flag == 1) {
         return false;
     }
+    else {
+        Email.send({
+            Host: "smtp.gmail.com",
+            Username: "kay.mailserver@gmail.com",
+            Password: "occignczmssovelf",
+            To: 'thanhkien76qn@gmail.com',
+            From: email,
+            Subject: subject,
+            Body: message,
+          })
+            .then(function (message) {
+              alert("Mail sent successfully")
+            });
+    }
 
-    var data = {
-        "name": name,
-        "email": email,
-        "subject": subject,
-        "message": message,
-    };
-
-    jQuery.ajax({
-        type: "POST",
-        crossOrigin: true,
-        url: "process_form.php",
-        data: data,
-        success: function(response) {
-            if (response == '1') {
-                jQuery('#suce_message').show();
-                jQuery("#contact-form")[0].reset();
-            } else {
-                jQuery('#err_message').show();
-            }
-        }
-    });
 
 }
