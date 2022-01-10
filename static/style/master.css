@@ -6212,6 +6212,48 @@ h6 {
 }
 
 
+
+/*  ------------ What We Do ------------ */
+ .do-wrap{
+
+    border: #E0A80D 2px solid;
+    margin-bottom: 10px;
+    border-radius:5px;
+}
+	
+ .do-wrap > .top{
+	width:100%;
+	height:40px;
+	display:block;
+}
+ .do-wrap span{
+  border-radius: 100px;
+  display: inline-block;
+  height: 90px;
+  margin-bottom: 2px;
+  margin-top: -40px;
+  width: 90px;
+  
+}
+ .do-wrap span i{
+	color: #E0A80D;
+	font-size:45px;
+	line-height: 85px;
+	display:block;
+}
+ .do-wrap h4{
+	margin-bottom:15px;
+}		
+ .do-wrap p,
+.white-box p{
+	margin:0 15px;
+    margin-bottom: 30px;
+}
+
+
+/* ------------ What We Do ------------ */
+
+
 /* education
 ------------------*/
 
