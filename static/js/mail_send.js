@@ -21,7 +21,7 @@ function send_mail() {
     } else if (!email.match(mailformat)) {
         jQuery("#email").addClass('invalid');
         jQuery("#val_user_email").html("Please Enter Valid Email");
-        flag = 1;
+        flag = 2;
     } else {
         jQuery("#email").removeClass('invalid');
         jQuery("#val_user_email").html("");
@@ -45,8 +45,13 @@ function send_mail() {
     }
 
     if (flag == 1) {
-        return false;
-    }
+        setTimeout(() =>{alert("Please enter full information.")},500)
+     }
+  else{
+    if (flag == 2) {
+        setTimeout(() =>{alert("Please enter correct email format.")},500)
+     }
+  
     else {
         Email.send({
             Host: "smtp.gmail.com",
@@ -58,9 +63,8 @@ function send_mail() {
             Body: message,
           })
             .then(function (message) {
-              alert("Mail sent successfully")
+              alert("Message has been sent successfully.")
             });
     }
-
-
+  }
 }
