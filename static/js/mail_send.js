@@ -27,14 +27,14 @@ function send_mail() {
         jQuery("#val_user_email").html("");
     }
 
-    if (subject == "") {
-        jQuery("#subject").addClass('invalid');
-        jQuery("#val_subject").html("Subject is Required");
-        flag = 1;
-    } else {
-        jQuery("#subject").removeClass('invalid');
-        jQuery("#val_subject").html("");
-    }
+    // if (subject == "") {
+    //     jQuery("#subject").addClass('invalid');
+    //     jQuery("#val_subject").html("Subject is Required");
+    //     flag = 1;
+    // } else {
+    //     jQuery("#subject").removeClass('invalid');
+    //     jQuery("#val_subject").html("");
+    // }
     if (message == "") {
         jQuery("#message").addClass('invalid');
         jQuery("#val_message").html("Please Describe your thoughts");
@@ -56,7 +56,7 @@ function send_mail() {
                     Password: "occignczmssovelf",
                     To: 'thanhkien76qn@gmail.com',
                     From: email,
-                    Subject: subject,
+                    Subject: 'nguyenthanhkienit.github.io',
                     Body: message,
                 })
                 .then(function(message) {
