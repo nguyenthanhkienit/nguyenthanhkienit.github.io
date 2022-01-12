@@ -27,14 +27,14 @@ function send_mail() {
         jQuery("#val_user_email").html("");
     }
 
-    // if (subject == "") {
-    //     jQuery("#subject").addClass('invalid');
-    //     jQuery("#val_subject").html("Subject is Required");
-    //     flag = 1;
-    // } else {
-    //     jQuery("#subject").removeClass('invalid');
-    //     jQuery("#val_subject").html("");
-    // }
+    if (subject == "") {
+        jQuery("#subject").addClass('invalid');
+        jQuery("#val_subject").html("Subject is Required");
+        flag = 1;
+    } else {
+        jQuery("#subject").removeClass('invalid');
+        jQuery("#val_subject").html("");
+    }
     if (message == "") {
         jQuery("#message").addClass('invalid');
         jQuery("#val_message").html("Please Describe your thoughts");
@@ -45,26 +45,23 @@ function send_mail() {
     }
 
     if (flag == 1) {
-        setTimeout(() =>{alert("Please enter full information.")},500)
-     }
-  else{
-    if (flag == 2) {
-        setTimeout(() =>{alert("Please enter correct email format.")},500)
-     }
-  
-    else {
-        Email.send({
-            Host: "smtp.gmail.com",
-            Username: "kay.mailserver@gmail.com",
-            Password: "occignczmssovelf",
-            To: 'thanhkien76qn@gmail.com',
-            From: email,
-            Subject: 'Mail',
-            Body: message,
-          })
-            .then(function (message) {
-              alert("Message has been sent successfully.")
-            });
+        setTimeout(() => { alert("Please enter full information.") }, 500)
+    } else {
+        if (flag == 2) {
+            setTimeout(() => { alert("Please enter correct email format.") }, 500)
+        } else {
+            Email.send({
+                    Host: "smtp.gmail.com",
+                    Username: "kay.mailserver@gmail.com",
+                    Password: "occignczmssovelf",
+                    To: 'thanhkien76qn@gmail.com',
+                    From: email,
+                    Subject: subject,
+                    Body: message,
+                })
+                .then(function(message) {
+                    alert("Message has been sent successfully.")
+                });
+        }
     }
-  }
 }
