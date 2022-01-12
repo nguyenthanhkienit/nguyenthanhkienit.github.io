@@ -6135,7 +6135,8 @@ h6 {
 /* fun
 ------------------*/
 
-.feature-box-2 {
+
+/* .feature-box-2 {
     padding: 18px 15px;
     border-radius: 5px;
     background: #ffffff;
@@ -6177,7 +6178,8 @@ h6 {
 /* Skills
 ------------------*/
 
-.skills-content {
+
+/* .skills-content {
     margin-left: -10px;
     shape-margin: -10px;
 }
@@ -6212,13 +6214,12 @@ h6 {
     .skills-box .portfolio-info h5 {
         font-size: 20px;
     }
-}
+}  */
 
 
 /*  ------------ What We Do ------------ */
 
 .do-wrap {
-    border: #E0A80D 2px solid;
     margin-bottom: 10px;
     border-radius: 5px;
     margin-top: 10px;
@@ -6254,6 +6255,42 @@ h6 {
 .white-box p {
     margin: 0 15px;
     margin-bottom: 30px;
+}
+
+
+/* do-wrap_hardware */
+
+.do-wrap_hardware {
+    border: #E0A80D 2px solid;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.do-wrap_hardware>.top {
+    width: 100%;
+    height: 40px;
+    display: block;
+}
+
+.do-wrap_hardware span {
+    border-radius: 100px;
+    display: inline-block;
+    height: 90px;
+    margin-bottom: 2px;
+    margin-top: -40px;
+    width: 90px;
+}
+
+.do-wrap_hardware span i {
+    color: #E0A80D;
+    font-size: 45px;
+    line-height: 85px;
+    display: block;
+}
+
+.do-wrap_hardware h4 {
+    margin-bottom: 15px;
 }
 
 
