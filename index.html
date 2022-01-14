@@ -112,7 +112,10 @@
                         <div class="ht-text">
                             <h6>Hello there...</h6>
                             <h1>I'm... </h1>
-                            <h2>Software Developer and Website Developer<span id="type-it"></span></h2>
+                            <!-- <iframe src="https://calendar.google.com/calendar/embed?src=thanhkien76qn%40gmail.com&ctz=Asia%2FHo_Chi_Minh" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe> -->
+                            <h2>
+                                <div id="type-it"></div>
+                            </h2>
                             <!-- <p>The namics of how users interact with interactive elements within a user interface flow chart based on container proportion.</p> -->
                             <div class="btn-bar go-to">
                                 <a class="m-btn m-btn-theme" href="#blog">My Experience</a>
@@ -534,7 +537,7 @@
                     </div>
                     
                 </div> -->
-                <a href="#" onload="imageloop()"></a>
+                <div id="app"></div>
             </div>
         </section>
         <!-- End Blog -->
@@ -544,7 +547,9 @@
                     <div class="col-md-12">
                         <div class="section-title">
                             <h3 class="dark-color text-uppercase">Contact</h3>
-                            <p class="text-uppercase small">software developer and website developer</p>
+                            <div class="element">
+                                <p class="text-uppercase small">software developer and website developer</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -591,7 +596,7 @@
                     </div>
                     <!-- col -->
                     <div class="col-lg-4 m-15px-tb">
-                        <div class="contact-info media box-shadow">
+                        <!-- <div class="contact-info media box-shadow">
                             <div class="icon">
                                 <i class="ti-location-pin"></i>
                             </div>
@@ -617,11 +622,18 @@
                                 <h6 class="dark-color font-alt">Our Email</h6>
                                 <p>info@domainname.com<br>contact@domainname.com</p>
                             </div>
-                        </div>
+                        </div> -->
+
+
+                        <script type="text/javascript" language="JavaScript" src="static/js/calendar.js"></script>
+                        <script language="JavaScript">
+                            setOutputSize("small");
+                            document.writeln(printSelectedMonth());
+                        </script>
                     </div>
+
+                    <!-- end form -->
                 </div>
-                <!-- end form -->
-            </div>
         </section>
     </main>
     <!-- main end -->
@@ -687,7 +699,21 @@
 </script>
 <!-- send mail -->
 <script src="https://smtpjs.com/v3/smtp.js"></script>
+<script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
+
 <script>
+    var app = document.getElementById('type-it');
+
+    var typewriter = new Typewriter(app, {
+        loop: true,
+        delay: 75,
+    });
+
+    typewriter
+        .pauseFor(300)
+        .typeString('Software Developer and Website Developer')
+        .pauseFor(300)
+        .start();
 </script>
 
 </html>
