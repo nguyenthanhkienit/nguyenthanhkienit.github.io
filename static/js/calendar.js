@@ -444,10 +444,10 @@ function printStyle() {
     res += '<!--\n';
     //res += '  body {margin:0}\n';
     res += '  .tennam {text-align:center; font-size:150%; line-height:120%; font-weight:bold; color:#000000; background-color: #CCCCCC}\n';
-    res += '  .thang {font-size: ' + fontSize + '; padding:1; line-height:100%; font-family:Tahoma,Verdana,Arial; table-layout:fixed}\n';
-    res += '  .tenthang {text-align:center; font-size:20px; line-height:100%; font-weight:bold; color:#330033; background-color: #CCFFCC}\n';
-    res += '  .navi-l {text-align:center; font-size:75%; line-height:100%; font-family:Verdana,Times New Roman,Arial; font-weight:bold; color:red; background-color: #CCFFCC}\n';
-    res += '  .navi-r {text-align:center; font-size:75%; line-height:100%; font-family:Verdana,Arial,Times New Roman; font-weight:bold; color:#330033; background-color: #CCFFCC}\n';
+    res += '  .thang {font-size: 18px; line-height:100%; table-layout:fixed}\n';
+    res += '  .tenthang {text-align:center; font-size:20px; line-height:100%; font-weight:bold; color:#2D2E2E; background-color: #E0A80D}\n';
+    res += '  .navi-l {text-align:center; font-size:75%; line-height:100%; font-family:Verdana,Times New Roman,Arial; font-weight:bold; background-color: #E0A80D}\n';
+    res += '  .navi-r {text-align:center; font-size:75%; line-height:100%; font-family:Verdana,Arial,Times New Roman; font-weight:bold; background-color: #E0A80D}\n';
     res += '  .ngaytuan {width:14%; text-align:center; font-size:125%; line-height:100%; color:#E0A80D; background-color: ##2D2E2E}\n';
     res += '  .ngaythang {background-color:##2D2E2E}\n';
     res += '  .homnay {background-color:#E0A80D}\n';
@@ -471,7 +471,7 @@ function printTable(mm, yy) {
     var MonthHead = mm + "/" + yy;
     var LunarHead = getYearCanChi(ld1.year);
     var res = "";
-    res += ('<table class="thang" border="2">\n');
+    res += ('<table style="height:370px; border:1px solid #E0A80D " class="thang" border="">\n');
     res += printHead(mm, yy);
     for (i = 0; i < 6; i++) {
         res += ("<tr>\n");
@@ -495,31 +495,31 @@ function getPrevMonthLink(mm, yy) {
     var mm1 = mm > 1 ? mm - 1 : 12;
     var yy1 = mm > 1 ? yy : yy - 1;
     //return '<a href="'+window.location.pathname+'?yy='+yy1+'&mm='+mm1+'"><img src="left1.gif" width=8 height=12 alt="PrevMonth" border=0></a>';
-    return '<a href="' + window.location.pathname + '?yy=' + yy1 + '&mm=' + mm1 + '">&lt;</a>';
+    return '<a style="font-size: 20px; color:#2D2E2E" href="' + window.location.pathname + '?yy=' + yy1 + '&mm=' + mm1 + '"><i class="fas fa-angle-left"></i></a>';
 }
 
 function getNextMonthLink(mm, yy) {
     var mm1 = mm < 12 ? mm + 1 : 1;
     var yy1 = mm < 12 ? yy : yy + 1;
     //return '<a href="'+window.location.pathname+'?yy='+yy1+'&mm='+mm1+'"><img src="right1.gif" width=8 height=12 alt="NextMonth" border=0></a>';
-    return '<a href="' + window.location.pathname + '?yy=' + yy1 + '&mm=' + mm1 + '">&gt;</a>';
+    return '<a style="font-size: 20px; color:#2D2E2E" href="' + window.location.pathname + '?yy=' + yy1 + '&mm=' + mm1 + '"><i class="fas fa-angle-right"></i></a>';
 }
 
 function getPrevYearLink(mm, yy) {
     //return '<a href="'+window.location.pathname+'?yy='+(yy-1)+'&mm='+mm+'"><img src="left2.gif" width=16 height=12 alt="PrevYear" border=0></a>';
-    return '<a href="' + window.location.pathname + '?yy=' + (yy - 1) + '&mm=' + mm + '">&lt;&lt;</a>';
+    return '<a style="font-size: 20px; color:#2D2E2E" href="' + window.location.pathname + '?yy=' + (yy - 1) + '&mm=' + mm + '"><i class="fas fa-angle-double-left"></i></a>';
 }
 
 function getNextYearLink(mm, yy) {
     //return '<a href="'+window.location.pathname+'?yy='+(yy+1)+'&mm='+mm+'"><img src="right2.gif" width=16 height=12 alt="NextYear" border=0></a>';
-    return '<a href="' + window.location.pathname + '?yy=' + (yy + 1) + '&mm=' + mm + '">&gt;&gt;</a>';
+    return '<a style="font-size: 20px; color:#2D2E2E" href="' + window.location.pathname + '?yy=' + (yy + 1) + '&mm=' + mm + '"><i class="fas fa-angle-double-right"></i></a>';
 }
 
 function printHead(mm, yy) {
     var res = "";
     var monthName = mm + "/" + yy;
     //res += ('<tr><td colspan="7" class="tenthang" onClick="showMonthSelect();">'+monthName+'</td></tr>\n');
-    res += ('<tr><td colspan="2" class="navi-l">' + getPrevYearLink(mm, yy) + ' &nbsp;' + getPrevMonthLink(mm, yy) + '</td>\n');
+    res += ('<tr style="height:50px"><td colspan="2" class="navi-l">' + getPrevYearLink(mm, yy) + ' &nbsp;' + getPrevMonthLink(mm, yy) + '</td>\n');
     //res += ('<td colspan="1" class="navig"><a href="'+getPrevMonthLink(mm, yy)+'"><img src="left1.gif" alt="Prev"></a></td>\n');
     res += ('<td colspan="3" class="tenthang" onClick="showMonthSelect();">' + monthName + '</td>\n');
     //res += ('<td colspan="1" class="navi-r"><a href="'+getNextMonthLink(mm, yy)+'"><img src="right1.gif" alt="Next"></a></td>\n');
@@ -527,14 +527,14 @@ function printHead(mm, yy) {
     //res += ('<tr><td colspan="7" class="tenthang"><a href="'+getNextMonthLink(mm, yy)+'"><img src="right.gif" alt="Next"></a></td></tr>\n');
     res += ('<tr onClick="alertAbout();">\n');
     for (var i = 0; i <= 6; i++) {
-        res += ('<td class=ngaytuan>' + DAYNAMES[i] + '</td>\n');
+        res += ('<td style="height:50px" class=ngaytuan>' + DAYNAMES[i] + '</td>\n'); // t2t3t4t5t6t7cn
     }
     res += ('<\/tr>\n');
     return res;
 }
 
 function printEmptyCell() {
-    return '<td style=width:100px class=ngaythang><div class=cn>&nbsp;</div> <div class=am>&nbsp;</div></td>\n';
+    return '<td style="width:100px;height:43px" class=ngaythang><div class=cn>&nbsp;</div> <div class=am>&nbsp;</div></td>\n';
 }
 
 function printCell(lunarDate, solarDate, solarMonth, solarYear) {
