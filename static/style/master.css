@@ -5650,7 +5650,6 @@ h6 {
 
 .home-banner-01 {
     position: relative;
-    background-attachment: fixed;
 }
 
 @media (max-width: 767px) {
