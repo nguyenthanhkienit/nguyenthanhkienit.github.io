@@ -23,7 +23,6 @@
 
     <link href="static/style/master.css" rel="stylesheet">
 
-
 </head>
 <!-- Body Start -->
 
@@ -112,15 +111,19 @@
                         <div class="ht-text">
                             <h6>Hello there...</h6>
                             <h1>I'm... </h1>
+
+                            <!-- <iframe src="https://calendar.google.com/calendar/embed?src=thanhkien76qn%40gmail.com&ctz=Asia%2FHo_Chi_Minh" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe> -->
+                            <h2>
+                                I'm a
+                                <sppan id="type-it">
+                                    </span>
+                            </h2>
                             <script type="text/javascript" language="JavaScript" src="static/js/calendar.js"></script>
+
                             <script language="JavaScript">
                                 setOutputSize("small");
                                 document.writeln(printSelectedMonth());
                             </script>
-                            <!-- <iframe src="https://calendar.google.com/calendar/embed?src=thanhkien76qn%40gmail.com&ctz=Asia%2FHo_Chi_Minh" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe> -->
-                            <h2>
-                                <div id="type-it"></div>
-                            </h2>
                             <!-- <p>The namics of how users interact with interactive elements within a user interface flow chart based on container proportion.</p> -->
                             <div class="btn-bar go-to">
                                 <a class="m-btn m-btn-theme" href="#blog">My Experience</a>
@@ -706,7 +709,6 @@
 <script src="https://smtpjs.com/v3/smtp.js"></script>
 <!-- runtext -->
 <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
-
 <script>
     var app = document.getElementById('type-it');
 
@@ -714,10 +716,10 @@
         loop: true,
         delay: 75,
     });
-
-    typewriter
+    typewriter.typeString('Software Developer')
         .pauseFor(300)
-        .typeString('Software Developer and Website Developer')
+        .deleteAll()
+        .typeString('Website Developer')
         .pauseFor(300)
         .start();
 </script>

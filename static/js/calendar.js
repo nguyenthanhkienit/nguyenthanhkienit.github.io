@@ -440,7 +440,9 @@ function printSelectedYear() {
 function printStyle() {
     var fontSize = PRINT_OPTS.fontSize;
     var res = "";
+
     res += '<style type="text/css">\n';
+
     res += '<!--\n';
     //res += '  body {margin:0}\n';
     res += '  .tennam {text-align:center; font-size:150%; line-height:120%; font-weight:bold; color:#000000; background-color: #CCCCCC}\n';
@@ -448,8 +450,8 @@ function printStyle() {
     res += '  .tenthang {text-align:center; font-size:20px; line-height:100%; font-weight:bold; color:#2D2E2E; background-color: #E0A80D}\n';
     res += '  .navi-l {text-align:center; font-size:75%; line-height:100%; font-family:Verdana,Times New Roman,Arial; font-weight:bold; background-color: #E0A80D}\n';
     res += '  .navi-r {text-align:center; font-size:75%; line-height:100%; font-family:Verdana,Arial,Times New Roman; font-weight:bold; background-color: #E0A80D}\n';
-    res += '  .ngaytuan {width:14%; text-align:center; font-size:125%; line-height:100%; color:#E0A80D; background-color: ##2D2E2E}\n';
-    res += '  .ngaythang {background-color:##2D2E2E}\n';
+    res += '  .ngaytuan {width:14%; text-align:center; font-size:125%; line-height:100%; color:#2D2E2E; background-color:rgba(255, 255, 255, 0.8);}\n';
+    res += '  .ngaythang {background-color:rgba(255, 255, 255, 0.8);}\n';
     res += '  .homnay {background-color:#E0A80D}\n';
     res += '  .tet {background-color:#FFCC99}\n';
     res += '  .am {text-align:right;font-size:75%;line-height:100%;color:#007bff}\n';
@@ -458,6 +460,25 @@ function printStyle() {
     res += '  .t7 {text-align:left;font-size:125%;line-height:100%;color:green}\n';
     res += '  .cn {text-align:left;font-size:125%;line-height:100%;color:red}\n';
     res += '-->\n';
+
+    // res += '<!--\n';
+    // res += '@media (max-width: 767px){\n';
+    // //res += '  body {margin:0}\n';
+    // res += '  .tennam {text-align:center; font-size:150%; line-height:120%; font-weight:bold; color:#000000; background-color: #CCCCCC}\n';
+    // res += '  .thang {font-size: 18px; line-height:100%; table-layout:fixed}\n';
+    // res += '  .tenthang {text-align:center; font-size:20px; line-height:100%; font-weight:bold; color:#2D2E2E; background-color: #E0A80D}\n';
+    // res += '  .navi-l {text-align:center; font-size:75%; line-height:100%; font-family:Verdana,Times New Roman,Arial; font-weight:bold; background-color: #E0A80D}\n';
+    // res += '  .navi-r {text-align:center; font-size:75%; line-height:100%; font-family:Verdana,Arial,Times New Roman; font-weight:bold; background-color: #E0A80D}\n';
+    // res += '  .ngaytuan {width:14%; text-align:center; font-size:125%; line-height:100%; color:#E0A80D; background-color: ##2D2E2E}\n';
+    // res += '  .ngaythang {background: initial;}\n';
+    // res += '  .homnay {background-color:#E0A80D}\n';
+    // res += '  .tet {background-color:#FFCC99}\n';
+    // res += '  .am {text-align:right;font-size:75%;line-height:100%;color:#007bff}\n';
+    // res += '  .am2 {text-align:right;font-size:75%;line-height:100%;color:#004080}\n';
+    // res += '  .t2t6 {text-align:left;font-size:125%;color:green}\n';
+    // res += '  .t7 {text-align:left;font-size:125%;line-height:100%;color:green}\n';
+    // res += '  .cn {text-align:left;font-size:125%;line-height:100%;color:red}\n';
+    // res += '-->}\n';
     res += '</style>\n';
     return res;
 }
@@ -471,7 +492,7 @@ function printTable(mm, yy) {
     var MonthHead = mm + "/" + yy;
     var LunarHead = getYearCanChi(ld1.year);
     var res = "";
-    res += ('<table style="height:370px; border:1px solid #E0A80D " class="thang" border="">\n');
+    res += ('<table style="height:370px; border:1px solid #2D2E2E " class="thang" border="">\n');
     res += printHead(mm, yy);
     for (i = 0; i < 6; i++) {
         res += ("<tr>\n");
@@ -534,7 +555,7 @@ function printHead(mm, yy) {
 }
 
 function printEmptyCell() {
-    return '<td style="width:100px;height:43px" class=ngaythang><div class=cn>&nbsp;</div> <div class=am>&nbsp;</div></td>\n';
+    return '<td style="width:50px; height:43px" class=ngaythang><div class=cn>&nbsp;</div> <div class=am>&nbsp;</div></td>\n';
 }
 
 function printCell(lunarDate, solarDate, solarMonth, solarYear) {
@@ -542,14 +563,14 @@ function printCell(lunarDate, solarDate, solarMonth, solarYear) {
     cellClass = "ngaythang";
     solarClass = "t2t6";
     lunarClass = "am";
-    solarColor = "#a4a5a6"; //màu ngày dương
+    solarColor = "#2D2E2E"; //màu ngày dương
     var dow = (lunarDate.jd + 1) % 7;
     if (dow == 0) {
         solarClass = "cn";
         solarColor = "red";
     } else if (dow == 6) {
         solarClass = "t7";
-        solarColor = "green";
+        solarColor = "#2D2E2E";
     }
     if (solarDate == today.getDate() && solarMonth == today.getMonth() + 1 && solarYear == today.getFullYear()) {
         cellClass = "homnay";
