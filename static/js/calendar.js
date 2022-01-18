@@ -329,10 +329,10 @@ function getDayString(lunar, solarDay, solarMonth, solarYear) {
     var s;
     var dayOfWeek = TUAN[(lunar.jd + 1) % 7];
     // s = dayOfWeek + " " + solarDay + "/" + solarMonth + "/" + solarYear + " dương lịch";
-    s = "Lịch Việt Nam";
+    s = "LỊCH VIỆT NAM";
     s = s + "\n" + solarDay + "/" + solarMonth + "/" + solarYear + " dương lịch";
     s = s + "\n" + lunar.day + "/" + lunar.month + "/" + lunar.year + " âm lịch";
-    s = s + "\n" + "         © 2018 copyright by Kay";
+    s = s + "\n" + "© 2018 by Kay";
     if (lunar.leap == 1) {
         s = s + " nhuần";
     }
