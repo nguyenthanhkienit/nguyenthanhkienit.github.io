@@ -1,11 +1,4 @@
-/**
- * Copyright 2004 Ho Ngoc Duc [http://come.to/duc]. All Rights Reserved.<p>
- * Permission to use, copy, modify, and redistribute this software and its
- * documentation for personal, non-commercial use is hereby granted provided that
- * this copyright notice appears in all copies.
- */
-
-var ABOUT = "\u00C2m l\u1ECBch Vi\u1EC7t Nam - Version 0.8" + "\n\u00A9 2004 H\u1ED3 Ng\u1ECDc \u0110\u1EE9c [http://come.to/duc]";
+//var ABOUT = "Lịch Việt Nam" + "\n© 2018 copyright by Kay";
 var TK19 = new Array(
     0x30baa3, 0x56ab50, 0x422ba0, 0x2cab61, 0x52a370, 0x3c51e8, 0x60d160, 0x4ae4b0, 0x376926, 0x58daa0,
     0x445b50, 0x3116d2, 0x562ae0, 0x3ea2e0, 0x28e2d2, 0x4ec950, 0x38d556, 0x5cb520, 0x46b690, 0x325da4,
@@ -335,11 +328,13 @@ function getCanChi(lunar) {
 function getDayString(lunar, solarDay, solarMonth, solarYear) {
     var s;
     var dayOfWeek = TUAN[(lunar.jd + 1) % 7];
-    s = dayOfWeek + " " + solarDay + "/" + solarMonth + "/" + solarYear;
-    s += " -+- ";
-    s = s + "Ng\u00E0y " + lunar.day + " th\341ng " + lunar.month;
+    // s = dayOfWeek + " " + solarDay + "/" + solarMonth + "/" + solarYear + " dương lịch";
+    s = "Lịch Việt Nam";
+    s = s + "\n" + solarDay + "/" + solarMonth + "/" + solarYear + " dương lịch";
+    s = s + "\n" + lunar.day + "/" + lunar.month + "/" + lunar.year + " âm lịch";
+    s = s + "\n" + "         © 2018 copyright by Kay";
     if (lunar.leap == 1) {
-        s = s + " nhu\u1EADn";
+        s = s + " nhuần";
     }
     return s;
 }
@@ -469,7 +464,7 @@ function printStyle() {
     // res += '  .tenthang {text-align:center; font-size:20px; line-height:100%; font-weight:bold; color:#2D2E2E; background-color: #E0A80D}\n';
     // res += '  .navi-l {text-align:center; font-size:75%; line-height:100%; font-family:Verdana,Times New Roman,Arial; font-weight:bold; background-color: #E0A80D}\n';
     // res += '  .navi-r {text-align:center; font-size:75%; line-height:100%; font-family:Verdana,Arial,Times New Roman; font-weight:bold; background-color: #E0A80D}\n';
-    // res += '  .ngaytuan {width:14%; text-align:center; font-size:125%; line-height:100%; color:#E0A80D; background-color: ##2D2E2E}\n';
+    // res += '  .ngaytuan {width:14%; text-align:center; font-size:125%; line-height:100%; color:#E0A80D; background-color: #2D2E2E}\n';
     // res += '  .ngaythang {background: initial;}\n';
     // res += '  .homnay {background-color:#E0A80D}\n';
     // res += '  .tet {background-color:#FFCC99}\n';
@@ -610,14 +605,20 @@ function infoCellSelect(id) {
     if (id == 0) {}
 }
 
+// function alertDayInfo_Old(dd, mm, yy, leap, jd, sday, smonth, syear) {
+//     var lunar = new LunarDate(dd, mm, yy, leap, jd);
+//     var s = getDayString(lunar, sday, smonth, syear);
+//     s += " \u00E2m l\u1ECBch\n";
+//     s += getDayName(lunar);
+//     s += "\nGi\u1EDD \u0111\u1EA7u ng\u00E0y: " + getCanHour0(jd) + " " + CHI[0];
+//     s += "\nTi\u1EBFt: " + TIETKHI[getSunLongitude(jd + 1, 7.0)];
+//     s += "\nGi\u1EDD ho\u00E0ng \u0111\u1EA1o: " + getGioHoangDao(jd);
+//     alert(s);
+// }
+
 function alertDayInfo(dd, mm, yy, leap, jd, sday, smonth, syear) {
     var lunar = new LunarDate(dd, mm, yy, leap, jd);
     var s = getDayString(lunar, sday, smonth, syear);
-    s += " \u00E2m l\u1ECBch\n";
-    s += getDayName(lunar);
-    s += "\nGi\u1EDD \u0111\u1EA7u ng\u00E0y: " + getCanHour0(jd) + " " + CHI[0];
-    s += "\nTi\u1EBFt: " + TIETKHI[getSunLongitude(jd + 1, 7.0)];
-    s += "\nGi\u1EDD ho\u00E0ng \u0111\u1EA1o: " + getGioHoangDao(jd);
     alert(s);
 }
 
@@ -625,9 +626,9 @@ function alertAbout() {
     alert(ABOUT);
 }
 
-function showVietCal() {
-    window.status = getCurrentTime() + " -+- " + getTodayString();
-    window.window.setTimeout("showVietCal()", 5000);
-}
+// function showVietCal() {
+//     window.status = getCurrentTime() + " -+- " + getTodayString();
+//     window.window.setTimeout("showVietCal()", 5000);
+// }
 
 //showVietCal();
