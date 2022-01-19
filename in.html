@@ -3,16 +3,25 @@
 <head>
     <title>Image Loader Test</title>
     <style>
+        .a {
+            height: 1000px;
+            width: auto;
+            margin: auto;
+            background-color: #ccc;
+        }
+
         .as {
             background-color: #2D2E2E;
             color: white;
+            width: auto;
+            margin: auto;
             text-align: center;
         }
 
         @media (max-width: 991px) {
             .as {
                 background-color: #ccc;
-                color: white;
+
                 text-align: center;
             }
         }
@@ -36,8 +45,12 @@
                 if (extension == "jpg" || extension == "png" || extension_jpeg == "jpeg") {
                     var image = document.createElement("img");
                     image.src = "images/" + filenames[i];
-                    image.width = "300";
-                    image.height = "300";
+                    image.style.width = "300";
+                    image.style.height = "300";
+
+                    image.style.objectFit = "cover";
+
+
 
 
 
@@ -50,11 +63,14 @@
     <script type="text/javascript" src="folder_contents.js"></script>
 </head>
 
-<body class="as" onload="run_onload()">
+<body onload="run_onload()">
 
     <p>Load images from a folder on a local machine.</p>
     <hr>
-    <div id="image_div"></div>
+    <div class="as">
+        <div id="image_div" class="as">
+        </div>
+    </div>
 
 
 
