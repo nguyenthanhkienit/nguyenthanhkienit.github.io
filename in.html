@@ -1,0 +1,54 @@
+<html>
+
+<head>
+    <title>Image Loader Test</title>
+    <style>
+        .as {
+            background-color: black;
+            color: white;
+            text-align: center;
+        }
+    </style>
+    <script type="text/javascript">
+        //http://stackoverflow.com/questions/805107/creating-multiline-strings-in-javascript
+        function mlString(f) {
+            return f.toString().
+            replace(/^[^\/]+\/\*!?/, '').
+            replace(/\*\/[^\/]+$/, '');
+        }
+
+        function run_onload() {
+            console.log("Running tests...");
+
+            var filenames = g_FOLDER_CONTENTS.match(/\S+/g);
+            var fragment = document.createDocumentFragment();
+            for (var i = 0; i < filenames.length; ++i) {
+                var extension = filenames[i].substring(filenames[i].length - 3);
+                var extension_jpeg = filenames[i].substring(filenames[i].length - 4);
+                if (extension == "jpg" || extension == "png" || extension_jpeg == "jpeg") {
+                    var image = document.createElement("img");
+                    image.src = "images/" + filenames[i];
+                    image.width = "400";
+                    image.height = "400";
+
+
+                    fragment.appendChild(image);
+                }
+            }
+            document.getElementById("image_div").appendChild(fragment);
+        }
+    </script>
+    <script type="text/javascript" src="folder_contents.js"></script>
+</head>
+
+<body class="as" onload="run_onload()">
+
+    <p>Load images from a folder on a local machine.</p>
+    <hr>
+    <div id="image_div"></div>
+
+
+
+</body>
+
+</html>
