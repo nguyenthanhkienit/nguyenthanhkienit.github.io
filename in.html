@@ -4,17 +4,31 @@
     <title>Image Loader Test</title>
     <style>
         .as {
-            background-color: black;
+            background-color: #2D2E2E;
             color: white;
             text-align: center;
+        }
+
+        .img {
+            height: 100px;
+            width: 100px;
+            border-radius: 50%;
+        }
+
+        @media (max-width: 991px) {
+            .as {
+                background-color: #ccc;
+                color: white;
+                text-align: center;
+            }
         }
     </style>
     <script type="text/javascript">
         //http://stackoverflow.com/questions/805107/creating-multiline-strings-in-javascript
         function mlString(f) {
             return f.toString().
-            replace(/^[^\/]+\/\*!?/, '').
-            replace(/\*\/[^\/]+$/, '');
+                replace(/^[^\/]+\/\*!?/, '').
+                replace(/\*\/[^\/]+$/, '');
         }
 
         function run_onload() {
@@ -28,8 +42,9 @@
                 if (extension == "jpg" || extension == "png" || extension_jpeg == "jpeg") {
                     var image = document.createElement("img");
                     image.src = "images/" + filenames[i];
-                    image.width = "400";
-                    image.height = "400";
+                    image.width = "300";
+                    image.height = "300";
+
 
 
                     fragment.appendChild(image);
