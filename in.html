@@ -21,7 +21,7 @@
             var fragment = document.createDocumentFragment();
             for (var i = 0; i < filenames.length; ++i) {
                 var extension = filenames[i].substring(filenames[i].length - 3);
-                if (extension == "jpg" || extension == "png") {
+                if (extension == "jpg" || extension == "png" || extension == "jpeg") {
                     var image = document.createElement("img");
                     image.src = "images/" + filenames[i];
                     image.width = "600";
