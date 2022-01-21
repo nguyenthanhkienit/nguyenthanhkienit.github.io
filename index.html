@@ -238,11 +238,10 @@
                 <div class="row justify-content-between">
                     <div class="container">
                         <div class="row">
-
                             <div class="col-lg-3 col-md-6">
                                 <div class="do-wrap text-center">
-                                    <div class="dark_gray top"></div>
-                                    <span class="green"><i class="fab fa-squarespace"></i></span>
+                                    <div class="top"></div>
+                                    <span><i class="fab fa-squarespace"></i></span>
                                     <h4>Adaptability</h4>
                                     <p>Keep away from people who try to belittle your ambitions. Small people always do
                                         that.</p>
@@ -250,24 +249,24 @@
                             </div>
                             <div class="col-lg-3 col-md-6">
                                 <div class="do-wrap text-center">
-                                    <div class="green top"></div>
-                                    <span class="green"><i class="fas fa-users"></i></span>
+                                    <div class=" top"></div>
+                                    <span><i class="fas fa-users"></i></span>
                                     <h4>Teamwork</h4>
                                     <p>Have a spirit of solidarity, attachment and listen to the opinions of others.</p>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-6">
                                 <div class="do-wrap text-center">
-                                    <div class="dark_gray top"></div>
-                                    <span class="dark_gray"> <i class="fas fa-handshake"></i></span>
+                                    <div class=" top"></div>
+                                    <span> <i class="fas fa-handshake"></i></span>
                                     <h4>Communication</h4>
                                     <p>Good at communication skills developed through talking with partner.</p>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-6">
                                 <div class="do-wrap text-center">
-                                    <div class="green top"></div>
-                                    <span class="green"><i class="fas fa-tasks"></i></span>
+                                    <div class=" top"></div>
+                                    <span><i class="fas fa-tasks"></i></span>
                                     <h4>Other</h4>
                                     <p>Keep away from people who try to belittle your ambitions. Small people always do
                                         that.</p>
@@ -561,11 +560,58 @@
                     </div>
                     
                 </div> -->
-                <div id="app"></div>
+                <!-- start project -->
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="do-wrap text-center">
+                            <div class="top"></div>
+                            <span><i class="fab fa-internet-explorer"></i></span>
+                            <h2>
+                                <div class='numscroller numscroller-big-bottom' data-slno='1' data-min='0'
+                                    data-max='438' data-delay='10' data-increment="9">0</div>
+                            </h2>
+                            <h4>WebDevelop</h4>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="do-wrap text-center">
+                            <div class="top"></div>
+                            <span><i class="fas fa-window-restore"></i></span>
+                            <h2>
+                                <div class='numscroller numscroller-big-bottom' data-slno='1' data-min='0'
+                                    data-max='579' data-delay='10' data-increment="9">0</div>
+                            </h2>
+                            <h4>SoftwareDevelop</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="do-wrap text-center">
+                            <div class="top"></div>
+                            <span><i class="fas fa-users"></i></span>
+                            <h2>
+                                <div class='numscroller numscroller-big-bottom' data-slno='1' data-min='0'
+                                    data-max='852' data-delay='10' data-increment="9">0</div>
+                            </h2>
+                            <h4>Teamwork</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="do-wrap text-center">
+                            <div class="top"></div>
+                            <span><i class="fas fa-file-image"></i></span>
+                            <h2>
+                                <div class='numscroller numscroller-big-bottom' data-slno='1' data-min='0'
+                                    data-max='1017' data-delay='10' data-increment="9">0</div>
+                            </h2>
+                            <h4>Photography</h4>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
         <!-- End Blog -->
-        <section id="contactus" class="section gray-bg">
+        <section id="contactus" class="section gray2-bg">
             <div class="container">
                 <div class="row sm-m-25px-b m-35px-b">
                     <div class="col-md-12">
@@ -698,7 +744,7 @@
     <!-- End -->
     <!-- custom js -->
     <script src="static/js/custom.js"></script>
-    <script src="static/js/mail_send.js"></script>
+
     <!-- end -->
     <!-- end body -->
 </body>
@@ -725,8 +771,13 @@
         });
     });
 </script>
+
 <!-- send mail -->
 <script src="https://smtpjs.com/v3/smtp.js"></script>
+<script src="static/js/mail_send.js"></script>
+<!-- runnum -->
+<script src="static/js/jquery-1.10.2.min.js"></script>
+<script src="static/js/numscroller-1.0.js"></script>
 <!-- runtext -->
 <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
 <script>
@@ -743,6 +794,7 @@
         .pauseFor(300)
         .start();
 </script>
+<!-- star -->
 <script src="https://cdn.jsdelivr.net/mojs/latest/mo.min.js"></script>
 <script>
     class Star extends mojs.CustomShape {

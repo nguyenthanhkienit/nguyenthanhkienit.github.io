@@ -95,7 +95,7 @@ Table of contents
 
 .m-btn.m-btn-theme {
     background: #E0A80D;
-    color: #2D2E2E;
+    color: #2B2C2C;
     border-color: #E0A80D;
     border-radius: 2px;
 }
@@ -110,12 +110,13 @@ Table of contents
     background: transparent;
     color: #E0A80D;
     border-color: #E0A80D;
+    border-radius: 2px;
 }
 
 .m-btn.m-btn-t-theme:hover {
     background: #E0A80D;
     border-color: #E0A80D;
-    color: #ffffff;
+    color: #2B2C2C;
 }
 
 .m-btn.m-btn-dark {
@@ -421,7 +422,7 @@ h3 {
 
 .h4,
 h4 {
-    font-size: 26px;
+    font-size: 23px;
 }
 
 @media (max-width: 767px) {
@@ -7201,10 +7202,11 @@ h6 {
         background-color: aqua;
     } */
 }
-
-
 /* end experience */
 
+/*.icon-account_balance_wallet:before {
+    content: "\eb3b";}*/
+/*end project */
 
 /* Contact Us
 ------------------*/
@@ -7263,12 +7265,12 @@ h6 {
 
 .contact-form .form-group textarea {
     height: 130px;
-    background-color: #2D2E2E;
+    background-color: #2B2C2C;
     color: #a4a5a6;
 }
 
 .contact-form .form-group input {
-    background-color: #2D2E2E;
+    background-color: #2B2C2C;
     color: #a4a5a6;
 }
 
