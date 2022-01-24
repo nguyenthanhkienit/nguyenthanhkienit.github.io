@@ -6029,7 +6029,6 @@ h6 {
     position: relative;
 }
 
-
 .about-me-img .social-icon {
     width: 50px;
     position: absolute;
@@ -6227,16 +6226,15 @@ h6 {
 .do-wrap {
     margin-bottom: 10px;
     border-radius: 5px;
-    margin-top: 10px; 
-
+    margin-top: 10px;
+    /* border: #E0A80D 2px solid; */
 }
-    .do-wrap:hover {
-        margin-bottom: 10px;
-        border-radius: 5px;
-        margin-top: 10px; 
-        /* border: #edd solid 2px; */
-    }
 
+.do-wrap>.top {
+    width: 100%;
+    height: 40px;
+    display: block;
+}
 
 .do-wrap span {
     border-radius: 100px;
@@ -6244,6 +6242,7 @@ h6 {
     height: 90px;
     margin-bottom: 2px;
     width: 90px;
+    margin-top: -40px;
 }
 
 .do-wrap span i {
@@ -6251,7 +6250,6 @@ h6 {
     font-size: 45px;
     line-height: 90px;
     display: block;
-
 }
 
 .do-wrap h5 {
@@ -6263,6 +6261,75 @@ h6 {
 .white-box p {
     margin: 0 15px;
     margin-bottom: 30px;
+}
+
+
+/* space */
+
+.do-wrap_space {
+    width: auto;
+    height: 2px;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.do-wrap_space_right {
+    width: 400px;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #E0A80D);
+    float: left;
+}
+
+.do-wrap_space_left {
+    width: 400px;
+    height: 2px;
+    background: linear-gradient(to left, transparent, #E0A80D);
+    float: left;
+}
+
+@media (max-width: 991px) {
+    .do-wrap_space_right {
+        width: 300px;
+        height: 2px;
+        background: linear-gradient(to right, transparent, #E0A80D);
+        float: left;
+    }
+    .do-wrap_space_left {
+        width: 300px;
+        height: 2px;
+        background: linear-gradient(to left, transparent, #E0A80D);
+        float: left;
+    }
+}
+
+@media (max-width: 767px) {
+    .do-wrap_space_right {
+        width: 200px;
+        height: 2px;
+        background: linear-gradient(to right, transparent, #E0A80D);
+        float: left;
+    }
+    .do-wrap_space_left {
+        width: 200px;
+        height: 2px;
+        background: linear-gradient(to left, transparent, #E0A80D);
+        float: left;
+    }
+}
+
+@media (max-width: 440px) {
+    .do-wrap_space_right {
+        width: 100px;
+        height: 2px;
+        background: linear-gradient(to right, transparent, #E0A80D);
+        float: left;
+    }
+    .do-wrap_space_left {
+        width: 100px;
+        height: 2px;
+        background: linear-gradient(to left, transparent, #E0A80D);
+        float: left;
+    }
 }
 
 
@@ -7205,11 +7272,17 @@ h6 {
         background-color: aqua;
     } */
 }
+
+
 /* end experience */
+
 
 /*.icon-account_balance_wallet:before {
     content: "\eb3b";}*/
+
+
 /*end project */
+
 
 /* Contact Us
 ------------------*/
