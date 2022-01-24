@@ -6289,13 +6289,13 @@ h6 {
 
 @media (max-width: 991px) {
     .do-wrap_space_right {
-        width: 300px;
+        width: 330px;
         height: 2px;
         background: linear-gradient(to right, transparent, #E0A80D);
         float: left;
     }
     .do-wrap_space_left {
-        width: 300px;
+        width: 330px;
         height: 2px;
         background: linear-gradient(to left, transparent, #E0A80D);
         float: left;
@@ -6304,13 +6304,13 @@ h6 {
 
 @media (max-width: 767px) {
     .do-wrap_space_right {
-        width: 200px;
+        width: 230px;
         height: 2px;
         background: linear-gradient(to right, transparent, #E0A80D);
         float: left;
     }
     .do-wrap_space_left {
-        width: 200px;
+        width: 230px;
         height: 2px;
         background: linear-gradient(to left, transparent, #E0A80D);
         float: left;
@@ -6319,13 +6319,13 @@ h6 {
 
 @media (max-width: 440px) {
     .do-wrap_space_right {
-        width: 100px;
+        width: 130px;
         height: 2px;
         background: linear-gradient(to right, transparent, #E0A80D);
         float: left;
     }
     .do-wrap_space_left {
-        width: 100px;
+        width: 130px;
         height: 2px;
         background: linear-gradient(to left, transparent, #E0A80D);
         float: left;
