@@ -299,7 +299,7 @@ function getDayName(lunarDate) {
         return "";
     }
     var cc = getCanChi(lunarDate);
-    var s = "Ng\u00E0y " + cc[0] + ", th\341ng " + cc[1] + ", n\u0103m " + cc[2];
+    var s = "Ngày " + cc[0] + ", tháng " + cc[1] + ", năm " + cc[2];
     return s;
 }
 
@@ -319,7 +319,7 @@ function getCanChi(lunar) {
     dayName = CAN[(lunar.jd + 9) % 10] + " " + CHI[(lunar.jd + 1) % 12];
     monthName = CAN[(lunar.year * 12 + lunar.month + 3) % 10] + " " + CHI[(lunar.month + 1) % 12];
     if (lunar.leap == 1) {
-        monthName += " (nhu\u1EADn)";
+        monthName += " (Leap year)";
     }
     yearName = getYearCanChi(lunar.year);
     return new Array(dayName, monthName, yearName);
@@ -327,15 +327,52 @@ function getCanChi(lunar) {
 
 function getDayString(lunar, solarDay, solarMonth, solarYear) {
     var s;
-    var dayOfWeek = TUAN[(lunar.jd + 1) % 7];
+    //var dayOfWeek = TUAN[(lunar.jd + 1) % 7];
     // s = dayOfWeek + " " + solarDay + "/" + solarMonth + "/" + solarYear + " dương lịch";
     s = "VIET NAM'S CALENDAR";
     s = s + "\n" + solarDay + "/" + solarMonth + "/" + solarYear + " solar calendar";
     s = s + "\n" + lunar.day + "/" + lunar.month + "/" + lunar.year + " lunar calendar";
-    s = s + "\n" + "© 2018 by Kay";
     if (lunar.leap == 1) {
-        s = s + " nhuần";
+        var _LeapMonth;
+        if (lunar.month == 1) {
+            _LeapMonth = "January";
+        }
+        if (lunar.month == 2) {
+            _LeapMonth = "February";
+        }
+        if (lunar.month == 3) {
+            _LeapMonth = "March";
+        }
+        if (lunar.month == 4) {
+            _LeapMonth = "April";
+        }
+        if (lunar.month == 5) {
+            _LeapMonth = "May";
+        }
+        if (lunar.month == 6) {
+            _LeapMonth = "June";
+        }
+        if (lunar.month == 7) {
+            _LeapMonth = "July";
+        }
+        if (lunar.month == 8) {
+            _LeapMonth = "August";
+        }
+        if (lunar.month == 9) {
+            _LeapMonth = "September";
+        }
+        if (lunar.month == 10) {
+            _LeapMonth = "October";
+        }
+        if (lunar.month == 11) {
+            _LeapMonth = "November";
+        }
+        if (lunar.month == 12) {
+            _LeapMonth = "December";
+        }
+        s = s + "\n" + _LeapMonth + " of a leap year";
     }
+    s = s + "\n" + "© 2018 by Kay";
     return s;
 }
 
@@ -602,7 +639,7 @@ function showYearSelect() {
 }
 
 function infoCellSelect(id) {
-    if (id == 0) {}
+    if (id == 0) { }
 }
 
 // function alertDayInfo_Old(dd, mm, yy, leap, jd, sday, smonth, syear) {

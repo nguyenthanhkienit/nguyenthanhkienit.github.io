@@ -839,17 +839,17 @@ h6 {
 }
 
 .footer .nav a {
-    color: rgba(255, 255, 255, 0.5);
+    color: #a4a5a6;
     font-size: 14px;
     margin-right: 17px;
 }
 
 .footer .nav a:hover {
-    color: #ffffff;
+    color: #E0A80D;
 }
 
 .footer p {
-    color: rgba(255, 255, 255, 0.5);
+    color: #a4a5a6;
     font-size: 12px;
     margin: 0;
 }
@@ -6027,6 +6027,7 @@ h6 {
     border: 14px solid #fff;
     border-radius: 5px;
     position: relative;
+    /* box-shadow: 0 0 10px 4px rgb(202 202 202 / 29%); */
 }
 
 .about-me-img .social-icon {
@@ -6050,7 +6051,7 @@ h6 {
 }
 
 .about-me-img .social-icon a:hover {
-    background: #090a0c;
+    background: #2D2E2E;
 }
 
 .about-me-img .btns {
@@ -6447,7 +6448,7 @@ h6 {
 }
 
 .feature-box-education-left h6 {
-    color: #979899;
+    color: #a4a5a6;
     font-weight: 500;
     font-size: 15px;
     margin: 0 0 12px;
@@ -6557,7 +6558,7 @@ h6 {
 }
 
 .feature-box-education-center h6 {
-    color: #979899;
+    color: #a4a5a6;
     font-weight: 500;
     font-size: 15px;
     margin: 0 0 12px;
@@ -6667,7 +6668,7 @@ h6 {
 }
 
 .feature-box-education-right h6 {
-    color: #979899;
+    color: #a4a5a6;
     font-weight: 500;
     font-size: 15px;
     margin: 0 0 12px;
