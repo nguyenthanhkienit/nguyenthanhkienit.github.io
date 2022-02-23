@@ -16,27 +16,25 @@
             margin: 10px;
             font-size: 16px;
         }
-
+        
         #demo {
             height: 100%;
             position: relative;
             overflow: hidden;
         }
-
-
+        
         .green {
             background-color: #6fb936;
         }
-
+        
         .thumb {
             margin-bottom: 30px;
         }
-
+        
         .page-top {
             margin-top: 85px;
         }
-
-
+        
         img.zoom {
             width: 100%;
             height: 200px;
@@ -47,24 +45,22 @@
             -o-transition: all .3s ease-in-out;
             -ms-transition: all .3s ease-in-out;
         }
-
-
+        
         .transition {
             -webkit-transform: scale(1.2);
             -moz-transform: scale(1.2);
             -o-transform: scale(1.2);
             transform: scale(1.2);
         }
-
+        
         .modal-header {
-
             border-bottom: none;
         }
-
+        
         .modal-title {
             color: #000;
         }
-
+        
         .modal-footer {
             display: none;
         }
@@ -72,13 +68,14 @@
     <script src="ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script type="text/javascript">
-        window.alert = function () { };
+        window.alert = function() {};
         var defaultCSS = document.getElementById('bootstrap-css');
+
         function changeCSS(css) {
             if (css) $('head > link').filter(':first').replaceWith('<link rel="stylesheet" href="' + css + '" type="text/css" />');
             else $('head > link').filter(':first').replaceWith(defaultCSS);
         }
-        $(document).ready(function () {
+        $(document).ready(function() {
             var iframe_height = parseInt($('html').height());
             window.parent.postMessage(iframe_height, 'https://bootsnipp.com');
         });
@@ -100,145 +97,88 @@
 
 
             <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a href="images/043967CD-A3F7-42B0-AD55-A5A7A14E02D5.jpeg" class="fancybox" rel="ligthbox">
-                    <img src="images/043967CD-A3F7-42B0-AD55-A5A7A14E02D5.jpeg" class="zoom img-fluid " alt="">
+                <a href="images/C1BB4820-77DC-4395-AE48-82A2F8A5CBC2.jpeg" class="fancybox" rel="ligthbox">
+                    <img src="images/C1BB4820-77DC-4395-AE48-82A2F8A5CBC2.jpeg" class="zoom img-fluid " alt="">
 
                 </a>
             </div>
             <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a href="images/22044c26f5e2a9f56473fe4d88e6e4ca.jpg" class="fancybox" rel="ligthbox">
-                    <img src="images/22044c26f5e2a9f56473fe4d88e6e4ca.jpg" class="zoom img-fluid" alt="">
+                <a href="images/17EC2D72-DED2-499B-BEA9-8687B81B4EBA.jpeg" class="fancybox" rel="ligthbox">
+                    <img src="images/17EC2D72-DED2-499B-BEA9-8687B81B4EBA.jpeg" class="zoom img-fluid" alt="">
                 </a>
             </div>
 
             <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a href="images/4804EE9C-FCAF-4BC4-A3CA-ACF044F85D96.jpeg" class="fancybox" rel="ligthbox">
-                    <img src="images/4804EE9C-FCAF-4BC4-A3CA-ACF044F85D96.jpeg" class="zoom img-fluid " alt="">
+                <a href="images/EC1B830D-0CC1-4463-88CD-A96F913B8DF6.jpeg" class="fancybox" rel="ligthbox">
+                    <img src="images/EC1B830D-0CC1-4463-88CD-A96F913B8DF6.jpeg" class="zoom img-fluid " alt="">
                 </a>
             </div>
 
             <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a href="images/go.jpg" class="fancybox" rel="ligthbox">
-                    <img src="images/go.jpg" class="zoom img-fluid " alt="">
+                <a href="images/AA8C3E9D-F794-445F-A94B-A163D1547A1A.jpeg" class="fancybox" rel="ligthbox">
+                    <img src="images/AA8C3E9D-F794-445F-A94B-A163D1547A1A.jpeg" class="zoom img-fluid " alt="">
                 </a>
             </div>
 
             <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a href="images/3898011837_3085c17466_b.jpg" class="fancybox" rel="ligthbox">
-                    <img src="images/3898011837_3085c17466_b.jpg" class="zoom img-fluid " alt="">
+                <a href="images/328D315B-2EF6-49B1-B7A0-773EF72B3EE8.jpeg" class="fancybox" rel="ligthbox">
+                    <img src="images/328D315B-2EF6-49B1-B7A0-773EF72B3EE8.jpeg" class="zoom img-fluid " alt="">
 
                 </a>
             </div>
             <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a href="images/22044c26f5e2a9f56473fe4d88e6e4ca.jpg" class="fancybox" rel="ligthbox">
-                    <img src="images/22044c26f5e2a9f56473fe4d88e6e4ca.jpg" class="zoom img-fluid" alt="">
+                <a href="images/C07CC897-A2CA-4AEE-A64C-E3390AE4257B.jpeg" class="fancybox" rel="ligthbox">
+                    <img src="images/C07CC897-A2CA-4AEE-A64C-E3390AE4257B.jpeg" class="zoom img-fluid" alt="">
                 </a>
             </div>
 
             <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a href="images/3898011837_3085c17466_b.jpg" class="fancybox" rel="ligthbox">
-                    <img src="images/3898011837_3085c17466_b.jpg" class="zoom img-fluid " alt="">
+                <a href="images/D4D7A23B-1690-4141-83D3-F4C9C717830D.jpeg" class="fancybox" rel="ligthbox">
+                    <img src="images/D4D7A23B-1690-4141-83D3-F4C9C717830D.jpeg" class="zoom img-fluid " alt="">
                 </a>
             </div>
 
             <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a href="images/go.jpg" class="fancybox" rel="ligthbox">
-                    <img src="images/go.jpg" class="zoom img-fluid " alt="">
+                <a href="images/70A0F813-3461-4FBB-B301-AA49BFEBB6B6.jpeg" class="fancybox" rel="ligthbox">
+                    <img src="images/70A0F813-3461-4FBB-B301-AA49BFEBB6B6.jpeg" class="zoom img-fluid " alt="">
                 </a>
             </div>
 
             <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a href="images/3898011837_3085c17466_b.jpg" class="fancybox" rel="ligthbox">
-                    <img src="images/3898011837_3085c17466_b.jpg" class="zoom img-fluid " alt="">
+                <a href="images/C76D87DC-2FB0-47B1-9347-F630C7B25E4B.jpeg" class="fancybox" rel="ligthbox">
+                    <img src="images/C76D87DC-2FB0-47B1-9347-F630C7B25E4B.jpeg" class="zoom img-fluid " alt="">
 
                 </a>
             </div>
             <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a href="images/22044c26f5e2a9f56473fe4d88e6e4ca.jpg" class="fancybox" rel="ligthbox">
-                    <img src="images/22044c26f5e2a9f56473fe4d88e6e4ca.jpg" class="zoom img-fluid" alt="">
+                <a href="images/B369F74B-7252-473B-B8C2-6F1669B41553.jpeg" class="fancybox" rel="ligthbox">
+                    <img src="images/B369F74B-7252-473B-B8C2-6F1669B41553.jpeg" class="zoom img-fluid" alt="">
                 </a>
             </div>
 
             <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a href="images/3898011837_3085c17466_b.jpg" class="fancybox" rel="ligthbox">
-                    <img src="images/3898011837_3085c17466_b.jpg" class="zoom img-fluid " alt="">
+                <a href="images/58B1E649-A078-4048-9AFA-2B9F8700C09E.jpeg" class="fancybox" rel="ligthbox">
+                    <img src="images/58B1E649-A078-4048-9AFA-2B9F8700C09E.jpeg" class="zoom img-fluid " alt="">
                 </a>
             </div>
 
             <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a href="images/go.jpg" class="fancybox" rel="ligthbox">
-                    <img src="images/go.jpg" class="zoom img-fluid " alt="">
+                <a href="images/B51CF6D1-9362-42CC-9F33-CCE7E642BC78.jpeg" class="fancybox" rel="ligthbox">
+                    <img src="images/B51CF6D1-9362-42CC-9F33-CCE7E642BC78.jpeg" class="zoom img-fluid " alt="">
                 </a>
             </div>
             <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a href="images/3898011837_3085c17466_b.jpg" class="fancybox" rel="ligthbox">
-                    <img src="images/3898011837_3085c17466_b.jpg" class="zoom img-fluid " alt="">
+                <a href="images/DF3191F6-C8A5-4C8B-A7D6-6310409CCD93.jpeg" class="fancybox" rel="ligthbox">
+                    <img src="images/DF3191F6-C8A5-4C8B-A7D6-6310409CCD93.jpeg" class="zoom img-fluid " alt="">
 
                 </a>
             </div>
             <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a href="images/22044c26f5e2a9f56473fe4d88e6e4ca.jpg" class="fancybox" rel="ligthbox">
-                    <img src="images/22044c26f5e2a9f56473fe4d88e6e4ca.jpg" class="zoom img-fluid" alt="">
+                <a href="images/D9F72160-5532-440F-AD26-B727B9214B52.jpeg" class="fancybox" rel="ligthbox">
+                    <img src="images/D9F72160-5532-440F-AD26-B727B9214B52.jpeg" class="zoom img-fluid" alt="">
                 </a>
             </div>
 
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a href="images/3898011837_3085c17466_b.jpg" class="fancybox" rel="ligthbox">
-                    <img src="images/3898011837_3085c17466_b.jpg" class="zoom img-fluid " alt="">
-                </a>
-            </div>
-
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a href="images/go.jpg" class="fancybox" rel="ligthbox">
-                    <img src="images/go.jpg" class="zoom img-fluid " alt="">
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a href="images/3898011837_3085c17466_b.jpg" class="fancybox" rel="ligthbox">
-                    <img src="images/3898011837_3085c17466_b.jpg" class="zoom img-fluid " alt="">
-
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a href="images/22044c26f5e2a9f56473fe4d88e6e4ca.jpg" class="fancybox" rel="ligthbox">
-                    <img src="images/22044c26f5e2a9f56473fe4d88e6e4ca.jpg" class="zoom img-fluid" alt="">
-                </a>
-            </div>
-
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a href="images/3898011837_3085c17466_b.jpg" class="fancybox" rel="ligthbox">
-                    <img src="images/3898011837_3085c17466_b.jpg" class="zoom img-fluid " alt="">
-                </a>
-            </div>
-
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a href="images/go.jpg" class="fancybox" rel="ligthbox">
-                    <img src="images/go.jpg" class="zoom img-fluid " alt="">
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a href="images/3898011837_3085c17466_b.jpg" class="fancybox" rel="ligthbox">
-                    <img src="images/3898011837_3085c17466_b.jpg" class="zoom img-fluid " alt="">
-
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a href="images/22044c26f5e2a9f56473fe4d88e6e4ca.jpg" class="fancybox" rel="ligthbox">
-                    <img src="images/22044c26f5e2a9f56473fe4d88e6e4ca.jpg" class="zoom img-fluid" alt="">
-                </a>
-            </div>
-
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a href="images/3898011837_3085c17466_b.jpg" class="fancybox" rel="ligthbox">
-                    <img src="images/3898011837_3085c17466_b.jpg" class="zoom img-fluid " alt="">
-                </a>
-            </div>
-
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a href="images/go.jpg" class="fancybox" rel="ligthbox">
-                    <img src="images/go.jpg" class="zoom img-fluid " alt="">
-                </a>
-            </div>
 
 
         </div>
@@ -249,16 +189,16 @@
     </div>
 
     <script type="text/javascript">
-        $(document).ready(function () {
+        $(document).ready(function() {
             $(".fancybox").fancybox({
                 openEffect: "none",
                 closeEffect: "none"
             });
 
-            $(".zoom").hover(function () {
+            $(".zoom").hover(function() {
 
                 $(this).addClass('transition');
-            }, function () {
+            }, function() {
 
                 $(this).removeClass('transition');
             });
