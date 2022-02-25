@@ -1,0 +1,155 @@
+@font-face {
+    font-family: 'HelveticaNeueCyr';
+    src: url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrUltraLight_0.eot');
+    src: url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrUltraLight_0.eot') format('embedded-opentype'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrUltraLight_0.woff2') format('woff2'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrUltraLight_0.woff') format('woff'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrUltraLight_0.ttf') format('truetype'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrUltraLight_0.svg#HelveticaNeueCyrUltraLight_0') format('svg');
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'HelveticaNeueCyr';
+    src: url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrUltraLightItalic.eot');
+    src: url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrUltraLightItalic.eot') format('embedded-opentype'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrUltraLightItalic.woff2') format('woff2'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrUltraLightItalic.woff') format('woff'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrUltraLightItalic.ttf') format('truetype'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrUltraLightItalic.svg#HelveticaNeueCyrUltraLightItalic') format('svg');
+    font-weight: 100;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'HelveticaNeueCyr';
+    src: url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrLight.eot');
+    src: url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrLight.eot') format('embedded-opentype'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrLight.woff2') format('woff2'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrLight.woff') format('woff'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrLight.ttf') format('truetype'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrLight.svg#HelveticaNeueCyrLight') format('svg');
+    font-weight: 200;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'HelveticaNeueCyr';
+    src: url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrLightItalic.eot');
+    src: url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrLightItalic.eot') format('embedded-opentype'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrLightItalic.woff2') format('woff2'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrLightItalic.woff') format('woff'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrLightItalic.ttf') format('truetype'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrLightItalic.svg#HelveticaNeueCyrLightItalic') format('svg');
+    font-weight: 200;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'HelveticaNeueCyr';
+    src: url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrThin.eot');
+    src: url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrThin.eot') format('embedded-opentype'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrThin.woff2') format('woff2'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrThin.woff') format('woff'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrThin.ttf') format('truetype'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrThin.svg#HelveticaNeueCyrThin') format('svg');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'HelveticaNeueCyr';
+    src: url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrThinItalic.eot');
+    src: url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrThinItalic.eot') format('embedded-opentype'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrThinItalic.woff2') format('woff2'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrThinItalic.woff') format('woff'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrThinItalic.ttf') format('truetype'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrThinItalic.svg#HelveticaNeueCyrThinItalic') format('svg');
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'HelveticaNeueCyr';
+    src: url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrRoman.eot');
+    src: url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrRoman.eot') format('embedded-opentype'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrRoman.woff2') format('woff2'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrRoman.woff') format('woff'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrRoman.ttf') format('truetype'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrRoman.svg#HelveticaNeueCyrRoman') format('svg');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'HelveticaNeueCyr';
+    src: url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrItalic.eot');
+    src: url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrItalic.eot') format('embedded-opentype'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrItalic.woff2') format('woff2'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrItalic.woff') format('woff'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrItalic.ttf') format('truetype'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrItalic.svg#HelveticaNeueCyrItalic') format('svg');
+    font-weight: 400;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'HelveticaNeueCyr';
+    src: url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrMedium.eot');
+    src: url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrMedium.eot') format('embedded-opentype'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrMedium.woff2') format('woff2'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrMedium.woff') format('woff'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrMedium.ttf') format('truetype'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrMedium.svg#HelveticaNeueCyrMedium') format('svg');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'HelveticaNeueCyr';
+    src: url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrBold.eot');
+    src: url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrBold.eot') format('embedded-opentype'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrBold.woff2') format('woff2'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrBold.woff') format('woff'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrBold.ttf') format('truetype'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrBold.svg#HelveticaNeueCyrBold') format('svg');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'HelveticaNeueCyr';
+    src: url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrBoldItalic.eot');
+    src: url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrBoldItalic.eot') format('embedded-opentype'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrBoldItalic.woff2') format('woff2'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrBoldItalic.woff') format('woff'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrBoldItalic.ttf') format('truetype'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrBoldItalic.svg#HelveticaNeueCyrBoldItalic') format('svg');
+    font-weight: 700;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'HelveticaNeueCyr';
+    src: url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrBlack.eot');
+    src: url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrBlack.eot') format('embedded-opentype'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrBlack.woff2') format('woff2'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrBlack.woff') format('woff'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrBlack.ttf') format('truetype'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrBlack.svg#HelveticaNeueCyrBlack') format('svg');
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'HelveticaNeueCyr';
+    src: url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrBlackItalic.eot');
+    src: url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrBlackItalic.eot') format('embedded-opentype'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrBlackItalic.woff2') format('woff2'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrBlackItalic.woff') format('woff'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrBlackItalic.ttf') format('truetype'),
+         url('https://promo-theme.com/cropit-wp/wp-content/themes/cropit/fonts/HelveticaNeueCyrBlackItalic.svg#HelveticaNeueCyrBlackItalic') format('svg');
+    font-weight: 800;
+    font-style: italic;
+}
