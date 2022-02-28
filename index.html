@@ -26,7 +26,7 @@
 </head>
 <!-- Body Start -->
 
-<body data-spy="scroll" data-target="#navbar-collapse-toggle" data-offset="70">
+<body data-spy="scroll" data-target="#navbar-collapse-toggle" data-offset="70" onload="calculate_old()">
     <!-- page loading -->
     <div id="loading">
         <div class="load-circle"><span class="one"></span></div>
@@ -182,7 +182,7 @@
                                     </div>
                                     <div class="media">
                                         <label>Age</label>
-                                        <p>25 years old</p>
+                                        <p id="old"></p>
                                     </div>
                                     <div class="media">
                                         <label>Residence</label>
@@ -788,6 +788,17 @@
 <script src="static/js/wow.js"></script>
 <script>
     new WOW().init();
+</script>
+
+<!-- calculate date of birth -->
+<script language="javascript" type="text/javascript">
+    function calculate_old() {
+        var current = new Date().getFullYear();
+        var birthday = "07/23/1996";
+        birthday = new Date(birthday).getFullYear();
+        var old = current - birthday;
+        document.getElementById("old").innerHTML = old + " year old";
+    }
 </script>
 <!-- star -->
 <!-- <script src="https://cdn.jsdelivr.net/mojs/latest/mo.min.js"></script>
