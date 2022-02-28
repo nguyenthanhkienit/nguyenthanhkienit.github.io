@@ -794,10 +794,21 @@
 <script language="javascript" type="text/javascript">
     function calculate_old() {
         var current = new Date().getFullYear();
-        var birthday = "07/23/1996";
+        var birthday = "07/23/1996"; // MM/dd/yyyy
         birthday = new Date(birthday).getFullYear();
         var old = current - birthday;
-        document.getElementById("old").innerHTML = old + " year old";
+        if (today.getMonth() + 1 < 7) {
+            document.getElementById("old").innerHTML = old - 1 + " year old";
+        }
+        if (today.getMonth() + 1 == 7 && today.getDate() < 23) {
+            document.getElementById("old").innerHTML = old - 1 + " year old";
+        }
+        if (today.getMonth() + 1 == 7 && today.getDate() >= 23) {
+            document.getElementById("old").innerHTML = old + " year old";
+        }
+        if (today.getMonth() + 1 > 7) {
+            document.getElementById("old").innerHTML = old + " year old";
+        }
     }
 </script>
 <!-- star -->
