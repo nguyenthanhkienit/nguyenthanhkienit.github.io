@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<!--
+/*
+ * blueimp Gallery Demo
+ * https://github.com/blueimp/Gallery
+ *
+ * Copyright 2013, Sebastian Tschan
+ * https://blueimp.net
+ *
+ * Licensed under the MIT license:
+ * https://opensource.org/licenses/MIT
+ */
+-->
+<html lang="en">
+
+<head>
+  <!--[if IE]>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <![endif]-->
+  <meta charset="utf-8" />
+  <title>blueimp Gallery</title>
+  <meta name="description"
+    content="blueimp Gallery is a touch-enabled, responsive and customizable image and video gallery, carousel and lightbox, optimized for both mobile and desktop web browsers. It features swipe, mouse and keyboard navigation, transition effects, slideshow functionality, fullscreen support and on-demand content loading and can be extended to display additional content types." />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="cssPIC/blueimp-gallery.css" />
+  <!-- <link rel="stylesheet" href="css/blueimp-gallery-indicator.css" />
+  <link rel="stylesheet" href="css/blueimp-gallery-video.css" /> -->
+  <link rel="stylesheet" href="cssPIC/demo/demo.css" />
+</head>
+
+<body>
+
+
+  <h2>Lightbox image gallery</h2>
+  <p>
+    <input type="checkbox" id="fullscreen" />
+    <label for="fullscreen">Fullscreen</label>
+  </p>
+  <!-- The container for the list of example images -->
+  <div id="links" class="links">
+
+    <a title="PEACE (Explored)" href="images/17EC2D72-DED2-499B-BEA9-8687B81B4EBA.jpeg"
+      data-srcset=""
+      data-gallery=""><img loading="lazy" width="200" height="200"
+        src="images/17EC2D72-DED2-499B-BEA9-8687B81B4EBA.jpeg" alt="PEACE (Explored)"></a>
+
+        <a title="PEACE (Explored)" href="images/58B1E649-A078-4048-9AFA-2B9F8700C09E.jpeg"
+      data-srcset=""
+      data-gallery=""><img loading="lazy" width="200" height="200"
+        src="images/58B1E649-A078-4048-9AFA-2B9F8700C09E.jpeg" alt="PEACE (Explored)"></a>
+
+        <a title="PEACE (Explored)" href="images/70A0F813-3461-4FBB-B301-AA49BFEBB6B6.jpeg"
+      data-srcset=""
+      data-gallery=""><img loading="lazy" width="200" height="200"
+        src="images/70A0F813-3461-4FBB-B301-AA49BFEBB6B6.jpeg" alt="PEACE (Explored)"></a>
+
+        <a title="PEACE (Explored)" href="images/328D315B-2EF6-49B1-B7A0-773EF72B3EE8.jpeg"
+      data-srcset=""
+      data-gallery=""><img loading="lazy" width="200" height="200"
+        src="images/328D315B-2EF6-49B1-B7A0-773EF72B3EE8.jpeg" alt="PEACE (Explored)"></a>
+
+        <a title="PEACE (Explored)" href="images/8284BE37-B097-4571-9360-0356367585D2.jpeg"
+      data-srcset=""
+      data-gallery=""><img loading="lazy" width="200" height="200"
+        src="images/8284BE37-B097-4571-9360-0356367585D2.jpeg" alt="PEACE (Explored)"></a>
+
+        <a title="PEACE (Explored)" href="images/AA8C3E9D-F794-445F-A94B-A163D1547A1A.jpeg"
+      data-srcset=""
+      data-gallery=""><img loading="lazy" width="200" height="200"
+        src="images/AA8C3E9D-F794-445F-A94B-A163D1547A1A.jpeg" alt="PEACE (Explored)"></a>
+
+        <a title="PEACE (Explored)" href="images/B51CF6D1-9362-42CC-9F33-CCE7E642BC78.jpeg"
+      data-srcset=""
+      data-gallery=""><img loading="lazy" width="200" height="200"
+        src="images/B51CF6D1-9362-42CC-9F33-CCE7E642BC78.jpeg" alt="PEACE (Explored)"></a>
+  </div>
+  <!-- The Gallery as lightbox dialog -->
+  <div id="blueimp-gallery" class="blueimp-gallery" aria-label="image gallery" aria-modal="true" role="dialog">
+    <div class="slides" aria-live="polite"></div>
+    <h3 class="title"></h3>
+    <a class="prev" aria-controls="blueimp-gallery" aria-label="previous slide" aria-keyshortcuts="ArrowLeft"></a>
+    <a class="next" aria-controls="blueimp-gallery" aria-label="next slide" aria-keyshortcuts="ArrowRight"></a>
+    <a class="close" aria-controls="blueimp-gallery" aria-label="close" aria-keyshortcuts="Escape"></a>
+    <a class="play-pause" aria-controls="blueimp-gallery" aria-label="play slideshow" aria-keyshortcuts="Space"
+      aria-pressed="false" role="button"></a>
+    <ol class="indicator"></ol>
+  </div>
+  <script src="jsPIC/blueimp-helper.js"></script>
+  <script src="jsPIC/blueimp-gallery.js"></script>
+  <!-- <script src="js/blueimp-gallery-fullscreen.js"></script>
+  <script src="js/blueimp-gallery-indicator.js"></script>
+  <script src="js/blueimp-gallery-video.js"></script>
+  <script src="js/blueimp-gallery-vimeo.js"></script>
+  <script src="js/blueimp-gallery-youtube.js"></script> -->
+  <script src="jsPIC/vendor/jquery.js"></script>
+  <script src="jsPIC/jquery.blueimp-gallery.js"></script>
+  <script src="jsPIC/demo/demo.js"></script>
+</body>
+
+</html>
