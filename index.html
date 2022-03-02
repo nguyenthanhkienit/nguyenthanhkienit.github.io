@@ -22,6 +22,7 @@
     <link href="static/plugin/font-awesome/css/all.min.css" rel="stylesheet">
 
     <link href="static/style/master.css" rel="stylesheet">
+    <link href="static/style/style_captcha.css" rel="stylesheet">
 
 </head>
 <!-- Body Start -->
@@ -653,14 +654,31 @@
                                             <span class="input-focus-effect theme-bg"></span>
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
-                                        <div class="send">
-                                            <button class="m-btn m-btn-theme" onclick="send_mail()" type="button" value="Send">send message</button>
-                                        </div>
 
-                                    </div>
+
                                 </div>
                             </form>
+                            <div class="wrapper">
+                                <header>Captcha in JavaScript</header>
+                                <div class="captcha-area">
+                                    <div class="captcha-img">
+                                        <img src="captcha-bg.png" alt="Captch Background">
+                                        <span class="captcha"></span>
+                                    </div>
+                                    <button class="reload-btns" type="button"></button>
+                                </div>
+                                <form action="#" class="input-area">
+                                    <input type="text" placeholder="Enter captcha" maxlength="6" spellcheck="false" required>
+                                    <!-- <button class="check-btn" type="button">Check</button> -->
+                                </form>
+                                <div class="status-text" type="label"></div>
+                                <div class="col-md-12">
+                                    <div class="send">
+                                        <button class="check-btn m-btn m-btn-theme" onclick="send_mail()" type="button" value="Send">send message</button>
+                                    </div>
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- col -->
@@ -719,6 +737,8 @@
         </div>
     </footer>
     <!-- footer End -->
+    <!-- capcha -->
+    <script src="static/js/scripts_captcha.js"></script>
     <!-- jquery -->
     <script src="static/js/jquery-3.2.1.min.js"></script>
     <script src="static/js/jquery-migrate-3.0.0.min.js"></script>
