@@ -27,7 +27,7 @@ reloadBtn.addEventListener("click", () => {
 function removeContent() {
     inputField.value = "";
     captcha.innerText = "";
-    statusTxt.style.display = "block";
+    //statusTxt.style.display = "block";
 }
 
 function send_mail() {
