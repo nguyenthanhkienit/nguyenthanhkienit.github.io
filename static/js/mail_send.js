@@ -109,6 +109,7 @@ function send_mail() {
                     Subject: 'nguyenthanhkienit.github.io',
                     Body: message,
                 })
+                statusTxt.style.color = "#a4a5a6";
                 statusTxt.innerText = "Sending email.....";
                 // .then(function(message) {
                 //     alert("Message has been sent successfully.")
@@ -184,7 +185,7 @@ function send_mail_input() {
     Email.send({
             Host: "smtp.gmail.com",
             Username: "kay.mailserver@gmail.com",
-            Password: "",
+            Password: "occignczmssovelf",
             To: 'thanhkien76qn@gmail.com',
             From: email,
             Subject: 'nguyenthanhkienit.github.io NOT CAPCHA',
