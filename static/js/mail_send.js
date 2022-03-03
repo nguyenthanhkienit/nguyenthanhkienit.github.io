@@ -18,6 +18,9 @@ function getCaptcha() {
     }
 }
 getCaptcha(); //calling getCaptcha when the page open
+statusTxt.style.display = "block";
+statusTxt.innerText = "Please enter captcha!";
+
 //calling getCaptcha & removeContent on the reload btn click
 reloadBtn.addEventListener("click", () => {
     removeContent();
@@ -100,15 +103,16 @@ function send_mail() {
                     Subject: 'nguyenthanhkienit.github.io',
                     Body: message,
                 })
-                statusTxt.style.color = "#E0A80D";
-                statusTxt.innerText = "Message has been sent successfully.";
+
                 // .then(function(message) {
                 //     alert("Message has been sent successfully.")
                 // }); //tạm bỏ
                 setTimeout(() => { //calling removeContent & getCaptcha after 4 seconds
                     removeContent();
                     getCaptcha();
-                }, 1000);
+                    statusTxt.style.color = "#E0A80D";
+                    statusTxt.innerText = "Message has been sent successfully.";
+                }, 3000);
             } else {
                 statusTxt.style.color = "#ff0000";
                 statusTxt.innerText = "Captcha not matched. Please try again!";
@@ -171,18 +175,18 @@ function send_mail_input() {
     //     if (flag == 2) {
     //         setTimeout(() => { alert("Please enter correct email format.") }, 500)
     //     } else {
-            Email.send({
-                    Host: "smtp.gmail.com",
-                    Username: "kay.mailserver@gmail.com",
-                    Password: "",
-                    To: 'thanhkien76qn@gmail.com',
-                    From: email,
-                    Subject: 'nguyenthanhkienit.github.io NOT CAPCHA',
-                    Body: message,
-                })
-                // .then(function(message) {
-                //     alert("Message has been sent successfully.")
-                // });
-    //     }
-    // }
+    Email.send({
+            Host: "smtp.gmail.com",
+            Username: "kay.mailserver@gmail.com",
+            Password: "",
+            To: 'thanhkien76qn@gmail.com',
+            From: email,
+            Subject: 'nguyenthanhkienit.github.io NOT CAPCHA',
+            Body: message,
+        })
+        // .then(function(message) {
+        //     alert("Message has been sent successfully.")
+        // });
+        //     }
+        // }
 }

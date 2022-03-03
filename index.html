@@ -661,23 +661,29 @@
                             <div class="wrapper">
                                 <div class="captcha-area">
                                     <div class="captcha-img">
-                                        <img src="captcha-bg.png" alt="Captch Background">
+                                        <!-- <img src="captcha-bg.png" alt="Captch Background"> -->
                                         <span class="captcha"></span>
                                     </div>
-                                    <button class="reload-btns" type="button"></button>
+                                    <button class="reload-btns" type="button"><i class="fas fa-redo"></i></button>
                                 </div>
                                 <form action="#" class="input-area">
-                                    <input onclick="send_mail_input()" type="text" placeholder="Enter captcha" maxlength="6" spellcheck="false" required>
+                                    <!-- required: Please fill -->
+                                    <input onclick="send_mail_input()" type="text" placeholder="Enter captcha" maxlength="6" spellcheck="false">
                                     <!-- <button class="check-btn" type="button">Check</button> -->
                                 </form>
-                                <div class="status-text" type="label"></div>
-                                <div class="col-md-12">
-                                    <div class="send">
-                                        <button class="check-btn m-btn m-btn-theme" onclick="send_mail()" type="button" value="Send">send message</button>
+                                <div class="notice_btn">
+                                    <div class="notice">
+                                        <div class="status-text" type="label"></div>
                                     </div>
-
+                                    <div class="_btn">
+                                        <div class="send">
+                                            <button class="check-btn m-btn m-btn-theme" onclick="send_mail()" type="button" value="Send">send message</button>
+                                        </div>
+                                    </div>
                                 </div>
+
                             </div>
+
                         </div>
                     </div>
                     <!-- col -->

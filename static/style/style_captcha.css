@@ -1,6 +1,7 @@
 /* Import Google font - Poppins & Noto */
 
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital@1&family=Poppins:wght@400;500;600&display=swap');
+
 /* * {
     margin: 0;
     padding: 0;
@@ -8,39 +9,19 @@
     font-family: "Poppins", sans-serif;
 } */
 
-.wrapper {
-    max-width: 485px;
-    width: 100%;
-
-/* background-color: #b1b1b1; */
-
-}
-
 .wrapper .captcha-area {
     display: flex;
     height: 35px;
-    
     align-items: center;
-   
 }
 
 .captcha-area .captcha-img {
     height: 100%;
-    width: 235px;
+    width: 120px;
     user-select: none;
-    background: #000;
-    border-radius: 5px;
+    border-radius: 2px;
     position: relative;
-    margin-left: 50px;
-}
-
-.captcha-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 5px;
-    opacity: 0.95;
-    
+    background-color: #a4a5a6;
 }
 
 .captcha-img .captcha {
@@ -48,13 +29,11 @@
     left: 50%;
     top: 50%;
     width: 100%;
-    color: #fff;
+    color: #2B2C2C;
     font-size: 20px;
     text-align: center;
-    letter-spacing: 10px;
     transform: translate(-50%, -50%);
     text-shadow: 0px 0px 2px #b1b1b1;
-    margin-left: 3px;
     /* font-family: "Comic Sans MS", cursive, sans-serif; */
     /* text-decoration: line-through; */
 }
@@ -65,7 +44,7 @@
     color: #fff;
     cursor: pointer;
     background: #E0A80D;
-    border-radius: 5px;
+    border-radius: 2px;
     transition: all 0.3s ease;
     border: 2px solid #E0A80D;
 }
@@ -78,8 +57,9 @@
 .captcha-area .reload-btns {
     width: 35px;
     height: 100%;
-    font-size: 25px;
+    font-size: 19px;
     margin-left: 10px;
+    color: #2B2C2C;
 }
 
 .captcha-area .reload-btns i {
@@ -87,7 +67,8 @@
 }
 
 .captcha-area .reload-btns:hover i {
-    transform: rotate(15deg);
+    transform: rotate(180deg);
+    color: #E0A80D;
 }
 
 .wrapper .input-area {
@@ -97,28 +78,28 @@
 }
 
 .input-area input {
-    width: 48.6%;
-    height: 75%;
+    width: 165px;
+    height: 70%;
     outline: none;
-    padding-left: 20px;
-    font-size: 20px;
-    border-radius: 5px;
-    border: 1px solid #bfbfbf;
+    font-size: 15px;
+    border-radius: 2px;
+    border: 2px solid #fff;
     margin-top: 10px;
-    margin-left: 50px;
+    color: #2B2C2C;
 }
 
 .input-area input:is(:focus,
  :valid) {
-    padding-left: 19px;
-    border: 2px solid #4db2ec;
+    /* padding-left: 19px; */
+    border: 2px solid #E0A80D;
 }
 
 .input-area input::placeholder {
     color: #bfbfbf;
 }
 
-.input-area .check-btn {
+
+/* .input-area .check-btn {
     position: absolute;
     right: 7px;
     top: 50%;
@@ -128,10 +109,23 @@
     opacity: 0;
     pointer-events: none;
     transform: translateY(-50%);
+} */
+
+.notice_btn {
+    height: 50px;
+    width: 100%;
 }
 
-.input-area .send .check-btn {
-    margin-top: 300px;
+.notice {
+    height: 50px;
+    width: 70%;
+    float: left;
+}
+
+._btn {
+    height: 50px;
+    width: 30%;
+    float: left;
 }
 
 .input-area input:valid+.check-btn {
@@ -142,39 +136,22 @@
 .wrapper .status-text {
     display: none;
     font-size: 18px;
-    text-align: center;
-    margin: 20px 0 -5px;
+    margin-top: 10px;
 }
 
-@media (max-width: 576px) {
-    .wrapper {
-        padding: 22px 25px 35px;
+@media (max-width: 767px) {
+    .notice_btn {
+        height: 100px;
+        width: 100%;
     }
-    .wrapper header {
-        font-size: 25px;
+    .notice {
+        height: 50px;
+        width: 100%;
+        float: left;
     }
-    .wrapper .captcha-area {
-        height: 60px;
-    }
-    .captcha-area .captcha {
-        font-size: 28px;
-        letter-spacing: 5px;
-    }
-    .captcha-area .reload-btns {
-        width: 60px;
-        margin-left: 5px;
-        font-size: 20px;
-    }
-    .wrapper .input-area {
-        height: 55px;
-    }
-    .input-area .check-btn {
-        height: 40px;
-    }
-    .wrapper .status-text {
-        font-size: 15px;
-    }
-    .captcha-area .captcha-img {
-        width: 250px;
+    ._btn {
+        height: 50px;
+        width: 100%;
+        float: left;
     }
 }
