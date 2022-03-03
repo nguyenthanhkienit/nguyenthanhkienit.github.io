@@ -88,11 +88,11 @@
     color: #2B2C2C;
 }
 
-.input-area input:is(:focus,
+
+/* .input-area input:is(:focus,
  :valid) {
-    /* padding-left: 19px; */
     border: 2px solid #E0A80D;
-}
+} */
 
 .input-area input::placeholder {
     color: #bfbfbf;

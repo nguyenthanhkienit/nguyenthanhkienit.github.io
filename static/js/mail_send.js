@@ -18,7 +18,7 @@ function getCaptcha() {
     }
 }
 getCaptcha(); //calling getCaptcha when the page open
-statusTxt.style.display = "block";
+statusTxt.style.display = "hile";
 statusTxt.innerText = "Please enter captcha!";
 
 //calling getCaptcha & removeContent on the reload btn click
@@ -81,10 +81,16 @@ function send_mail() {
     }
 
     if (flag == 1) {
-        setTimeout(() => { alert("Please enter full information.") }, 500)
+        //setTimeout(() => { alert("Please enter full information.") }, 500)
+        statusTxt.style.display = "block";
+        statusTxt.innerText = "Please enter full information!";
+        statusTxt.style.color = "#ff0000";
     } else {
         if (flag == 2) {
-            setTimeout(() => { alert("Please enter correct email format.") }, 500)
+            //setTimeout(() => { alert("Please enter correct email format.") }, 500)
+            statusTxt.style.display = "block";
+            statusTxt.innerText = "Please enter correct email format!";
+            statusTxt.style.color = "#ff0000";
         } else {
 
             // checkBtn.addEventListener("click", e => { //tạm bỏ
@@ -103,7 +109,7 @@ function send_mail() {
                     Subject: 'nguyenthanhkienit.github.io',
                     Body: message,
                 })
-
+                statusTxt.innerText = "Sending email.....";
                 // .then(function(message) {
                 //     alert("Message has been sent successfully.")
                 // }); //tạm bỏ
@@ -112,7 +118,7 @@ function send_mail() {
                     getCaptcha();
                     statusTxt.style.color = "#E0A80D";
                     statusTxt.innerText = "Message has been sent successfully.";
-                }, 3000);
+                }, 4000);
             } else {
                 statusTxt.style.color = "#ff0000";
                 statusTxt.innerText = "Captcha not matched. Please try again!";
