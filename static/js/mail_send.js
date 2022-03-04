@@ -2,7 +2,8 @@ const captcha = document.querySelector(".captcha"),
     reloadBtn = document.querySelector(".reload-btns"),
     inputField = document.querySelector(".input-area input"),
     checkBtn = document.querySelector(".send .check-btn"),
-    statusTxt = document.querySelector(".status-text");
+    statusTxt = document.querySelector(".status-text"),
+    secondTxt = document.querySelector("s");
 
 //storing all captcha characters in array
 let allCharacters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
@@ -18,7 +19,7 @@ function getCaptcha() {
     }
 }
 getCaptcha(); //calling getCaptcha when the page open
-statusTxt.style.display = "block";
+statusTxt.style.display = "hile";
 statusTxt.innerText = "Please enter captcha!";
 
 //calling getCaptcha & removeContent on the reload btn click
@@ -31,6 +32,24 @@ function removeContent() {
     inputField.value = "";
     captcha.innerText = "";
     //statusTxt.style.display = "block";
+}
+var s = null; // Giây
+var timeout = null; // Timeout
+function start() {
+    if (s == null) {
+        //s = parseInt(document.getElementById('s_val').value);
+        s = "10"
+    }
+    if (s == -1) {
+        //s = parseInt(document.getElementById('s_val').value);
+        secondTxt.style.display = "none";
+    }
+
+    document.getElementById('s').innerText = s.toString();
+    timeout = setTimeout(function() {
+        s--;
+        start();
+    }, 1000);
 }
 
 function send_mail() {
@@ -92,6 +111,7 @@ function send_mail() {
             statusTxt.innerText = "Please enter correct email format!";
             statusTxt.style.color = "#ff0000";
         } else {
+            //countdown timer
 
             // checkBtn.addEventListener("click", e => { //tạm bỏ
             //preventing button from it's default behaviour
@@ -101,14 +121,16 @@ function send_mail() {
             if (inputVal == captcha.innerText) { //if captcha matched
 
                 Email.send({
-                    Host: "smtp.gmail.com",
-                    Username: "kay.mailserver@gmail.com",
-                    Password: "occignczmssovelf",
-                    To: 'thanhkien76qn@gmail.com',
-                    From: email,
-                    Subject: 'nguyenthanhkienit.github.io',
-                    Body: message,
-                })
+                        Host: "smtp.gmail.com",
+                        Username: "kay.mailserver@gmail.com",
+                        Password: "occignczmssovelf",
+                        To: 'thanhkien76qn@gmail.com',
+                        From: email,
+                        Subject: 'nguyenthanhkienit.github.io',
+                        Body: message,
+                    })
+                    //countdown timer
+                start();
                 statusTxt.style.color = "#a4a5a6";
                 statusTxt.innerText = "Sending email.....";
                 // .then(function(message) {
@@ -119,7 +141,7 @@ function send_mail() {
                     getCaptcha();
                     statusTxt.style.color = "#E0A80D";
                     statusTxt.innerText = "Message has been sent successfully.";
-                }, 4000);
+                }, 10000);
             } else {
                 statusTxt.style.color = "#ff0000";
                 statusTxt.innerText = "Captcha not matched.";
