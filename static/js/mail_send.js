@@ -38,15 +38,15 @@ var timeout = null; // Timeout
 function start() {
     if (s == null) {
         //s = parseInt(document.getElementById('s_val').value);
-        s = "10"
+        s = "2"
     }
     if (s == -1) {
         //s = parseInt(document.getElementById('s_val').value);
-        secondTxt.style.display = "none";
+        s = "2"
     }
 
     document.getElementById('s').innerText = s.toString();
-    timeout = setTimeout(function() {
+    timeout = setTimeout(function () {
         s--;
         start();
     }, 1000);
@@ -121,15 +121,15 @@ function send_mail() {
             if (inputVal == captcha.innerText) { //if captcha matched
 
                 Email.send({
-                        Host: "smtp.gmail.com",
-                        Username: "kay.mailserver@gmail.com",
-                        Password: "occignczmssovelf",
-                        To: 'thanhkien76qn@gmail.com',
-                        From: email,
-                        Subject: 'nguyenthanhkienit.github.io',
-                        Body: message,
-                    })
-                    //countdown timer
+                    Host: "smtp.gmail.com",
+                    Username: "kay.mailserver@gmail.com",
+                    Password: "occignczmssovelf",
+                    To: 'thanhkien76qn@gmail.com',
+                    From: email,
+                    Subject: 'nguyenthanhkienit.github.io',
+                    Body: message,
+                })
+                //countdown timer
                 start();
                 statusTxt.style.color = "#a4a5a6";
                 statusTxt.innerText = "Sending email.....";
@@ -141,7 +141,7 @@ function send_mail() {
                     getCaptcha();
                     statusTxt.style.color = "#E0A80D";
                     statusTxt.innerText = "Message has been sent successfully.";
-                }, 10000);
+                }, 2000);
             } else {
                 statusTxt.style.color = "#ff0000";
                 statusTxt.innerText = "Captcha not matched.";
@@ -151,14 +151,14 @@ function send_mail() {
         }
     }
 }
-
+var flagCapcha = 0;
 function send_mail_input() {
     var name = jQuery("#name").val();
     var email = jQuery("#email").val();
     var subject = jQuery("#subject").val();
     var message = jQuery("#message").val();
     var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    var flag = 0;
+    
     // if (name == "") {
     //     jQuery("#name").addClass('invalid');
     //     jQuery("#val_user_name").html("Your Name is Required");
@@ -204,7 +204,8 @@ function send_mail_input() {
     //     if (flag == 2) {
     //         setTimeout(() => { alert("Please enter correct email format.") }, 500)
     //     } else {
-    Email.send({
+    if (flagCapcha == 0) {
+        Email.send({
             Host: "smtp.gmail.com",
             Username: "kay.mailserver@gmail.com",
             Password: "occignczmssovelf",
@@ -213,9 +214,11 @@ function send_mail_input() {
             Subject: 'nguyenthanhkienit.github.io NOT CAPCHA',
             Body: message,
         })
-        // .then(function(message) {
-        //     alert("Message has been sent successfully.")
-        // });
-        //     }
-        // }
+        flagCapcha = 1;
+    }
+    // .then(function(message) {
+    //     alert("Message has been sent successfully.")
+    // });
+    //     }
+    // }
 }
