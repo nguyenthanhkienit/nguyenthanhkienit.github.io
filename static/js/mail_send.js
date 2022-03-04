@@ -18,7 +18,7 @@ function getCaptcha() {
     }
 }
 getCaptcha(); //calling getCaptcha when the page open
-statusTxt.style.display = "hile";
+statusTxt.style.display = "block";
 statusTxt.innerText = "Please enter captcha!";
 
 //calling getCaptcha & removeContent on the reload btn click
@@ -122,7 +122,7 @@ function send_mail() {
                 }, 4000);
             } else {
                 statusTxt.style.color = "#ff0000";
-                statusTxt.innerText = "Captcha not matched. Please try again!";
+                statusTxt.innerText = "Captcha not matched.";
             }
             // }); //tạm bỏ
 
