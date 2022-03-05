@@ -7384,8 +7384,12 @@ h6 {
     font-size: 14px;
 }
 
+
+/* Capcha
+------------------*/
+
 .formcaptcha {
-    height: 220px;
+    height: 185px;
     width: 100%;
 }
 
@@ -7397,7 +7401,6 @@ h6 {
 .formcaptcha_btnreload ._captcha_btnreload {
     height: 50px;
     width: auto;
-    background-color: #5912b6;
 }
 
 ._captcha_btnreload ._captcha {
@@ -7460,35 +7463,33 @@ h6 {
 }
 
 .formcaptcha .inputcapcha {
-    height: 40px;
+    height: 35px;
     width: 100%;
-    background-color: #000;
 }
 
 .formcaptcha .inputcapcha .inform {
     border: none;
     border-bottom: 1px solid #a4a5a6;
-    border-radius: 0;
-    padding-left: 0;
+    border-radius: 2px;
+    padding-left: 7px;
     box-shadow: none;
-    font-size: 14px;
+    font-size: 20px;
+    width: 205px;
 }
 
 .inputcapcha .form-input input {
-    background-color: #2B2C2C;
-    color: #a4a5a6;
+    background-color: #a4a5a6;
+    color: #2B2C2C;
 }
 
 .formcaptcha .notice_btnsend {
-    height: 80px;
+    height: 100px;
     width: 100%;
-    background-color: rgb(66, 2, 2);
 }
 
 .notice_btnsend .notice {
     height: 40px;
     width: auto;
-    background-color: aqua;
 }
 
 .notice_btnsend .notice .status-text {
