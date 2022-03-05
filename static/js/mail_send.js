@@ -42,7 +42,7 @@ function start() {
     }
     if (s == -1) {
         //s = parseInt(document.getElementById('s_val').value);
-        s = "2"
+        secondTxt.style.overflow = "hidden";
     }
 
     document.getElementById('s').innerText = s.toString();

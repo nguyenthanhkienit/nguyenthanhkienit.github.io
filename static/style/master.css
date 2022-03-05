@@ -7389,7 +7389,7 @@ h6 {
 ------------------*/
 
 .formcaptcha {
-    height: 185px;
+    height: auto;
     width: 100%;
 }
 
@@ -7483,19 +7483,44 @@ h6 {
 }
 
 .formcaptcha .notice_btnsend {
-    height: 100px;
+    height: 50px;
     width: 100%;
 }
 
 .notice_btnsend .notice {
     height: 40px;
-    width: auto;
+    width: 70%;
+    float: left;
+}
+
+.notice_btnsend ._btnsend {
+    height: 50px;
+    width: 30%;
+    float: left;
 }
 
 .notice_btnsend .notice .status-text {
     overflow: hidden;
     font-size: 18px;
     margin-top: 10px;
+}
+
+@media (max-width: 767px) {
+    .formcaptcha .notice_btnsend {
+        height: 95px;
+        width: 100%;
+    }
+    .notice_btnsend .notice {
+        height: 40px;
+        width: 100%;
+        float: left;
+    }
+    .notice_btnsend ._btnsend {
+        height: 40px;
+        width: 100%;
+        float: left;
+        margin-top: 10px;
+    }
 }
 
 
