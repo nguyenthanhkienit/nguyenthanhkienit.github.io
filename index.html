@@ -658,24 +658,26 @@
 
                                 </div>
                             </form>
-                            <div class="wrapper">
-                                <div class="captcha-area">
-                                    <div class="_captcha_btnreloadnew">
+                            <div class="formcaptcha">
+                                <div class="formcaptcha_btnreload">
+                                    <div class="_captcha_btnreload">
                                         <div class="_captcha"><span class="captcha"></span></div>
-                                        <div class="_btnreloadnew"><button class="reload-btns m-btn m-btn-theme" type="button"><i class="fas fa-redo"></i></button></div>
+                                        <div class="_btnreload"><button class="reload-btns m-btn m-btn-theme" type="button"><i class="fas fa-redo"></i></button></div>
                                     </div>
 
                                 </div>
-                                <form action="#" class="input-area">
-                                    <!-- required: Please fill -->
-                                    <input onclick="send_mail_input()" type="text" placeholder="Enter captcha" maxlength="6" spellcheck="false">
-                                    <!-- <button class="check-btn" type="button">Check</button> -->
-                                </form>
-                                <div class="notice_btn">
+                                <div class="inputcapcha">
+                                    <form action="#" class="input-area">
+                                        <!-- required: Please fill -->
+                                        <input onclick="send_mail_input()" type="text" placeholder="Enter captcha" maxlength="6" spellcheck="false">
+                                        <!-- <button class="check-btn" type="button">Check</button> -->
+                                    </form>
+                                </div>
+                                <div class="notice_btnsend">
                                     <div class="notice">
                                         <div class="status-text" type="label"></div><span id="s"></span>
                                     </div>
-                                    <div class="_btn">
+                                    <div class="_btnsend">
 
                                         <div class="send">
                                             <button class="check-btn m-btn m-btn-theme" onclick="send_mail()" type="button" value="Send">send message</button>
