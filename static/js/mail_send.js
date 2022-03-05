@@ -46,7 +46,7 @@ function start() {
     }
 
     document.getElementById('s').innerText = s.toString();
-    timeout = setTimeout(function () {
+    timeout = setTimeout(function() {
         s--;
         start();
     }, 1000);
@@ -121,15 +121,15 @@ function send_mail() {
             if (inputVal == captcha.innerText) { //if captcha matched
 
                 Email.send({
-                    Host: "smtp.gmail.com",
-                    Username: "kay.mailserver@gmail.com",
-                    Password: "occignczmssovelf",
-                    To: 'thanhkien76qn@gmail.com',
-                    From: email,
-                    Subject: 'nguyenthanhkienit.github.io',
-                    Body: message,
-                })
-                //countdown timer
+                        Host: "smtp.gmail.com",
+                        Username: "kay.mailserver@gmail.com",
+                        Password: "occignczmssovelf",
+                        To: 'thanhkien76qn@gmail.com',
+                        From: email,
+                        Subject: 'nguyenthanhkienit.github.io',
+                        Body: message,
+                    })
+                    //countdown timer
                 start();
                 statusTxt.style.color = "#a4a5a6";
                 statusTxt.innerText = "Sending email.....";
@@ -152,13 +152,14 @@ function send_mail() {
     }
 }
 var flagCapcha = 0;
+
 function send_mail_input() {
     var name = jQuery("#name").val();
     var email = jQuery("#email").val();
     var subject = jQuery("#subject").val();
     var message = jQuery("#message").val();
     var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    
+
     // if (name == "") {
     //     jQuery("#name").addClass('invalid');
     //     jQuery("#val_user_name").html("Your Name is Required");
