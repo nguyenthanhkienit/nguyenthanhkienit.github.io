@@ -7403,6 +7403,26 @@ h6 {
     margin: auto;
 }
 
+._captcha_btnreload ._captcha {
+    height: 35px;
+    width: 130px;
+    background-color: #a4a5a6;
+    float: left;
+    user-select: none;
+    border-radius: 2px;
+    text-align: center;
+    font-size: 22px;
+    color: #2B2C2C;
+}
+
+._captcha_btnreload ._btnreload {
+    height: 35px;
+    width: 35px;
+    float: left;
+    margin-left: 10px;
+    border-radius: 2px;
+}
+
 .formcaptcha .inputcapcha {
     height: 40px;
     width: 100%;
