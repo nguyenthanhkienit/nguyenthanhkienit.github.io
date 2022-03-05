@@ -1,0 +1,212 @@
+/* Import Google font - Poppins & Noto */
+
+@import url("https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap");
+
+/* * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+} */
+
+.wrapper .captcha-area {
+    display: flex;
+    height: 35px;
+    align-items: center;
+}
+
+._captcha_btnreloadnew {
+    height: 35px;
+    width: 165px;
+}
+
+._captcha {
+    height: 35px;
+    width: 120px;
+    background-color: #a4a5a6;
+    float: left;
+    user-select: none;
+    border-radius: 2px;
+    text-align: center;
+    font-size: 22px;
+    color: #2B2C2C;
+}
+
+._btnreloadnew {
+    height: 35px;
+    width: 35px;
+    float: left;
+    margin-left: 10px;
+    border-radius: 2px;
+}
+
+
+/* .captcha-area .captcha-img {
+    height: 35px;
+    width: 120px;
+    user-select: none;
+    border-radius: 2px;
+    position: relative;
+    background-color: #a4a5a6;
+    margin: auto;
+    display: block;
+}
+
+.captcha-img .captcha {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 100%;
+    color: #2B2C2C;
+    font-size: 20px;
+    text-align: center;
+    transform: translate(-50%, -50%);
+    /* text-shadow: 0px 0px 2px #b1b1b1; */
+
+
+/* font-family: "Comic Sans MS", cursive, sans-serif; */
+
+
+/* text-decoration: line-through; */
+
+.wrapper button {
+    outline: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    background: #E0A80D;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    border: 2px solid #E0A80D;
+}
+
+.wrapper button:hover {
+    background: #2B2C2C;
+    border: 2px solid #E0A80D;
+}
+
+.captcha-area .reload-btns {
+    width: 35px;
+    height: 35px;
+    font-size: 19px;
+    color: #2B2C2C;
+}
+
+.captcha-area .reload-btns i {
+    transition: transform 0.3s ease;
+}
+
+.captcha-area .reload-btns:hover i {
+    transform: rotate(180deg);
+    color: #E0A80D;
+}
+
+.wrapper .input-area {
+    width: 100%;
+    position: relative;
+}
+
+.input-area input {
+    width: 165px;
+    height: 35px;
+    outline: none;
+    font-size: 15px;
+    border-radius: 2px;
+    border: 2px solid #fff;
+    color: #2B2C2C;
+    margin-top: 10px;
+}
+
+
+/* .input-area input:is(:focus,
+ :valid) {
+    border: 2px solid #E0A80D;
+} */
+
+.input-area input::placeholder {
+    color: #bfbfbf;
+}
+
+
+/* .input-area .check-btn {
+    position: absolute;
+    right: 7px;
+    top: 50%;
+    font-size: 17px;
+    height: 45px;
+    padding: 0 20px;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-50%);
+} */
+
+.notice_btn {
+    height: 50px;
+    width: 100%;
+}
+
+.notice {
+    height: 50px;
+    width: 70%;
+    float: left;
+}
+
+._btn {
+    height: 50px;
+    width: 30%;
+    float: left;
+}
+
+.input-area input:valid+.check-btn {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.wrapper .status-text {
+    display: none;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+@media (max-width: 767px) {
+    ._captcha_btnreloadnew {
+        margin: auto;
+    }
+    .wrapper .input-area {
+        width: 100%;
+        position: relative;
+    }
+    .input-area input {
+        text-align: center;
+        margin: auto;
+        margin-top: 10px;
+        display: block;
+    }
+    .notice_btn {
+        height: 100px;
+        width: 100%;
+    }
+    .notice {
+        height: 50px;
+        width: 100%;
+        float: left;
+        margin: auto;
+        text-align: center;
+    }
+    ._btn {
+        height: 50px;
+        width: 100%;
+        float: left;
+        margin: auto;
+    }
+    ._btn_temp {
+        height: 50px;
+        width: auto;
+        margin: auto;
+        background-color: #000;
+    }
+    ._btn .send .check-btn {
+        margin: auto;
+        display: block;
+    }
+}
