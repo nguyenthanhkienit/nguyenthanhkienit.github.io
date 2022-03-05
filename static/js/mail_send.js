@@ -19,8 +19,8 @@ function getCaptcha() {
     }
 }
 getCaptcha(); //calling getCaptcha when the page open
-statusTxt.style.display = "hile";
-statusTxt.innerText = "Please enter captcha!";
+
+// statusTxt.innerText = "Please enter captcha!";
 
 //calling getCaptcha & removeContent on the reload btn click
 reloadBtn.addEventListener("click", () => {
