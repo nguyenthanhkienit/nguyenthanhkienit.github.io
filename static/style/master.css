@@ -5652,12 +5652,14 @@ h6 {
 .home-banner-01 {
     position: relative;
     background-attachment: fixed;
+    background-image: url("../img/1.jpg");
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1024px) {
     .home-banner-01 {
         background-position: 70% center;
         background-attachment: initial;
+        background-image: url("../img/2.jpg");
     }
 }
 

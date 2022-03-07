@@ -482,9 +482,9 @@ function printStyle() {
     res += '  .tenthang {text-align:center; font-size:20px; line-height:100%; font-weight:bold; color:#2D2E2E; background-color: #E0A80D}\n';
     res += '  .navi-l {text-align:center; font-size:75%; line-height:100%; font-family:Verdana,Times New Roman,Arial; font-weight:bold; background-color: #E0A80D}\n';
     res += '  .navi-r {text-align:center; font-size:75%; line-height:100%; font-family:Verdana,Arial,Times New Roman; font-weight:bold; background-color: #E0A80D}\n';
-    res += '  .ngaytuan {width:14%; text-align:center; font-size:18px; line-height:100%;}\n';
-    // res += '  .ngaythang {background-color:rgba(255, 255, 255, 0.8);}\n';
-    res += '  .homnay {color:#000; background-color:#E0A80D}\n';
+    res += '  .ngaytuan {width:14%; text-align:center; font-size:125%; line-height:100%; color:#2D2E2E; background-color:rgba(255, 255, 255, 0.8);}\n';
+    res += '  .ngaythang {background-color:rgba(255, 255, 255, 0.8);}\n';
+    res += '  .homnay {background-color:#E0A80D}\n';
     res += '  .tet {background-color:#FFCC99}\n';
     res += '  .am {text-align:right;font-size:75%;line-height:100%;color:#007bff}\n';
     res += '  .am2 {text-align:right;font-size:75%;line-height:100%;color:#004080}\n';
@@ -595,14 +595,14 @@ function printCell(lunarDate, solarDate, solarMonth, solarYear) {
     cellClass = "ngaythang";
     solarClass = "t2t6";
     lunarClass = "am";
-    // solarColor = "#2D2E2E"; //màu ngày dương
+    solarColor = "#2D2E2E"; //màu ngày dương
     var dow = (lunarDate.jd + 1) % 7;
     if (dow == 0) {
         solarClass = "cn";
         solarColor = "red";
     } else if (dow == 6) {
         solarClass = "t7";
-        // solarColor = "#2D2E2E";
+        solarColor = "#2D2E2E";
     }
     if (solarDate == today.getDate() && solarMonth == today.getMonth() + 1 && solarYear == today.getFullYear()) {
         cellClass = "homnay";
