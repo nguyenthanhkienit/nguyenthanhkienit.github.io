@@ -3,7 +3,8 @@ const captcha = document.querySelector(".captcha"),
     inputField = document.querySelector(".input-area input"),
     checkBtn = document.querySelector(".send .check-btn"),
     statusTxt = document.querySelector(".status-text"),
-    secondTxt = document.querySelector("s");
+    secondTxt = document.querySelector("#s"),
+    statussecondsTxt = document.querySelector(".status-seconds");
 
 //storing all captcha characters in array
 let allCharacters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
@@ -33,16 +34,20 @@ function removeContent() {
     captcha.innerText = "";
     //statusTxt.style.display = "block";
 }
+//countdown timer
 var s = null; // Giây
 var timeout = null; // Timeout
 function start() {
     if (s == null) {
         //s = parseInt(document.getElementById('s_val').value);
-        s = "2"
+        s = "5"
+        secondTxt.style.display = "block";
     }
     if (s == -1) {
         //s = parseInt(document.getElementById('s_val').value);
-        secondTxt.style.overflow = "hidden";
+        secondTxt.style.display = "none";
+        s = null; // Giây
+        timeout = null; // Timeout
     }
 
     document.getElementById('s').innerText = s.toString();
@@ -102,12 +107,14 @@ function send_mail() {
     if (flag == 1) {
         //setTimeout(() => { alert("Please enter full information.") }, 500)
         statusTxt.style.display = "block";
+        statussecondsTxt.style.display = "none";
         statusTxt.innerText = "Please enter full information!";
         statusTxt.style.color = "#ff0000";
     } else {
         if (flag == 2) {
             //setTimeout(() => { alert("Please enter correct email format.") }, 500)
             statusTxt.style.display = "block";
+            statussecondsTxt.style.display = "none";
             statusTxt.innerText = "Please enter correct email format!";
             statusTxt.style.color = "#ff0000";
         } else {
@@ -116,6 +123,7 @@ function send_mail() {
             // checkBtn.addEventListener("click", e => { //tạm bỏ
             //preventing button from it's default behaviour
             statusTxt.style.display = "block";
+            statussecondsTxt.style.display = "block";
             //adding space after each character of user entered values because I've added spaces while generating captcha
             let inputVal = inputField.value.split('').join(' ');
             if (inputVal == captcha.innerText) { //if captcha matched
@@ -132,17 +140,21 @@ function send_mail() {
                     //countdown timer
                 start();
                 statusTxt.style.color = "#a4a5a6";
-                statusTxt.innerText = "Sending email.....";
+                statusTxt.innerText = "Sending. Please wait";
+                statussecondsTxt.innerText = "seconds";
                 // .then(function(message) {
                 //     alert("Message has been sent successfully.")
                 // }); //tạm bỏ
                 setTimeout(() => { //calling removeContent & getCaptcha after 4 seconds
                     removeContent();
                     getCaptcha();
+                    secondTxt.style.display = "none";
+                    statussecondsTxt.style.display = "none";
                     statusTxt.style.color = "#E0A80D";
                     statusTxt.innerText = "Message has been sent successfully.";
-                }, 2000);
+                }, 6000);
             } else {
+                statussecondsTxt.style.display = "none";
                 statusTxt.style.color = "#ff0000";
                 statusTxt.innerText = "Captcha not matched.";
             }
