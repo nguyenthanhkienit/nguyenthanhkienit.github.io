@@ -5652,14 +5652,15 @@ h6 {
 .home-banner-01 {
     position: relative;
     background-attachment: fixed;
-    background-image: url("../img/1.jpg");
+    background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 10, 0, 0.5)), url("../img/header-bg3.jpg");
+    
 }
 
 @media (max-width: 1024px) {
     .home-banner-01 {
-        background-position: 70% center;
+        background-position: 40% center;
         background-attachment: initial;
-        background-image: url("../img/2.jpg");
+        background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 10, 0, 0.5)), url("../img/header-bg3.jpg");
     }
 }
 
@@ -5676,7 +5677,7 @@ h6 {
 }
 
 .home-banner-01 h6 {
-    color: #2D2E2E;
+    color: #a4a5a6;
     font-size: 18px;
     margin: 0 0 15px;
 }
@@ -5695,7 +5696,7 @@ h6 {
 
 .home-banner-01 h1 {
     font-size: 60px;
-    color: #2D2E2E;
+    color: #E0A80D;
     font-weight: 600;
     margin: 0 0 15px;
     line-height: 1;
@@ -5716,7 +5717,13 @@ h6 {
 .home-banner-01 h2 {
     font-weight: 500;
     font-size: 20px;
-    color: #2D2E2E;
+    color: #a4a5a6;
+    margin: 0 0 15px;
+}
+.home-banner-01 h2 span {
+    font-weight: 500;
+    font-size: 20px;
+    color: #E0A80D;
     margin: 0 0 15px;
 }
 
