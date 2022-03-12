@@ -686,8 +686,10 @@
                                     <form action="#" class="input-area">
                                         <!-- required: Please fill -->
                                         <div class="form-input">
-                                            <input onclick="send_mail_input()" class="inform" type="text"
-                                                placeholder="Enter captcha" maxlength="6" spellcheck="false">
+                                            <input onkeydown="enter_sendmail()" onclick="send_mail_input()"
+                                                class="inform" type="text" placeholder="Enter captcha" maxlength="6"
+                                                spellcheck="false">
+                                            <input type="hidden">
                                         </div>
                                         <!-- <button class="check-btn" type="button">Check</button> -->
                                     </form>
@@ -701,7 +703,7 @@
                                     <div class="_btnsend">
 
                                         <div class="send">
-                                            <button class="check-btn m-btn m-btn-theme" onclick="send_mail()"
+                                            <button id="myBtn" class="check-btn m-btn m-btn-theme" onclick="send_mail()"
                                                 type="button" value="Send">send message</button>
                                         </div>
                                     </div>
@@ -858,6 +860,16 @@
         }
         if (today.getMonth() + 1 > 7) {
             document.getElementById("old").innerHTML = old + " year old";
+        }
+    }
+</script>
+<!-- enter send mail -->
+<script>
+
+    function enter_sendmail() {
+        if (event.keyCode == 13) {
+            event.preventDefault();
+            document.getElementById("myBtn").click();
         }
     }
 </script>
