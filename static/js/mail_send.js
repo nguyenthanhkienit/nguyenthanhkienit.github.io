@@ -51,7 +51,7 @@ function start() {
     }
 
     document.getElementById('s').innerText = s.toString();
-    timeout = setTimeout(function() {
+    timeout = setTimeout(function () {
         s--;
         start();
     }, 1000);
@@ -129,15 +129,15 @@ function send_mail() {
             if (inputVal == captcha.innerText) { //if captcha matched
 
                 Email.send({
-                        Host: "smtp.gmail.com",
-                        Username: "kay.mailserver@gmail.com",
-                        Password: "occignczmssovelf",
-                        To: 'thanhkien76qn@gmail.com',
-                        From: email,
-                        Subject: 'nguyenthanhkienit.github.io',
-                        Body: message,
-                    })
-                    //countdown timer
+                    Host: "smtp.gmail.com",
+                    Username: "kay.mailserver@gmail.com",
+                    Password: "occignczmssovelf",
+                    To: 'thanhkien76qn@gmail.com',
+                    From: email,
+                    Subject: 'nguyenthanhkienit.github.io',
+                    Body: message,
+                })
+                //countdown timer
                 start();
                 statusTxt.style.color = "#a4a5a6";
                 statusTxt.innerText = "Sending. Please wait";
