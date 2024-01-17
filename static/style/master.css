@@ -7219,7 +7219,7 @@ h6 {
     #blog .container:before {
         left: 22px;
         width: 2px;
-        height: 500px;
+        height: 1500px;
     }
     .marker {
         margin-left: 0px;
@@ -7253,7 +7253,7 @@ h6 {
         width: 2px;
         position: absolute;
         margin-top: 130px;
-        height: 700px;
+        height: 1500px;
     }
 }
 
@@ -7263,7 +7263,7 @@ h6 {
         width: 2px;
         margin-top: 150px;
         position: absolute;
-        height: 600px;
+        height: 1500px;
     }
     /* .timeline-block-left {
         background-color: #ff0000;
@@ -7276,7 +7276,7 @@ h6 {
         width: 2px;
         position: absolute;
         margin-top: 150px;
-        height: 730px;
+        height: 1500px;
     }
     /* .timeline-block-left {
         background-color: aqua;
