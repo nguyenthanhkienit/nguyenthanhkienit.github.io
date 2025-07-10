@@ -1,0 +1,185 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="shortcut icon" type="image/x-icon" href="static/icon/iconk.png">
+    <title>Em bé - Chan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <style type="text/css">
+        body {
+            background-color: #1d1d1d !important;
+            font-family: "Asap", sans-serif;
+            color: #fff;
+            margin: 10px;
+            font-size: 16px;
+        }
+
+        #demo {
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .green {
+            background-color: #6fb936;
+        }
+
+        .thumb {
+            margin-bottom: 30px;
+        }
+
+        .page-top {
+            margin-top: 85px;
+        }
+
+        .page-top_title {
+            margin-top: 35px;
+        }
+
+        img.zoom {
+            width: 100%;
+            height: 230px;
+            border-radius: 5px;
+            object-fit: cover;
+            /* -webkit-transition: all .3s ease-in-out;
+            -moz-transition: all .3s ease-in-out;
+            -o-transition: all .3s ease-in-out;
+            -ms-transition: all .3s ease-in-out; */
+        }
+
+        @media (max-width: 767px) {
+            img.zoom {
+                width: 100%;
+                height: 500px;
+                border-radius: 5px;
+                object-fit: cover;
+            }
+        }
+
+        @media (max-width: 567px) {
+            img.zoom {
+                width: 100%;
+                height: 300px;
+                border-radius: 5px;
+                object-fit: cover;
+            }
+        }
+
+        .transition {
+            -webkit-transform: scale(1.2);
+            -moz-transform: scale(1.2);
+            -o-transform: scale(1.2);
+            transform: scale(1.2);
+        }
+
+        .modal-header {
+            border-bottom: none;
+        }
+
+        .modal-title {
+            color: #000;
+        }
+
+        .modal-footer {
+            display: none;
+        }
+    </style>
+
+    <script src="ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <!-- <script type="text/javascript">
+        window.alert = function() {};
+        var defaultCSS = document.getElementById('bootstrap-css');
+
+        function changeCSS(css) {
+            if (css) $('head > link').filter(':first').replaceWith('<link rel="stylesheet" href="' + css + '" type="text/css" />');
+            else $('head > link').filter(':first').replaceWith(defaultCSS);
+        }
+        $(document).ready(function() {
+            var iframe_height = parseInt($('html').height());
+            window.parent.postMessage(iframe_height, 'https://bootsnipp.com');
+        });
+    </script> -->
+    <link rel="stylesheet" href="ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+    <script src="ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+
+    <!-- <script type="text/javascript" src="loading/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="loading/js/script.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="loading/css/style.css"> -->
+
+    <link href="static/style/master.css" rel="stylesheet">
+
+    <!--end bootstrap-->
+    <!-- End -->
+    <!-- custom js -->
+    <script src="static/js/custom.js"></script>
+</head>
+
+<body>
+
+    <!-- page loading -->
+    <div id="loading">
+        <div class="load-circle"><span class="one"></span></div>
+    </div>
+    <!-- end page loading -->
+    <div class="container page-top_title">
+        <h1>ANH THƯƠNG BÉ</h1>
+    </div>
+    
+    <!-- Page Content -->
+
+    <div class="container page-top">
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                <a href="#" class="fancybox" rel="ligthbox">
+                    <img src="#" class="zoom img-fluid " alt="">
+
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                <a href="#" class="fancybox" rel="ligthbox">
+                    <img src="#" class="zoom img-fluid " alt="">
+
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                <a href="#" class="fancybox" rel="ligthbox">
+                    <img src="#" class="zoom img-fluid " alt="">
+
+                </a>
+            </div>
+
+
+
+        </div>
+
+
+
+
+    </div>
+
+
+</body>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".fancybox").fancybox({
+            openEffect: "none",
+            closeEffect: "none"
+        });
+
+        $(".zoom").hover(function () {
+
+            $(this).addClass('transition');
+        }, function () {
+
+            $(this).removeClass('transition');
+        });
+    });
+</script>
+
+</html>
