@@ -853,7 +853,17 @@ h6 {
     font-size: 12px;
     margin: 0;
 }
-
+.section-title h1 {
+    font-weight: 700;
+    font-size: 50px;
+    margin: 0 0 10px;
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    z-index: 1;
+    padding: 0 0 10px;
+    color: #E0A80D;
+}
 .section-title h3 {
     font-weight: 700;
     font-size: 35px;
