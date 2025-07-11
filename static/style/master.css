@@ -6327,7 +6327,26 @@ h6 {
     background: linear-gradient(to left, transparent, #E0A80D);
     float: left;
 }
+.do-wrap_space_C {
+    width: 80%;
+    height: 2px;
+    margin: auto;
+    margin-top: 10px;
+}
 
+.do-wrap_space_right_C {
+    width: 50%;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #E0A80D);
+    float: left;
+}
+
+.do-wrap_space_left_C {
+    width: 50%;
+    height: 2px;
+    background: linear-gradient(to left, transparent, #E0A80D);
+    float: left;
+}
 @media (max-width: 991px) {
     .do-wrap_space_right {
         width: 330px;
