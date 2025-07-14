@@ -8,24 +8,32 @@ const bgMusic = document.getElementById('bgMusic');
   // Mảng chứa các tin nhắn và ảnh tương ứng
   const messages = [
   {
-    text: "Anh thích em nhiều lắm! 💖",
-    gif: "https://i.pinimg.com/originals/d9/4e/ef/d94eef3fc4f4af08ac6ed201017cd4c6.gif"
+    text: "Anh sẽ nấu cơm cho em ăn.",
+    gif: "images//gift//an.gif"
   },
   {
-    text: "Em là món quà quý giá nhất đời anh 🎀",
-    gif: "https://i.pinimg.com/originals/33/76/db/3376dbdfc1b6e8b71a2ea7353e4fc0f2.gif"
+    text: "Sẽ mua trả sữa cho em lúc em thèm.",
+    gif: "images//gift//uong.gif"
   },
   {
-    text: "Mỗi ngày bên em đều là ngày hạnh phúc! 🥰",
-    gif: "https://i.pinimg.com/originals/3a/fc/12/3afc12d6744a68594d29eb565c62244c.gif"
+    text: "Em là người lì nhất anh từng gặp.",
+    gif: "images//gift//li.gif"
   },
   {
-    text: "Em làm cuộc sống anh trở nên rực rỡ hơn! 🌟",
-    gif: "https://i.pinimg.com/originals/6a/ec/ee/6aecee875e4844f34a1539054bf8aa8a.gif"
+    text: "Mà lại còn hay khóc nữa.",
+    gif: "images//gift//khoc.gif"
   },
   {
-    text: "Mãi bên nhau nhé, em yêu! 💕",
-    gif: "https://i.pinimg.com/originals/be/39/be/be39be7b9b6a02e06f892798063406c8.gif"
+    text: "Hay bị anh kí đầu",
+    gif: "images//gift/kidau.gif"
+  },
+  {
+    text: "À em còn ham ngủ nữa chứ.",
+    gif: "images//gift//ngu.gif"
+  },
+  {
+    text: "Anh thương em 💕",
+    gif: "images//gift//hon.gif"
   }
 ];
 
