@@ -8,11 +8,11 @@ const bgMusic = document.getElementById('bgMusic');
   // Mảng chứa các tin nhắn và ảnh tương ứng
   const messages = [
   {
-    text: "Anh sẽ nấu cơm cho em ăn.",
+    text: "Làm biếng nấu cơm thì hay ăn mì.",
     gif: "images//gift//an.gif"
   },
   {
-    text: "Sẽ mua trả sữa cho em lúc em thèm.",
+    text: "Sợ mập nhưng trà sữa vẫn đều đều .",
     gif: "images//gift//uong.gif"
   },
   {
@@ -24,7 +24,7 @@ const bgMusic = document.getElementById('bgMusic');
     gif: "images//gift//khoc.gif"
   },
   {
-    text: "Hay bị anh kí đầu",
+    text: "Hay bị anh kí đầu.",
     gif: "images//gift/kidau.gif"
   },
   {
@@ -32,7 +32,7 @@ const bgMusic = document.getElementById('bgMusic');
     gif: "images//gift//ngu.gif"
   },
   {
-    text: "Anh thương em 💕",
+    text: "Nhưng... anh vẫn thương em 💕",
     gif: "images//gift//hon.gif"
   }
 ];
@@ -170,7 +170,7 @@ setTimeout(() => {
       // Sau 10 giây gọi resetGiftBox
       setTimeout(() => {
         resetGiftBox();
-      }, 22000);
+      }, 25000);
 
     }, 1000);
 
