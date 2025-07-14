@@ -10,13 +10,6 @@
   height: 15vw;
   cursor: pointer;
 }
-.container_gift.gift {
-  position: relative;
-  width: 15vw;
-  height: 15vw;
-  cursor: pointer;
-}
-
 .gift-box {
   font-size: 10vw;
   user-select: none;
@@ -117,8 +110,28 @@ gap: 12px;
 
 @media (max-width: 480px) {
   .message-text {
-    font-size: 1rem;
+    font-size: 15px;
   }
+  .gift-box {
+  font-size: 20vw;
+  }
+.heart {
+  font-size: 15vw;
+  margin-left: -40px;
+  margin-top: -40px;
+  }
+  .message-gif {
+  width: 20vw;
+  height: auto;
+  border-radius: 10px;
+  user-select: none;
+  }
+  .container_gift {
+  position: relative;
+  width: 40vw;
+  height: 40vw;
+  cursor: pointer;
+}
 }
 
 @media (min-width: 481px) and (max-width: 1024px) {

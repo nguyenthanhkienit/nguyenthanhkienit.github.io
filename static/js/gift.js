@@ -99,7 +99,7 @@ async function startMessageRotation() {
   let count = 3;
   countdownEl.textContent = count;
   countdownEl.style.display = 'block';
-
+  countdownEl.style.marginTop = '-20px';
   const interval = setInterval(() => {
     count--;
     if (count === 0) {
