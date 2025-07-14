@@ -38,6 +38,7 @@
   user-select: none;
   animation: flyAway 1.5s forwards ease-out;
   pointer-events: none;
+  margin-left: -30px;
 }
 
 @keyframes heartbeat {
