@@ -12,7 +12,7 @@ const bgMusic = document.getElementById('bgMusic');
     gif: "images//gift//an.gif"
   },
   {
-    text: "Sợ mập nhưng trà sữa vẫn đều đều .",
+    text: "Sợ mập nhưng vẫn trà sữa đều đều .",
     gif: "images//gift//uong.gif"
   },
   {
@@ -108,6 +108,11 @@ async function startMessageRotation() {
   countdownEl.textContent = count;
   countdownEl.style.display = 'block';
   countdownEl.style.marginTop = '-20px';
+  if (window.innerWidth <= 480) {
+  countdownEl.style.fontSize = '100px'; // ví dụ nhỏ hơn
+} else {
+  countdownEl.style.fontSize = '170px';
+}
   const interval = setInterval(() => {
     count--;
     if (count === 0) {
