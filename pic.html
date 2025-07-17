@@ -1,8 +1,9 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Gallery with Slide Effect</title>
+  <title>Gallery with Swipe + Transition</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
@@ -52,30 +53,18 @@
       padding: 20px;
       box-sizing: border-box;
       z-index: 9999;
-      overflow: hidden;
     }
     .overlay.active {
       opacity: 1;
       pointer-events: auto;
     }
-
-    .slide-container {
-      position: relative;
-      width: 100%;
-      height: 100%;
+    .overlay img {
       max-width: 100%;
-      display: flex;
-      transition: transform 0.4s ease;
-    }
-
-    .slide-image {
-      flex-shrink: 0;
-      width: 100%;
       max-height: 100%;
       object-fit: contain;
       box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      transition: transform 0.3s ease, opacity 0.3s ease;
     }
-
     .controls {
       position: absolute;
       top: 50%;
@@ -83,7 +72,6 @@
       display: flex;
       justify-content: space-between;
       transform: translateY(-50%);
-      z-index: 1;
     }
     .controls button {
       background: rgba(255,255,255,0.2);
@@ -100,7 +88,6 @@
       font-size: 2em;
       color: white;
       cursor: pointer;
-      z-index: 1;
     }
   </style>
 </head>
@@ -108,74 +95,50 @@
 
 <div class="container py-4">
   <div class="row g-3">
-    <!-- Repeat image blocks -->
-    <div class="col-lg-3 col-md-4 col-sm-6">
+    <!-- Thay src và caption -->
+    <div class="col-lg-3 col-sm-6">
       <div class="gallery-img-container" data-index="0">
         <img src="images/17EC2D72-DED2-499B-BEA9-8687B81B4EBA.jpeg" alt="">
         <div class="gallery-caption">Ảnh 1</div>
       </div>
     </div>
-    <div class="col-lg-3 col-md-4 col-sm-6">
+    <div class="col-lg-3 col-sm-6">
       <div class="gallery-img-container" data-index="1">
         <img src="images/322D14AD-18D3-4CB1-BF62-90052F87FEE6.jpeg" alt="">
         <div class="gallery-caption">Ảnh 2</div>
       </div>
     </div>
-    <div class="col-lg-3 col-md-4 col-sm-6">
+    <div class="col-lg-3 col-sm-6">
       <div class="gallery-img-container" data-index="2">
         <img src="images/328D315B-2EF6-49B1-B7A0-773EF72B3EE8.jpeg" alt="">
         <div class="gallery-caption">Ảnh 3</div>
       </div>
     </div>
-    <div class="col-lg-3 col-md-4 col-sm-6">
+    <div class="col-lg-3 col-sm-6">
       <div class="gallery-img-container" data-index="3">
         <img src="images/70A0F813-3461-4FBB-B301-AA49BFEBB6B6.jpeg" alt="">
         <div class="gallery-caption">Ảnh 4</div>
       </div>
     </div>
-    <div class="col-lg-3 col-md-4 col-sm-6">
+    <div class="col-lg-3 col-sm-6">
       <div class="gallery-img-container" data-index="0">
         <img src="images/17EC2D72-DED2-499B-BEA9-8687B81B4EBA.jpeg" alt="">
         <div class="gallery-caption">Ảnh 1</div>
       </div>
     </div>
-    <div class="col-lg-3 col-md-4 col-sm-6">
+    <div class="col-lg-3 col-sm-6">
       <div class="gallery-img-container" data-index="1">
         <img src="images/322D14AD-18D3-4CB1-BF62-90052F87FEE6.jpeg" alt="">
         <div class="gallery-caption">Ảnh 2</div>
       </div>
     </div>
-    <div class="col-lg-3 col-md-4 col-sm-6">
+    <div class="col-lg-3 col-sm-6">
       <div class="gallery-img-container" data-index="2">
         <img src="images/328D315B-2EF6-49B1-B7A0-773EF72B3EE8.jpeg" alt="">
         <div class="gallery-caption">Ảnh 3</div>
       </div>
     </div>
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <div class="gallery-img-container" data-index="3">
-        <img src="images/70A0F813-3461-4FBB-B301-AA49BFEBB6B6.jpeg" alt="">
-        <div class="gallery-caption">Ảnh 4</div>
-      </div>
-    </div>
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <div class="gallery-img-container" data-index="0">
-        <img src="images/17EC2D72-DED2-499B-BEA9-8687B81B4EBA.jpeg" alt="">
-        <div class="gallery-caption">Ảnh 1</div>
-      </div>
-    </div>
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <div class="gallery-img-container" data-index="1">
-        <img src="images/322D14AD-18D3-4CB1-BF62-90052F87FEE6.jpeg" alt="">
-        <div class="gallery-caption">Ảnh 2</div>
-      </div>
-    </div>
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <div class="gallery-img-container" data-index="2">
-        <img src="images/328D315B-2EF6-49B1-B7A0-773EF72B3EE8.jpeg" alt="">
-        <div class="gallery-caption">Ảnh 3</div>
-      </div>
-    </div>
-    <div class="col-lg-3 col-md-4 col-sm-6">
+    <div class="col-lg-3 col-sm-6">
       <div class="gallery-img-container" data-index="3">
         <img src="images/70A0F813-3461-4FBB-B301-AA49BFEBB6B6.jpeg" alt="">
         <div class="gallery-caption">Ảnh 4</div>
@@ -186,63 +149,48 @@
 
 <div class="overlay" id="overlay">
   <span class="close-btn" id="closeBtn">&times;</span>
+  <img id="overlayImage" src="">
   <div class="controls">
     <button id="prevBtn">&#10094;</button>
     <button id="nextBtn">&#10095;</button>
-  </div>
-  <div class="slide-container" id="slideContainer">
-    <!-- Images will be added dynamically here -->
   </div>
 </div>
 
 <script>
   const galleryContainers = document.querySelectorAll('.gallery-img-container');
   const overlay = document.getElementById('overlay');
-  const slideContainer = document.getElementById('slideContainer');
+  const overlayImage = document.getElementById('overlayImage');
   const closeBtn = document.getElementById('closeBtn');
   const prevBtn = document.getElementById('prevBtn');
   const nextBtn = document.getElementById('nextBtn');
 
-  let images = [];
   let currentIndex = 0;
 
-  galleryContainers.forEach(container => {
-    const img = container.querySelector('img').src;
-    images.push(img);
-  });
+  function showImage(index, direction = 'none') {
+    const newSrc = galleryContainers[index].querySelector('img').src;
 
-  // Tạo các ảnh slide trong overlay
-  images.forEach(src => {
-    const img = document.createElement('img');
-    img.src = src;
-    img.className = 'slide-image';
-    slideContainer.appendChild(img);
-  });
+    // Add animation effect
+    overlayImage.style.opacity = 0;
+    overlayImage.style.transform = direction === 'left' ? 'translateX(-50px)' : 
+                                   direction === 'right' ? 'translateX(50px)' : 'translateX(0)';
+
+    setTimeout(() => {
+      overlayImage.src = newSrc;
+      overlayImage.style.transform = 'translateX(0)';
+      overlayImage.style.opacity = 1;
+    }, 200);
+  }
 
   function openOverlay(index) {
     overlay.classList.add('active');
+    showImage(index);
     currentIndex = index;
-    updateSlidePosition();
-    document.body.style.overflow = 'hidden'; // Khóa scroll
+    document.body.style.overflow = 'hidden'; // Lock scroll
   }
 
   function closeOverlay() {
     overlay.classList.remove('active');
-    document.body.style.overflow = ''; // Mở lại scroll
-  }
-
-  function updateSlidePosition() {
-    slideContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
-  }
-
-  function showPrev() {
-    currentIndex = (currentIndex - 1 + images.length) % images.length;
-    updateSlidePosition();
-  }
-
-  function showNext() {
-    currentIndex = (currentIndex + 1) % images.length;
-    updateSlidePosition();
+    document.body.style.overflow = ''; // Unlock scroll
   }
 
   galleryContainers.forEach((container, index) => {
@@ -254,18 +202,25 @@
     if (e.target === overlay) closeOverlay();
   });
 
-  prevBtn.addEventListener('click', showPrev);
-  nextBtn.addEventListener('click', showNext);
+  prevBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + galleryContainers.length) % galleryContainers.length;
+    showImage(currentIndex, 'left');
+  });
 
-  // Swipe for mobile
+  nextBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % galleryContainers.length;
+    showImage(currentIndex, 'right');
+  });
+
+  // Swipe Detection
   let touchStartX = 0;
   let touchEndX = 0;
 
-  slideContainer.addEventListener('touchstart', (e) => {
+  overlay.addEventListener('touchstart', (e) => {
     touchStartX = e.changedTouches[0].screenX;
   });
 
-  slideContainer.addEventListener('touchend', (e) => {
+  overlay.addEventListener('touchend', (e) => {
     touchEndX = e.changedTouches[0].screenX;
     handleSwipeGesture();
   });
@@ -273,8 +228,9 @@
   function handleSwipeGesture() {
     const delta = touchStartX - touchEndX;
     if (Math.abs(delta) < 50) return;
-    if (delta > 0) showNext(); // Swipe left
-    else showPrev(); // Swipe right
+
+    if (delta > 0) nextBtn.click(); // swipe left
+    else prevBtn.click(); // swipe right
   }
 </script>
 
