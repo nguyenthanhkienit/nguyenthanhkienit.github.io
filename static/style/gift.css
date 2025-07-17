@@ -9,6 +9,7 @@
   width: 15vw;
   height: 15vw;
   cursor: pointer;
+  left: 42%;
 }
 .gift-box {
   font-size: 10vw;
@@ -132,6 +133,7 @@ gap: 12px;
   width: 40vw;
   height: 40vw;
   cursor: pointer;
+  left: 29%;
 }
 }
 
