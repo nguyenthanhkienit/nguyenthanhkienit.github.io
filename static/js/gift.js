@@ -12,7 +12,7 @@ const bgMusic = document.getElementById('bgMusic');
     gif: "images//gift//an.gif"
   },
   {
-    text: "Sợ mập nhưng vẫn trà sữa đều đều .",
+    text: "Sợ mập nhưng vẫn trà sữa đều đều.",
     gif: "images//gift//uong.gif"
   },
   {
