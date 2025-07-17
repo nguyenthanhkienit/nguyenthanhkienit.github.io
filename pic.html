@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Gallery with Swipe + Scroll Lock</title>
+  <title>Gallery with Swipe + Transition</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
@@ -62,6 +62,7 @@
       max-height: 100%;
       object-fit: contain;
       box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      transition: transform 0.3s ease, opacity 0.3s ease;
     }
     .controls {
       position: absolute;
@@ -94,55 +95,54 @@
 <div class="container py-4">
   <div class="row g-3">
     <!-- Thay src và caption -->
-    <div class="col-lg-3">
+    <div class="col-lg-3 col-sm-6">
       <div class="gallery-img-container" data-index="0">
         <img src="images/17EC2D72-DED2-499B-BEA9-8687B81B4EBA.jpeg" alt="">
         <div class="gallery-caption">Ảnh 1</div>
       </div>
     </div>
-    <div class="col-lg-3">
+    <div class="col-lg-3 col-sm-6">
       <div class="gallery-img-container" data-index="1">
         <img src="images/322D14AD-18D3-4CB1-BF62-90052F87FEE6.jpeg" alt="">
         <div class="gallery-caption">Ảnh 2</div>
       </div>
     </div>
-    <div class="col-lg-3">
+    <div class="col-lg-3 col-sm-6">
       <div class="gallery-img-container" data-index="2">
         <img src="images/328D315B-2EF6-49B1-B7A0-773EF72B3EE8.jpeg" alt="">
         <div class="gallery-caption">Ảnh 3</div>
       </div>
     </div>
-    <div class="col-lg-3">
+    <div class="col-lg-3 col-sm-6">
       <div class="gallery-img-container" data-index="3">
         <img src="images/70A0F813-3461-4FBB-B301-AA49BFEBB6B6.jpeg" alt="">
         <div class="gallery-caption">Ảnh 4</div>
       </div>
     </div>
-    <div class="col-lg-3">
+    <div class="col-lg-3 col-sm-6">
       <div class="gallery-img-container" data-index="0">
         <img src="images/17EC2D72-DED2-499B-BEA9-8687B81B4EBA.jpeg" alt="">
         <div class="gallery-caption">Ảnh 1</div>
       </div>
     </div>
-    <div class="col-lg-3">
+    <div class="col-lg-3 col-sm-6">
       <div class="gallery-img-container" data-index="1">
         <img src="images/322D14AD-18D3-4CB1-BF62-90052F87FEE6.jpeg" alt="">
         <div class="gallery-caption">Ảnh 2</div>
       </div>
     </div>
-    <div class="col-lg-3">
+    <div class="col-lg-3 col-sm-6">
       <div class="gallery-img-container" data-index="2">
         <img src="images/328D315B-2EF6-49B1-B7A0-773EF72B3EE8.jpeg" alt="">
         <div class="gallery-caption">Ảnh 3</div>
       </div>
     </div>
-    <div class="col-lg-3">
+    <div class="col-lg-3 col-sm-6">
       <div class="gallery-img-container" data-index="3">
         <img src="images/70A0F813-3461-4FBB-B301-AA49BFEBB6B6.jpeg" alt="">
         <div class="gallery-caption">Ảnh 4</div>
       </div>
     </div>
-    <!-- Thêm bao nhiêu ảnh tùy bạn -->
   </div>
 </div>
 
@@ -165,16 +165,31 @@
 
   let currentIndex = 0;
 
+  function showImage(index, direction = 'none') {
+    const newSrc = galleryContainers[index].querySelector('img').src;
+
+    // Add animation effect
+    overlayImage.style.opacity = 0;
+    overlayImage.style.transform = direction === 'left' ? 'translateX(-50px)' : 
+                                   direction === 'right' ? 'translateX(50px)' : 'translateX(0)';
+
+    setTimeout(() => {
+      overlayImage.src = newSrc;
+      overlayImage.style.transform = 'translateX(0)';
+      overlayImage.style.opacity = 1;
+    }, 200);
+  }
+
   function openOverlay(index) {
     overlay.classList.add('active');
-    overlayImage.src = galleryContainers[index].querySelector('img').src;
+    showImage(index);
     currentIndex = index;
-    document.body.style.overflow = 'hidden'; // khóa scroll nền
+    document.body.style.overflow = 'hidden'; // Lock scroll
   }
 
   function closeOverlay() {
     overlay.classList.remove('active');
-    document.body.style.overflow = ''; // mở lại scroll
+    document.body.style.overflow = ''; // Unlock scroll
   }
 
   galleryContainers.forEach((container, index) => {
@@ -188,15 +203,15 @@
 
   prevBtn.addEventListener('click', () => {
     currentIndex = (currentIndex - 1 + galleryContainers.length) % galleryContainers.length;
-    overlayImage.src = galleryContainers[currentIndex].querySelector('img').src;
+    showImage(currentIndex, 'left');
   });
 
   nextBtn.addEventListener('click', () => {
     currentIndex = (currentIndex + 1) % galleryContainers.length;
-    overlayImage.src = galleryContainers[currentIndex].querySelector('img').src;
+    showImage(currentIndex, 'right');
   });
 
-  // Swipe Detection for Mobile
+  // Swipe Detection
   let touchStartX = 0;
   let touchEndX = 0;
 
@@ -211,15 +226,10 @@
 
   function handleSwipeGesture() {
     const delta = touchStartX - touchEndX;
-    if (Math.abs(delta) < 50) return; // chỉ xử lý khi swipe đủ mạnh
+    if (Math.abs(delta) < 50) return;
 
-    if (delta > 0) {
-      // swipe left → next
-      nextBtn.click();
-    } else {
-      // swipe right → prev
-      prevBtn.click();
-    }
+    if (delta > 0) nextBtn.click(); // swipe left
+    else prevBtn.click(); // swipe right
   }
 </script>
 
