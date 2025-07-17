@@ -22,17 +22,17 @@ const galleryContainers = document.querySelectorAll('.gallery-img-container');
     }, 200);
   }
 
-  function openOverlay(index) {
-    overlay.classList.add('active');
-    showImage(index);
-    currentIndex_img = index;
-    document.body.style.overflow = 'hidden'; // Lock scroll
-  }
+function openOverlay(index) {
+  overlay.classList.add('active');
+  showImage(index);
+  imageIndex = index;
+  document.documentElement.classList.add('no-scroll');            // khóa body
+}
 
-  function closeOverlay() {
-    overlay.classList.remove('active');
-    document.body.style.overflow = ''; // Unlock scroll
-  }
+function closeOverlay() {
+  overlay.classList.remove('active');
+  document.documentElement.classList.remove('no-scroll');
+}
 
   galleryContainers.forEach((container, index) => {
     container.addEventListener('click', () => openOverlay(index));
