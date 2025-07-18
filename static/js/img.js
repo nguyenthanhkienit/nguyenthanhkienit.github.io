@@ -25,7 +25,7 @@ const galleryContainers = document.querySelectorAll('.gallery-img-container');
 function openOverlay(index) {
   overlay.classList.add('active');
   showImage(index);
-  imageIndex = index;
+  currentIndex_img = index;
   document.documentElement.classList.add('no-scroll');            // khóa body
 }
 
