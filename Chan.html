@@ -185,6 +185,44 @@
             cursor: pointer;
         }
     </style>
+    <style>
+    #passwordBox {
+      display: none;
+      margin: 20px 0;
+    }
+    #content {
+      display: none;
+      margin-top: 20px;
+      color: #ccc;
+      line-height: 1.6;
+    }
+    input[type="password"] {
+      padding: 8px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      margin-right: 10px;
+    }
+    button {
+      padding: 8px 12px;
+      font-size: 1rem;
+      background-color: #E0A80D;
+      border: none;
+      border-radius: 5px;
+      color: #1D1D1D;
+      cursor: pointer;
+    }
+    button:hover{
+      background-color: #1D1D1D;
+      color: #E0A80D;
+      border:#E0A80D solid 1px;
+      padding: 7px 12px;
+    }
+    .error {
+      color: red;
+      margin-top: 10px;
+    }
+  </style>
     <!-- end hình ảnh -->
     <script src="ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -214,9 +252,15 @@
     </div>
     <div class="container page-top_title">
         <div class="section-title">
-            <h5 class="dark-color text-uppercase wow fadeInUp animated" data-wow-delay="0.3s">TỰ SỰ</h5>
+            <h5 class="dark-color text-uppercase wow fadeInUp animated" data-wow-delay="0.3s" onclick="showPasswordBox()">TỰ SỰ</h5>
         </div>
+        <div id="passwordBox">
+  <input type="password" id="passwordInput" placeholder="Nhập mật khẩu...">
+  <button onclick="checkPassword()">Mở khóa</button>
+  <div id="errorMsg" class="error"></div>
+</div>
     </div>
+    <div id="content">
     <div class="container"><p class="wow fadeInUp animated" data-wow-delay="0.3s">Chúng ta đã bắt đầu bằng một sự hiểu lầm không hề nhỏ. Sau khi rời khỏi xe đưa rước, anh đã
         nhắn tin cho em một cách rất thân mật
         và tự nhiên quá mức, dẫn đến việc em né anh còn anh thì ghét em. Đến bây giờ khi nhắc về câu chuyện
@@ -382,7 +426,7 @@
         <br>ANH THƯƠNG EM...</br></p>
         <p></p>
         <p style="float: right; font-weight: bold" class="wow fadeInUp animated" data-wow-delay="0.3s">NGUYỄN THÀNH KIÊN</p>
-    </div>
+    </div></div>
     <div class="do-wrap_space_C" style="margin-top: 100px; margin-bottom: 50px;">
         <div class="do-wrap_space_right_C"></div>
         <div class="do-wrap_space_left_C"></div>
@@ -554,5 +598,26 @@
         });
     });
 </script>
+<script> // mật khẩu TỰ SỰ
+  const correctPassword = "!kaychan"; // 🔐 đổi mật khẩu tại đây
+  let unlocked = false;
+  function showPasswordBox() {
+    if (unlocked) return; // Nếu đã mở khóa rồi thì không làm gì nữa
+    document.getElementById("passwordBox").style.display = "block";
+  }
 
+  function checkPassword() {
+    const input = document.getElementById("passwordInput").value;
+    const errorMsg = document.getElementById("errorMsg");
+    if (input === correctPassword) {
+      unlocked = true;
+      document.getElementById("content").style.display = "block";
+      document.getElementById("passwordBox").style.display = "none";
+      document.getElementById("title").onclick = null;
+      errorMsg.textContent = "";
+    } else {
+      errorMsg.textContent = "Sai mật khẩu.";
+    }
+  }
+</script>
 </html>
