@@ -1,15 +1,3 @@
   const images = [
-        { src: "images/Chan/z6815849117951_88baae4c80be3194552a9bb404748621.jpg", caption: "08-03-2025" },
-        { src: "images/Chan/z6815794207393_f4905b299125b96780f49b51368b398f.jpg", caption: "12-03-2025" },
-        { src: "images/Chan/z6815794197133_79cd3bbad124e93bd0786f92db4b8ff5.jpg", caption: "15-03-2025" },
-        { src: "images/Chan/z6815794190879_f55d440ec54310be503a6e09c7551444.jpg", caption: "16-04-2025" },
-        { src: "images/Chan/z6815794190880_29a420ee9fcdf1f6224d80e46cf7f5be.jpg", caption: "20-04-2025" },
-        { src: "images/Chan/z6815794149763_dafa0e5b83dda792a9740b565654fd45.jpg", caption: "25-04-2025" },
-        { src: "images/Chan/z6815794174052_1ac1ed731d37f6bdcde2a1e71d5e95f4.jpg", caption: "07-05-2025" },
-        { src: "images/Chan/z6815794146812_45353733efa2b1edb11e642c39da92eb.jpg", caption: "10-05-2025" },
-        { src: "images/Chan/z6815794167268_124bdb8c0fcfa7d0b4c67ab0c57e23cf.jpg", caption: "08-06-2025" },
-        { src: "images/Chan/z6815794161102_b6726361989e193adc9b627af8bc5701.jpg", caption: "22-06-2025" },
-        { src: "images/Chan/z6815794161104_5a4196babcd9643c291fbef794c274c5.jpg", caption: "23-06-2025" },
-        { src: "images/Chan/z6815794161103_5073f3c96d36b9c331f661754803d300.jpg", caption: "02-07-2025" },
-        { src: "images/Chan/z6815794147756_40ab0714be8e37f0166960aae894c13a.jpg", caption: "11-07-2025" },
+        { src: "images/kh/z6815849117951_88baae4c80be3194552a9bb404748621.jpg", caption: "08-03-2025" },
     ];
