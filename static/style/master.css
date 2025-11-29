@@ -6379,6 +6379,7 @@ h6 {
     height: 2px;
     background: linear-gradient(to left, transparent, #EB2F8C);
     float: left;
+    
 }
 @media (max-width: 991px) {
     .do-wrap_space_right {
