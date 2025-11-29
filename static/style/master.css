@@ -523,7 +523,9 @@ h6 {
 .dark-color {
     color: #E0A80D;
 }
-
+.KH_dark-color {
+    color: #EB2F8C;
+}
 .body-color {
     color: #555a64;
 }
@@ -896,7 +898,16 @@ h6 {
     z-index: 1;
     padding: 0 0 10px;
 }
-
+.KH_section-title h5 {
+    font-weight: 700;
+    font-size: 25px;
+    margin: 0 0 10px;
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    z-index: 1;
+    padding: 0 0 10px;
+}
 .section-title h5:after {
     content: "";
     position: absolute;
@@ -906,6 +917,17 @@ h6 {
     height: 2px;
     z-index: -1;
     background: #E0A80D;
+    width: 50px;
+}
+.KH_section-title h5:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    height: 2px;
+    z-index: -1;
+    background: #EB2F8C;
     width: 50px;
 }
 .section-title p {
@@ -6340,11 +6362,22 @@ h6 {
     background: linear-gradient(to right, transparent, #E0A80D);
     float: left;
 }
-
+.KH_do-wrap_space_right_C {
+    width: 50%;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #EB2F8C);
+    float: left;
+}
 .do-wrap_space_left_C {
     width: 50%;
     height: 2px;
     background: linear-gradient(to left, transparent, #E0A80D);
+    float: left;
+}
+.KH_do-wrap_space_left_C {
+    width: 50%;
+    height: 2px;
+    background: linear-gradient(to left, transparent, #EB2F8C);
     float: left;
 }
 @media (max-width: 991px) {
