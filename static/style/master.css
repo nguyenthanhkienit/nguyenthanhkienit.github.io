@@ -5752,10 +5752,22 @@ h6 {
 
     z-index: -1; /* Quan trọng: nằm phía sau */
 }
-.video-mobile { display: none; }
+.video-mobile { 
+        position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+
+    z-index: -1; /* Quan trọng: nằm phía sau */
+    display: none; }
 
 /* Khi màn hình nhỏ hơn 768px → dùng video mobile */
-@media (max-width: 1024px) {
+@media (max-width: 767px) {
     .video-desktop { display: none; }
     .video-mobile { display: block; }
 }
@@ -5792,6 +5804,12 @@ h6 {
         /* background: rgba(255, 255, 255, 0.8); */
         padding: 25px;
     }
+    .KH_home-banner-01 {
+    position: relative;
+    width: 100%;
+    height: 70vh;
+    overflow: hidden;
+}
 }
 
 .home-banner-01 h6 {
