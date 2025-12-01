@@ -319,7 +319,15 @@ mark {
     background: #E0A80D;
     z-index: 99999;
 }
-
+#KH_loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #EB2F8C;
+    z-index: 99999;
+}
 .load-circle {
     position: fixed;
     top: 0;
@@ -330,13 +338,26 @@ mark {
     width: 50px;
     height: 50px;
 }
-
+.KH_load-circle {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 50px;
+    height: 50px;
+}
 .load-circle span {
     display: inline-block;
     width: 64px;
     height: 64px;
 }
-
+.KH_load-circle span {
+    display: inline-block;
+    width: 64px;
+    height: 64px;
+}
 .load-circle span:after {
     content: " ";
     display: block;
@@ -348,7 +369,17 @@ mark {
     border-color: #ffffff transparent #ffffff transparent;
     animation: lds-dual-ring 1.2s linear infinite;
 }
-
+.KH_load-circle span:after {
+    content: " ";
+    display: block;
+    width: 46px;
+    height: 46px;
+    margin: 1px;
+    border-radius: 50%;
+    border: 5px solid #ffffff;
+    border-color: #ffffff transparent #ffffff transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+}
 @keyframes lds-dual-ring {
     0% {
         transform: rotate(0deg);
@@ -5701,7 +5732,38 @@ h6 {
 
 /* Home Banner 1
 ----------------------*/
+/* Video backgroud*/
+.KH_home-banner-01 {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
 
+.bg-video {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    object-fit: cover;
+}
+
+/* Lớp overlay giống gradient của bạn */
+.black-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* độ tối – chỉnh tùy ý */
+    z-index: 1;
+}
+/* Video backgroud*/
 .home-banner-01 {
     position: relative;
     background-attachment: fixed;

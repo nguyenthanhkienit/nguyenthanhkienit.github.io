@@ -185,54 +185,6 @@
             cursor: pointer;
         }
     </style>
-    <style>
-    #passwordBox {
-      display: none;
-      margin: 20px 0;
-    }
-    #content {
-      display: none;
-      margin-top: 20px;
-      line-height: 1.6;
-    }
-    input[type="password"] {
-      padding: 8px;
-      font-size: 1rem;
-      border: none;
-      border-radius: 5px;
-      margin-right: 10px;
-    }
-    .button {
-      padding: 8px 12px;
-      font-size: 1rem;
-      background-color: #E0A80D;
-      border: none;
-      border-radius: 5px;
-      color: #1D1D1D;
-      cursor: pointer;
-    }
-    .button:hover{
-      background-color: #1D1D1D;
-      color: #E0A80D;
-      border:#E0A80D solid 1px;
-      padding: 7px 12px;
-    }
-    .error {
-      color: red;
-      margin-top: 10px;
-    }
-    @media (max-width: 480px) {
-    .button {
-      padding: 10px 12px;
-      font-size: 1rem;
-      background-color: #E0A80D;
-      border: none;
-      border-radius: 5px;
-      color: #1D1D1D;
-      cursor: pointer;
-    }
-    }
-  </style>
     <!-- end hình ảnh -->
     <script src="ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -255,14 +207,16 @@
         <div class="load-circle"><span class="one"></span></div>
     </div>
     <!-- end page loading -->
-    <div class="section-title">
-        <div class="container page-top_title">
-            
-        </div>
-    </div>
-
     <!-- Page Content -->
+    <div class="KH_home-banner-01">
+    <video autoplay muted loop playsinline class="bg-video">
+        <source src="./images/kh/00030.mp4" type="video/mp4">
+    </video>
+    <div class="black-overlay"></div>
 
+
+</div>
+<section id="together" class="section gray-bg">
     <div class="container page-top_title">
         <div class="KH_section-title">
             <h5 class="KH_dark-color text-uppercase wow fadeInUp animated" data-wow-delay="0.3s">CÙNG NHAU</h5>
@@ -271,10 +225,8 @@
     <div class="container">
         <div class="row g-3">
             <!-- Thay src và caption -->
-            
             <div id="gallery-row" class="row g-3"></div>
         </div>
-
         <div class="overlay" id="overlay">
             <span class="close-btn" id="closeBtn">&times;</span>
             <img id="overlayImage" src="">
@@ -285,17 +237,18 @@
         </div>
 
     </div>
-    <div class="do-wrap_space_C" style="margin-top: 60px; margin-bottom: 50px;">
+    <div class="do-wrap_space_C" style="margin-top: 60px;">
         <div class="KH_do-wrap_space_right_C"></div>
         <div class="KH_do-wrap_space_left_C"></div>
     </div>
-    
+    </section>
+    <section id="skills" class="section gray2-bg">
     <div class="container page-top_title">
         <div class="KH_section-title">
             <h5 class="KH_dark-color text-uppercase wow fadeInUp animated" data-wow-delay="0.3s">TO BE CONTINUED...</h5>
         </div>
     </div>
-
+</section>
     <!-- hình ảnh -->
      <script src="static/js/img_json.js"></script>
     <script src="static/js/img.js"></script>
