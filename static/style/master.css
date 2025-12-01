@@ -5758,7 +5758,6 @@ h6 {
 @media (max-width: 768px) {
     .video-desktop { display: none; }
     .video-mobile { display: block; }
-
 }
 .black-overlay {
     position: absolute;
