@@ -199,7 +199,57 @@
     <script src="static/js/gift.js" defer></script>
 
 </head>
+<style>
 
+  .flip-date {
+    display: flex;
+    align-items: center;
+    gap: clamp(8px, 2.5vw, 0px);        /* khoảng cách tự động đẹp */
+    padding: 20px;
+  }
+
+  .flip-unit {
+    position: relative;
+    width: clamp(60px, 16vw, 140px);
+    height: clamp(90px, 24vw, 210px);
+    background: #0a0a0a;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 
+      0 15px 40px rgba(0,0,0,0.9),
+      inset 0 0 30px rgba(255,255,255,0.05);
+  }
+
+  .flip-card {
+    position: absolute;
+    inset: 0;
+    transform-style: preserve-3d;
+    transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+  }
+  .flip-card.flip { transform: rotateX(-180deg); }
+
+  .face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #EB2F8C;
+    font-weight: 900;
+    font-size: clamp(40px, 14vw, 130px);   /* chữ tự động to/nhỏ hoàn hảo */
+    background: linear-gradient(to bottom, #1a1a1a, #000);
+    border-radius: 12px;
+    top: -20px;
+  }
+
+  .face::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 50%;
+    background: linear-gradient(rgba(255,255,255,0.12), transparent);
+  }
+</style>
 <body>
 
     <!-- page loading -->
@@ -216,7 +266,31 @@
     <video class="video-mobile" autoplay muted loop playsinline>
         <source src="./images/kh/7282147596426.mp4" type="video/mp4">
     </video>
-    <div class="black-overlay"></div>
+    <div class="container">
+                <div class="row full-screen align-items-center p-100px-tb">
+                    <div class="col-md-6">
+                        <div class="flip-date">
+  <!-- 29 -->
+  <div class="flip-unit"><div class="flip-card"><div class="face front">2</div></div></div>
+  <div class="flip-unit"><div class="flip-card"><div class="face front">9</div></div></div>
+
+  <div class="dot">.</div>
+
+  <!-- 11 -->
+  <div class="flip-unit"><div class="flip-card"><div class="face front">1</div></div></div>
+  <div class="flip-unit"><div class="flip-card"><div class="face front">1</div></div></div>
+
+  <div class="dot">.</div>
+
+  <!-- 2025 -->
+  <div class="flip-unit"><div class="flip-card"><div class="face front">2</div></div></div>
+  <div class="flip-unit"><div class="flip-card"><div class="face front">0</div></div></div>
+  <div class="flip-unit"><div class="flip-card"><div class="face front">2</div></div></div>
+  <div class="flip-unit"><div class="flip-card"><div class="face front">5</div></div></div>
+</div>
+                            </div>
+                            </div>
+                            </div>
 </div>
 <section id="about" class="section gray-bg">
     <!-- Page Content -->
@@ -227,7 +301,8 @@
     </div>
     <div class="container">
             <!-- Thay src và caption -->
-            <div id="gallery-row" class="row g-3"></div>
+             
+            <div id="gallery-row" class="row g-3" style="padding-top:20px"></div>
     
         <div class="overlay" id="overlay">
             <span class="close-btn" id="closeBtn">&times;</span>
