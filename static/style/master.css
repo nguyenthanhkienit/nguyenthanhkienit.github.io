@@ -5733,36 +5733,7 @@ h6 {
 /* Home Banner 1
 ----------------------*/
 /* Video backgroud*/
-.KH_home-banner-01 {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
-}
 
-.bg-video {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    transform: translate(-50%, -50%);
-    z-index: -1;
-    object-fit: cover;
-}
-
-/* Lớp overlay giống gradient của bạn */
-.black-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.4); /* độ tối – chỉnh tùy ý */
-    z-index: 1;
-}
 /* Video backgroud*/
 .home-banner-01 {
     position: relative;
