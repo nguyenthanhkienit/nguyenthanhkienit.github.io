@@ -5755,7 +5755,7 @@ h6 {
 .video-mobile { display: none; }
 
 /* Khi màn hình nhỏ hơn 768px → dùng video mobile */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     .video-desktop { display: none; }
     .video-mobile { display: block; }
 }
