@@ -5801,7 +5801,12 @@ h6 {
     overflow: hidden;
 }
 }
-
+.KH_time
+{
+    border: #EB2F8C solid 2px;
+    color: #a4a5a6;
+    box-shadow: 0 0 10px #EB2F8C;
+}
 .home-banner-01 h6 {
     color: #a4a5a6;
     font-size: 18px;
@@ -6371,7 +6376,18 @@ h6 {
     height: 40px;
     display: block;
 }
+.KH_do-wrap {
+    margin-bottom: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    /* border: #E0A80D 2px solid; */
+}
 
+.KH_do-wrap>.top {
+    width: 100%;
+    height: 10px;
+    display: block;
+}
 .do-wrap span {
     border-radius: 100px;
     display: inline-block;
@@ -6392,7 +6408,14 @@ h6 {
     margin-top: -10px;
     margin-bottom: 25px;
 }
-
+.KH_do-wrap h1 {
+    font-size: 100px;
+}
+.KH_do-wrap h5 {
+    margin-top: -10px;
+    margin-bottom: 45px;
+    font-size: 30px;
+}
 .do-wrap p,
 .white-box p {
     margin: 0 15px;
