@@ -195,7 +195,7 @@
     <!--end bootstrap-->
     <!-- End -->
     <!-- custom js -->
-    <script src="static/js/custom.js"></script>
+    <script src="static/js/KH_custom.js"></script>
     <script src="static/js/gift.js" defer></script>
 
 </head>
@@ -261,8 +261,8 @@
 <body>
 
     <!-- page loading -->
-    <div id="loading">
-        <div class="load-circle"><span class="one"></span></div>
+    <div id="KH_loading">
+        <div class="KH_load-circle"><span class="one"></span></div>
     </div>
     <!-- end page loading -->
 
@@ -332,51 +332,80 @@
             </div>
         </div>
     </div>
-    <section id="about" class="section gray-bg">
+    <section id="start" class="section gray-bg">
         <!-- Page Content -->
         <div class="container page-top_title">
             <div class="KH_section-title">
-                <h5 class="KH_dark-color text-uppercase wow fadeInUp animated" data-wow-delay="0.3s">BẮT ĐẦU</h5>
+                <h5 class="KH_dark-color" style="margin-top: 12px;">HÀNH TRÌNH</h5>
             </div>
-        </div>
-        <div class="container">
-            <!-- Thay src và caption -->
-
+     
+            <div class="timeline-block timeline-block-right"style=" padding-top: 10px;">
+                    <div class="KH_marker"></div>
+                    <div class="KH_timeline-content-left wow fadeInRight" data-wow-delay="0.5s">
+                        <h5>27 - 10 - 2025</h5>
+                        <h6>Nhắn tin</h6>
+                        <span>...</span>
+                    </div>
+                </div>
+                <div class="timeline-block timeline-block-left">
+                    <div class="KH_marker"></div>
+                    <div class="KH_timeline-content-right wow fadeInLeft" data-wow-delay="0.5s">
+                        <h5>2025 - 11 - 02</h5>
+                        <h6>Gặp nhau</h6>
+                        <span>...</span>
+                    </div>
+                </div>
+                <div class="timeline-block timeline-block-right">
+                    <div class="KH_marker"></div>
+                    <div class="KH_timeline-content-left wow fadeInRight" data-wow-delay="0.5s">
+                        <h5>29 - 11 - 2025</h5>
+                        <h6>Quen nhau</h6>
+                        <span>...</span>
+                    </div>
+                </div>
+                <div class="timeline-block timeline-block-left">
+                    <div class="KH_marker"></div>
+                    <div class="KH_timeline-content-right wow fadeInLeft" data-wow-delay="0.5s">
+                        <h5>...</h5>
+                        <h6>...</h6>
+                        <span>...</span>
+                    </div>
+                </div>
         </div>
     </section>
     <section id="skills" class="section gray2-bg">
         <div class="container page-top_title">
             <div class="KH_section-title">
-                <h5 class="KH_dark-color text-uppercase wow fadeInUp animated" data-wow-delay="0.3s">THỜI GIAN
+                <h5 class="KH_dark-color text-uppercase wow fadeInUp animated" data-wow-delay="0.3s" >THỜI GIAN
                 </h5>
             </div>
         </div>
         <div class="container" style="width: 50%; padding-top: 10px;">
             <div class="row">
-    <div class="col-lg-4 wow fadeInUp animated" data-wow-delay="0.3s">
-        <div class="KH_do-wrap text-center KH_time">
-            <div class="top"></div>
-            <h1 id="years">0</h1>
-            <h5>Năm</h5>
-        </div>
-    </div>
+                <div class="col-lg-4 wow fadeInUp animated" data-wow-delay="0.3s">
+                    <div class="KH_do-wrap text-center KH_time">
+                        <div class="top"></div>
+                        <h1 id="years">0</h1>
+                        <h5>Năm</h5>
+                    </div>
+                </div>
 
-    <div class="col-lg-4 wow fadeInUp animated" data-wow-delay="0.3s">
-        <div class="KH_do-wrap text-center KH_time">
-            <div class="top"></div>
-            <h1 id="months">0</h1>
-            <h5>Tháng</h5>
-        </div>
-    </div>
+                <div class="col-lg-4 wow fadeInUp animated" data-wow-delay="0.3s">
+                    <div class="KH_do-wrap text-center KH_time">
+                        <div class="top"></div>
+                        <h1 id="months">0</h1>
+                        <h5>Tháng</h5>
+                    </div>
+                </div>
 
-    <div class="col-lg-4 wow fadeInUp animated" data-wow-delay="0.3s">
-        <div class="KH_do-wrap text-center KH_time">
-            <div class="top"></div>
-            <h1 id="days">4</h1>
-            <h5>Ngày</h5>
-        </div>
-    </div>
-</div>
+                <div class="col-lg-4 wow fadeInUp animated" data-wow-delay="0.3s">
+                    <div class="KH_do-wrap text-center KH_time">
+                        <div class="top"></div>
+                        <h1 id="days">4</h1>
+                        <h5>Ngày</h5>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </section>
@@ -447,33 +476,34 @@
 </script>
 <!-- Thời gian hiện tại trừ 29-11-2025 -->
 <script>
-function calculateDateDiff() {
-    const startDate = new Date(2025, 10, 29); // tháng 10 = November (JS đếm từ 0)
-    const now = new Date();
+    function calculateDateDiff() {
+        const startDate = new Date(2025, 10, 29); // tháng 10 = November (JS đếm từ 0)
+        const now = new Date();
 
-    let years = now.getFullYear() - startDate.getFullYear();
-    let months = now.getMonth() - startDate.getMonth();
-    let days = now.getDate() - startDate.getDate() + 1;
+        let years = now.getFullYear() - startDate.getFullYear();
+        let months = now.getMonth() - startDate.getMonth();
+        let days = now.getDate() - startDate.getDate() + 1;
 
-    // Điều chỉnh ngày âm
-    if (days < 0) {
-        months--;
-        const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
-        days += prevMonth.getDate();
+        // Điều chỉnh ngày âm
+        if (days < 0) {
+            months--;
+            const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+            days += prevMonth.getDate();
+        }
+
+        // Điều chỉnh tháng âm
+        if (months < 0) {
+            years--;
+            months += 12;
+        }
+
+        // Gán vào HTML
+        document.getElementById("years").textContent = years;
+        document.getElementById("months").textContent = months;
+        document.getElementById("days").textContent = days;
     }
 
-    // Điều chỉnh tháng âm
-    if (months < 0) {
-        years--;
-        months += 12;
-    }
-
-    // Gán vào HTML
-    document.getElementById("years").textContent = years;
-    document.getElementById("months").textContent = months;
-    document.getElementById("days").textContent = days;
-}
-
-calculateDateDiff();
+    calculateDateDiff();
 </script>
+
 </html>
