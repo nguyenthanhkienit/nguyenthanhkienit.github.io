@@ -257,7 +257,72 @@
         background: linear-gradient(rgba(255, 255, 255, 0.12), transparent);
     }
 </style>
+<style>
 
+.box{
+    width:100%;
+    height:210px;
+margin-top: 10px;
+    border-radius:5px;
+    position:relative;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    color:#a4a5a6;
+    border: #EB2F8C solid 2px;
+
+    /* ---- Border neon inside ---- */
+   
+}
+
+/* Glow bên trái */
+.box::after{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:55%;
+    height:100%;
+    background:linear-gradient(90deg, #EB2F8C, transparent);
+    z-index:0;
+    filter:blur(30px);
+}
+
+/* Glow mạnh phía dưới */
+.box::before{
+    content:"";
+    position:absolute;
+    bottom:-20px;
+    left:50%;
+    transform:translateX(-50%);
+    width:120%;
+    height:60px;
+    background:radial-gradient(circle, #EB2F8C, transparent 70%);
+    filter:blur(28px);
+    z-index:0;
+}
+
+/* Text */
+.box h1{
+    position:relative;
+    font-size:100px;
+    margin:0;
+    z-index:2;
+    text-shadow:
+        0 0 20px #EB2F8C,
+        0 0 40px #EB2F8C,
+        0 0 80px #EB2F8C;
+}
+
+.box h5{
+   
+    margin-bottom: 35px;
+    font-size: 30px;
+    z-index:2;
+}
+</style>
 <body>
 
     <!-- page loading -->
@@ -371,6 +436,7 @@
                         <span>...</span>
                     </div>
                 </div>
+                
         </div>
     </section>
     <section id="skills" class="section gray2-bg">
@@ -383,7 +449,7 @@
         <div class="container" style="width: 50%; padding-top: 10px;">
             <div class="row">
                 <div class="col-lg-4 wow fadeInUp animated" data-wow-delay="0.3s">
-                    <div class="KH_do-wrap text-center KH_time">
+                    <div class="box">
                         <div class="top"></div>
                         <h1 id="years">0</h1>
                         <h5>Năm</h5>
@@ -391,7 +457,7 @@
                 </div>
 
                 <div class="col-lg-4 wow fadeInUp animated" data-wow-delay="0.3s">
-                    <div class="KH_do-wrap text-center KH_time">
+                    <div class="box">
                         <div class="top"></div>
                         <h1 id="months">0</h1>
                         <h5>Tháng</h5>
@@ -399,7 +465,7 @@
                 </div>
 
                 <div class="col-lg-4 wow fadeInUp animated" data-wow-delay="0.3s">
-                    <div class="KH_do-wrap text-center KH_time">
+                    <div class="box">
                         <div class="top"></div>
                         <h1 id="days">4</h1>
                         <h5>Ngày</h5>

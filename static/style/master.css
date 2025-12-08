@@ -7334,12 +7334,14 @@ h6 {
 }
 .KH_timeline-content-left {
     width: 95%;
-    padding: 6px 5px;
-    border-radius: 7px;
+    padding: 6px 15px;
+    border-radius: 5px;
     -moz-transition: ease all 0.35s;
     -o-transition: ease all 0.35s;
     -webkit-transition: ease all 0.35s;
     transition: ease all 0.35s;
+    box-shadow: 0 0 10px #EB2F8C;
+    margin-top: 10px;
 }
 .timeline-content-left:hover {
     background: #E0A80D;
@@ -7398,7 +7400,10 @@ h6 {
 }
 .KH_timeline-content-right {
     width: 95%;
-    padding: 6px 5px;
+    padding: 6px 15px;
+    margin-top: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #EB2F8C;
 }
 .timeline-content-right:hover {
     background: #E0A80D;
