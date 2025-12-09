@@ -7342,6 +7342,7 @@ h6 {
     transition: ease all 0.35s;
     box-shadow: 0 0 10px #EB2F8C;
     margin-top: 10px;
+    margin-left: 15px;
 }
 .timeline-content-left:hover {
     background: #E0A80D;
@@ -7404,6 +7405,7 @@ h6 {
     margin-top: 10px;
     border-radius: 5px;
     box-shadow: 0 0 10px #EB2F8C;
+    margin-right: 15px;
 }
 .timeline-content-right:hover {
     background: #E0A80D;
@@ -7497,6 +7499,9 @@ h6 {
         line-height: 25px;
         padding-left: 10px;
     }
+       .KH_timeline-content-right {
+        margin-right: 0px;
+}
 }
 
 @media screen and (max-width: 767px) {
@@ -7514,6 +7519,11 @@ h6 {
         margin-top: 85px;
         height: 1500px;
     }
+    .KH_timeline-content-left {
+    margin-left: 15px;}
+    .KH_timeline-content-right {
+    margin-left: 15px;
+}
 }
 
 @media screen and (max-width: 440px) {
