@@ -258,71 +258,135 @@
     }
 </style>
 <style>
+    .box {
+        width: 100%;
+        height: 210px;
+        margin-top: 10px;
+        border-radius: 5px;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: #a4a5a6;
+        border: #EB2F8C solid 2px;
 
-.box{
-    width:100%;
-    height:210px;
-margin-top: 10px;
-    border-radius:5px;
-    position:relative;
-    overflow:hidden;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    color:#a4a5a6;
-    border: #EB2F8C solid 2px;
+        /* ---- Border neon inside ---- */
 
-    /* ---- Border neon inside ---- */
-   
-}
+    }
 
-/* Glow bên trái */
-.box::after{
-    content:"";
-    position:absolute;
-    top:0;
-    left:0;
-    width:55%;
-    height:100%;
-    background:linear-gradient(90deg, #EB2F8C, transparent);
-    z-index:0;
-    filter:blur(30px);
-}
+    /* Glow bên trái */
+    .box::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 55%;
+        height: 100%;
+        background: linear-gradient(90deg, #EB2F8C, transparent);
+        z-index: 0;
+        filter: blur(30px);
+    }
 
-/* Glow mạnh phía dưới */
-.box::before{
-    content:"";
-    position:absolute;
-    bottom:-20px;
-    left:50%;
-    transform:translateX(-50%);
-    width:120%;
-    height:60px;
-    background:radial-gradient(circle, #EB2F8C, transparent 70%);
-    filter:blur(28px);
-    z-index:0;
-}
+    /* Glow mạnh phía dưới */
+    .box::before {
+        content: "";
+        position: absolute;
+        bottom: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 120%;
+        height: 60px;
+        background: radial-gradient(circle, #EB2F8C, transparent 70%);
+        filter: blur(28px);
+        z-index: 0;
+    }
 
-/* Text */
-.box h1{
-    position:relative;
-    font-size:100px;
-    margin:0;
-    z-index:2;
-    text-shadow:
-        0 0 20px #EB2F8C,
-        0 0 40px #EB2F8C,
-        0 0 80px #EB2F8C;
-}
+    /* Text */
+    .box h1 {
+        position: relative;
+        font-size: 100px;
+        margin: 0;
+        z-index: 2;
+        text-shadow:
+            0 0 20px #EB2F8C,
+            0 0 40px #EB2F8C,
+            0 0 80px #EB2F8C;
+    }
 
-.box h5{
-   
-    margin-bottom: 35px;
-    font-size: 30px;
-    z-index:2;
-}
+    .box h5 {
+
+        margin-bottom: 35px;
+        font-size: 30px;
+        z-index: 2;
+    }
 </style>
+
+<style>
+    .calendar-wrapper {
+        position: relative;
+        margin: 7px auto;
+    }
+
+    /* Chữ Kay phía sau */
+    .kaymipink-bg {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 80px;
+        font-weight: 900;
+        color: #2B2C2C;
+        text-shadow:
+            0 0 20px #EB2F8C,
+            0 0 40px #EB2F8C,
+            0 0 60px #EB2F8C;
+        pointer-events: none;
+        user-select: none;
+    }
+
+    .calendar {
+        width: 100%;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 8px #EB2F8C;
+        position: relative;
+    }
+
+    .calendar h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .weekdays,
+    .days {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        text-align: center;
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    .days .day {
+        margin: 4px;
+        border-radius: 5px;
+        font-size: 18px;
+    }
+
+    .highlight {
+ 
+        font-weight: bold;
+        color: #EB2F8C;
+text-shadow:
+    0 0 8px #EB2F8C,
+    0 0 20px #EB2F8C,
+    0 0 40px #EB2F8C,
+    0 0 70px #EB2F8C,
+    0 0 110px #EB2F8C;
+    }
+</style>
+
 <body>
 
     <!-- page loading -->
@@ -403,51 +467,173 @@ margin-top: 10px;
             <div class="KH_section-title">
                 <h5 class="KH_dark-color" style="margin-top: 12px;">CHUYỆN CHÚNG MÌNH</h5>
             </div>
-     
-            <div class="timeline-block timeline-block-right"style=" padding-top: 10px;">
-                    <div class="KH_marker"></div>
-                    <div class="KH_timeline-content-left wow fadeInRight" data-wow-delay="0.5s">
-                        <h5>27-10-2025</h5>
-                        <h6>Nhắn tin</h6>
-                        <span>...</span>
-                    </div>
+
+            <div class="timeline-block timeline-block-right" style=" padding-top: 10px;">
+                <div class="KH_marker"></div>
+                <div class="KH_timeline-content-left wow fadeInRight" data-wow-delay="0.5s">
+                    <h5>27-10-2025</h5>
+                    <h6>Nhắn tin</h6>
+                    <span>...</span>
                 </div>
-                <div class="timeline-block timeline-block-left">
-                    <div class="KH_marker"></div>
-                    <div class="KH_timeline-content-right wow fadeInLeft" data-wow-delay="0.5s">
-                        <h5>02-11-2025</h5>
-                        <h6>Gặp nhau</h6>
-                        <span>...</span>
-                    </div>
+            </div>
+            <div class="timeline-block timeline-block-left">
+                <div class="KH_marker"></div>
+                <div class="KH_timeline-content-right wow fadeInLeft" data-wow-delay="0.5s">
+                    <h5>02-11-2025</h5>
+                    <h6>Gặp nhau</h6>
+                    <span>...</span>
                 </div>
-                <div class="timeline-block timeline-block-right">
-                    <div class="KH_marker"></div>
-                    <div class="KH_timeline-content-left wow fadeInRight" data-wow-delay="0.5s">
-                        <h5>29-11-2025</h5>
-                        <h6>Quen nhau</h6>
-                        <span>...</span>
-                    </div>
+            </div>
+            <div class="timeline-block timeline-block-right">
+                <div class="KH_marker"></div>
+                <div class="KH_timeline-content-left wow fadeInRight" data-wow-delay="0.5s">
+                    <h5>29-11-2025</h5>
+                    <h6>Quen nhau</h6>
+                    <span>...</span>
                 </div>
-                <div class="timeline-block timeline-block-left">
-                    <div class="KH_marker"></div>
-                    <div class="KH_timeline-content-right wow fadeInLeft" data-wow-delay="0.5s">
-                        <h5>...</h5>
-                        <h6>...</h6>
-                        <span>...</span>
-                    </div>
+            </div>
+            <div class="timeline-block timeline-block-left">
+                <div class="KH_marker"></div>
+                <div class="KH_timeline-content-right wow fadeInLeft" data-wow-delay="0.5s">
+                    <h5>...</h5>
+                    <h6>...</h6>
+                    <span>...</span>
                 </div>
-                
+            </div>
+
         </div>
     </section>
     <section id="skills" class="section gray2-bg">
         <div class="container">
-<h1 class="kh">KH</h1>
+            <h1 class="kh">KH</h1>
+            <div class="row" style="margin-top: 30px;">
+                <div class="col-lg-4">
+                    <div class="calendar-wrapper">
+
+                        <!-- Chữ Kay phía sau -->
+                        <div class="kaymipink-bg">Kay</div>
+
+                        <!-- Calendar -->
+                        <div class="calendar">
+                            <h2>9/1996</h2>
+
+                            <div class="weekdays">
+                                <div>Sun</div>
+                                <div>Mon</div>
+                                <div>Tue</div>
+                                <div>Wed</div>
+                                <div>Thu</div>
+                                <div>Fri</div>
+                                <div>Sat</div>
+                            </div>
+
+                            <div class="days">
+                                <div class="day">1</div>
+                                <div class="day">2</div>
+                                <div class="day">3</div>
+                                <div class="day">4</div>
+                                <div class="day highlight">5</div>
+                                <div class="day">6</div>
+                                <div class="day">7</div>
+
+                                <div class="day">8</div>
+                                <div class="day">9</div>
+                                <div class="day">10</div>
+                                <div class="day">11</div>
+                                <div class="day">12</div>
+                                <div class="day">13</div>
+                                <div class="day">14</div>
+
+                                <div class="day">15</div>
+                                <div class="day">16</div>
+                                <div class="day">17</div>
+                                <div class="day">18</div>
+                                <div class="day">19</div>
+                                <div class="day">20</div>
+                                <div class="day">21</div>
+
+                                <div class="day">22</div>
+                                <div class="day">23</div>
+                                <div class="day">24</div>
+                                <div class="day">25</div>
+                                <div class="day">26</div>
+                                <div class="day">27</div>
+                                <div class="day">28</div>
+
+                                <div class="day">29</div>
+                                <div class="day">30</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+             
+                </div>
+                <div class="col-lg-4">
+                    <div class="calendar-wrapper">
+                    <div class="kaymipink-bg">MiPink</div>
+                    <div class="calendar">
+                        <h2>3/1998</h2>
+
+                        <div class="weekdays">
+                            <div>Sun</div>
+                            <div>Mon</div>
+                            <div>Tue</div>
+                            <div>Wed</div>
+                            <div>Thu</div>
+                            <div>Fri</div>
+                            <div>Sat</div>
+                        </div>
+
+                        <div class="days">
+                            <!-- 1/3/1998 là Chủ nhật -->
+                            <div class="day">1</div>
+                            <div class="day">2</div>
+                            <div class="day">3</div>
+                            <div class="day">4</div>
+                            <div class="day">5</div>
+                            <div class="day">6</div>
+                            <div class="day">7</div>
+
+                            <div class="day">8</div>
+                            <div class="day">9</div>
+                            <div class="day">10</div>
+                            <div class="day">11</div>
+                            <div class="day">12</div>
+                            <div class="day">13</div>
+                            <div class="day">14</div>
+
+                            <div class="day">15</div>
+                            <div class="day">16</div>
+                            <div class="day">17</div>
+                            <div class="day">18</div>
+                            <div class="day">19</div>
+                            <div class="day">20</div>
+                            <div class="day">21</div>
+
+                            <div class="day">22</div>
+                            <div class="day">23</div>
+                            <div class="day">24</div>
+                            <div class="day highlight">25</div>
+                            <div class="day">26</div>
+                            <div class="day">27</div>
+                            <div class="day">28</div>
+
+                            <div class="day">29</div>
+                            <div class="day">30</div>
+                            <div class="day">31</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         </div>
     </section>
+    
     <section id="skills" class="section gray-bg">
         <div class="container page-top_title">
             <div class="KH_section-title">
-                <h5 class="KH_dark-color text-uppercase wow fadeInUp animated" data-wow-delay="0.3s" >THỜI GIAN
+                <h5 class="KH_dark-color text-uppercase wow fadeInUp animated" data-wow-delay="0.3s">THỜI GIAN
                 </h5>
             </div>
         </div>
