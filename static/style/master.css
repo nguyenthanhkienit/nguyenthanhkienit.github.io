@@ -7837,4 +7837,27 @@ h6 {
 }
 
 
-/*# sourceMappingURL=master.css.map *
+/*# sourceMappingURL=master.css.map */
+.kh {
+        font-size: 200px;
+        font-weight: 900;
+        text-align: center;
+    background-image: url('../../images/kh/z7303151556698_7f10847b006b284c29b104c678bc1ed3.jpg');
+        background-size: 180%; /* tăng hơn để không bị hở */
+        background-position: 60% center;
+        background-repeat: no-repeat;
+
+        -webkit-background-clip: text;
+        color: transparent;
+
+        filter: drop-shadow(0 0 5px #EB2F8C);
+        line-height: 1;
+        margin: 0;
+        padding: 0;
+    }
+    @media (max-width: 767px) {
+.kh {
+        font-size: 150px;
+        margin-left: -20px;
+    }
+}
