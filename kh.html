@@ -384,7 +384,24 @@ text-shadow:
             0 0 1px #EB2F8C;
     }
 </style>
+<style>
+    .fixed-mini-img {
+    position: fixed;
+    bottom: 20px;  /* chỉnh cao thấp */
+    right: 20px;   /* chỉnh sát mép hơn hoặc ra ngoài */
+    width: 80px;   /* kích thước ảnh */
+    height: auto;
+    border-radius: 10px;
+    z-index: 99999;
+    cursor: pointer;
+    transition: 0.3s;
+}
 
+.fixed-mini-img:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 15px #EB2F8C;
+}
+</style>
 <body>
 
     <!-- page loading -->
@@ -696,6 +713,7 @@ text-shadow:
     <script src="static/js/img.js"></script>
     <!-- end hình ảnh -->
 </body>
+<img class="fixed-mini-img" src="images/kh/kiss.png" alt="icon">
 <footer class="footer">
     <div class="container">
         <div class="row align-items-center">
