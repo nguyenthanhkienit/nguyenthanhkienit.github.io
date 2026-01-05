@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Photo Gallery</title>
+
+<style>
+body{
+    background:#222;
+    font-family:Arial;
+    margin:0;
+    padding:30px;
+}
+
+/* --- 4 ảnh ngoài --- */
+.gallery-container{
+    display:flex;
+    flex-wrap:wrap;
+    gap:20px;
+    justify-content:center;
+}
+.photo-card{
+    position:relative;
+    width:260px;
+    height:340px;
+    border-radius:10px;
+    overflow:hidden;
+    cursor:pointer;
+    background:#111;
+    transition:0.3s;
+}
+.photo-card:hover{ transform:scale(1.04); }
+
+.photo-card img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+/* Tag ngày */
+.date-tag{
+    position:absolute;
+    bottom:10px;
+    left:50%;
+    transform:translateX(-50%);
+    background:#EB2F8C;
+    color:white;
+    padding:6px 10px;
+    font-size:14px;
+    border-radius:6px;
+    font-weight:bold;
+}
+
+/* --- Popup --- */
+.popup{
+    display:none;
+    position:fixed;
+    top:0; left:0;
+    width:100%; 
+    height:100%;
+    background:rgba(0,0,0,0.85);
+    justify-content:center;
+    align-items:center;
+    z-index:1000;
+    backdrop-filter:blur(5px);
+}
+
+/* Khóa thao tác nền */
+body.noscroll{
+    overflow:hidden;
+}
+
+.popup-content{
+    position:relative;
+    max-width: 90vw;     /* 👈 giới hạn khung theo màn hình */
+    max-height: 80vh;
+}
+
+/* X cố định */
+.close{
+    position:fixed;
+    top:20px;
+    right:20px;
+    font-size:32px;
+    color:#EB2F8C;
+    cursor:pointer;
+    z-index:2000;
+}
+
+.image-wrapper{
+    position:relative;
+    max-width: 90vw;     /* 👈 giới hạn khung theo màn hình */
+    max-height: 80vh;
+    width: auto;
+    height: auto;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    margin: 0 auto;      /* căn giữa */
+    overflow:hidden;
+}
+
+#popup-img{
+    max-width: 90vw;     /* 👈 khớp với wrapper */
+    max-height: 80vh;
+
+    object-fit: contain;
+    position: relative; /* đổi từ absolute → tránh dư khung */
+    
+    transition: transform 0.35s ease, opacity 0.35s ease;
+}
+
+/* Ngày */
+.popup-date{
+    position:fixed;          /* CỐ ĐỊNH */
+    bottom:100px;             /* cách đáy màn hình */
+    left:50%;
+    transform:translateX(-50%);
+    font-size:18px;
+    font-weight:bold;
+    color:#EB2F8C;
+    text-align:center;
+    z-index:1600;
+    pointer-events:none;     /* không cản vuốt / click */
+}
+
+/* Nút điều hướng */
+.nav-btn{
+    position:fixed;                 /* QUAN TRỌNG */
+    top:50%;
+    transform:translateY(-50%);
+    font-size:36px;
+    color:#EB2F8C;
+    cursor:pointer;
+    padding:12px;
+   
+    border-radius:50%;
+    user-select:none;
+    z-index:1500;
+
+
+}
+.prev{left:10px;}
+    .next{right:10px;}
+/* Trạng thái */
+.slide-in-right{ transform: translateX(100%); }
+.slide-in-left{  transform: translateX(-100%); }
+
+.slide-out-left{  transform: translateX(-100%); opacity:0; }
+.slide-out-right{ transform: translateX(100%);  opacity:0; }
+
+.slide-center{
+    transform: translateX(0);
+    opacity:1;
+}
+
+/* Responsive */
+
+@media(max-width:480px){
+    .photo-card{width:100%; height:260px;}
+}
+</style>
+</head>
+<body>
+
+<!-- 4 ảnh ngoài -->
+<div class="gallery-container">
+    <div class="photo-card" onclick="openGallery(0)">
+        <img src="../11.png"><div class="date-tag">29-11-2025</div>
+    </div>
+    <div class="photo-card" onclick="openGallery(1)">
+        <img src="../5.png"><div class="date-tag">07-12-2025</div>
+    </div>
+    <div class="photo-card" onclick="openGallery(2)">
+        <img src="img/3a.jpg"><div class="date-tag">14-12-2025</div>
+    </div>
+    <div class="photo-card" onclick="openGallery(3)">
+        <img src="img/4a.jpg"><div class="date-tag">21-12-2025</div>
+    </div>
+</div>
+
+<!-- Popup xem album -->
+<div class="popup" id="popup" onclick="backgroundClose(event)">
+    <div class="popup-content">
+        <span class="close" onclick="closeGallery()">✕</span>
+        <span class="nav-btn prev" onclick="prevImg()">❮</span>
+        <div class="image-wrapper">
+            <img id="popup-img" src="">
+        </div>
+        <div class="popup-date" id="popup-date"></div>
+        <span class="nav-btn next" onclick="nextImg()">❯</span>
+    </div>
+</div>
+
+<script>
+// Album hình
+const albums = [
+    ["../11.png","../DSC02066.jpeg","../P1020560.jpg"],
+    ["../5.png","img/2b.jpg","img/2c.jpg"],
+    ["img/3a.jpg","img/3b.jpg","img/3c.jpg"],
+    ["img/4a.jpg","img/4b.jpg","img/4c.jpg"]
+];
+
+// Ngày album
+const dates = [
+    "29-11-2025",
+    "07-12-2025",
+    "14-12-2025",
+    "21-12-2025"
+];
+
+let currentAlbum = 0;
+let currentIndex = 0;
+function showImage(direction){
+    const img = document.getElementById("popup-img");
+
+    // Reset class
+    img.className = "";
+
+    // 1️⃣ Ảnh hiện tại đi ra
+    if(direction === "next"){
+        img.classList.add("slide-out-right");
+    }else{
+        img.classList.add("slide-out-left");
+    }
+
+    setTimeout(() => {
+
+        // 2️⃣ Đổi ảnh
+        img.src = albums[currentAlbum][currentIndex];
+       
+
+        // 4️⃣ Trượt ảnh mới vào giữa
+        requestAnimationFrame(() => {
+            img.classList.add("slide-center");
+        });
+
+    }, 220); // khớp thời gian slide-out
+}
+function showImage_luot(direction){
+    const img = document.getElementById("popup-img");
+
+    // Reset class
+    img.className = "";
+
+    // 1️⃣ Ảnh hiện tại đi ra
+    if(direction === "next"){
+        img.classList.add("slide-out-left");
+    }else{
+        img.classList.add("slide-out-right");
+    }
+
+    setTimeout(() => {
+
+        // 2️⃣ Đổi ảnh
+        img.src = albums[currentAlbum][currentIndex];
+       
+
+        // 4️⃣ Trượt ảnh mới vào giữa
+        requestAnimationFrame(() => {
+            img.classList.add("slide-center");
+        });
+
+    }, 220); // khớp thời gian slide-out
+}
+
+function openGallery(albumIndex){
+    currentAlbum = albumIndex;
+    currentIndex = 0;
+    document.getElementById("popup").style.display = "flex";
+    document.body.classList.add("noscroll"); // Khóa nền
+    showImage();
+}
+
+function closeGallery(){
+    document.getElementById("popup").style.display = "none";
+    document.body.classList.remove("noscroll"); // Mở lại nền
+}
+
+// Bấm ra ngoài tắt popup
+function backgroundClose(e){
+    if(e.target.id === "popup"){
+        closeGallery();
+    }
+}
+
+// Chuyển ảnh + nhảy album
+function nextImg(){
+    if(currentIndex < albums[currentAlbum].length - 1){
+        currentIndex++;
+    } else if(currentAlbum < albums.length - 1){
+        currentAlbum++;
+        currentIndex = 0;
+    }
+    showImage("next");
+}
+
+function prevImg(){
+    if(currentIndex > 0){
+        currentIndex--;
+    } else if(currentAlbum > 0){
+        currentAlbum--;
+        currentIndex = albums[currentAlbum].length - 1;
+    }
+    showImage("prev");
+}
+function nextImg_luot(){
+    if(currentIndex < albums[currentAlbum].length - 1){
+        currentIndex++;
+    } else if(currentAlbum < albums.length - 1){
+        currentAlbum++;
+        currentIndex = 0;
+    }
+    showImage_luot("prev");
+}
+
+function prevImg_luot(){
+    if(currentIndex > 0){
+        currentIndex--;
+    } else if(currentAlbum > 0){
+        currentAlbum--;
+        currentIndex = albums[currentAlbum].length - 1;
+    }
+    showImage_luot("next");
+}
+/* --- Vuốt trái/phải di chuyển ảnh (đúng 1 hình) --- */
+let startX = 0;
+let isSwiping = false; // tránh double-swipe
+
+const swipeArea = document.querySelector(".popup-content");
+
+swipeArea.addEventListener("touchstart", e => {
+    startX = e.touches[0].clientX;
+    isSwiping = false;
+});
+
+swipeArea.addEventListener("touchend", e => {
+    const endX = e.changedTouches[0].clientX;
+    const distance = endX - startX;
+
+    // Ngưỡng vuốt
+    if(Math.abs(distance) > 60 && !isSwiping){
+        isSwiping = true; // khóa 1 lần
+        distance < 0 ? nextImg_luot() : prevImg_luot();
+
+        // mở khóa sau 200ms
+        setTimeout(()=> isSwiping = false, 200);
+    }
+});
+function openGallery(albumIndex){
+    currentAlbum = albumIndex;
+    currentIndex = 0;
+
+    const img = document.getElementById("popup-img");
+    img.src = albums[currentAlbum][0];
+    img.className = "slide-center";
+
+    document.getElementById("popup-date").textContent = dates[currentAlbum];
+    document.getElementById("popup").style.display = "flex";
+    document.body.classList.add("noscroll");
+}
+</script>
+
+</body>
+</html>
