@@ -1,47 +1,95 @@
+// gallery-control.js
 
-// lấy hình ảnh bên img_json.js
-    const galleryRow = document.getElementById("gallery-row");
+/* ===============================
+   1. GOM ẢNH THEO NGÀY
+================================ */
+const groupedByDate = {};
 
-    images.forEach((img, index) => {
-        galleryRow.innerHTML += `
-        <div class="col-lg-3 col-sm-6 wow fadeInUp animated" data-wow-delay="0.3s">
-            <div class="gallery-img-container" data-index="${index % 4}">
-                <img src="${img.src}" alt="">
-                <div class="gallery-caption">${img.caption}</div>
-            </div>
-        </div>`;
-    });
-// end lấy hình ảnh bên img_json.js
-// click vô hình
-  const galleryContainers = document.querySelectorAll('.gallery-img-container');
-  const overlay = document.getElementById('overlay');
-  const overlayImage = document.getElementById('overlayImage');
-  const closeBtn = document.getElementById('closeBtn');
-  const prevBtn = document.getElementById('prevBtn');
-  const nextBtn = document.getElementById('nextBtn');
-
-  let currentIndex_img = 0;
-
-  function showImage(index, direction = 'none') {
-    const newSrc = galleryContainers[index].querySelector('img').src;
-
-    // Add animation effect
-    overlayImage.style.opacity = 0;
-    overlayImage.style.transform = direction === 'left' ? 'translateX(-50px)' : 
-                                   direction === 'right' ? 'translateX(50px)' : 'translateX(0)';
-
-    setTimeout(() => {
-      overlayImage.src = newSrc;
-      overlayImage.style.transform = 'translateX(0)';
-      overlayImage.style.opacity = 1;
-    }, 200);
+images.forEach(img => {
+  if (!groupedByDate[img.caption]) {
+    groupedByDate[img.caption] = [];
   }
+  groupedByDate[img.caption].push(img);
+});
+
+/* ===============================
+   2. ẢNH HIỂN THỊ NGOÀI GALLERY
+   (mỗi ngày 1 ảnh)
+================================ */
+const displayImages = [];
+Object.keys(groupedByDate).forEach(date => {
+  displayImages.push(groupedByDate[date][0]); // ảnh đại diện
+});
+
+/* ===============================
+   3. TẤT CẢ ẢNH CHO OVERLAY
+================================ */
+const overlayImages = Object.values(groupedByDate).flat();
+
+/* ===============================
+   4. MAP: NGÀY → INDEX ĐẦU TIÊN
+================================ */
+const firstIndexOfDate = {};
+let runningIndex = 0;
+
+Object.keys(groupedByDate).forEach(date => {
+  firstIndexOfDate[date] = runningIndex;
+  runningIndex += groupedByDate[date].length;
+});
+
+/* ===============================
+   5. RENDER GALLERY
+================================ */
+const galleryRow = document.getElementById("gallery-row");
+
+displayImages.forEach((img, index) => {
+  galleryRow.innerHTML += `
+    <div class="col-lg-3 col-sm-6 wow fadeInUp animated" data-wow-delay="0.3s">
+      <div class="gallery-img-container" data-index="${index}">
+        <img src="${img.src}" alt="">
+        <div class="gallery-caption">${img.caption}</div>
+      </div>
+    </div>`;
+});
+
+/* ===============================
+   6. OVERLAY CONTROL
+================================ */
+const galleryContainers = document.querySelectorAll('.gallery-img-container');
+const overlay = document.getElementById('overlay');
+const overlayImage = document.getElementById('overlayImage');
+const overlayDate = document.getElementById('overlayDate');
+const closeBtn = document.getElementById('closeBtn');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+
+let currentIndex_img = 0;
+
+function showImage(index, direction = 'none') {
+  const imgData = overlayImages[index];
+
+  overlayImage.style.opacity = 0;
+  overlayImage.style.transform =
+    direction === 'left' ? 'translateX(-50px)' :
+    direction === 'right' ? 'translateX(50px)' :
+    'translateX(0)';
+
+  setTimeout(() => {
+    overlayImage.src = imgData.src;
+
+    // 👉 hiển thị ngày bên dưới
+    overlayDate.textContent = imgData.caption;
+
+    overlayImage.style.transform = 'translateX(0)';
+    overlayImage.style.opacity = 1;
+  }, 200);
+}
 
 function openOverlay(index) {
   overlay.classList.add('active');
-  showImage(index);
   currentIndex_img = index;
-  document.documentElement.classList.add('no-scroll');            // khóa body
+  showImage(index);
+  document.documentElement.classList.add('no-scroll');
 }
 
 function closeOverlay() {
@@ -49,42 +97,57 @@ function closeOverlay() {
   document.documentElement.classList.remove('no-scroll');
 }
 
-  galleryContainers.forEach((container, index) => {
-    container.addEventListener('click', () => openOverlay(index));
+/* ===============================
+   7. CLICK ẢNH ĐẠI DIỆN
+================================ */
+galleryContainers.forEach((container, index) => {
+  container.addEventListener('click', () => {
+    const date = displayImages[index].caption;
+    currentIndex_img = firstIndexOfDate[date];
+    openOverlay(currentIndex_img);
   });
+});
 
-  closeBtn.addEventListener('click', closeOverlay);
-  overlay.addEventListener('click', (e) => {
-    if (e.target === overlay) closeOverlay();
-  });
+/* ===============================
+   8. NÚT ĐIỀU KHIỂN
+================================ */
+closeBtn.addEventListener('click', closeOverlay);
 
-  prevBtn.addEventListener('click', () => {
-    currentIndex_img = (currentIndex_img - 1 + galleryContainers.length) % galleryContainers.length;
-    showImage(currentIndex_img, 'left');
-  });
+overlay.addEventListener('click', (e) => {
+  if (e.target === overlay) closeOverlay();
+});
 
-  nextBtn.addEventListener('click', () => {
-    currentIndex_img = (currentIndex_img + 1) % galleryContainers.length;
-    showImage(currentIndex_img, 'right');
-  });
+prevBtn.addEventListener('click', () => {
+  currentIndex_img =
+    (currentIndex_img - 1 + overlayImages.length) % overlayImages.length;
+  showImage(currentIndex_img, 'left');
+});
 
-  // Swipe Detection
-  let touchStartX = 0;
-  let touchEndX = 0;
+nextBtn.addEventListener('click', () => {
+  currentIndex_img =
+    (currentIndex_img + 1) % overlayImages.length;
+  showImage(currentIndex_img, 'right');
+});
 
-  overlay.addEventListener('touchstart', (e) => {
-    touchStartX = e.changedTouches[0].screenX;
-  });
+/* ===============================
+   9. SWIPE MOBILE
+================================ */
+let touchStartX = 0;
+let touchEndX = 0;
 
-  overlay.addEventListener('touchend', (e) => {
-    touchEndX = e.changedTouches[0].screenX;
-    handleSwipeGesture();
-  });
+overlay.addEventListener('touchstart', (e) => {
+  touchStartX = e.changedTouches[0].screenX;
+});
 
-  function handleSwipeGesture() {
-    const delta = touchStartX - touchEndX;
-    if (Math.abs(delta) < 50) return;
+overlay.addEventListener('touchend', (e) => {
+  touchEndX = e.changedTouches[0].screenX;
+  handleSwipeGesture();
+});
 
-    if (delta > 0) nextBtn.click(); // swipe left
-    else prevBtn.click(); // swipe right
-  }
+function handleSwipeGesture() {
+  const delta = touchStartX - touchEndX;
+  if (Math.abs(delta) < 50) return;
+
+  if (delta > 0) nextBtn.click(); // swipe left
+  else prevBtn.click();         // swipe right
+}

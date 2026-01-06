@@ -157,7 +157,18 @@
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
             transition: transform 0.3s ease, opacity 0.3s ease;
         }
-
+        .overlay-date{
+            position:fixed;          /* CỐ ĐỊNH */
+    bottom:50px;             /* cách đáy màn hình */
+    left:50%;
+    transform:translateX(-50%);
+    font-size:18px;
+    font-weight:bold;
+    color:#EB2F8C;
+    text-align:center;
+    z-index:1600;
+    pointer-events:none;     /* không cản vuốt / click */
+        }
         .controls {
             position: absolute;
             top: 50%;
@@ -685,6 +696,7 @@ text-shadow:
             <div class="overlay" id="overlay">
                 <span class="close-btn" id="closeBtn">&times;</span>
                 <img id="overlayImage" src="">
+                <div id="overlayDate" class="overlay-date"></div> <!-- 👈 thêm dòng này -->
                 <div class="controls">
                     <button id="prevBtn">&#10094;</button>
                     <button id="nextBtn">&#10095;</button>
