@@ -169,10 +169,10 @@ body.noscroll{
 <!-- 4 ảnh ngoài -->
 <div class="gallery-container">
     <div class="photo-card" onclick="openGallery(0)">
-        <img src="../nguyenthanhkienit.github.io/images/17EC2D72-DED2-499B-BEA9-8687B81B4EBA.jpeg"><div class="date-tag">29-11-2025</div>
+        <img src="./images/17EC2D72-DED2-499B-BEA9-8687B81B4EBA.jpeg"><div class="date-tag">29-11-2025</div>
     </div>
     <div class="photo-card" onclick="openGallery(1)">
-        <img src="../nguyenthanhkienit.github.io/images/8284BE37-B097-4571-9360-0356367585D2.jpeg"><div class="date-tag">07-12-2025</div>
+        <img src="./images/8284BE37-B097-4571-9360-0356367585D2.jpeg"><div class="date-tag">07-12-2025</div>
     </div>
 </div>
 
@@ -192,8 +192,8 @@ body.noscroll{
 <script>
 // Album hình
 const albums = [
-    ["../nguyenthanhkienit.github.io/images/17EC2D72-DED2-499B-BEA9-8687B81B4EBA.jpeg","../nguyenthanhkienit.github.io/images/17EC2D72-DED2-499B-BEA9-8687B81B4EBA.jpeg","../nguyenthanhkienit.github.io/images/58B1E649-A078-4048-9AFA-2B9F8700C09E.jpeg"],
-    ["../nguyenthanhkienit.github.io/images/8284BE37-B097-4571-9360-0356367585D2.jpeg","../nguyenthanhkienit.github.io/images/C1BB4820-77DC-4395-AE48-82A2F8A5CBC2.jpeg"]
+    ["./images/17EC2D72-DED2-499B-BEA9-8687B81B4EBA.jpeg","./images/C76D87DC-2FB0-47B1-9347-F630C7B25E4B.jpeg","./images/58B1E649-A078-4048-9AFA-2B9F8700C09E.jpeg"],
+    ["./images/8284BE37-B097-4571-9360-0356367585D2.jpeg","./images/C1BB4820-77DC-4395-AE48-82A2F8A5CBC2.jpeg"]
 ];
 
 // Ngày album
@@ -203,60 +203,28 @@ const dates = [
     "14-12-2025",
     "21-12-2025"
 ];
-
 let currentAlbum = 0;
 let currentIndex = 0;
+
 function showImage(direction){
     const img = document.getElementById("popup-img");
 
-    // Reset class
+    // Slide ảnh hiện tại ra
     img.className = "";
-
-    // 1️⃣ Ảnh hiện tại đi ra
-    if(direction === "next"){
-        img.classList.add("slide-out-right");
-    }else{
-        img.classList.add("slide-out-left");
-    }
+    img.classList.add(direction == "next" ? "slide-out-left" : "slide-out-right");
 
     setTimeout(() => {
-
-        // 2️⃣ Đổi ảnh
+        // Đặt ảnh mới ở ngoài màn hình
         img.src = albums[currentAlbum][currentIndex];
-       
+        img.className = "";
 
-        // 4️⃣ Trượt ảnh mới vào giữa
+        document.getElementById("popup-date").textContent = dates[currentAlbum];
+
+        // Trượt ảnh vào giữa
         requestAnimationFrame(() => {
-            img.classList.add("slide-center");
+            img.className = "slide-center";
         });
-
-    }, 220); // khớp thời gian slide-out
-}
-function showImage_luot(direction){
-    const img = document.getElementById("popup-img");
-
-    // Reset class
-    img.className = "";
-
-    // 1️⃣ Ảnh hiện tại đi ra
-    if(direction === "next"){
-        img.classList.add("slide-out-left");
-    }else{
-        img.classList.add("slide-out-right");
-    }
-
-    setTimeout(() => {
-
-        // 2️⃣ Đổi ảnh
-        img.src = albums[currentAlbum][currentIndex];
-       
-
-        // 4️⃣ Trượt ảnh mới vào giữa
-        requestAnimationFrame(() => {
-            img.classList.add("slide-center");
-        });
-
-    }, 220); // khớp thời gian slide-out
+    }, 200);
 }
 
 function openGallery(albumIndex){
@@ -306,7 +274,7 @@ function nextImg_luot(){
         currentAlbum++;
         currentIndex = 0;
     }
-    showImage_luot("prev");
+    showImage("prev");
 }
 
 function prevImg_luot(){
@@ -316,7 +284,7 @@ function prevImg_luot(){
         currentAlbum--;
         currentIndex = albums[currentAlbum].length - 1;
     }
-    showImage_luot("next");
+    showImage("next");
 }
 /* --- Vuốt trái/phải di chuyển ảnh (đúng 1 hình) --- */
 let startX = 0;
