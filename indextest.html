@@ -146,15 +146,30 @@ body.noscroll{
 .prev{left:10px;}
     .next{right:10px;}
 /* Trạng thái */
-.slide-in-right{ transform: translateX(100%); }
-.slide-in-left{  transform: translateX(-100%); }
-
-.slide-out-left{  transform: translateX(-100%); opacity:0; }
-.slide-out-right{ transform: translateX(100%);  opacity:0; }
-
+/* trạng thái ban đầu */
 .slide-center{
     transform: translateX(0);
-    opacity:1;
+    opacity: 1;
+}
+
+/* ảnh cũ đi ra */
+.slide-out-left{
+    transform: translateX(-40%);
+    opacity: 0;
+}
+.slide-out-right{
+    transform: translateX(40%);
+    opacity: 0;
+}
+
+/* ảnh mới chuẩn bị vào */
+.slide-in-right{
+    transform: translateX(40%);
+    opacity: 1;   /* KHÔNG mờ */
+}
+.slide-in-left{
+    transform: translateX(-40%);
+    opacity: 1;
 }
 
 /* Responsive */
@@ -209,22 +224,38 @@ let currentIndex = 0;
 function showImage(direction){
     const img = document.getElementById("popup-img");
 
-    // Slide ảnh hiện tại ra
-    img.className = "";
-    img.classList.add(direction == "next" ? "slide-out-left" : "slide-out-right");
+    // 1. cho ảnh hiện tại đi ra + mờ
+    img.className = "slide-center";
+    img.offsetWidth; // force reflow
 
+    if(direction === "next"){
+        img.className = "slide-out-left";
+    }else{
+        img.className = "slide-out-right";
+    }
+
+    // 2. sau khi ảnh cũ đi ra
     setTimeout(() => {
-        // Đặt ảnh mới ở ngoài màn hình
+
+        // đổi src
         img.src = albums[currentAlbum][currentIndex];
-        img.className = "";
 
-        document.getElementById("popup-date").textContent = dates[currentAlbum];
+        // 3. đặt ảnh mới ở ngoài màn hình
+        if(direction === "next"){
+            img.className = "slide-in-right";
+        }else{
+            img.className = "slide-in-left";
+        }
 
-        // Trượt ảnh vào giữa
+        // 4. trượt ảnh mới vào giữa
         requestAnimationFrame(() => {
             img.className = "slide-center";
         });
-    }, 200);
+
+        document.getElementById("popup-date").textContent =
+            dates[currentAlbum];
+
+    }, 250);   // tốc độ ảnh đi ra
 }
 
 function openGallery(albumIndex){
@@ -288,26 +319,29 @@ function prevImg_luot(){
 }
 /* --- Vuốt trái/phải di chuyển ảnh (đúng 1 hình) --- */
 let startX = 0;
-let isSwiping = false; // tránh double-swipe
+let isSwiping = false;
 
-const swipeArea = document.querySelector(".popup-content");
+const swipeArea = document.querySelector(".image-wrapper");
 
-swipeArea.addEventListener("touchstart", e => {
+swipeArea.addEventListener("touchstart", e=>{
     startX = e.touches[0].clientX;
-    isSwiping = false;
 });
 
-swipeArea.addEventListener("touchend", e => {
+swipeArea.addEventListener("touchend", e=>{
     const endX = e.changedTouches[0].clientX;
     const distance = endX - startX;
 
-    // Ngưỡng vuốt
-    if(Math.abs(distance) > 60 && !isSwiping){
-        isSwiping = true; // khóa 1 lần
-        distance < 0 ? nextImg_luot() : prevImg_luot();
+    // 👉 chỉ cần vuốt nhẹ 25px là đổi ảnh
+    if(Math.abs(distance) > 25 && !isSwiping){
+        isSwiping = true;
 
-        // mở khóa sau 200ms
-        setTimeout(()=> isSwiping = false, 200);
+        if(distance < 0){
+            nextImg();   // vuốt trái
+        }else{
+            prevImg();   // vuốt phải
+        }
+
+        setTimeout(()=> isSwiping = false, 300);
     }
 });
 function openGallery(albumIndex){
