@@ -234,32 +234,35 @@ function showImage(direction){
     isAnimating = true;
 
     const img = document.getElementById("popup-img");
+    const dateEl = document.getElementById("popup-date");
 
-    // 1. cho ảnh cũ đi ra
+    // 1. ảnh cũ đi ra
     if(direction === "next"){
         img.className = "slide-out-right";
     }else{
         img.className = "slide-out-left";
     }
 
-    // 2. chờ animation kết thúc thật sự
     img.addEventListener("transitionend", function handler(){
         img.removeEventListener("transitionend", handler);
 
-        // đổi ảnh
+        // 2. đổi ảnh
         img.src = albums[currentAlbum][currentIndex];
+
+        // ✅ cập nhật ngày
+        dateEl.textContent = dates[currentAlbum];
 
         // 3. đặt ảnh mới ngoài khung
         if(direction === "next"){
-            img.className = "slide-in-right";
-        }else{
             img.className = "slide-in-left";
+        }else{
+            img.className = "slide-in-right";
         }
 
-        // 4. ép browser render
+        // 4. ép render
         img.offsetWidth;
 
-        // 5. trượt ảnh mới vào
+        // 5. trượt vào giữa
         img.className = "slide-center";
 
         isAnimating = false;
