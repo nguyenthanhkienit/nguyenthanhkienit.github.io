@@ -227,41 +227,43 @@ const dates = [
 let currentAlbum = 0;
 let currentIndex = 0;
 
+let isAnimating = false;
+
 function showImage(direction){
+    if(isAnimating) return;
+    isAnimating = true;
+
     const img = document.getElementById("popup-img");
 
-    // 1. cho ảnh hiện tại đi ra + mờ
-    img.className = "slide-center";
-    img.offsetWidth; // force reflow
-
+    // 1. cho ảnh cũ đi ra
     if(direction === "next"){
         img.className = "slide-out-right";
     }else{
         img.className = "slide-out-left";
     }
 
-    // 2. sau khi ảnh cũ đi ra
-    setTimeout(() => {
+    // 2. chờ animation kết thúc thật sự
+    img.addEventListener("transitionend", function handler(){
+        img.removeEventListener("transitionend", handler);
 
-        // đổi src
+        // đổi ảnh
         img.src = albums[currentAlbum][currentIndex];
 
-        // 3. đặt ảnh mới ở ngoài màn hình
+        // 3. đặt ảnh mới ngoài khung
         if(direction === "next"){
             img.className = "slide-in-right";
         }else{
             img.className = "slide-in-left";
         }
 
-        // 4. trượt ảnh mới vào giữa
-        requestAnimationFrame(() => {
-            img.className = "slide-center";
-        });
+        // 4. ép browser render
+        img.offsetWidth;
 
-        document.getElementById("popup-date").textContent =
-            dates[currentAlbum];
+        // 5. trượt ảnh mới vào
+        img.className = "slide-center";
 
-    }, 250);   // tốc độ ảnh đi ra
+        isAnimating = false;
+    });
 }
 
 function openGallery(albumIndex){
