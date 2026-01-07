@@ -43,9 +43,16 @@ Object.keys(groupedByDate).forEach(date => {
 const galleryRow = document.getElementById("gallery-row");
 
 displayImages.forEach((img, index) => {
+  const count = groupedByDate[img.caption].length;
+
   galleryRow.innerHTML += `
-    <div class="col-lg-3 col-sm-6 wow fadeInUp animated" data-wow-delay="0.3s">
+    <div class="col-lg-3 col-sm-6 wow fadeInUp animated">
       <div class="gallery-img-container" data-index="${index}">
+
+        ${count > 1 
+          ? `<div class="img-count-badge">${count}</div>` 
+          : ``}
+
         <img src="${img.src}" alt="">
         <div class="gallery-caption">${img.caption}</div>
       </div>
@@ -73,11 +80,11 @@ function showImage(index, direction = 'none') {
   tempImg.src = imgData.src;
 
   const offset =
-    direction === 'left' ? -50 :
-    direction === 'right' ? 50 : 0;
+    direction === 'left' ? 50 :
+    direction === 'right' ? -50 : 0;
 
   // B1: animate ảnh hiện tại ra ngoài
-  overlayImage.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+  overlayImage.style.transition = 'transform 0.6s ease, opacity 0.6s ease';
   overlayImage.style.opacity = 0;
   overlayImage.style.transform = `translateX(${offset}px)`;
 
@@ -94,7 +101,7 @@ function showImage(index, direction = 'none') {
     overlayImage.offsetHeight;
 
     // B3: animate ảnh mới vào
-    overlayImage.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+    overlayImage.style.transition = 'transform 0.6s ease, opacity 0.6s ease';
     overlayImage.style.opacity = 1;
     overlayImage.style.transform = 'translateX(0)';
     preloadNeighborImages(index);
