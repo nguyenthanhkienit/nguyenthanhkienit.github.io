@@ -68,23 +68,47 @@ let currentIndex_img = 0;
 function showImage(index, direction = 'none') {
   const imgData = overlayImages[index];
 
+  // preload ảnh trước
+  const tempImg = new Image();
+  tempImg.src = imgData.src;
+
+  const offset =
+    direction === 'left' ? -50 :
+    direction === 'right' ? 50 : 0;
+
+  // B1: animate ảnh hiện tại ra ngoài
+  overlayImage.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
   overlayImage.style.opacity = 0;
-  overlayImage.style.transform =
-    direction === 'left' ? 'translateX(-50px)' :
-    direction === 'right' ? 'translateX(50px)' :
-    'translateX(0)';
+  overlayImage.style.transform = `translateX(${offset}px)`;
 
-  setTimeout(() => {
+  tempImg.onload = () => {
+    // B2: đổi ảnh khi đã load xong
     overlayImage.src = imgData.src;
-
-    // 👉 hiển thị ngày bên dưới
     overlayDate.textContent = imgData.caption;
 
-    overlayImage.style.transform = 'translateX(0)';
-    overlayImage.style.opacity = 1;
-  }, 200);
-}
+    // reset vị trí để chuẩn bị animate vào
+    overlayImage.style.transition = 'none';
+    overlayImage.style.transform = `translateX(${-offset}px)`;
 
+    // force reflow để browser nhận trạng thái mới
+    overlayImage.offsetHeight;
+
+    // B3: animate ảnh mới vào
+    overlayImage.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+    overlayImage.style.opacity = 1;
+    overlayImage.style.transform = 'translateX(0)';
+    preloadNeighborImages(index);
+  };
+}
+function preloadNeighborImages(index){
+  const next = (index + 1) % overlayImages.length;
+  const prev = (index - 1 + overlayImages.length) % overlayImages.length;
+
+  [next, prev].forEach(i => {
+    const img = new Image();
+    img.src = overlayImages[i].src;
+  });
+}
 function openOverlay(index) {
   overlay.classList.add('active');
   currentIndex_img = index;
