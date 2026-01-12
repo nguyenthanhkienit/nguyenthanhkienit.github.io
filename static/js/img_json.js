@@ -1,6 +1,12 @@
   const images = [
         { src: "images/kh/29-11-2025.jpg", caption: "29-11-2025" },
         { src: "images/kh/07-12-2025.jpg", caption: "07-12-2025" },
+        { src: "images/kh/07-12-2025 (1).jpg", caption: "07-12-2025" },
+        { src: "images/kh/07-12-2025 (2).jpg", caption: "07-12-2025" },
+        { src: "images/kh/07-12-2025 (3).jpg", caption: "07-12-2025" },
+        { src: "images/kh/07-12-2025 (4).jpg", caption: "07-12-2025" },
+        { src: "images/kh/07-12-2025 (5).jpg", caption: "07-12-2025" },
+        { src: "images/kh/07-12-2025 (6).jpg", caption: "07-12-2025" },
         { src: "images/kh/14-12-2025.jpg", caption: "14-12-2025" },
         { src: "images/kh/21-12-2025.jpg", caption: "21-12-2025" },
         { src: "images/kh/28-12-2025.jpeg", caption: "28-12-2025" },
@@ -15,5 +21,12 @@
         { src: "images/kh/01-01-2026 (7).jpg", caption: "01-01-2026" },
         { src: "images/kh/01-01-2026 (8).jpg", caption: "01-01-2026" },
         { src: "images/kh/03-01-2026.jpg", caption: "03-01-2026" },
+        { src: "images/kh/11-01-2026.jpg", caption: "11-01-2026" },
+        { src: "images/kh/11-01-2026 (1).jpg", caption: "11-01-2026" },
+        { src: "images/kh/11-01-2026 (2).jpg", caption: "11-01-2026" },
+        { src: "images/kh/11-01-2026 (3).jpg", caption: "11-01-2026" },
+        { src: "images/kh/11-01-2026 (4).jpg", caption: "11-01-2026" },
+        { src: "images/kh/11-01-2026 (5).jpg", caption: "11-01-2026" },
+        { src: "images/kh/11-01-2026 (6).jpg", caption: "11-01-2026" },
 
     ];
