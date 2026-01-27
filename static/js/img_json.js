@@ -29,5 +29,15 @@
         { src: "images/kh/11-01-2026 (5).jpg", caption: "11-01-2026" },
         { src: "images/kh/11-01-2026 (6).jpg", caption: "11-01-2026" },
         { src: "images/kh/15-01-2026.jpg", caption: "15-01-2026" },
+        { src: "images/kh/25-01-2026.jpg", caption: "25-01-2026" },
+        { src: "images/kh/25-01-2026 (1).jpg", caption: "25-01-2026" },
+        { src: "images/kh/25-01-2026 (2).jpg", caption: "25-01-2026" },
+        { src: "images/kh/25-01-2026 (3).jpg", caption: "25-01-2026" },
+        { src: "images/kh/25-01-2026 (4).jpg", caption: "25-01-2026" },
+        { src: "images/kh/25-01-2026 (5).jpg", caption: "25-01-2026" },
+        { src: "images/kh/25-01-2026 (6).jpg", caption: "25-01-2026" },
+        { src: "images/kh/25-01-2026 (7).jpg", caption: "25-01-2026" },
+        { src: "images/kh/25-01-2026 (8).jpg", caption: "25-01-2026" },
+        { src: "images/kh/25-01-2026 (9).jpg", caption: "25-01-2026" },
 
     ];
