@@ -472,6 +472,7 @@ text-shadow:
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 /* ===== ẢNH ===== */
@@ -483,7 +484,18 @@ text-shadow:
     border-radius: 5px;
     box-shadow: 0px 0px 8px #EB2F8C;
 }
-
+.image-date {
+  position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2; /* 🔥 DÒNG QUAN TRỌNG */
+    padding: 2px 10px 5px 10px;
+    color: #EB2F8C;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 5px;
+    pointer-events: none;
+}
 </style>
 <body>
 
@@ -777,28 +789,26 @@ text-shadow:
                 <div class="slides" id="slides">
                     <div class="slide">
                         <div class="image-wrapper">
-                            <img src="images/gift/01-01-2026 (1).jpg">
+                            <img src="images/gift/11-01-2026.jpg">
+                            <div class="image-date">11-01-2026</div>
                         </div>
                     </div>
 
                     <div class="slide">
                         <div class="image-wrapper">
-                            <img src="images/gift/01-01-2026 (6).jpg">
+                            <img src="images/gift/14-12-2025.jpg">
+                            <!-- không có ngày -->
                         </div>
                     </div>
 
                     <div class="slide">
                         <div class="image-wrapper">
-                            <img src="images/gift/28-12-2025.jpeg">
+                            <img src="images/gift/15-01-2026.jpg">
+                            <div class="image-date">15-01-2026</div>
                         </div>
                     </div>
 
-                    <!-- clone ảnh đầu để chạy vòng -->
-                    <div class="slide">
-                        <div class="image-wrapper">
-                            <img src="images/gift/01-01-2026 (1).jpg">
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
 
@@ -806,7 +816,7 @@ text-shadow:
     </div>
 </div>
     </section>
-    <section id="about" class="section gray-bg">
+    <section id="about" class="section gray2-bg">
         <!-- Page Content -->
         <div class="container page-top_title">
             <div class="KH_section-title">
@@ -906,22 +916,30 @@ text-shadow:
 </script>
 <!-- Món quà -->
 <script>
-    const slides = document.getElementById("slides");
-    const totalSlides = slides.children.length;
-    let index = 0;
+const slides = document.getElementById("slides");
+const slideItems = slides.children;
+const totalSlides = slideItems.length;
 
-    setInterval(() => {
-        index++;
-        slides.style.transition = "transform 0.8s ease";
-        slides.style.transform = `translateX(-${index * 100}%)`;
+// Clone slide đầu
+const firstClone = slideItems[0].cloneNode(true);
+slides.appendChild(firstClone);
 
-        if (index === totalSlides - 1) {
-            setTimeout(() => {
-                slides.style.transition = "none";
-                slides.style.transform = "translateX(0)";
-                index = 0;
-            }, 800);
-        }
-    }, 2000);
+let index = 0;
+const slideCount = slides.children.length;
+
+setInterval(() => {
+    index++;
+    slides.style.transition = "transform 0.8s ease";
+    slides.style.transform = `translateX(-${index * 100}%)`;
+
+    // Khi chạy tới slide clone
+    if (index === slideCount - 1) {
+        setTimeout(() => {
+            slides.style.transition = "none";
+            slides.style.transform = "translateX(0)";
+            index = 0;
+        }, 800);
+    }
+}, 2000);
 </script>
 </html>
