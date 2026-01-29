@@ -157,27 +157,32 @@
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
             transition: transform 0.3s ease, opacity 0.3s ease;
         }
-        .overlay-date{
-            position:fixed;          /* CỐ ĐỊNH */
-            bottom:50px;             /* cách đáy màn hình */
-            left:50%;
-            transform:translateX(-50%);
-            font-size:18px;
-            font-weight:bold;
-            color:#EB2F8C;
-            text-align:center;
-            z-index:1600;
-            pointer-events:none;     /* không cản vuốt / click */
-        }
-        .gallery-img-container{
-            position: relative;
-            }
 
-        .img-count-badge{
+        .overlay-date {
+            position: fixed;
+            /* CỐ ĐỊNH */
+            bottom: 50px;
+            /* cách đáy màn hình */
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 18px;
+            font-weight: bold;
+            color: #EB2F8C;
+            text-align: center;
+            z-index: 1600;
+            pointer-events: none;
+            /* không cản vuốt / click */
+        }
+
+        .gallery-img-container {
+            position: relative;
+        }
+
+        .img-count-badge {
             position: absolute;
             top: 8px;
             right: 8px;
-            background: rgba(0,0,0,0.65);
+            background: rgba(0, 0, 0, 0.65);
             color: #EB2F8C;
             font-size: 16px;
             padding: 0px 9px 4px 9px;
@@ -185,6 +190,7 @@
             z-index: 2;
             pointer-events: none;
         }
+
         .controls {
             position: absolute;
             top: 50%;
@@ -402,10 +408,10 @@
     }
 
     .highlight {
- 
+
         font-weight: bold;
         color: #EB2F8C;
-text-shadow:
+        text-shadow:
             0 0 10px #EB2F8C,
             0 0 1px #EB2F8C,
             0 0 1px #EB2F8C;
@@ -413,90 +419,85 @@ text-shadow:
 </style>
 <style>
     .fixed-mini-img {
-    position: fixed;
-    bottom: 20px;  /* chỉnh cao thấp */
-    right: 20px;   /* chỉnh sát mép hơn hoặc ra ngoài */
-    width: 80px;   /* kích thước ảnh */
-    height: auto;
-    z-index: 99999;
-    transition: 0.3s;
-}
-</style>
-    <!-- Món quà -->
-<style>
-.slider {
-    width: 100%;
-    max-width: 800px;
-    aspect-ratio: 16 / 9;
-    margin: auto;
-    overflow: hidden;
-    background: transparent;
-}
-
-/* ===== MOBILE: ẢNH TO HƠN ===== */
-@media (max-width: 576px) {
-    .slider {
-        aspect-ratio: 7 / 7;
+        position: fixed;
+        bottom: 20px;
+        /* chỉnh cao thấp */
+        right: 20px;
+        /* chỉnh sát mép hơn hoặc ra ngoài */
+        width: 80px;
+        /* kích thước ảnh */
+        height: auto;
+        z-index: 99999;
+        transition: 0.3s;
     }
+</style>
+<!-- Món quà -->
+<style>
+    .slider-wrapper {
+        text-align: center;
+    }
+
+    .slider {
+        width: 100%;
+        max-width: 800px;
+        aspect-ratio: 16 / 9;
+        margin: auto;
+        overflow: hidden;
+        background: transparent;
+    }
+
+    /* mobile */
+    @media (max-width: 576px) {
+        .slider {
+            aspect-ratio: 7 / 7;
+        }
+    }
+
+    .slides {
+        display: flex;
+        height: 100%;
+        transition: transform 0.8s ease;
+    }
+
     .slide {
-        padding: 10px;
+        min-width: 100%;
+        height: 100%;
+        padding: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .image-wrapper {
-        border-radius: 5px;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
-}
 
-/* ===== DẢI SLIDE ===== */
-.slides {
-    display: flex;
-    height: 100%;
-    transition: transform 0.8s ease;
-}
+    .image-wrapper img {
+        max-width: 95%;
+        max-height: 95%;
+        object-fit: contain;
+        border-radius: 5px;
+        box-shadow: 0px 0px 8px #EB2F8C;
+    }
 
-/* ===== MỖI SLIDE ===== */
-.slide {
-    min-width: 100%;
-    height: 100%;
-    padding: 14px;                 /* khoảng thở */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+    /* date dưới slider */
+    .image-date {
 
-/* ===== WRAPPER BO GÓC (CHỖ QUAN TRỌNG) ===== */
-.image-wrapper {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;              /* CỰC KỲ QUAN TRỌNG */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-}
-
-/* ===== ẢNH ===== */
-.image-wrapper img {
-    max-width: 95%;
-    max-height: 95%;
-    object-fit: contain;           /* KHÔNG BỂ HÌNH */
-    display: block;
-    border-radius: 5px;
-    box-shadow: 0px 0px 8px #EB2F8C;
-}
-.image-date {
-  position: absolute;
-    top: 90%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2; /* 🔥 DÒNG QUAN TRỌNG */
-    padding: 2px 10px 5px 10px;
-    color: #EB2F8C;
-    background: rgba(0, 0, 0, 0.8);
-    border-radius: 5px;
-    pointer-events: none;
-}
+        padding: 4px 12px;
+        color: #EB2F8C;
+        background: rgba(0, 0, 0, 0.8);
+        border-radius: 6px;
+        font-weight: 600;
+        display: none;
+        /* mặc định ẩn */
+    }
 </style>
+
 <body>
 
     <!-- page loading -->
@@ -676,68 +677,68 @@ text-shadow:
                         </div>
                     </div>
                 </div>
-             
+
                 <div class="col-lg-6 wow fadeInUp animated" data-wow-delay="0.3s">
                     <div class="calendar-wrapper">
-                    <div class="kaymipink-bg">MiPink</div>
-                    <div class="calendar">
-                        <h2>3/1998</h2>
+                        <div class="kaymipink-bg">MiPink</div>
+                        <div class="calendar">
+                            <h2>3/1998</h2>
 
-                        <div class="weekdays">
-                            <div>Sun</div>
-                            <div>Mon</div>
-                            <div>Tue</div>
-                            <div>Wed</div>
-                            <div>Thu</div>
-                            <div>Fri</div>
-                            <div>Sat</div>
-                        </div>
+                            <div class="weekdays">
+                                <div>Sun</div>
+                                <div>Mon</div>
+                                <div>Tue</div>
+                                <div>Wed</div>
+                                <div>Thu</div>
+                                <div>Fri</div>
+                                <div>Sat</div>
+                            </div>
 
-                        <div class="days">
-                            <!-- 1/3/1998 là Chủ nhật -->
-                            <div class="day">1</div>
-                            <div class="day">2</div>
-                            <div class="day">3</div>
-                            <div class="day">4</div>
-                            <div class="day">5</div>
-                            <div class="day">6</div>
-                            <div class="day">7</div>
+                            <div class="days">
+                                <!-- 1/3/1998 là Chủ nhật -->
+                                <div class="day">1</div>
+                                <div class="day">2</div>
+                                <div class="day">3</div>
+                                <div class="day">4</div>
+                                <div class="day">5</div>
+                                <div class="day">6</div>
+                                <div class="day">7</div>
 
-                            <div class="day">8</div>
-                            <div class="day">9</div>
-                            <div class="day">10</div>
-                            <div class="day">11</div>
-                            <div class="day">12</div>
-                            <div class="day">13</div>
-                            <div class="day">14</div>
+                                <div class="day">8</div>
+                                <div class="day">9</div>
+                                <div class="day">10</div>
+                                <div class="day">11</div>
+                                <div class="day">12</div>
+                                <div class="day">13</div>
+                                <div class="day">14</div>
 
-                            <div class="day">15</div>
-                            <div class="day">16</div>
-                            <div class="day">17</div>
-                            <div class="day">18</div>
-                            <div class="day">19</div>
-                            <div class="day">20</div>
-                            <div class="day">21</div>
+                                <div class="day">15</div>
+                                <div class="day">16</div>
+                                <div class="day">17</div>
+                                <div class="day">18</div>
+                                <div class="day">19</div>
+                                <div class="day">20</div>
+                                <div class="day">21</div>
 
-                            <div class="day">22</div>
-                            <div class="day">23</div>
-                            <div class="day">24</div>
-                            <div class="day highlight">25</div>
-                            <div class="day">26</div>
-                            <div class="day">27</div>
-                            <div class="day">28</div>
+                                <div class="day">22</div>
+                                <div class="day">23</div>
+                                <div class="day">24</div>
+                                <div class="day highlight">25</div>
+                                <div class="day">26</div>
+                                <div class="day">27</div>
+                                <div class="day">28</div>
 
-                            <div class="day">29</div>
-                            <div class="day">30</div>
-                            <div class="day">31</div>
+                                <div class="day">29</div>
+                                <div class="day">30</div>
+                                <div class="day">31</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        </div>
     </section>
-    
+
     <section id="skills" class="section gray-bg">
         <div class="container page-top_title">
             <div class="KH_section-title">
@@ -782,39 +783,47 @@ text-shadow:
             </div>
         </div>
         <div class="container py-5">
-    <div class="row justify-content-center">
-        <div class="col-12 col-md-10 col-lg-8">
-            
-            <div class="slider">
-                <div class="slides" id="slides">
-                    <div class="slide">
-                        <div class="image-wrapper">
-                            <img src="images/gift/11-01-2026.jpg">
-                            <div class="image-date">11-01-2026</div>
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-10 col-lg-8">
+
+                    <div class="slider-wrapper">
+
+                        <div class="slider">
+                            <div class="slides" id="slides">
+
+                                <div class="slide" data-date="11-01-2026">
+                                    <div class="image-wrapper">
+                                        <img src="images/gift/21-12-2025.jpg">
+                                    </div>
+                                </div>
+                                <div class="slide" data-date="23-01-2026">
+                                    <div class="image-wrapper">
+                                        <img src="images/gift/11-01-2026.jpg">
+                                    </div>
+                                </div>
+                                <div class="slide">
+                                    <div class="image-wrapper">
+                                        <img src="images/gift/14-12-2025.jpg">
+                                    </div>
+                                </div>
+
+                                <div class="slide" data-date="15-01-2026">
+                                    <div class="image-wrapper">
+                                        <img src="images/gift/15-01-2026.jpg">
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
+
+                        <!-- date nằm ngoài slider -->
+                        <div id="dateDisplay" class="image-date"></div>
+
                     </div>
 
-                    <div class="slide">
-                        <div class="image-wrapper">
-                            <img src="images/gift/14-12-2025.jpg">
-                            <!-- không có ngày -->
-                        </div>
-                    </div>
-
-                    <div class="slide">
-                        <div class="image-wrapper">
-                            <img src="images/gift/15-01-2026.jpg">
-                            <div class="image-date">15-01-2026</div>
-                        </div>
-                    </div>
-
-                    
                 </div>
             </div>
-
         </div>
-    </div>
-</div>
     </section>
     <section id="about" class="section gray2-bg">
         <!-- Page Content -->
@@ -851,7 +860,7 @@ text-shadow:
     <script src="static/js/img.js"></script>
     <!-- end hình ảnh -->
 </body>
-<img class="fixed-mini-img" src="images/kh/kiss.png" alt="icon">
+<img id="scrollTopBtn" class="fixed-mini-img" src="images/kh/kiss.png" alt="icon">
 <footer class="footer">
     <div class="container">
         <div class="row align-items-center">
@@ -916,30 +925,71 @@ text-shadow:
 </script>
 <!-- Món quà -->
 <script>
-const slides = document.getElementById("slides");
-const slideItems = slides.children;
-const totalSlides = slideItems.length;
+    const slides = document.getElementById("slides");
+    const slideItems = slides.children;
+    const dateDisplay = document.getElementById("dateDisplay");
 
-// Clone slide đầu
-const firstClone = slideItems[0].cloneNode(true);
-slides.appendChild(firstClone);
+    const firstClone = slideItems[0].cloneNode(true);
+    slides.appendChild(firstClone);
 
-let index = 0;
-const slideCount = slides.children.length;
+    let index = 0;
+    const slideCount = slides.children.length;
+    let started = false;
 
-setInterval(() => {
-    index++;
-    slides.style.transition = "transform 0.8s ease";
-    slides.style.transform = `translateX(-${index * 100}%)`;
+    function updateDate() {
+        const current = slides.children[index];
+        const date = current.getAttribute("data-date");
 
-    // Khi chạy tới slide clone
-    if (index === slideCount - 1) {
-        setTimeout(() => {
-            slides.style.transition = "none";
-            slides.style.transform = "translateX(0)";
-            index = 0;
-        }, 800);
+        if (date) {
+            dateDisplay.textContent = date;
+            dateDisplay.style.display = "inline-block";
+        } else {
+            dateDisplay.style.display = "none";
+        }
     }
-}, 2000);
+
+    function runSlider() {
+        if (!started) return;
+
+        index++;
+
+        slides.style.transition = "transform 0.8s ease";
+        slides.style.transform = `translateX(-${index * 100}%)`;
+
+        updateDate();
+
+        if (index === slideCount - 1) {
+            setTimeout(() => {
+                slides.style.transition = "none";
+                slides.style.transform = "translateX(0)";
+                index = 0;
+                updateDate();
+            }, 800);
+        }
+
+        setTimeout(runSlider, 2800);
+    }
+
+    function isInViewport(el) {
+        const rect = el.getBoundingClientRect();
+        return rect.top < window.innerHeight && rect.bottom > 0;
+    }
+
+    window.addEventListener("scroll", () => {
+        if (!started && isInViewport(slides)) {
+            started = true;
+            updateDate();
+            setTimeout(runSlider, 2000);
+        }
+    });
 </script>
+<script>
+    document.getElementById("scrollTopBtn").addEventListener("click", function () {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    });
+</script>
+
 </html>
