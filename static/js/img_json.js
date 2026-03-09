@@ -63,4 +63,9 @@
         { src: "images/kh/14-02-2026 (15).jpg", caption: "14-02-2026" },
         { src: "images/kh/14-02-2026 (16).jpg", caption: "14-02-2026" },
         { src: "images/kh/14-02-2026 (17).jpg", caption: "14-02-2026" },
+        { src: "images/kh/08-03-2026.jpg", caption: "08-03-2026" },
+        { src: "images/kh/08-03-2026 (1).jpg", caption: "08-03-2026" },
+        { src: "images/kh/08-03-2026 (2).jpg", caption: "08-03-2026" },
+        { src: "images/kh/08-03-2026 (3).jpg", caption: "08-03-2026" },
+        { src: "images/kh/08-03-2026 (4).jpg", caption: "08-03-2026" },
     ];
