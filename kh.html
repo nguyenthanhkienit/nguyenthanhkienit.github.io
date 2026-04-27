@@ -499,8 +499,6 @@
 </style>
 <!-- Chuyến đi -->
     <style>
-        /* CSS riêng cho modal chuyến đi - tránh xung đột */
-        /* ==================== CHUYẾN ĐI - ĐÃ SỬA BỂ KHUNG ==================== */
 .trips-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -511,19 +509,14 @@
 }
 
 .trip-card {
-  background: rgba(0, 0, 0, 0.85);
-  border-radius: 12px;
+  background: #2D2E2E;
+  border-radius: 5px;
   overflow: hidden;
   box-shadow: 0 8px 25px rgba(0,0,0,0.6);
   cursor: pointer;
   transition: all 0.3s ease;
-  border: 1px solid rgba(235, 47, 140, 0.3);
 }
 
-.trip-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 15px 35px rgba(235, 47, 140, 0.25);
-}
 
 .trip-card img {
   width: 100%;
@@ -535,7 +528,7 @@
 .trip-card h2 {
   padding: 15px 20px 5px;
   font-size: 1.45rem;
-  color: white;
+  color: #EB2F8C;
   margin: 0;
 }
 
