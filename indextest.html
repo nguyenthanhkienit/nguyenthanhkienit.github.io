@@ -1,354 +1,229 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Photo Gallery</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Những Chuyến Đi Của Tôi</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-<style>
-body{
-    background:#222;
-    font-family:Arial;
-    margin:0;
-    padding:30px;
-}
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f8f9fa;
+      color: #333;
+      line-height: 1.6;
+    }
 
-/* --- 4 ảnh ngoài --- */
-.gallery-container{
-    display:flex;
-    flex-wrap:wrap;
-    gap:20px;
-    justify-content:center;
-}
-.photo-card{
-    position:relative;
-    width:260px;
-    height:340px;
-    border-radius:10px;
-    overflow:hidden;
-    cursor:pointer;
-    background:#111;
-    transition:0.3s;
-}
-.photo-card:hover{ transform:scale(1.04); }
+    header {
+      text-align: center;
+      padding: 60px 20px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+    }
 
-.photo-card img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
+    header h1 { font-size: 2.8rem; margin-bottom: 10px; }
 
-/* Tag ngày */
-.date-tag{
-    position:absolute;
-    bottom:10px;
-    left:50%;
-    transform:translateX(-50%);
-    background:#EB2F8C;
-    color:white;
-    padding:6px 10px;
-    font-size:14px;
-    border-radius:6px;
-    font-weight:bold;
-}
+    .trips-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 25px;
+      padding: 40px 20px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
 
-/* --- Popup --- */
-.popup{
-    display:none;
-    position:fixed;
-    top:0; left:0;
-    width:100%; 
-    height:100%;
-    background:rgba(0,0,0,0.85);
-    justify-content:center;
-    align-items:center;
-    z-index:1000;
-    backdrop-filter:blur(5px);
-}
+    .trip-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
 
-/* Khóa thao tác nền */
-body.noscroll{
-    overflow:hidden;
-}
+    .trip-card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    }
 
-.popup-content{
-    position:relative;
-    max-width: 90vw;     /* 👈 giới hạn khung theo màn hình */
-    max-height: 80vh;
-}
+    .trip-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
 
-/* X cố định */
-.close{
-    position:fixed;
-    top:20px;
-    right:20px;
-    font-size:32px;
-    color:#EB2F8C;
-    cursor:pointer;
-    z-index:2000;
-}
+    .trip-card h2 { padding: 15px 20px 5px; font-size: 1.45rem; }
+    .trip-card p { padding: 0 20px 20px; color: #666; font-size: 0.95rem; }
 
-.image-wrapper{
-    position:relative;
-    max-width: 90vw;     /* 👈 giới hạn khung theo màn hình */
-    max-height: 80vh;
-    width: auto;
-    height: auto;
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 15px;
+    }
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    .modal-content {
+      background: white;
+      width: 100%;
+      max-width: 1200px;
+      max-height: 95vh;
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
 
-    margin: 0 auto;      /* căn giữa */
-    overflow:hidden;
-}
+    .modal-header {
+      padding: 20px 25px;
+      text-align: center;
+      border-bottom: 1px solid #eee;
+      position: relative;
+    }
 
-#popup-img{
-    max-width: 90vw;     /* 👈 khớp với wrapper */
-    max-height: 80vh;
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 40px;
+      cursor: pointer;
+      color: #333;
+    }
+    .close-btn:hover { color: #e74c3c; }
 
-    object-fit: contain;
-    position: relative; /* đổi từ absolute → tránh dư khung */
-    
-    transition: transform 0.35s ease, opacity 0.35s ease;
-}
+    .gallery-container {
+      flex: 1;
+      overflow-y: auto;
+      padding: 25px;
+      background: #fafafa;
+    }
 
-/* Ngày */
-.popup-date{
-    position:fixed;          /* CỐ ĐỊNH */
-    bottom:50px;             /* cách đáy màn hình */
-    left:50%;
-    transform:translateX(-50%);
-    font-size:18px;
-    font-weight:bold;
-    color:#EB2F8C;
-    text-align:center;
-    z-index:1600;
-    pointer-events:none;     /* không cản vuốt / click */
-}
+    .masonry {
+      columns: 3;
+      column-gap: 18px;
+    }
 
-/* Nút điều hướng */
-.nav-btn{
-    position:fixed;                 /* QUAN TRỌNG */
-    top:50%;
-    transform:translateY(-50%);
-    font-size:36px;
-    color:#EB2F8C;
-    cursor:pointer;
-    padding: 5px 20px 10px 20px;
-    user-select:none;
-    z-index:1500;
-    background: rgba(255, 255, 255, 0.2);
+    .masonry img {
+      width: 100%;
+      margin-bottom: 18px;
+      border-radius: 12px;
+      display: block;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
 
-}
-.prev{left:0px;}
-    .next{right:0px;}
-/* Trạng thái */
-/* trạng thái ban đầu */
-.slide-center{
-    transform: translateX(0);
-    opacity: 1;
-}
+    .masonry img:hover { transform: scale(1.04); }
 
-/* ảnh cũ đi ra */
-.slide-out-left{
-    transform: translateX(-40%);
-    opacity: 0;
-}
-.slide-out-right{
-    transform: translateX(40%);
-    opacity: 0;
-}
-
-/* ảnh mới chuẩn bị vào */
-.slide-in-right{
-    transform: translateX(40%);
-    opacity: 1;   /* KHÔNG mờ */
-}
-.slide-in-left{
-    transform: translateX(-40%);
-    opacity: 1;
-}
-
-/* Responsive */
-
-@media(max-width:480px){
-    .photo-card{width:100%; height:260px;}
-}
-</style>
+    /* Responsive */
+    @media (max-width: 900px) { .masonry { columns: 2; } }
+    @media (max-width: 600px) { 
+      .masonry { columns: 1; }
+      .trips-grid { grid-template-columns: 1fr; padding: 20px 15px; }
+      header h1 { font-size: 2.2rem; }
+    }
+  </style>
 </head>
 <body>
 
-<!-- 4 ảnh ngoài -->
-<div class="gallery-container">
-    <div class="photo-card" onclick="openGallery(0)">
-        <img src="./images/kh/29-11-2025.jpg"><div class="date-tag">29-11-2025</div>
+  <header>
+    <h1>Những Chuyến Đi Chơi</h1>
+    <p>Những khoảnh khắc đẹp nhất trong hành trình của tôi</p>
+  </header>
+
+  <main class="trips-grid">
+    <div class="trip-card" data-trip="trip1">
+      <img src="https://picsum.photos/id/1015/800/600" alt="Đà Lạt">
+      <h2>Đà Lạt - Mùa Hoa Dã Quỳ</h2>
+      <p>Tháng 10/2025 • 4 ngày 3 đêm</p>
     </div>
-    <div class="photo-card" onclick="openGallery(1)">
-        <img src="./images/kh/07-12-2025.jpg"><div class="date-tag">07-12-2025</div>
+
+    <div class="trip-card" data-trip="trip2">
+      <img src="https://picsum.photos/id/1016/800/600" alt="Phú Quốc">
+      <h2>Phú Quốc - Biển Xanh Cát Trắng</h2>
+      <p>Tháng 12/2025 • 5 ngày 4 đêm</p>
     </div>
-    <div class="photo-card" onclick="openGallery(1)">
-        <img src="./images/kh/14-12-2025.jpg"><div class="date-tag">14-12-2025</div>
+
+    <div class="trip-card" data-trip="trip3">
+      <img src="https://picsum.photos/id/133/800/600" alt="Sapa">
+      <h2>Sapa - Ruộng Bậc Thang</h2>
+      <p>Tháng 9/2025 • 3 ngày 2 đêm</p>
     </div>
-    <div class="photo-card" onclick="openGallery(1)">
-        <img src="./images/kh/21-12-2025.jpg"><div class="date-tag">21-12-2025</div>
+  </main>
+
+  <!-- Modal -->
+  <div id="gallery-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modal-title"></h2>
+        <span class="close-btn">&times;</span>
+      </div>
+      <div id="gallery-container" class="gallery-container">
+        <div id="masonry-gallery" class="masonry"></div>
+      </div>
     </div>
-</div>
+  </div>
 
-<!-- Popup xem album -->
-<div class="popup" id="popup" onclick="backgroundClose(event)">
-    <div class="popup-content">
-        <span class="close" onclick="closeGallery()">✕</span>
-        <span class="nav-btn prev" onclick="prevImg()">❮</span>
-        <div class="image-wrapper">
-            <img id="popup-img" src="">
-        </div>
-        <div class="popup-date" id="popup-date"></div>
-        <span class="nav-btn next" onclick="nextImg()">❯</span>
-    </div>
-</div>
+  <script>
+    const tripsData = { /* giữ nguyên như cũ */ 
+      trip1: {
+        title: "Đà Lạt - Mùa Hoa Dã Quỳ",
+        images: ["https://picsum.photos/id/1015/1200/800","https://picsum.photos/id/133/800/1200","https://picsum.photos/id/201/1200/800","https://picsum.photos/id/251/800/1200","https://picsum.photos/id/180/1200/800","https://picsum.photos/id/1016/800/1200","https://picsum.photos/id/133/1200/800","https://picsum.photos/id/201/800/1200"]
+      },
+      trip2: {
+        title: "Phú Quốc - Biển Xanh Cát Trắng",
+        images: ["https://picsum.photos/id/1016/1200/800","https://picsum.photos/id/133/800/1200","https://picsum.photos/id/201/1200/800","https://picsum.photos/id/251/800/1200","https://picsum.photos/id/180/1200/800","https://picsum.photos/id/1015/800/1200"]
+      },
+      trip3: {
+        title: "Sapa - Ruộng Bậc Thang",
+        images: ["https://picsum.photos/id/133/1200/800","https://picsum.photos/id/1015/800/1200","https://picsum.photos/id/201/1200/800","https://picsum.photos/id/251/800/1200","https://picsum.photos/id/180/1200/800"]
+      }
+    };
 
-<script>
-// Album hình
-const albums = [
-    ["./images/kh/29-11-2025.jpg"],
-    ["./images/kh/07-12-2025.jpg"],
-    ["./images/kh/14-12-2025.jpg","./images/kh/IMG_4993.jpeg"],
-    ["./images/kh/21-12-2025.jpg"]
-];
+    const modal = document.getElementById('gallery-modal');
+    const modalTitle = document.getElementById('modal-title');
+    const galleryContainer = document.getElementById('gallery-container');
+    const masonryGallery = document.getElementById('masonry-gallery');
+    const closeBtn = document.querySelector('.close-btn');
 
-// Ngày album
-const dates = [
-    "29-11-2025",
-    "07-12-2025",
-    "14-12-2025",
-    "21-12-2025"
-];
-let currentAlbum = 0;
-let currentIndex = 0;
-
-let isAnimating = false;
-
-function showImage(direction){
-    if(isAnimating) return;
-    isAnimating = true;
-
-    const img = document.getElementById("popup-img");
-    const dateEl = document.getElementById("popup-date");
-
-    // 1. ảnh cũ đi ra
-    if(direction === "next"){
-        img.className = "slide-out-right";
-    }else{
-        img.className = "slide-out-left";
+    function resetScroll() {
+      galleryContainer.scrollTop = 0;
+      // Buộc reset mạnh hơn
+      setTimeout(() => {
+        galleryContainer.scrollTo({ top: 0, behavior: 'instant' });
+      }, 10);
     }
 
-    img.addEventListener("transitionend", function handler(){
-        img.removeEventListener("transitionend", handler);
+    document.querySelectorAll('.trip-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const tripId = card.getAttribute('data-trip');
+        const trip = tripsData[tripId];
 
-        // 2. đổi ảnh
-        img.src = albums[currentAlbum][currentIndex];
+        modalTitle.textContent = trip.title;
+        masonryGallery.innerHTML = '';
 
-        // ✅ cập nhật ngày
-        dateEl.textContent = dates[currentAlbum];
+        trip.images.forEach(src => {
+          const img = document.createElement('img');
+          img.src = src;
+          img.alt = trip.title;
+          img.loading = "lazy";
+          masonryGallery.appendChild(img);
+        });
 
-        // 3. đặt ảnh mới ngoài khung
-        if(direction === "next"){
-            img.className = "slide-in-left";
-        }else{
-            img.className = "slide-in-right";
-        }
+        // Reset scroll về đầu (sửa lỗi chính ở đây)
+        resetScroll();
 
-        // 4. ép render
-        img.offsetWidth;
-
-        // 5. trượt vào giữa
-        img.className = "slide-center";
-
-        isAnimating = false;
+        modal.style.display = 'flex';
+      });
     });
-}
 
-function openGallery(albumIndex){
-    currentAlbum = albumIndex;
-    currentIndex = 0;
-    document.getElementById("popup").style.display = "flex";
-    document.body.classList.add("noscroll"); // Khóa nền
-    showImage();
-}
-
-function closeGallery(){
-    document.getElementById("popup").style.display = "none";
-    document.body.classList.remove("noscroll"); // Mở lại nền
-}
-
-// Bấm ra ngoài tắt popup
-function backgroundClose(e){
-    if(e.target.id === "popup"){
-        closeGallery();
-    }
-}
-
-// Chuyển ảnh + nhảy album
-function nextImg(){
-    if(currentIndex < albums[currentAlbum].length - 1){
-        currentIndex++;
-    } else if(currentAlbum < albums.length - 1){
-        currentAlbum++;
-        currentIndex = 0;
-    }
-    showImage("next");
-}
-
-function prevImg(){
-    if(currentIndex > 0){
-        currentIndex--;
-    } else if(currentAlbum > 0){
-        currentAlbum--;
-        currentIndex = albums[currentAlbum].length - 1;
-    }
-    showImage("prev");
-}
-/* --- Vuốt trái/phải di chuyển ảnh (đúng 1 hình) --- */
-let startX = 0;
-let isSwiping = false;
-
-const swipeArea = document.querySelector(".image-wrapper");
-
-swipeArea.addEventListener("touchstart", e=>{
-    startX = e.touches[0].clientX;
-});
-
-swipeArea.addEventListener("touchend", e=>{
-    const endX = e.changedTouches[0].clientX;
-    const distance = endX - startX;
-
-    // 👉 chỉ cần vuốt nhẹ 25px là đổi ảnh
-    if(Math.abs(distance) > 25 && !isSwiping){
-        isSwiping = true;
-
-        if(distance < 0){
-            nextImg();   // vuốt trái
-        }else{
-            prevImg();   // vuốt phải
-        }
-
-        setTimeout(()=> isSwiping = false, 300);
-    }
-});
-function openGallery(albumIndex){
-    currentAlbum = albumIndex;
-    currentIndex = 0;
-
-    const img = document.getElementById("popup-img");
-    img.src = albums[currentAlbum][0];
-    img.className = "slide-center";
-
-    document.getElementById("popup-date").textContent = dates[currentAlbum];
-    document.getElementById("popup").style.display = "flex";
-    document.body.classList.add("noscroll");
-}
-</script>
-
+    closeBtn.addEventListener('click', () => modal.style.display = 'none');
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) modal.style.display = 'none';
+    });
+  </script>
 </body>
 </html>
