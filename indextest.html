@@ -55,34 +55,39 @@
     .trip-card h2 { padding: 15px 20px 5px; font-size: 1.45rem; }
     .trip-card p { padding: 0 20px 20px; color: #666; font-size: 0.95rem; }
 
-    /* Modal */
+    /* ==================== MODAL - KHÔNG CHO LƯỚT NỀN ==================== */
     .modal {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.92);
+      background: rgba(0,0,0,0.95);
       z-index: 1000;
-      align-items: center;
-      justify-content: center;
-      padding: 15px;
+      overflow: hidden;           /* Ngăn chặn lướt nền */
     }
 
     .modal-content {
       background: white;
       width: 100%;
       max-width: 1200px;
-      max-height: 95vh;
+      height: 95vh;               /* Chiếm gần hết chiều cao màn hình */
+      margin: auto;
       border-radius: 16px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
     }
 
+    /* Header cố định */
     .modal-header {
       padding: 20px 25px;
       text-align: center;
+      background: white;
       border-bottom: 1px solid #eee;
-      position: relative;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      flex-shrink: 0;
     }
 
     .close-btn {
@@ -95,6 +100,7 @@
     }
     .close-btn:hover { color: #e74c3c; }
 
+    /* Phần gallery chỉ scroll bên trong */
     .gallery-container {
       flex: 1;
       overflow-y: auto;
@@ -124,6 +130,7 @@
       .masonry { columns: 1; }
       .trips-grid { grid-template-columns: 1fr; padding: 20px 15px; }
       header h1 { font-size: 2.2rem; }
+      .modal-content { height: 100vh; border-radius: 0; } /* Full màn hình trên mobile */
     }
   </style>
 </head>
@@ -168,19 +175,10 @@
   </div>
 
   <script>
-    const tripsData = { /* giữ nguyên như cũ */ 
-      trip1: {
-        title: "Đà Lạt - Mùa Hoa Dã Quỳ",
-        images: ["images/kh/29-03-2026.jpg","images/kh/05-04-2026.jpg","images/kh/05-04-2026.jpg","images/kh/25-03-2026.jpg","images/kh/25-03-2026 (4).jpg","images/kh/25-03-2026 (4).jpg","images/kh/29-03-2026 (8).jpg","images/kh/29-03-2026 (9).jpg","images/kh/14-02-2026 (10).jpg"]
-      },
-      trip2: {
-        title: "Phú Quốc - Biển Xanh Cát Trắng",
-        images: ["https://picsum.photos/id/1016/1200/800","https://picsum.photos/id/133/800/1200","https://picsum.photos/id/201/1200/800","https://picsum.photos/id/251/800/1200","https://picsum.photos/id/180/1200/800","https://picsum.photos/id/1015/800/1200"]
-      },
-      trip3: {
-        title: "Sapa - Ruộng Bậc Thang",
-        images: ["https://picsum.photos/id/133/1200/800","https://picsum.photos/id/1015/800/1200","https://picsum.photos/id/201/1200/800","https://picsum.photos/id/251/800/1200","https://picsum.photos/id/180/1200/800"]
-      }
+    const tripsData = {
+      trip1: { title: "Đà Lạt - Mùa Hoa Dã Quỳ", images: ["images/kh/29-03-2026.jpg","images/kh/05-04-2026.jpg","images/kh/05-04-2026.jpg","images/kh/25-03-2026.jpg","images/kh/25-03-2026 (4).jpg","images/kh/25-03-2026 (4).jpg","images/kh/29-03-2026 (8).jpg","images/kh/29-03-2026 (9).jpg","images/kh/14-02-2026 (10).jpg"] },
+      trip2: { title: "Phú Quốc - Biển Xanh Cát Trắng", images: ["https://picsum.photos/id/1016/1200/800","https://picsum.photos/id/133/800/1200","https://picsum.photos/id/201/1200/800","https://picsum.photos/id/251/800/1200","https://picsum.photos/id/180/1200/800","https://picsum.photos/id/1015/800/1200"] },
+      trip3: { title: "Sapa - Ruộng Bậc Thang", images: ["https://picsum.photos/id/133/1200/800","https://picsum.photos/id/1015/800/1200","https://picsum.photos/id/201/1200/800","https://picsum.photos/id/251/800/1200","https://picsum.photos/id/180/1200/800"] }
     };
 
     const modal = document.getElementById('gallery-modal');
@@ -190,11 +188,7 @@
     const closeBtn = document.querySelector('.close-btn');
 
     function resetScroll() {
-      galleryContainer.scrollTop = 0;
-      // Buộc reset mạnh hơn
-      setTimeout(() => {
-        galleryContainer.scrollTo({ top: 0, behavior: 'instant' });
-      }, 10);
+      galleryContainer.scrollTo({ top: 0, behavior: 'instant' });
     }
 
     document.querySelectorAll('.trip-card').forEach(card => {
@@ -213,9 +207,7 @@
           masonryGallery.appendChild(img);
         });
 
-        // Reset scroll về đầu (sửa lỗi chính ở đây)
         resetScroll();
-
         modal.style.display = 'flex';
       });
     });
