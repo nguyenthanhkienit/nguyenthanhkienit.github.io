@@ -604,7 +604,7 @@
 }
 
 @media (max-width: 900px) { .trip-masonry { columns: 2; } .trip-modal-header h2{
-  font-size: 15px;
+  font-size: 20px;
 }}
 @media (max-width: 600px) { 
   .trip-masonry { columns: 1; }
@@ -998,12 +998,6 @@
                 <h2>Đồi Bát Úp - Thác Liêng Ài (Lâm Đồng)</h2>
                 <p>Giỗ Tổ Hùng Vương - 26/04/2026</p>
             </div>
-
-            <div class="trip-card" data-trip="trip3">
-                <img src="https://picsum.photos/id/133/800/600">
-                <h2>Đồi Bát Úp - Thác Liêng Ài (Lâm Đồng)</h2>
-                <p>Giỗ Tổ Hùng Vương - 26/04/2026</p>
-            </div>
         </main></div>
     </section>
 
@@ -1157,148 +1151,8 @@
     });
 </script>
 <!-- Chuyến đi -->
+<script src="static/js/img_trips-data.js"></script>
 <script>
-    const tripsData = {
-        trip1: {
-            title: "Tết Về Quê",
-            images: [
-                "images/kh/29-03-2026.jpg",
-                "images/kh/05-04-2026.jpg",
-                "images/kh/25-03-2026.jpg",
-                "images/kh/25-03-2026 (4).jpg",
-                "images/kh/29-03-2026 (8).jpg",
-                "images/kh/29-03-2026 (9).jpg",
-                "images/kh/14-02-2026 (10).jpg",
-                "images/kh/29-03-2026.jpg",
-                "images/kh/05-04-2026.jpg",
-                "images/kh/25-03-2026.jpg",
-                "images/kh/25-03-2026 (4).jpg",
-                "images/kh/29-03-2026 (8).jpg",
-                "images/kh/29-03-2026 (9).jpg",
-                "images/kh/14-02-2026 (10).jpg",
-                "images/kh/29-03-2026.jpg",
-                "images/kh/05-04-2026.jpg",
-                "images/kh/25-03-2026.jpg",
-          
-                "images/kh/29-03-2026 (9).jpg",
-                "images/kh/14-02-2026 (10).jpg",
-                "images/kh/29-03-2026.jpg",
-                "images/kh/05-04-2026.jpg",
-                "images/kh/25-03-2026.jpg",
-                "images/kh/25-03-2026 (4).jpg",
-                "images/kh/29-03-2026 (8).jpg",
-                "images/kh/29-03-2026 (9).jpg",
-              
-                "images/kh/29-03-2026.jpg",
-                "images/kh/05-04-2026.jpg",
-                "images/kh/25-03-2026.jpg",
-             
-                "images/kh/29-03-2026 (8).jpg",
-                "images/kh/29-03-2026 (9).jpg",
-                "images/kh/14-02-2026 (10).jpg",
-                "images/kh/29-03-2026.jpg",
-                "images/kh/05-04-2026.jpg",
-                "images/kh/25-03-2026.jpg",
-                "images/kh/25-03-2026 (4).jpg",
-                "images/kh/29-03-2026 (8).jpg",
-             
-                "images/kh/14-02-2026 (10).jpg"
-            ]
-        },
-        trip2: {
-            title: "Đà Nẵng - Hội An",
-            images: [
-                "images/kh/29-03-2026.jpg",
-                "images/kh/05-04-2026.jpg",
-                "images/kh/25-03-2026.jpg",
-                "images/kh/25-03-2026 (4).jpg",
-                "images/kh/29-03-2026 (8).jpg",
-                "images/kh/29-03-2026 (9).jpg",
-                "images/kh/14-02-2026 (10).jpg",
-                "images/kh/29-03-2026.jpg",
-                "images/kh/05-04-2026.jpg",
-                "images/kh/25-03-2026.jpg",
-                "images/kh/25-03-2026 (4).jpg",
-                "images/kh/29-03-2026 (8).jpg",
-                "images/kh/29-03-2026 (9).jpg",
-            
-                "images/kh/29-03-2026.jpg",
-                "images/kh/05-04-2026.jpg",
-                "images/kh/25-03-2026.jpg",
-                "images/kh/25-03-2026 (4).jpg",
-                "images/kh/29-03-2026 (8).jpg",
-                "images/kh/29-03-2026 (9).jpg",
-                "images/kh/14-02-2026 (10).jpg",
-                "images/kh/29-03-2026.jpg",
-                "images/kh/05-04-2026.jpg",
-                "images/kh/25-03-2026.jpg",
-                "images/kh/25-03-2026 (4).jpg",
-                "images/kh/29-03-2026 (8).jpg",
-                "images/kh/29-03-2026 (9).jpg",
-                "images/kh/14-02-2026 (10).jpg",
-                "images/kh/29-03-2026.jpg",
-      
-                "images/kh/25-03-2026.jpg",
-                "images/kh/25-03-2026 (4).jpg",
-                "images/kh/29-03-2026 (8).jpg",
-                "images/kh/29-03-2026 (9).jpg",
-            
-                "images/kh/29-03-2026.jpg",
-                "images/kh/05-04-2026.jpg",
-                "images/kh/25-03-2026.jpg",
-                "images/kh/25-03-2026 (4).jpg",
-                "images/kh/29-03-2026 (8).jpg",
-                "images/kh/29-03-2026 (9).jpg",
-                "images/kh/14-02-2026 (10).jpg"
-            ]
-        },
-        trip3: {
-            title: "Đồi Bát Úp - Thác Liêng Ài",
-            images: [
-                "images/kh/29-03-2026.jpg",
-                "images/kh/05-04-2026.jpg",
-                "images/kh/25-03-2026.jpg",
-                "images/kh/25-03-2026 (4).jpg",
-                "images/kh/29-03-2026 (8).jpg",
-                "images/kh/29-03-2026 (9).jpg",
-                "images/kh/14-02-2026 (10).jpg",
-                "images/kh/29-03-2026.jpg",
-                "images/kh/05-04-2026.jpg",
-                "images/kh/25-03-2026.jpg",
-                "images/kh/25-03-2026 (4).jpg",
-                "images/kh/29-03-2026 (8).jpg",
-          
-                "images/kh/29-03-2026.jpg",
-                "images/kh/05-04-2026.jpg",
-                "images/kh/25-03-2026.jpg",
-                "images/kh/25-03-2026 (4).jpg",
-                "images/kh/29-03-2026 (8).jpg",
-      
-                "images/kh/29-03-2026.jpg",
-                "images/kh/05-04-2026.jpg",
-                "images/kh/25-03-2026.jpg",
-                "images/kh/25-03-2026 (4).jpg",
-                "images/kh/29-03-2026 (8).jpg",
-                "images/kh/29-03-2026 (9).jpg",
-                "images/kh/14-02-2026 (10).jpg",
-                "images/kh/29-03-2026.jpg",
-                "images/kh/05-04-2026.jpg",
-                "images/kh/25-03-2026.jpg",
-                "images/kh/25-03-2026 (4).jpg",
-                "images/kh/29-03-2026 (8).jpg",
-                "images/kh/29-03-2026 (9).jpg",
-                "images/kh/14-02-2026 (10).jpg",
-                "images/kh/29-03-2026.jpg",
-                "images/kh/05-04-2026.jpg",
-                "images/kh/25-03-2026.jpg",
-                "images/kh/25-03-2026 (4).jpg",
-                "images/kh/29-03-2026 (8).jpg",
-                "images/kh/29-03-2026 (9).jpg",
-                "images/kh/14-02-2026 (10).jpg"
-            ]
-        }
-    };
-
     // Lấy các phần tử modal
     const tripModal = document.getElementById('trip-modal');
     const tripModalTitle = document.getElementById('trip-modal-title');
