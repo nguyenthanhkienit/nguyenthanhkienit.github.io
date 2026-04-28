@@ -503,7 +503,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 25px;
-  padding: 40px 20px;
+  padding-top:20px;
   max-width: 1400px;
   margin: 0 auto;
 }
@@ -603,7 +603,9 @@
   box-shadow: 0 4px 15px rgba(0,0,0,0.6);
 }
 
-@media (max-width: 900px) { .trip-masonry { columns: 2; } }
+@media (max-width: 900px) { .trip-masonry { columns: 2; } .trip-modal-header h2{
+  font-size: 15px;
+}}
 @media (max-width: 600px) { 
   .trip-masonry { columns: 1; }
   .trip-modal-content { height: 100vh; border-radius: 0; }
@@ -977,27 +979,32 @@
                 </h5>
             </div>
         </div>
-
-
-        <main class="trips-grid container">
+<div class="container">
+        <main class="trips-grid">
             <div class="trip-card" data-trip="trip1">
-                <img src="https://picsum.photos/id/1015/800/600" alt="Tết Về Quê">
+                <img src="https://picsum.photos/id/1015/800/600">
                 <h2>Tết (Quảng Ngãi)</h2>
                 <p>2026</p>
             </div>
 
             <div class="trip-card" data-trip="trip2">
-                <img src="https://picsum.photos/id/1016/800/600" alt="Đà Nẵng - Hội An">
+                <img src="https://picsum.photos/id/1016/800/600">
                 <h2>Hội An (Đà Nẵng)</h2>
                 <p>Mùng 5 Tết 2026 - 21/02/2026</p>
             </div>
 
             <div class="trip-card" data-trip="trip3">
-                <img src="https://picsum.photos/id/133/800/600" alt="Đồi Bát Úp">
+                <img src="https://picsum.photos/id/133/800/600">
                 <h2>Đồi Bát Úp - Thác Liêng Ài (Lâm Đồng)</h2>
                 <p>Giỗ Tổ Hùng Vương - 26/04/2026</p>
             </div>
-        </main>
+
+            <div class="trip-card" data-trip="trip3">
+                <img src="https://picsum.photos/id/133/800/600">
+                <h2>Đồi Bát Úp - Thác Liêng Ài (Lâm Đồng)</h2>
+                <p>Giỗ Tổ Hùng Vương - 26/04/2026</p>
+            </div>
+        </main></div>
     </section>
 
     <!-- ==================== MODAL CHUYẾN ĐI (KHÔNG XUNG ĐỘT) ==================== -->
