@@ -527,7 +527,7 @@
 
 .trip-card h2 {
   padding: 15px 20px 5px;
-  font-size: 1.45rem;
+  font-size: 20px;
   color: #EB2F8C;
   margin: 0;
 }
@@ -535,7 +535,7 @@
 .trip-card p {
   padding: 0 20px 20px;
   color: #a4a5a6;
-  font-size: 0.95rem;
+  font-size: 16px;
   margin: 0;
 }
 
@@ -550,12 +550,12 @@
 }
 
 .trip-modal-content {
-  background: #1d1d1d;
+  background: rgba(0, 0, 0, 0.97);
   width: 100%;
   max-width: 1250px;
   height: 95vh;
   margin: auto;
-  border-radius: 12px;
+  border-radius: 10px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -569,18 +569,20 @@
   position: sticky;
   top: 0;
   z-index: 10;
-  color: white;
-}
-
-.close-btn-trip {
-  position: absolute;
-  top: 15px;
-  right: 25px;
-  font-size: 42px;
-  cursor: pointer;
   color: #EB2F8C;
 }
-.close-btn-trip:hover { color: #ff79c6; }
+.trip-modal-header h2{
+  font-size: 30px;
+  margin-top: 10px;
+}
+.close-btn-trip {
+  position: absolute;
+  top: -5px;
+  right: 10px;
+  font-size: 30px;
+  cursor: pointer;
+  color: #a4a5a6;
+}
 
 .trip-gallery-container {
   flex: 1;
@@ -987,13 +989,13 @@
             <div class="trip-card" data-trip="trip2">
                 <img src="https://picsum.photos/id/1016/800/600" alt="Đà Nẵng - Hội An">
                 <h2>Đà Nẵng - Hội An</h2>
-                <p>Mùng 5 Tết 2026</p>
+                <p>Mùng 5 Tết 2026 - 21/02/2026</p>
             </div>
 
             <div class="trip-card" data-trip="trip3">
                 <img src="https://picsum.photos/id/133/800/600" alt="Đồi Bát Úp">
                 <h2>Đồi Bát Úp - Thác Liêng Ài</h2>
-                <p>Giỗ Tổ Hùng Vương</p>
+                <p>Giỗ Tổ Hùng Vương - 26/04/2026</p>
             </div>
         </main>
     </section>
@@ -1244,7 +1246,7 @@
             ]
         },
         trip3: {
-            title: "Đồi Bát Úp - Thác Liêng Ài",
+            title: "Đồi Bát Úp - Thác Liêng Àifsf 7575",
             images: [
                 "images/kh/29-03-2026.jpg",
                 "images/kh/05-04-2026.jpg",
