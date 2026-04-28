@@ -1149,142 +1149,210 @@
 </script>
 <!-- Chuyến đi -->
 <script>
-        const tripsData = {
-            trip1: {
-                title: "Tết Về Quê",
-                images: [
-                    "images/kh/29-03-2026.jpg",
-                    "images/kh/05-04-2026.jpg",
-                    "images/kh/25-03-2026.jpg",
-                    "images/kh/25-03-2026 (4).jpg",
-                    "images/kh/29-03-2026 (8).jpg",
-                    "images/kh/29-03-2026 (9).jpg",
-                    "images/kh/14-02-2026 (10).jpg","images/kh/29-03-2026.jpg",
-                    "images/kh/05-04-2026.jpg",
-                    "images/kh/25-03-2026.jpg",
-                    "images/kh/25-03-2026 (4).jpg",
-                    "images/kh/29-03-2026 (8).jpg",
-                    "images/kh/29-03-2026 (9).jpg",
-                    "images/kh/14-02-2026 (10).jpg","images/kh/29-03-2026.jpg",
-                    "images/kh/05-04-2026.jpg",
-                    "images/kh/25-03-2026.jpg",
-                    "images/kh/25-03-2026 (4).jpg",
-                    "images/kh/29-03-2026 (8).jpg",
-                    "images/kh/29-03-2026 (9).jpg",
-                    "images/kh/14-02-2026 (10).jpg","images/kh/29-03-2026.jpg",
-                    "images/kh/05-04-2026.jpg",
-                    "images/kh/25-03-2026.jpg",
-                    "images/kh/25-03-2026 (4).jpg",
-                    "images/kh/29-03-2026 (8).jpg",
-                    "images/kh/29-03-2026 (9).jpg",
-                    "images/kh/14-02-2026 (10).jpg"
-                ]
-            },
-            trip2: {
-                title: "Đà Nẵng - Hội An",
-                images: [
-                    "images/kh/29-03-2026.jpg",
-                    "images/kh/05-04-2026.jpg",
-                    "images/kh/25-03-2026.jpg",
-                    "images/kh/25-03-2026 (4).jpg",
-                    "images/kh/29-03-2026 (8).jpg",
-                    "images/kh/29-03-2026 (9).jpg",
-                    "images/kh/14-02-2026 (10).jpg","images/kh/29-03-2026.jpg",
-                    "images/kh/05-04-2026.jpg",
-                    "images/kh/25-03-2026.jpg",
-                    "images/kh/25-03-2026 (4).jpg",
-                    "images/kh/29-03-2026 (8).jpg",
-                    "images/kh/29-03-2026 (9).jpg",
-                    "images/kh/14-02-2026 (10).jpg","images/kh/29-03-2026.jpg",
-                    "images/kh/05-04-2026.jpg",
-                    "images/kh/25-03-2026.jpg",
-                    "images/kh/25-03-2026 (4).jpg",
-                    "images/kh/29-03-2026 (8).jpg",
-                    "images/kh/29-03-2026 (9).jpg",
-                    "images/kh/14-02-2026 (10).jpg","images/kh/29-03-2026.jpg",
-                    "images/kh/05-04-2026.jpg",
-                    "images/kh/25-03-2026.jpg",
-                    "images/kh/25-03-2026 (4).jpg",
-                    "images/kh/29-03-2026 (8).jpg",
-                    "images/kh/29-03-2026 (9).jpg",
-                    "images/kh/14-02-2026 (10).jpg"
-                ]
-            },
-            trip3: {
-                title: "Đồi Bát Úp - Thác Liêng Ài",
-                images: [
-                    "images/kh/29-03-2026.jpg",
-                    "images/kh/05-04-2026.jpg",
-                    "images/kh/25-03-2026.jpg",
-                    "images/kh/25-03-2026 (4).jpg",
-                    "images/kh/29-03-2026 (8).jpg",
-                    "images/kh/29-03-2026 (9).jpg",
-                    "images/kh/14-02-2026 (10).jpg","images/kh/29-03-2026.jpg",
-                    "images/kh/05-04-2026.jpg",
-                    "images/kh/25-03-2026.jpg",
-                    "images/kh/25-03-2026 (4).jpg",
-                    "images/kh/29-03-2026 (8).jpg",
-                    "images/kh/29-03-2026 (9).jpg",
-                    "images/kh/14-02-2026 (10).jpg","images/kh/29-03-2026.jpg",
-                    "images/kh/05-04-2026.jpg",
-                    "images/kh/25-03-2026.jpg",
-                    "images/kh/25-03-2026 (4).jpg",
-                    "images/kh/29-03-2026 (8).jpg",
-                    "images/kh/29-03-2026 (9).jpg",
-                    "images/kh/14-02-2026 (10).jpg","images/kh/29-03-2026.jpg",
-                    "images/kh/05-04-2026.jpg",
-                    "images/kh/25-03-2026.jpg",
-                    "images/kh/25-03-2026 (4).jpg",
-                    "images/kh/29-03-2026 (8).jpg",
-                    "images/kh/29-03-2026 (9).jpg",
-                    "images/kh/14-02-2026 (10).jpg"
-                ]
-            }
-        };
-
-        const tripModal = document.getElementById('trip-modal');
-        const tripModalTitle = document.getElementById('trip-modal-title');
-        const tripGalleryContainer = document.getElementById('trip-gallery-container');
-        const tripMasonryGallery = document.getElementById('trip-masonry-gallery');
-        const closeBtnTrip = document.querySelector('.close-btn-trip');
-
-        function resetTripScroll() {
-            tripGalleryContainer.scrollTo({ top: 0, behavior: 'instant' });
+    const tripsData = {
+        trip1: {
+            title: "Tết Về Quê",
+            images: [
+                "images/kh/29-03-2026.jpg",
+                "images/kh/05-04-2026.jpg",
+                "images/kh/25-03-2026.jpg",
+                "images/kh/25-03-2026 (4).jpg",
+                "images/kh/29-03-2026 (8).jpg",
+                "images/kh/29-03-2026 (9).jpg",
+                "images/kh/14-02-2026 (10).jpg",
+                "images/kh/29-03-2026.jpg",
+                "images/kh/05-04-2026.jpg",
+                "images/kh/25-03-2026.jpg",
+                "images/kh/25-03-2026 (4).jpg",
+                "images/kh/29-03-2026 (8).jpg",
+                "images/kh/29-03-2026 (9).jpg",
+                "images/kh/14-02-2026 (10).jpg",
+                "images/kh/29-03-2026.jpg",
+                "images/kh/05-04-2026.jpg",
+                "images/kh/25-03-2026.jpg",
+          
+                "images/kh/29-03-2026 (9).jpg",
+                "images/kh/14-02-2026 (10).jpg",
+                "images/kh/29-03-2026.jpg",
+                "images/kh/05-04-2026.jpg",
+                "images/kh/25-03-2026.jpg",
+                "images/kh/25-03-2026 (4).jpg",
+                "images/kh/29-03-2026 (8).jpg",
+                "images/kh/29-03-2026 (9).jpg",
+              
+                "images/kh/29-03-2026.jpg",
+                "images/kh/05-04-2026.jpg",
+                "images/kh/25-03-2026.jpg",
+             
+                "images/kh/29-03-2026 (8).jpg",
+                "images/kh/29-03-2026 (9).jpg",
+                "images/kh/14-02-2026 (10).jpg",
+                "images/kh/29-03-2026.jpg",
+                "images/kh/05-04-2026.jpg",
+                "images/kh/25-03-2026.jpg",
+                "images/kh/25-03-2026 (4).jpg",
+                "images/kh/29-03-2026 (8).jpg",
+             
+                "images/kh/14-02-2026 (10).jpg"
+            ]
+        },
+        trip2: {
+            title: "Đà Nẵng - Hội An",
+            images: [
+                "images/kh/29-03-2026.jpg",
+                "images/kh/05-04-2026.jpg",
+                "images/kh/25-03-2026.jpg",
+                "images/kh/25-03-2026 (4).jpg",
+                "images/kh/29-03-2026 (8).jpg",
+                "images/kh/29-03-2026 (9).jpg",
+                "images/kh/14-02-2026 (10).jpg",
+                "images/kh/29-03-2026.jpg",
+                "images/kh/05-04-2026.jpg",
+                "images/kh/25-03-2026.jpg",
+                "images/kh/25-03-2026 (4).jpg",
+                "images/kh/29-03-2026 (8).jpg",
+                "images/kh/29-03-2026 (9).jpg",
+            
+                "images/kh/29-03-2026.jpg",
+                "images/kh/05-04-2026.jpg",
+                "images/kh/25-03-2026.jpg",
+                "images/kh/25-03-2026 (4).jpg",
+                "images/kh/29-03-2026 (8).jpg",
+                "images/kh/29-03-2026 (9).jpg",
+                "images/kh/14-02-2026 (10).jpg",
+                "images/kh/29-03-2026.jpg",
+                "images/kh/05-04-2026.jpg",
+                "images/kh/25-03-2026.jpg",
+                "images/kh/25-03-2026 (4).jpg",
+                "images/kh/29-03-2026 (8).jpg",
+                "images/kh/29-03-2026 (9).jpg",
+                "images/kh/14-02-2026 (10).jpg",
+                "images/kh/29-03-2026.jpg",
+      
+                "images/kh/25-03-2026.jpg",
+                "images/kh/25-03-2026 (4).jpg",
+                "images/kh/29-03-2026 (8).jpg",
+                "images/kh/29-03-2026 (9).jpg",
+            
+                "images/kh/29-03-2026.jpg",
+                "images/kh/05-04-2026.jpg",
+                "images/kh/25-03-2026.jpg",
+                "images/kh/25-03-2026 (4).jpg",
+                "images/kh/29-03-2026 (8).jpg",
+                "images/kh/29-03-2026 (9).jpg",
+                "images/kh/14-02-2026 (10).jpg"
+            ]
+        },
+        trip3: {
+            title: "Đồi Bát Úp - Thác Liêng Ài",
+            images: [
+                "images/kh/29-03-2026.jpg",
+                "images/kh/05-04-2026.jpg",
+                "images/kh/25-03-2026.jpg",
+                "images/kh/25-03-2026 (4).jpg",
+                "images/kh/29-03-2026 (8).jpg",
+                "images/kh/29-03-2026 (9).jpg",
+                "images/kh/14-02-2026 (10).jpg",
+                "images/kh/29-03-2026.jpg",
+                "images/kh/05-04-2026.jpg",
+                "images/kh/25-03-2026.jpg",
+                "images/kh/25-03-2026 (4).jpg",
+                "images/kh/29-03-2026 (8).jpg",
+          
+                "images/kh/29-03-2026.jpg",
+                "images/kh/05-04-2026.jpg",
+                "images/kh/25-03-2026.jpg",
+                "images/kh/25-03-2026 (4).jpg",
+                "images/kh/29-03-2026 (8).jpg",
+      
+                "images/kh/29-03-2026.jpg",
+                "images/kh/05-04-2026.jpg",
+                "images/kh/25-03-2026.jpg",
+                "images/kh/25-03-2026 (4).jpg",
+                "images/kh/29-03-2026 (8).jpg",
+                "images/kh/29-03-2026 (9).jpg",
+                "images/kh/14-02-2026 (10).jpg",
+                "images/kh/29-03-2026.jpg",
+                "images/kh/05-04-2026.jpg",
+                "images/kh/25-03-2026.jpg",
+                "images/kh/25-03-2026 (4).jpg",
+                "images/kh/29-03-2026 (8).jpg",
+                "images/kh/29-03-2026 (9).jpg",
+                "images/kh/14-02-2026 (10).jpg",
+                "images/kh/29-03-2026.jpg",
+                "images/kh/05-04-2026.jpg",
+                "images/kh/25-03-2026.jpg",
+                "images/kh/25-03-2026 (4).jpg",
+                "images/kh/29-03-2026 (8).jpg",
+                "images/kh/29-03-2026 (9).jpg",
+                "images/kh/14-02-2026 (10).jpg"
+            ]
         }
+    };
 
-        document.querySelectorAll('.trip-card').forEach(card => {
-            card.addEventListener('click', () => {
-                const tripId = card.getAttribute('data-trip');
-                const trip = tripsData[tripId];
+    // Lấy các phần tử modal
+    const tripModal = document.getElementById('trip-modal');
+    const tripModalTitle = document.getElementById('trip-modal-title');
+    const tripGalleryContainer = document.getElementById('trip-gallery-container');
+    const tripMasonryGallery = document.getElementById('trip-masonry-gallery');
+    const closeBtnTrip = document.querySelector('.close-btn-trip');
 
-                tripModalTitle.textContent = trip.title;
-                tripMasonryGallery.innerHTML = '';
-
-                trip.images.forEach(src => {
-                    const img = document.createElement('img');
-                    img.src = src;
-                    img.alt = trip.title;
-                    img.loading = "lazy";
-                    tripMasonryGallery.appendChild(img);
+    // Hàm reset scroll mạnh (quan trọng nhất)
+    function resetTripScroll() {
+        if (tripGalleryContainer) {
+            tripGalleryContainer.scrollTop = 0;
+            // Reset mạnh hơn bằng setTimeout
+            setTimeout(() => {
+                tripGalleryContainer.scrollTo({
+                    top: 0,
+                    behavior: 'instant'
                 });
-
-                resetTripScroll();
-                tripModal.style.display = 'flex';
-            });
-        });
-
-        // Đóng modal
-        if (closeBtnTrip) {
-            closeBtnTrip.addEventListener('click', () => {
-                tripModal.style.display = 'none';
-            });
+            }, 10);
         }
+    }
 
-        tripModal.addEventListener('click', (e) => {
-            if (e.target === tripModal) {
-                tripModal.style.display = 'none';
-            }
+    // Xử lý click vào từng trip card
+    document.querySelectorAll('.trip-card').forEach(card => {
+        card.addEventListener('click', () => {
+            const tripId = card.getAttribute('data-trip');
+            const trip = tripsData[tripId];
+
+            if (!trip) return;
+
+            // Cập nhật tiêu đề
+            tripModalTitle.textContent = trip.title;
+
+            // Xóa ảnh cũ và thêm ảnh mới
+            tripMasonryGallery.innerHTML = '';
+
+            trip.images.forEach(src => {
+                const img = document.createElement('img');
+                img.src = src;
+                img.alt = trip.title;
+                img.loading = "lazy";
+                tripMasonryGallery.appendChild(img);
+            });
+
+            // Reset scroll về đầu trước khi hiển thị
+            resetTripScroll();
+
+            // Hiển thị modal
+            tripModal.style.display = 'flex';
         });
-    </script>
+    });
+
+    // Đóng modal
+    if (closeBtnTrip) {
+        closeBtnTrip.addEventListener('click', () => {
+            tripModal.style.display = 'none';
+        });
+    }
+
+    tripModal.addEventListener('click', (e) => {
+        if (e.target === tripModal) {
+            tripModal.style.display = 'none';
+        }
+    });
+</script>
 
 </html>
