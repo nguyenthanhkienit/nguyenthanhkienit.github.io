@@ -498,120 +498,137 @@
     }
 </style>
 <!-- Chuyến đi -->
-    <style>
-.trips-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 25px;
-  padding-top:20px;
-  max-width: 1400px;
-  margin: 0 auto;
-}
+<style>
+    .trips-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 25px;
+        padding-top: 20px;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
 
-.trip-card {
-  background: #2D2E2E;
-  border-radius: 5px;
-  overflow: hidden;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.6);
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
+    .trip-card {
+        background: #2D2E2E;
+        border-radius: 5px;
+        overflow: hidden;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
 
 
-.trip-card img {
-  width: 100%;
-  height: 240px;           /* Tăng chiều cao một chút cho đẹp */
-  object-fit: cover;       /* Giữ tỷ lệ, không méo */
-  display: block;
-}
+    .trip-card img {
+        width: 100%;
+        height: 240px;
+        /* Tăng chiều cao một chút cho đẹp */
+        object-fit: cover;
+        /* Giữ tỷ lệ, không méo */
+        display: block;
+    }
 
-.trip-card h2 {
-  padding: 15px 20px 5px;
-  font-size: 20px;
-  color: #EB2F8C;
-  margin: 0;
-}
+    .trip-card h2 {
+        padding: 15px 20px 5px;
+        font-size: 20px;
+        color: #EB2F8C;
+        margin: 0;
+    }
 
-.trip-card p {
-  padding: 0 20px 20px;
-  color: #a4a5a6;
-  font-size: 16px;
-  margin: 0;
-}
+    .trip-card p {
+        padding: 0 20px 20px;
+        color: #a4a5a6;
+        font-size: 16px;
+        margin: 0;
+    }
 
-/* Modal chuyến đi (giữ nguyên như trước nhưng tối ưu hơn) */
-.trip-modal {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.97);
-  z-index: 99999;
-  overflow: hidden;
-}
+    /* Modal chuyến đi (giữ nguyên như trước nhưng tối ưu hơn) */
+    .trip-modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.97);
+        z-index: 99999;
+        overflow: hidden;
+    }
 
-.trip-modal-content {
-  background: rgba(0, 0, 0, 0.97);
-  width: 100%;
-  max-width: 1250px;
-  height: 95vh;
-  margin: auto;
-  border-radius: 10px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
+    .trip-modal-content {
+        background: rgba(0, 0, 0, 0.97);
+        width: 100%;
+        max-width: 1250px;
+        height: 95vh;
+        margin: auto;
+        border-radius: 10px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+    }
 
-.trip-modal-header {
-  padding: 20px 25px;
-  text-align: center;
-  background: #1d1d1d;
-  border-bottom: 1px solid #333;
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  color: #EB2F8C;
-}
-.trip-modal-header h2{
-  font-size: 30px;
-  margin-top: 10px;
-}
-.close-btn-trip {
-  position: absolute;
-  top: -5px;
-  right: 10px;
-  font-size: 30px;
-  cursor: pointer;
-  color: #a4a5a6;
-}
+    .trip-modal-header {
+        padding: 20px 25px;
+        text-align: center;
+        background: #1d1d1d;
+        border-bottom: 1px solid #333;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        color: #EB2F8C;
+    }
 
-.trip-gallery-container {
-  flex: 1;
-  overflow-y: auto;
-  padding: 25px;
-  background: #121212;
-}
+    .trip-modal-header h2 {
+        font-size: 30px;
+        margin-top: 10px;
+    }
 
-.trip-masonry {
-  columns: 3;
-  column-gap: 18px;
-}
+    .close-btn-trip {
+        position: absolute;
+        top: -5px;
+        right: 10px;
+        font-size: 30px;
+        cursor: pointer;
+        color: #a4a5a6;
+    }
 
-.trip-masonry img {
-  width: 100%;
-  margin-bottom: 18px;
-  border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.6);
-}
+    .trip-gallery-container {
+        flex: 1;
+        overflow-y: auto;
+        padding: 25px;
+        background: #121212;
+    }
 
-@media (max-width: 900px) { .trip-masonry { columns: 2; } .trip-modal-header h2{
-  font-size: 20px;
-}}
-@media (max-width: 600px) { 
-  .trip-masonry { columns: 1; }
-  .trip-modal-content { height: 100vh; border-radius: 0; }
-}
+    .trip-masonry {
+        columns: 3;
+        column-gap: 18px;
+    }
 
-    </style>
+    .trip-masonry img {
+        width: 100%;
+        margin-bottom: 18px;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+    }
+
+    @media (max-width: 900px) {
+        .trip-masonry {
+            columns: 2;
+        }
+
+        .trip-modal-header h2 {
+            font-size: 20px;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .trip-masonry {
+            columns: 1;
+        }
+
+        .trip-modal-content {
+            height: 100vh;
+            border-radius: 0;
+        }
+    }
+</style>
+
 <body>
 
     <!-- page loading -->
@@ -960,12 +977,13 @@
         <div class="container">
             <!-- Thay src và caption -->
             <div id="gallery-row" class="row g-3" style="padding-top: 20px"></div>
-    
-    <div class="text-center mt-4">
-        <button id="kh-load-more-btn" class="btn btn-primary load-more-btn wow fadeInUp animated" style="background: rgba(0, 0, 0, 0.8); color: #EB2F8C; border: none; padding: 12px 40px; font-size: 20px; border-radius: 5px;">
-            Xem thêm
-        </button>
-    </div>
+
+            <div class="text-center mt-4">
+                <button id="kh-load-more-btn" class="btn btn-primary load-more-btn wow fadeInUp animated"
+                    style="background: rgba(0, 0, 0, 0.8); color: #EB2F8C; border: none; padding: 12px 40px; font-size: 20px; border-radius: 5px;">
+                    Xem thêm
+                </button>
+            </div>
 
             <div class="overlay" id="overlay">
                 <span class="close-btn" id="closeBtn">&times;</span>
@@ -986,20 +1004,21 @@
                 </h5>
             </div>
         </div>
-<div class="container"> 
-    <div class="container">
-        <main id="trips-grid" class="trips-grid wow fadeInUp animated">
-            <!-- 3 trip đầu tiên sẽ được JS thêm vào đây -->
-        </main>
+        <div class="container">
+            <div class="container">
+                <main id="trips-grid" class="trips-grid wow fadeInUp animated">
+                    <!-- 3 trip đầu tiên sẽ được JS thêm vào đây -->
+                </main>
 
-        <!-- Nút Xem thêm -->
-        <div class="text-center mt-4">
-            <button id="trips-load-more-btn" class="btn btn-primary btn-lg wow fadeInUp animated" style="background: rgba(0, 0, 0, 0.8); color: #EB2F8C; border: none; padding: 12px 40px; font-size: 20px; border-radius: 5px;">
-                Xem thêm
-            </button>
+                <!-- Nút Xem thêm -->
+                <div class="text-center mt-4">
+                    <button id="trips-load-more-btn" class="btn btn-primary btn-lg wow fadeInUp animated"
+                        style="background: rgba(0, 0, 0, 0.8); color: #EB2F8C; border: none; padding: 12px 40px; font-size: 20px; border-radius: 5px;">
+                        Xem thêm
+                    </button>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
     </section>
 
     <!-- ==================== MODAL CHUYẾN ĐI (KHÔNG XUNG ĐỘT) ==================== -->
@@ -1148,27 +1167,28 @@
 <script src="static/js/img_trips-data.js"></script>
 <script src="static/js/img_trips.js"></script>
 <script>
-// Scroll to Top - Dễ chỉnh tốc độ
-const scrollTopBtn = document.getElementById("scrollTopBtn");
+    // Scroll to Top - Dễ chỉnh tốc độ
+    const scrollTopBtn = document.getElementById("scrollTopBtn");
 
-if (scrollTopBtn) {
-    scrollTopBtn.addEventListener("click", () => {
-        const speed = 160;        // ← Thay số này để chỉnh tốc độ (100 = chậm, 200 = nhanh)
+    if (scrollTopBtn) {
+        scrollTopBtn.addEventListener("click", () => {
+            const speed = 160;        // ← Thay số này để chỉnh tốc độ (100 = chậm, 200 = nhanh)
 
-        let currentPos = window.scrollY;
-        
-        const scroll = () => {
-            currentPos -= speed;
-            if (currentPos > 0) {
-                window.scrollTo(0, currentPos);
-                requestAnimationFrame(scroll);
-            } else {
-                window.scrollTo(0, 0);
-            }
-        };
-        
-        scroll();
-    });
-}
+            let currentPos = window.scrollY;
+
+            const scroll = () => {
+                currentPos -= speed;
+                if (currentPos > 0) {
+                    window.scrollTo(0, currentPos);
+                    requestAnimationFrame(scroll);
+                } else {
+                    window.scrollTo(0, 0);
+                }
+            };
+
+            scroll();
+        });
+    }
 </script>
+
 </html>
