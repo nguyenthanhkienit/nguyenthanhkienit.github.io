@@ -11,13 +11,6 @@ const allTrips = [
                 "images/kh/25-03-2026 (4).jpg",
                 "images/kh/29-03-2026 (8).jpg",
                 "images/kh/29-03-2026 (9).jpg",
-                "images/kh/14-02-2026 (10).jpg",
-                "images/kh/29-03-2026.jpg",
-                "images/kh/05-04-2026.jpg",
-                "images/kh/25-03-2026.jpg",
-                "images/kh/25-03-2026 (4).jpg",
-                "images/kh/29-03-2026 (8).jpg",
-                "images/kh/29-03-2026 (9).jpg",
             
                 "images/kh/29-03-2026.jpg",
                 "images/kh/05-04-2026.jpg",
@@ -147,6 +140,20 @@ const allTrips = [
                 "images/kh/29-03-2026 (8).jpg",
                 "images/kh/29-03-2026 (9).jpg",
                 "images/kh/14-02-2026 (10).jpg"
+            ]
+        },
+        {
+            id: "trip1",
+            title: "Tết (Quảng Ngãi)",
+            date: "2026",
+            cover: "images/trip/trip1/z7771553537482_f351fd1240237a3e4bd4ef64fad49a25.jpg",
+            images: [
+                "images/kh/29-03-2026.jpg",
+                "images/kh/05-04-2026.jpg",
+                "images/kh/25-03-2026.jpg",
+                "images/kh/25-03-2026 (4).jpg",
+                "images/kh/29-03-2026 (8).jpg",
+
             ]
         }
     ];

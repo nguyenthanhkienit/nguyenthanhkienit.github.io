@@ -1143,15 +1143,32 @@
         }
     });
 </script>
-<script>
-    document.getElementById("scrollTopBtn").addEventListener("click", function () {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-    });
-</script>
+
 <!-- Chuyến đi -->
 <script src="static/js/img_trips-data.js"></script>
 <script src="static/js/img_trips.js"></script>
+<script>
+// Scroll to Top - Dễ chỉnh tốc độ
+const scrollTopBtn = document.getElementById("scrollTopBtn");
+
+if (scrollTopBtn) {
+    scrollTopBtn.addEventListener("click", () => {
+        const speed = 160;        // ← Thay số này để chỉnh tốc độ (100 = chậm, 200 = nhanh)
+
+        let currentPos = window.scrollY;
+        
+        const scroll = () => {
+            currentPos -= speed;
+            if (currentPos > 0) {
+                window.scrollTo(0, currentPos);
+                requestAnimationFrame(scroll);
+            } else {
+                window.scrollTo(0, 0);
+            }
+        };
+        
+        scroll();
+    });
+}
+</script>
 </html>
