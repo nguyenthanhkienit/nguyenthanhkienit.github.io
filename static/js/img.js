@@ -38,26 +38,61 @@ Object.keys(groupedByDate).forEach(date => {
 });
 
 /* ===============================
-   5. RENDER GALLERY
+   GALLERY KH - LOAD MORE (Không xung đột)
 ================================ */
+
+const IMAGES_PER_LOAD = 3;
+let galleryCurrentDisplayed = 0;     // Đổi tên biến để tránh xung đột
+
 const galleryRow = document.getElementById("gallery-row");
+const khLoadMoreBtn = document.getElementById("kh-load-more-btn");   // ID riêng
 
-displayImages.forEach((img, index) => {
-  const count = groupedByDate[img.caption].length;
+function renderMoreGalleryImages() {
+    const end = Math.min(galleryCurrentDisplayed + IMAGES_PER_LOAD, displayImages.length);
+    
+    for (let i = galleryCurrentDisplayed; i < end; i++) {
+        const img = displayImages[i];
+        const count = groupedByDate[img.caption].length;
 
-  galleryRow.innerHTML += `
-    <div class="col-lg-3 col-sm-6 wow fadeInUp animated">
-      <div class="gallery-img-container" data-index="${index}">
+        const html = `
+            <div class="col-lg-3 col-sm-6 wow fadeInUp animated">
+                <div class="gallery-img-container" data-index="${i}">
+                    ${count > 1 ? `<div class="img-count-badge">${count}</div>` : ''}
+                    <img src="${img.src}" alt="${img.caption}">
+                    <div class="gallery-caption">${img.caption}</div>
+                </div>
+            </div>`;
 
-        ${count > 1 
-          ? `<div class="img-count-badge">${count}</div>` 
-          : ``}
+        galleryRow.insertAdjacentHTML('beforeend', html);
+    }
 
-        <img src="${img.src}" alt="">
-        <div class="gallery-caption">${img.caption}</div>
-      </div>
-    </div>`;
+    galleryCurrentDisplayed = end;
+
+    if (galleryCurrentDisplayed >= displayImages.length) {
+        khLoadMoreBtn.style.display = "none";
+    }
+}
+
+// Event click cho gallery (Event Delegation)
+galleryRow.addEventListener('click', function(e) {
+    const container = e.target.closest('.gallery-img-container');
+    if (container) {
+        const index = parseInt(container.getAttribute('data-index'));
+        if (!isNaN(index)) {
+            const date = displayImages[index].caption;
+            currentIndex_img = firstIndexOfDate[date];
+            openOverlay(currentIndex_img);
+        }
+    }
 });
+
+// Khởi tạo Gallery
+function initGallery() {
+    if (galleryRow && khLoadMoreBtn) {
+        renderMoreGalleryImages();
+        khLoadMoreBtn.addEventListener("click", renderMoreGalleryImages);
+    }
+}
 
 /* ===============================
    6. OVERLAY CONTROL

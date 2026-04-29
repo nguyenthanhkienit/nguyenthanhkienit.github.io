@@ -959,7 +959,14 @@
         </div>
         <div class="container">
             <!-- Thay src và caption -->
-            <div id="gallery-row" class="row g-3" style="padding-top:20px"></div>
+            <div id="gallery-row" class="row g-3"></div>
+    
+    <div class="text-center mt-4">
+        <button id="kh-load-more-btn" class="btn btn-primary load-more-btn wow fadeInUp animated" style="background: rgba(0, 0, 0, 0.8); color: #EB2F8C; border: none; padding: 12px 40px; font-size: 20px; border-radius: 5px;">
+            Xem thêm
+        </button>
+    </div>
+
             <div class="overlay" id="overlay">
                 <span class="close-btn" id="closeBtn">&times;</span>
                 <img id="overlayImage" src="">
@@ -983,13 +990,13 @@
  
 
     <div class="container">
-        <main id="trips-grid" class="trips-grid">
+        <main id="trips-grid" class="trips-grid wow fadeInUp animated">
             <!-- 3 trip đầu tiên sẽ được JS thêm vào đây -->
         </main>
 
         <!-- Nút Xem thêm -->
         <div class="text-center mt-4">
-            <button id="load-more-btn" class="btn btn-primary btn-lg" style="background: rgba(0, 0, 0, 0.8); color: #EB2F8C; border: none; padding: 12px 40px; font-size: 20px; border-radius: 5px;">
+            <button id="trips-load-more-btn" class="btn btn-primary btn-lg wow fadeInUp animated" style="background: rgba(0, 0, 0, 0.8); color: #EB2F8C; border: none; padding: 12px 40px; font-size: 20px; border-radius: 5px;">
                 Xem thêm
             </button>
         </div>
@@ -1148,107 +1155,5 @@
 </script>
 <!-- Chuyến đi -->
 <script src="static/js/img_trips-data.js"></script>
-<script>
-    
-
-    let currentIndex = 0;
-    const tripsPerLoad = 3;
-
-    const tripsGrid = document.getElementById('trips-grid');
-    const loadMoreBtn = document.getElementById('load-more-btn');
-    const tripModal = document.getElementById('trip-modal');
-    const tripModalTitle = document.getElementById('trip-modal-title');
-    const tripGalleryContainer = document.getElementById('trip-gallery-container');
-    const tripMasonryGallery = document.getElementById('trip-masonry-gallery');
-    const closeBtnTrip = document.querySelector('.close-btn-trip');
-
-    // ====================== RESET SCROLL MẠNH ======================
-    function resetScrollStrong() {
-        if (!tripGalleryContainer) return;
-        
-        tripGalleryContainer.scrollTop = 0;
-        
-        // Reset nhiều lần để chắc chắn
-        setTimeout(() => tripGalleryContainer.scrollTop = 0, 10);
-        setTimeout(() => tripGalleryContainer.scrollTo({ top: 0, behavior: 'instant' }), 30);
-        setTimeout(() => tripGalleryContainer.scrollTop = 0, 100);
-    }
-
-    // ====================== MỞ GALLERY ======================
-    function openTripGallery(trip) {
-        tripModalTitle.textContent = trip.title;
-        tripMasonryGallery.innerHTML = '';
-
-        // Thêm ảnh
-        trip.images.forEach(src => {
-            const img = document.createElement('img');
-            img.src = src;
-            img.alt = trip.title;
-            img.loading = "lazy";
-            tripMasonryGallery.appendChild(img);
-        });
-
-        // Reset scroll trước khi hiện modal
-        resetScrollStrong();
-
-        tripModal.style.display = 'flex';
-    }
-
-    // ====================== TẠO CARD ======================
-    function createTripCard(trip) {
-        const card = document.createElement('div');
-        card.className = 'trip-card';
-        card.setAttribute('data-trip', trip.id);
-
-        card.innerHTML = `
-            <img src="${trip.cover}" alt="${trip.title}">
-            <h2>${trip.title}</h2>
-            <p>${trip.date}</p>
-        `;
-
-        card.addEventListener('click', () => openTripGallery(trip));
-        return card;
-    }
-
-    // ====================== LOAD MORE ======================
-    function loadMoreTrips() {
-        const endIndex = Math.min(currentIndex + tripsPerLoad, allTrips.length);
-        
-        for (let i = currentIndex; i < endIndex; i++) {
-            const card = createTripCard(allTrips[i]);
-            tripsGrid.appendChild(card);
-        }
-
-        currentIndex = endIndex;
-
-        if (currentIndex >= allTrips.length) {
-            loadMoreBtn.style.display = 'none';
-        }
-    }
-
-    // ====================== KHỞI TẠO ======================
-    document.addEventListener('DOMContentLoaded', () => {
-        loadMoreTrips();
-
-        if (loadMoreBtn) {
-            loadMoreBtn.addEventListener('click', loadMoreTrips);
-        }
-
-        // Nút đóng
-        if (closeBtnTrip) {
-            closeBtnTrip.addEventListener('click', () => {
-                tripModal.style.display = 'none';
-            });
-        }
-
-        // Click ngoài modal để đóng
-        if (tripModal) {
-            tripModal.addEventListener('click', (e) => {
-                if (e.target === tripModal) {
-                    tripModal.style.display = 'none';
-                }
-            });
-        }
-    });
-</script>
+<script src="static/js/img_trips.js"></script>
 </html>
