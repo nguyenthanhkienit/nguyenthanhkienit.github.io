@@ -124,4 +124,21 @@
         { src: "images/kh/05-04-2026 (15).jpg", caption: "05-04-2026" },
         //
         { src: "images/kh/12-04-2026.jpg", caption: "12-04-2026" },
+        //
+        { src: "images/kh/19-04-2026.jpg", caption: "19-04-2026" },
+        { src: "images/kh/19-04-2026 (1).jpg", caption: "19-04-2026" },
+        { src: "images/kh/19-04-2026 (2).jpg", caption: "19-04-2026" },
+        { src: "images/kh/19-04-2026 (3).jpg", caption: "19-04-2026" },
+        { src: "images/kh/19-04-2026 (4).jpg", caption: "19-04-2026" },
+        { src: "images/kh/19-04-2026 (5).jpg", caption: "19-04-2026" },
+        { src: "images/kh/19-04-2026 (6).jpg", caption: "19-04-2026" },
+        { src: "images/kh/19-04-2026 (7).jpg", caption: "19-04-2026" },
+        { src: "images/kh/19-04-2026 (8).jpg", caption: "19-04-2026" },
+        { src: "images/kh/19-04-2026 (9).jpg", caption: "19-04-2026" },
+        { src: "images/kh/19-04-2026 (10).jpg", caption: "19-04-2026" },
+        { src: "images/kh/19-04-2026 (11).jpg", caption: "19-04-2026" },
+        { src: "images/kh/19-04-2026 (12).jpg", caption: "19-04-2026" },
+        { src: "images/kh/19-04-2026 (13).jpg", caption: "19-04-2026" },
+        { src: "images/kh/19-04-2026 (14).jpg", caption: "19-04-2026" },
+        { src: "images/kh/19-04-2026 (15).jpg", caption: "19-04-2026" },
     ];
