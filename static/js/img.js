@@ -41,7 +41,7 @@ Object.keys(groupedByDate).forEach(date => {
    GALLERY KH - LOAD MORE (Không xung đột)
 ================================ */
 
-const IMAGES_PER_LOAD = 3;
+const IMAGES_PER_LOAD = 4;
 let galleryCurrentDisplayed = 0;     // Đổi tên biến để tránh xung đột
 
 const galleryRow = document.getElementById("gallery-row");
