@@ -1,5 +1,15 @@
 const allTrips = [
     {
+        id: "trip4",
+        title: "Hồ Trị An (Đồng Nai)",
+        date: "30/04/2026",
+        cover: "images/trip/trip3/z7770392020887_3b6a3a865014b930e59fed5170a4770e.jpg",
+        images: [
+            "images/kh/29-03-2026.jpg",
+            "images/kh/05-04-2026.jpg"
+        ]
+    },
+    {
         id: "trip3",
         title: "Đồi Bát Úp - Thác Liêng Ài (Lâm Đồng)",
         date: "Giỗ Tổ Hùng Vương - 26/04/2026",
