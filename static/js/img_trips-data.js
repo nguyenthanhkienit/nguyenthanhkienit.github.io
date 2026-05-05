@@ -63,7 +63,7 @@ const allTrips = [
         id: "trip2",
         title: "Hội An (Đà Nẵng)",
         date: "Mùng 5 Tết 2026 - 21/02/2026",
-        cover: "images/trip/trip2/20.jpg",
+        cover: "images/trip/trip2/25.jpg",
         images: [
             "images/trip/trip2/1.jpg",
             "images/trip/trip2/2.jpg",

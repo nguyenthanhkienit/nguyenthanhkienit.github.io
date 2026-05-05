@@ -1,4 +1,8 @@
 const images = [
+    { src: "images/kh/02-05-2026/02-05-2026.jpg", caption: "02-05-2026" },
+    { src: "images/kh/02-05-2026/02-05-2026 (1).jpg", caption: "02-05-2026" },
+    { src: "images/kh/02-05-2026/02-05-2026 (2).jpg", caption: "02-05-2026" },
+
     { src: "images/kh/19-04-2026.jpg", caption: "19-04-2026" },
     { src: "images/kh/19-04-2026 (1).jpg", caption: "19-04-2026" },
     { src: "images/kh/19-04-2026 (2).jpg", caption: "19-04-2026" },
