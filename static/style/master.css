@@ -7340,7 +7340,7 @@ h6 {
     -o-transition: ease all 0.35s;
     -webkit-transition: ease all 0.35s;
     transition: ease all 0.35s;
-    box-shadow: 0 0 10px #EB2F8C;
+
     margin-top: 10px;
     margin-left: 15px;
 }
@@ -7404,7 +7404,7 @@ h6 {
     padding: 6px 15px;
     margin-top: 10px;
     border-radius: 5px;
-    box-shadow: 0 0 10px #EB2F8C;
+    
     margin-right: 15px;
 }
 .timeline-content-right:hover {
