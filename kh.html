@@ -769,7 +769,57 @@ margin-top: -5px;
         }
     }
 </style>
-
+<!-- Ngày đặc biệt tiếp theo -->
+  <style>
+    .container-date {
+      max-width: 620px;
+    margin-top: 30px;
+    }
+    h1 {
+      font-size: 30px;
+      margin-bottom: 15px;
+    }
+    .event-card {
+      background: #2D2E2E;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(12px);
+      border-radius: 5px;
+      padding: 35px 25px;
+    }
+    .name {
+      font-size: 20px;
+      font-weight: bold;
+      margin: 10px 0 8px 0;
+      text-align: center;
+    }
+    .date {
+      font-size: 1.25rem;
+      opacity: 0.9;
+      margin-bottom: 25px;
+      text-align: center;
+    }
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    .time-box {
+      background: rgba(0,0,0,0.3);
+      padding: 12px 18px;
+      border-radius: 12px;
+      min-width: 80px;
+    }
+    .time {
+      font-size: 2.4rem;
+      font-weight: bold;
+      color: #EB2F8C;
+    }
+    .label {
+      font-size: 0.95rem;
+      opacity: 0.85;
+    }
+  </style>
 <body>
     <canvas id="petals-canvas"></canvas>
     <!-- page loading -->
@@ -958,6 +1008,11 @@ margin-top: -5px;
             </div>
 
         </div>
+        <div class="container-date">
+    <div class="event-card" id="card"><h1>📅 Ngày Đặc Biệt Tiếp Theo</h1>
+      <div id="content"></div>
+    </div>
+  </div>
     </section>
     <section id="about" class="section gray2-bg">
         <!-- Page Content -->
@@ -1304,5 +1359,96 @@ margin-top: -5px;
         loop();
     })();
 </script>
+<!-- Ngày đặc biệt tiếp theo -->
+   <script>
+   const events = [
+      { name: "💕 Valentine", date: "14/02" },
+      { name: "👩 8/3 - Ngày Phụ nữ", date: "08/03" },
+      { name: "🎂 Sinh nhật Pink", date: "25/03" },
+      { name: "🎂 Sinh nhật Kay", date: "05/09" },
+      { name: "🌹 20/10", date: "20/10" },
+      { name: "💑 Ngày quen nhau", date: "29/11" },
+      { name: "🎄 Giáng sinh", date: "25/12" }
+    ];
 
+    let timerInterval = null;
+
+    function getNextEvent() {
+      const today = new Date();
+      let soonest = null;
+      let minMs = Infinity;
+
+      events.forEach(event => {
+        const [day, month] = event.date.split('/').map(Number);
+        let target = new Date(today.getFullYear(), month - 1, day);
+
+        if (target < today) {
+          target = new Date(today.getFullYear() + 1, month - 1, day);
+        }
+
+        const diffMs = target - today;
+        if (diffMs < minMs) {
+          minMs = diffMs;
+          soonest = { ...event, targetDate: target };
+        }
+      });
+      return soonest;
+    }
+
+    function updateCountdown() {
+      const next = getNextEvent();
+      if (!next) return;
+
+      const now = new Date();
+      let diff = next.targetDate - now;
+
+      if (diff < 0) {
+        // Nếu đã qua (trường hợp hiếm), refresh lại
+        clearInterval(timerInterval);
+        setTimeout(() => location.reload(), 1000);
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      diff -= days * (1000 * 60 * 60 * 24);
+
+      const hours = Math.floor(diff / (1000 * 60 * 60));
+      diff -= hours * (1000 * 60 * 60);
+
+      const minutes = Math.floor(diff / (1000 * 60));
+      diff -= minutes * (1000 * 60);
+
+      const seconds = Math.floor(diff / 1000);
+
+      document.getElementById('content').innerHTML = `
+        <div class="name">${next.name}</div>
+        <div class="date">${next.targetDate.toLocaleDateString('vi-VN', {
+          weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric'
+        })}</div>
+        
+        <div class="countdown">
+          <div class="time-box">
+            <div class="time">${days}</div>
+            <div class="label">Ngày</div>
+          </div>
+          <div class="time-box">
+            <div class="time">${hours}</div>
+            <div class="label">Giờ</div>
+          </div>
+          <div class="time-box">
+            <div class="time">${minutes}</div>
+            <div class="label">Phút</div>
+          </div>
+          <div class="time-box">
+            <div class="time">${seconds}</div>
+            <div class="label">Giây</div>
+          </div>
+        </div>
+      `;
+    }
+
+    // Khởi chạy
+    updateCountdown();
+    timerInterval = setInterval(updateCountdown, 1000);  // Cập nhật mỗi giây
+  </script>
 </html>
