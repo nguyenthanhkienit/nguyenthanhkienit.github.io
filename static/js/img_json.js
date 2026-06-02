@@ -1,4 +1,16 @@
 const images = [
+    { src: "images/kh/31-05-2026/31-05-2026.jpg", caption: "31-05-2026" },
+    { src: "images/kh/31-05-2026/31-05-2026 (1).jpg", caption: "31-05-2026" },
+    { src: "images/kh/31-05-2026/31-05-2026 (2).jpg", caption: "31-05-2026" },
+    { src: "images/kh/31-05-2026/31-05-2026 (3).jpg", caption: "31-05-2026" },
+    { src: "images/kh/31-05-2026/31-05-2026 (4).jpg", caption: "31-05-2026" },
+    { src: "images/kh/31-05-2026/31-05-2026 (5).jpg", caption: "31-05-2026" },
+    { src: "images/kh/31-05-2026/31-05-2026 (6).jpg", caption: "31-05-2026" },
+    { src: "images/kh/31-05-2026/31-05-2026 (7).jpg", caption: "31-05-2026" },
+    { src: "images/kh/31-05-2026/31-05-2026 (8).jpg", caption: "31-05-2026" },
+    { src: "images/kh/31-05-2026/31-05-2026 (9).jpg", caption: "31-05-2026" },
+    { src: "images/kh/31-05-2026/31-05-2026 (10).jpg", caption: "31-05-2026" },
+
     { src: "images/kh/24-05-2026/24-05-2026.jpg", caption: "24-05-2026" },
     { src: "images/kh/24-05-2026/24-05-2026 (1).jpg", caption: "24-05-2026" },
 
