@@ -906,111 +906,87 @@
     }
 
     /* Lightbox */
-    /* Lightbox */
-    .lightbox {
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, .92);
-        z-index: 100;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        cursor: zoom-out;
-        user-select: none;
-        -webkit-user-select: none;
-    }
+ /* Lightbox */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.92);
+  z-index: 100;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.lightbox.open { display: flex }
+body.lb-open { overflow: hidden }
 
-    .lightbox.open {
-        display: flex
-    }
+#lb-track {
+  display: flex;
+  width: 90vw;
+  height: 80vh;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  gap: 24px;
+  cursor: grab;
+}
+#lb-track:active { cursor: grabbing }
+#lb-track::-webkit-scrollbar { display: none }
 
-    body.lb-open {
-        overflow: hidden
-    }
+.lb-slide {
+  flex: 0 0 90vw;
+  height: 100%;
+  scroll-snap-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lb-slide img, .lb-slide video {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 10px;
+  object-fit: contain;
+  pointer-events: none;
+  box-shadow: 0 8px 40px rgba(0,0,0,.6);
+  user-select: none;
+  -webkit-user-select: none;
+}
+.lb-slide video { pointer-events: auto }
 
-    #lb-track {
-        position: relative;
-        width: 90vw;
-        height: 80vh;
-        overflow: visible;
-        cursor: default;
-        pointer-events: none;
-    }
-
-    .lb-slide {
-        position: absolute;
-        inset: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        will-change: transform;
-        pointer-events: auto;
-    }
-
-    .lb-slide img,
-    .lb-slide video {
-        max-width: 100%;
-        max-height: 100%;
-        border-radius: 10px;
-        object-fit: contain;
-        pointer-events: none;
-        cursor: default;
-        box-shadow: 0 8px 40px rgba(0, 0, 0, .6);
-    }
-
-    .lb-close {
-        position: absolute;
-        top: 16px;
-        right: 20px;
-        background: rgba(255, 255, 255, .15);
-        border: none;
-        color: #fff;
-        font-size: 22px;
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 10;
-        backdrop-filter: blur(6px);
-    }
-
-    .lb-nav {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        background: rgba(255, 255, 255, .15);
-        border: none;
-        color: #fff;
-        font-size: 20px;
-        width: 42px;
-        height: 42px;
-        border-radius: 50%;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        backdrop-filter: blur(6px);
-        z-index: 10;
-    }
-
-    .lb-prev {
-        left: 12px
-    }
-
-    .lb-next {
-        right: 12px
-    }
-
-    .lb-hint {
-        color: rgba(255, 255, 255, .55);
-        font-size: 12px;
-        margin-top: 14px;
-        letter-spacing: .5px;
-    }
+.lb-close {
+  position: absolute;
+  top: 16px; right: 20px;
+  background: rgba(255,255,255,.15);
+  border: none; color: #fff;
+  font-size: 22px;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  backdrop-filter: blur(6px);
+  z-index: 10;
+}
+.lb-nav {
+  position: absolute;
+  top: 50%; transform: translateY(-50%);
+  background: rgba(255,255,255,.15);
+  border: none; color: #fff;
+  font-size: 20px;
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  backdrop-filter: blur(6px);
+  z-index: 10;
+}
+.lb-prev { left: 12px }
+.lb-next { right: 12px }
+.lb-hint {
+  color: rgba(255,255,255,.55);
+  font-size: 12px;
+  margin-top: 14px;
+}
 </style>
 
 <body>
@@ -1586,100 +1562,72 @@
 
         // ============================================================
         // LIGHTBOX
-        // ============================================================
-// LIGHTBOX — mượt, chống giật khi bấm/swipe nhanh
+     // ============================================================
+// LIGHTBOX — CSS scroll snap, mượt như browser native
 // ============================================================
-const SLIDE_W  = () => document.getElementById('lb-track').offsetWidth;
-const GAP      = 32;
-const DURATION = 300; // ms
-
-let lbOpen     = false;
-let isAnimating = false; // lock chống double-trigger
-let dragStartX = 0, dragCurX = 0, isDragging = false, dragStartTime = 0;
-let prevSlideEl = null, curSlideEl = null, nextSlideEl = null;
+let lbOpen = false;
+let lbScrolling = false; // chống hint update liên tục
+let dragStartX = 0, dragCurX = 0;
 
 function mediaEl(m) {
   if (m.type === 'video') {
-    return `<video src="${m.src}" poster="${m.poster}" controls style="max-width:100%;max-height:100%;border-radius:10px"></video>`;
+    return `<video src="${m.src}" poster="${m.poster}" controls
+      style="max-width:100%;max-height:100%;border-radius:10px"></video>`;
   }
   return `<img src="${m.src}" alt="${m.label}">`;
 }
 
-function buildSlide(idx) {
-  if (idx < 0 || idx >= currentAlbum.media.length) return null;
-  const el = document.createElement('div');
-  el.className = 'lb-slide';
-  el.innerHTML = mediaEl(currentAlbum.media[idx]);
-  return el;
-}
-
 function renderLb() {
   const track = document.getElementById('lb-track');
-  track.innerHTML = '';
-  const W = SLIDE_W() + GAP;
+  track.innerHTML = currentAlbum.media.map((m, i) =>
+    `<div class="lb-slide" data-idx="${i}">${mediaEl(m)}</div>`
+  ).join('');
 
-  prevSlideEl = buildSlide(lbIdx - 1);
-  curSlideEl  = buildSlide(lbIdx);
-  nextSlideEl = buildSlide(lbIdx + 1);
-
-  if (prevSlideEl) { prevSlideEl.style.transform = `translateX(${-W}px)`;  track.appendChild(prevSlideEl); }
-  if (curSlideEl)  { curSlideEl.style.transform  = `translateX(0px)`;       track.appendChild(curSlideEl); }
-  if (nextSlideEl) { nextSlideEl.style.transform = `translateX(${W}px)`;   track.appendChild(nextSlideEl); }
+  // Scroll đến slide hiện tại không có animation
+  const slideW = track.offsetWidth + 24; // width + gap
+  track.scrollLeft = lbIdx * slideW;
 
   updateHint();
-  isAnimating = false; // reset lock sau khi render xong
+  watchScroll();
 }
 
 function updateHint() {
   const m = currentAlbum.media[lbIdx];
-  document.getElementById('lb-hint').textContent = `${lbIdx + 1} / ${currentAlbum.media.length} · ${m.label}`;
+  document.getElementById('lb-hint').textContent =
+    `${lbIdx + 1} / ${currentAlbum.media.length} · ${m.label}`;
 }
 
-function setTransition(on) {
-  const t = on ? `transform ${DURATION}ms cubic-bezier(.25,.46,.45,.94)` : 'none';
-  [prevSlideEl, curSlideEl, nextSlideEl].forEach(el => {
-    if (el) el.style.transition = t;
-  });
-}
-
-function shiftSlides(offsetX) {
-  const W = SLIDE_W() + GAP;
-  if (prevSlideEl) prevSlideEl.style.transform = `translateX(${-W + offsetX}px)`;
-  if (curSlideEl)  curSlideEl.style.transform  = `translateX(${offsetX}px)`;
-  if (nextSlideEl) nextSlideEl.style.transform = `translateX(${W + offsetX}px)`;
-}
-
-function commitNav(dir) {
-  if (isAnimating) return; // chặn gọi chồng
-  const next = lbIdx + dir;
-  if (next < 0 || next >= currentAlbum.media.length) { snapBack(); return; }
-
-  isAnimating = true;
-  const W = SLIDE_W() + GAP;
-
-  setTransition(true);
-  shiftSlides(-dir * W);
-
-  setTimeout(() => {
-    lbIdx += dir;
-    renderLb(); // renderLb sẽ reset isAnimating = false
-  }, DURATION);
-}
-
-function snapBack() {
-  setTransition(true);
-  shiftSlides(0);
-  setTimeout(() => { isAnimating = false; }, DURATION);
+function watchScroll() {
+  const track = document.getElementById('lb-track');
+  track.onscroll = () => {
+    if (lbScrolling) return;
+    lbScrolling = true;
+    // Dùng requestAnimationFrame để đợi snap xong
+    const check = () => {
+      const slideW = track.offsetWidth + 24;
+      const newIdx = Math.round(track.scrollLeft / slideW);
+      if (newIdx !== lbIdx && newIdx >= 0 && newIdx < currentAlbum.media.length) {
+        lbIdx = newIdx;
+        updateHint();
+      }
+      // Kiểm tra xem scroll đã dừng chưa
+      if (Math.abs(track.scrollLeft - lbIdx * slideW) < 2) {
+        lbScrolling = false;
+      } else {
+        requestAnimationFrame(check);
+      }
+    };
+    requestAnimationFrame(check);
+  };
 }
 
 function openLb(idx) {
-  lbIdx   = idx;
-  lbOpen  = true;
-  isAnimating = false;
+  lbIdx  = idx;
+  lbOpen = true;
   document.getElementById('lightbox').classList.add('open');
   document.body.classList.add('lb-open');
-  renderLb();
-  setupLbDrag();
+  // Render sau 1 frame để DOM có kích thước thật
+  requestAnimationFrame(() => { requestAnimationFrame(renderLb); });
 }
 
 function closeLb() {
@@ -1689,64 +1637,18 @@ function closeLb() {
 }
 
 function lbNav(d) {
-  if (isAnimating) return;
-  commitNav(d);
+  const next = lbIdx + d;
+  if (next < 0 || next >= currentAlbum.media.length) return;
+  const track   = document.getElementById('lb-track');
+  const slideW  = track.offsetWidth + 24;
+  track.scrollTo({ left: next * slideW, behavior: 'smooth' });
 }
 
-// ---- Drag / Touch ----
-function setupLbDrag() {
-  const lb = document.getElementById('lightbox');
-
-  lb.onmousedown = e => { if (!e.target.closest('.lb-close,.lb-nav')) startDrag(e.clientX); };
-  window.onmousemove = e => { if (isDragging) onDrag(e.clientX); };
-  window.onmouseup   = e => { if (isDragging) endDrag(e.clientX); };
-
-  lb.ontouchstart = e => { if (!e.target.closest('.lb-close,.lb-nav')) startDrag(e.touches[0].clientX); };
-  lb.ontouchmove  = e => { if (isDragging) { e.preventDefault(); onDrag(e.touches[0].clientX); } };
-  lb.ontouchend   = e => { if (isDragging) endDrag(e.changedTouches[0].clientX); };
-}
-
-function startDrag(x) {
-  if (isAnimating) return;
-  isDragging    = true;
-  dragStartX    = x;
-  dragCurX      = x;
-  dragStartTime = Date.now();
-  setTransition(false);
-}
-
-function onDrag(x) {
-  if (!isDragging) return;
-  dragCurX  = x;
-  const dx  = x - dragStartX;
-  const W   = SLIDE_W();
-  // Lực cản ở đầu/cuối album
-  if ((lbIdx === 0 && dx > 0) || (lbIdx === currentAlbum.media.length - 1 && dx < 0)) {
-    shiftSlides(dx * 0.15);
-  } else {
-    shiftSlides(dx);
-  }
-}
-
-function endDrag(x) {
-  if (!isDragging) return;
-  isDragging    = false;
-  const dx      = x - dragStartX;
-  const dt      = Date.now() - dragStartTime;
-  const velocity = Math.abs(dx) / dt; // px/ms
-  const W        = SLIDE_W();
-
-  if ((Math.abs(dx) > W * 0.25 || velocity > 0.35) && Math.abs(dx) > 8) {
-    commitNav(dx < 0 ? 1 : -1);
-  } else {
-    snapBack();
-  }
-}
-
-// Click ngoài đóng lightbox (phân biệt với drag)
+// Click ngoài đóng
+document.getElementById('lightbox').addEventListener('mousedown', e => { dragStartX = e.clientX; });
 document.getElementById('lightbox').addEventListener('click', function(e) {
-  if (Math.abs(dragCurX - dragStartX) > 5) return;
-  if (!e.target.closest('img, video, .lb-close, .lb-nav')) closeLb();
+  if (Math.abs(e.clientX - dragStartX) > 5) return;
+  if (!e.target.closest('img, video, .lb-close, .lb-nav, #lb-track')) closeLb();
 });
 
 // Phím tắt
