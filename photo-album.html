@@ -202,7 +202,8 @@
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      touch-action: pan-y
+      touch-action: pan-y;
+      cursor: zoom-out
     }
 
     .lightbox.open {
@@ -216,26 +217,14 @@
     #lb-content {
       position: relative;
       overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      max-width: 90vw;
-      max-height: 80vh
-    }
-
-    #lb-content img,
-    #lb-content video {
-      max-width: 90vw;
-      max-height: 80vh;
-      border-radius: 8px;
-      object-fit: contain;
-      display: block
+      width: 90vw;
+      height: 80vh;
+      cursor: default
     }
 
     .lb-slide {
       position: absolute;
-      width: 100%;
-      height: 100%;
+      inset: 0;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -244,10 +233,11 @@
 
     .lb-slide img,
     .lb-slide video {
-      max-width: 90vw;
-      max-height: 80vh;
+      max-width: 100%;
+      max-height: 100%;
       border-radius: 8px;
-      object-fit: contain
+      object-fit: contain;
+      cursor: default
     }
 
     .lb-close {
@@ -383,6 +373,9 @@
       }
     ];
 
+    // ============================================================
+    // STATE
+    // ============================================================
     let currentAlbum = null;
     let lbIdx = 0;
 
@@ -474,8 +467,6 @@
     function renderLb() {
       const m = currentAlbum.media[lbIdx];
       const c = document.getElementById('lb-content');
-      c.style.width = '90vw';
-      c.style.height = '80vh';
       c.innerHTML = `<div class="lb-slide" style="transform:translateX(0)">${mediaEl(m)}</div>`;
       document.getElementById('lb-hint').textContent = `${lbIdx + 1} / ${currentAlbum.media.length} · ${m.label}`;
     }
@@ -484,6 +475,7 @@
       const m = currentAlbum.media[next];
       const c = document.getElementById('lb-content');
       const cur = c.querySelector('.lb-slide');
+
       const incoming = document.createElement('div');
       incoming.className = 'lb-slide';
       incoming.style.transform = `translateX(${dir > 0 ? '100%' : '-100%'})`;
@@ -506,17 +498,17 @@
 
     function mediaEl(m) {
       if (m.type === 'video') {
-        return `<video src="${m.src}" poster="${m.poster}" controls style="max-width:90vw;max-height:80vh;border-radius:8px"></video>`;
+        return `<video src="${m.src}" poster="${m.poster}" controls style="max-width:100%;max-height:100%;border-radius:8px"></video>`;
       }
-      return `<img src="${m.src}" alt="${m.label}" style="max-width:90vw;max-height:80vh;border-radius:8px;object-fit:contain">`;
+      return `<img src="${m.src}" alt="${m.label}" style="max-width:100%;max-height:100%;border-radius:8px;object-fit:contain">`;
     }
 
-    // Đóng khi click nền
+    // Đóng khi click ngoài hình (kể cả hai bên)
     document.getElementById('lightbox').addEventListener('click', function (e) {
-      if (e.target === this) closeLb();
+      if (!e.target.closest('img, video, .lb-close, .lb-nav')) closeLb();
     });
 
-    // Swipe
+    // Swipe trên lightbox
     let tsX = 0, tsY = 0;
     const lb = document.getElementById('lightbox');
     lb.addEventListener('touchstart', e => {
@@ -526,7 +518,9 @@
     lb.addEventListener('touchend', e => {
       const dx = e.changedTouches[0].clientX - tsX;
       const dy = e.changedTouches[0].clientY - tsY;
-      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) lbNav(dx < 0 ? 1 : -1);
+      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
+        lbNav(dx < 0 ? 1 : -1);
+      }
     }, { passive: true });
 
     // Phím tắt
@@ -537,6 +531,7 @@
       if (e.key === 'Escape') closeLb();
     });
 
+    // Khởi động
     renderAlbums();
   </script>
 </body>
