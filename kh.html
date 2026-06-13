@@ -304,8 +304,8 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        background: rgba(0,0,0,0.3);
-        
+        background: rgba(0, 0, 0, 0.3);
+
     }
 
     /* Text */
@@ -459,7 +459,7 @@
         align-items: center;
         justify-content: center;
         min-width: 70px;
-margin-top: -5px;
+        margin-top: -5px;
     }
 
     .trip-photo-count span {
@@ -679,313 +679,340 @@ margin-top: -5px;
     }
 </style>
 <!-- Ngày đặc biệt tiếp theo -->
-  <style>
-    
+<style>
     h1 {
-      font-size: 35px;
-      margin-bottom: 15px;
+        font-size: 35px;
+        margin-bottom: 15px;
     }
+
     .event-card {
-      margin-top: 50px;
-      margin-bottom: 40px;
-      background: #2B2C2C;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(12px);
-      border-radius: 5px;
-      padding: 35px 25px;
+        margin-top: 50px;
+        margin-bottom: 40px;
+        background: #2B2C2C;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(12px);
+        border-radius: 5px;
+        padding: 35px 25px;
     }
+
     .name {
-      font-size: 20px;
-      font-weight: bold;
-      margin: 30px 0 8px 0;
-      text-align: center;
+        font-size: 20px;
+        font-weight: bold;
+        margin: 30px 0 8px 0;
+        text-align: center;
     }
+
     .date {
-      font-size: 20px;
-      margin-bottom: 25px;
-      text-align: center;
+        font-size: 20px;
+        margin-bottom: 25px;
+        text-align: center;
     }
+
     .countdown {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      flex-wrap: wrap;
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        flex-wrap: wrap;
     }
+
     .time-box {
-      background: rgba(0,0,0,0.3);
-      padding: 12px 18px;
-      border-radius: 5px;
-      min-width: 120px;
+        background: rgba(0, 0, 0, 0.3);
+        padding: 12px 18px;
+        border-radius: 5px;
+        min-width: 120px;
     }
+
     .time {
-      font-size: 40px;
-      font-weight: bold;
-      color: #EB2F8C;
-      text-align: center;
-      margin-top: -10px;
+        font-size: 40px;
+        font-weight: bold;
+        color: #EB2F8C;
+        text-align: center;
+        margin-top: -10px;
     }
+
     .label {
-      font-size: 20px;
-      text-align: center;
-      margin-top: -5px;
-      padding-bottom: 10px;
+        font-size: 20px;
+        text-align: center;
+        margin-top: -5px;
+        padding-bottom: 10px;
     }
-  </style>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-  <style>
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
     .page {
-      display: none
+        display: none
     }
 
     .page.active {
-      display: block
+        display: block
     }
 
     /* Home */
     #home-page .header {
-      margin-bottom: 1.5rem;
-      padding-top: 2rem
+        margin-bottom: 1.5rem;
+        padding-top: 2rem
     }
 
     #home-page .header h1 {
-      font-size: 22px;
-      font-weight: 500
+        font-size: 22px;
+        font-weight: 500
     }
 
     #home-page .header p {
-      font-size: 14px;
-      color: #666;
-      margin-top: 4px
+        font-size: 14px;
+        color: #666;
+        margin-top: 4px
     }
 
     .album-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 16px
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 16px
     }
 
     .album-card {
-      background: #fff;
-      border: 0.5px solid rgba(0, 0, 0, .12);
-      border-radius: 12px;
-      overflow: hidden;
-      cursor: pointer;
-      transition: border-color .15s
+        background: #fff;
+        border: 0.5px solid rgba(0, 0, 0, .12);
+        border-radius: 12px;
+        overflow: hidden;
+        cursor: pointer;
+        transition: border-color .15s
     }
 
     .album-card:hover {
-      border-color: rgba(0, 0, 0, .3)
+        border-color: rgba(0, 0, 0, .3)
     }
 
     .album-thumb-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: 1fr 1fr;
-      width: 100%;
-      aspect-ratio: 1
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        width: 100%;
+        aspect-ratio: 1
     }
 
     .album-thumb-grid img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block
     }
 
     .album-thumb {
-      width: 100%;
-      aspect-ratio: 1;
-      object-fit: cover;
-      display: block
+        width: 100%;
+        aspect-ratio: 1;
+        object-fit: cover;
+        display: block
     }
 
     .album-info {
-      padding: 12px
+        padding: 12px
     }
 
     .album-info h3 {
-      font-size: 15px;
-      font-weight: 500;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis
+        font-size: 15px;
+        font-weight: 500;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis
     }
 
     .album-info .meta {
-      font-size: 13px;
-      color: #888;
-      margin-top: 4px
+        font-size: 13px;
+        color: #888;
+        margin-top: 4px
     }
 
     /* Album page */
     .sticky-header {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      background: #f5f5f3;
-      padding: 1rem 0 0.75rem;
-      border-bottom: 0.5px solid rgba(0, 0, 0, .08)
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: #f5f5f3;
+        padding: 1rem 0 0.75rem;
+        border-bottom: 0.5px solid rgba(0, 0, 0, .08)
     }
 
     #album-page .topbar {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap
     }
 
     .back-btn {
-      background: none;
-      border: 0.5px solid rgba(0, 0, 0, .25);
-      border-radius: 8px;
-      padding: 6px 12px;
-      font-size: 14px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px
+        background: none;
+        border: 0.5px solid rgba(0, 0, 0, .25);
+        border-radius: 8px;
+        padding: 6px 12px;
+        font-size: 14px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 6px
     }
 
     .back-btn:hover {
-      background: #f0f0ee
+        background: #f0f0ee
     }
 
     #album-page .album-title {
-      font-size: 18px;
-      font-weight: 500
+        font-size: 18px;
+        font-weight: 500
     }
 
     #album-page .album-sub {
-      font-size: 13px;
-      color: #888;
-      margin-left: auto
+        font-size: 13px;
+        color: #888;
+        margin-left: auto
     }
 
     .media-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-      gap: 6px;
-      margin-top: 1rem
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 6px;
+        margin-top: 1rem
     }
 
     .media-item {
-      position: relative;
-      aspect-ratio: 1;
-      border-radius: 8px;
-      overflow: hidden;
-      cursor: pointer
+        position: relative;
+        aspect-ratio: 1;
+        border-radius: 8px;
+        overflow: hidden;
+        cursor: pointer
     }
 
     .media-item img,
     .media-item video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      pointer-events: none
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        pointer-events: none
     }
 
     .vid-badge {
-      position: absolute;
-      bottom: 6px;
-      left: 6px;
-      background: rgba(0, 0, 0, .55);
-      border-radius: 4px;
-      padding: 2px 6px;
-      font-size: 11px;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 4px
+        position: absolute;
+        bottom: 6px;
+        left: 6px;
+        background: rgba(0, 0, 0, .55);
+        border-radius: 4px;
+        padding: 2px 6px;
+        font-size: 11px;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        gap: 4px
     }
 
     /* Lightbox */
     /* Lightbox */
-.lightbox {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,.92);
-  z-index: 100;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  cursor: zoom-out;
-  user-select: none;
-  -webkit-user-select: none;
-}
-.lightbox.open { display: flex }
-body.lb-open { overflow: hidden }
+    .lightbox {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, .92);
+        z-index: 100;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        cursor: zoom-out;
+        user-select: none;
+        -webkit-user-select: none;
+    }
 
-#lb-track {
-  position: relative;
-  width: 90vw;
-  height: 80vh;
-  overflow: visible;
-  cursor: default;
-}
-.lb-slide {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  will-change: transform;
-}
-.lb-slide img, .lb-slide video {
-  max-width: 100%;
-  max-height: 100%;
-  border-radius: 10px;
-  object-fit: contain;
-  pointer-events: none;
-  cursor: default;
-  box-shadow: 0 8px 40px rgba(0,0,0,.6);
-}
-.lb-close {
-  position: absolute;
-  top: 16px;
-  right: 20px;
-  background: rgba(255,255,255,.15);
-  border: none;
-  color: #fff;
-  font-size: 22px;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
-  backdrop-filter: blur(6px);
-}
-.lb-nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(255,255,255,.15);
-  border: none;
-  color: #fff;
-  font-size: 20px;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  backdrop-filter: blur(6px);
-  z-index: 10;
-}
-.lb-prev { left: 12px }
-.lb-next { right: 12px }
-.lb-hint {
-  color: rgba(255,255,255,.55);
-  font-size: 12px;
-  margin-top: 14px;
-  letter-spacing: .5px;
-}
-  </style>
+    .lightbox.open {
+        display: flex
+    }
+
+    body.lb-open {
+        overflow: hidden
+    }
+
+    #lb-track {
+        position: relative;
+        width: 90vw;
+        height: 80vh;
+        overflow: visible;
+        cursor: default;
+        pointer-events: none;
+    }
+
+    .lb-slide {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        will-change: transform;
+        pointer-events: auto;
+    }
+
+    .lb-slide img,
+    .lb-slide video {
+        max-width: 100%;
+        max-height: 100%;
+        border-radius: 10px;
+        object-fit: contain;
+        pointer-events: none;
+        cursor: default;
+        box-shadow: 0 8px 40px rgba(0, 0, 0, .6);
+    }
+
+    .lb-close {
+        position: absolute;
+        top: 16px;
+        right: 20px;
+        background: rgba(255, 255, 255, .15);
+        border: none;
+        color: #fff;
+        font-size: 22px;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+        backdrop-filter: blur(6px);
+    }
+
+    .lb-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, .15);
+        border: none;
+        color: #fff;
+        font-size: 20px;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(6px);
+        z-index: 10;
+    }
+
+    .lb-prev {
+        left: 12px
+    }
+
+    .lb-next {
+        right: 12px
+    }
+
+    .lb-hint {
+        color: rgba(255, 255, 255, .55);
+        font-size: 12px;
+        margin-top: 14px;
+        letter-spacing: .5px;
+    }
+</style>
+
 <body>
     <canvas id="petals-canvas"></canvas>
     <!-- page loading -->
@@ -1101,9 +1128,10 @@ body.lb-open { overflow: hidden }
 
                 </div>
             </div>
-            </div></section>
-            <section id="start" class="section gray2-bg" style="margin-top: -120px;">
-            <div class="container">
+        </div>
+    </section>
+    <section id="start" class="section gray2-bg" style="margin-top: -120px;">
+        <div class="container">
             <div class="timeline-block timeline-block-right" style=" margin-top: 50px;">
                 <div class="KH_marker"></div>
                 <div class="KH_timeline-content-left wow fadeInUp animated" data-wow-delay="0.5s">
@@ -1215,10 +1243,11 @@ body.lb-open { overflow: hidden }
 
         </div>
         <div class="container wow fadeInUp animated" data-wow-delay="0.3s">
-    <div class="event-card" id="card"><h1>📅 Tiếp theo</h1>
-      <div id="content"></div>
-    </div>
-  </div>
+            <div class="event-card" id="card">
+                <h1>📅 Tiếp theo</h1>
+                <div id="content"></div>
+            </div>
+        </div>
     </section>
     <section id="about" class="section gray2-bg">
         <!-- Page Content -->
@@ -1335,7 +1364,7 @@ body.lb-open { overflow: hidden }
             </div>
         </div>
     </section>
-    <section id="about" class="section gray-bg">
+    <section id="album-section" class="section gray-bg">
         <!-- Page Content -->
         <div class="container page-top_title">
             <div class="KH_section-title">
@@ -1345,124 +1374,166 @@ body.lb-open { overflow: hidden }
         <div class="container">
             <div class="container">
 
-    <!-- Trang chủ -->
-    <div id="home-page" class="page active">
-      <div class="album-grid" id="album-grid"></div>
-    </div>
+                <!-- Trang chủ -->
+                <div id="home-page" class="page active">
+                    <div class="album-grid" id="album-grid"></div>
+                </div>
 
-    <!-- Trang album -->
-    <div id="album-page" class="page">
-      <div class="sticky-header">
-        <div class="topbar">
-          <button class="back-btn" onclick="showHome()">
-            <i class="ti ti-arrow-left"></i> Quay lại
-          </button>
-          <span class="album-title" id="album-title"></span>
-          <span class="album-sub" id="album-sub"></span>
-        </div>
-      </div>
-      <div class="media-grid" id="media-grid"></div>
-    </div>
+                <!-- Trang album -->
+                <div id="album-page" class="page">
+                    <div class="sticky-header">
+                        <div class="topbar">
+                            <button class="back-btn" onclick="showHome()">
+                                <i class="ti ti-arrow-left"></i> Quay lại
+                            </button>
+                            <span class="album-title" id="album-title"></span>
+                            <span class="album-sub" id="album-sub"></span>
+                        </div>
+                    </div>
+                    <div class="media-grid" id="media-grid"></div>
+                </div>
 
-  </div>
+            </div>
 
-  <!-- Lightbox -->
-  <div class="lightbox" id="lightbox">
-  <button class="lb-close" onclick="closeLb()">✕</button>
-  <button class="lb-nav lb-prev" onclick="lbNav(-1)"><i class="ti ti-chevron-left"></i></button>
-  <div id="lb-track"></div>
-  <button class="lb-nav lb-next" onclick="lbNav(1)"><i class="ti ti-chevron-right"></i></button>
-  <span class="lb-hint" id="lb-hint"></span>
-</div>
+            <!-- Lightbox -->
+            <div class="lightbox" id="lightbox">
+                <button class="lb-close" onclick="closeLb()">✕</button>
+                <button class="lb-nav lb-prev" onclick="lbNav(-1)"><i class="ti ti-chevron-left"></i></button>
+                <div id="lb-track"></div>
+                <button class="lb-nav lb-next" onclick="lbNav(1)"><i class="ti ti-chevron-right"></i></button>
+                <span class="lb-hint" id="lb-hint"></span>
+            </div>
         </div>
     </section>
-      <script>
-    // ============================================================
-    // DỮ LIỆU ALBUM — thay src bằng ảnh/video thực của bạn
-    // ============================================================
-    const ALBUMS = [
-      {
-        id: 0,
-        name: "Kỳ nghỉ Đà Lạt",
-        date: "Tháng 3, 2025",
-        media: [
-          { type: "img", src: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400", label: "Bờ biển buổi sáng" },
-          { type: "img", src: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=400", label: "Núi mây" },
-          { type: "img", src: "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=400", label: "Đồng cỏ xanh" },
-          { type: "video", src: "https://www.w3schools.com/html/mov_bbb.mp4", poster: "https://images.unsplash.com/photo-1464422845204-6b6b69f2b9e2?w=400", label: "Video thác nước" },
-          { type: "img", src: "https://images.unsplash.com/photo-1540390769625-2fc3f8b1d50c?w=400", label: "Rừng thông" },
-          { type: "img", src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400", label: "Hoàng hôn đỉnh núi" },
-       { type: "img", src: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400", label: "Bờ biển buổi sáng" },
-          { type: "img", src: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=400", label: "Núi mây" },
-          { type: "img", src: "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=400", label: "Đồng cỏ xanh" },
-          { type: "video", src: "https://www.w3schools.com/html/mov_bbb.mp4", poster: "https://images.unsplash.com/photo-1464422845204-6b6b69f2b9e2?w=400", label: "Video thác nước" },
-          { type: "img", src: "https://images.unsplash.com/photo-1540390769625-2fc3f8b1d50c?w=400", label: "Rừng thông" },
-          { type: "img", src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400", label: "Hoàng hôn đỉnh núi" },
-       { type: "img", src: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400", label: "Bờ biển buổi sáng" },
-          { type: "img", src: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=400", label: "Núi mây" },
-          { type: "img", src: "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=400", label: "Đồng cỏ xanh" },
-          { type: "video", src: "https://www.w3schools.com/html/mov_bbb.mp4", poster: "https://images.unsplash.com/photo-1464422845204-6b6b69f2b9e2?w=400", label: "Video thác nước" },
-          { type: "img", src: "https://images.unsplash.com/photo-1540390769625-2fc3f8b1d50c?w=400", label: "Rừng thông" },
-          { type: "img", src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400", label: "Hoàng hôn đỉnh núi" },
-       { type: "img", src: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400", label: "Bờ biển buổi sáng" },
-          { type: "img", src: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=400", label: "Núi mây" },
-          { type: "img", src: "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=400", label: "Đồng cỏ xanh" },
-          { type: "video", src: "https://www.w3schools.com/html/mov_bbb.mp4", poster: "https://images.unsplash.com/photo-1464422845204-6b6b69f2b9e2?w=400", label: "Video thác nước" },
-          { type: "img", src: "https://images.unsplash.com/photo-1540390769625-2fc3f8b1d50c?w=400", label: "Rừng thông" },
-          { type: "img", src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400", label: "Hoàng hôn đỉnh núi" },
-       
-        ]
-      },
-      {
-        id: 1,
-        name: "Tiệc sinh nhật",
-        date: "Tháng 5, 2025",
-        media: [
-          { type: "img", src: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=400", label: "Bánh sinh nhật" },
-          { type: "img", src: "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400", label: "Không khí tiệc" },
-          { type: "video", src: "https://www.w3schools.com/html/mov_bbb.mp4", poster: "https://images.unsplash.com/photo-1533294455009-a77b7557d2d1?w=400", label: "Video thổi nến" },
-          { type: "img", src: "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=400", label: "Bóng bay" },
-          { type: "img", src: "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=400", label: "Chụp ảnh cùng nhau" },
-        ]
-      },
-      {
-        id: 2,
-        name: "Chuyến đi Hội An",
-        date: "Tháng 1, 2025",
-        media: [
-          { type: "img", src: "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=400", label: "Phố đèn lồng" },
-          { type: "img", src: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400", label: "Cầu Nhật Bản" },
-          { type: "img", src: "https://images.unsplash.com/photo-1565967511849-76a60a516170?w=400", label: "Phố cổ ban đêm" },
-          { type: "video", src: "https://www.w3schools.com/html/mov_bbb.mp4", poster: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400", label: "Video thả hoa đăng" },
-          { type: "img", src: "https://images.unsplash.com/photo-1551009175-15bdf9dcb580?w=400", label: "Ẩm thực địa phương" },
-          { type: "img", src: "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=400", label: "Biển An Bàng" },
-          { type: "img", src: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400", label: "Hoàng hôn trên sông" },
-        ]
-      }
-    ];
+    <script>
+        // ============================================================
+        // DỮ LIỆU ALBUM — thay src bằng ảnh/video thực của bạn
+        // ============================================================
+        const ALBUMS = [
+            {
+                id: 0,
+                name: "Kỳ nghỉ Đà Lạt",
+                date: "Tháng 3, 2025",
+                media: [
+                    { type: "img", src: "images/kh/31-05-2026/31-05-2026.jpg", label: "Bờ biển buổi sáng" },
+                    { type: "img", src: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=400", label: "Núi mây" },
+                    { type: "img", src: "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=400", label: "Đồng cỏ xanh" },
+                    { type: "video", src: "https://www.w3schools.com/html/mov_bbb.mp4", poster: "https://images.unsplash.com/photo-1464422845204-6b6b69f2b9e2?w=400", label: "Video thác nước" },
+                    { type: "img", src: "https://images.unsplash.com/photo-1540390769625-2fc3f8b1d50c?w=400", label: "Rừng thông" },
+                    { type: "img", src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400", label: "Hoàng hôn đỉnh núi" },
+                    { type: "img", src: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400", label: "Bờ biển buổi sáng" },
+                    { type: "img", src: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=400", label: "Núi mây" },
+                    { type: "img", src: "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=400", label: "Đồng cỏ xanh" },
+                    { type: "video", src: "https://www.w3schools.com/html/mov_bbb.mp4", poster: "https://images.unsplash.com/photo-1464422845204-6b6b69f2b9e2?w=400", label: "Video thác nước" },
+                    { type: "img", src: "https://images.unsplash.com/photo-1540390769625-2fc3f8b1d50c?w=400", label: "Rừng thông" },
+                    { type: "img", src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400", label: "Hoàng hôn đỉnh núi" },
+                    { type: "img", src: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400", label: "Bờ biển buổi sáng" },
+                    { type: "img", src: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=400", label: "Núi mây" },
+                    { type: "img", src: "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=400", label: "Đồng cỏ xanh" },
+                    { type: "video", src: "https://www.w3schools.com/html/mov_bbb.mp4", poster: "https://images.unsplash.com/photo-1464422845204-6b6b69f2b9e2?w=400", label: "Video thác nước" },
+                    { type: "img", src: "https://images.unsplash.com/photo-1540390769625-2fc3f8b1d50c?w=400", label: "Rừng thông" },
+                    { type: "img", src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400", label: "Hoàng hôn đỉnh núi" },
+                    { type: "img", src: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400", label: "Bờ biển buổi sáng" },
+                    { type: "img", src: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=400", label: "Núi mây" },
+                    { type: "img", src: "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=400", label: "Đồng cỏ xanh" },
+                    { type: "video", src: "https://www.w3schools.com/html/mov_bbb.mp4", poster: "https://images.unsplash.com/photo-1464422845204-6b6b69f2b9e2?w=400", label: "Video thác nước" },
+                    { type: "img", src: "https://images.unsplash.com/photo-1540390769625-2fc3f8b1d50c?w=400", label: "Rừng thông" },
+                    { type: "img", src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400", label: "Hoàng hôn đỉnh núi" },
 
-    // ============================================================
-    // STATE
-    // ============================================================
-    let currentAlbum = null;
-    let lbIdx = 0;
+                ]
+            },
+            {
+                id: 1,
+                name: "Tiệc sinh nhật",
+                date: "Tháng 5, 2025",
+                media: [
+                    { type: "img", src: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=400", label: "Bánh sinh nhật" },
+                    { type: "img", src: "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400", label: "Không khí tiệc" },
+                    { type: "video", src: "https://www.w3schools.com/html/mov_bbb.mp4", poster: "https://images.unsplash.com/photo-1533294455009-a77b7557d2d1?w=400", label: "Video thổi nến" },
+                    { type: "img", src: "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=400", label: "Bóng bay" },
+                    { type: "img", src: "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=400", label: "Chụp ảnh cùng nhau" },
+                ]
+            },
+            {
+                id: 2,
+                name: "Chuyến đi Hội An",
+                date: "Tháng 1, 2025",
+                media: [
+                    { type: "img", src: "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=400", label: "Phố đèn lồng" },
+                    { type: "img", src: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400", label: "Cầu Nhật Bản" },
+                    { type: "img", src: "https://images.unsplash.com/photo-1565967511849-76a60a516170?w=400", label: "Phố cổ ban đêm" },
+                    { type: "video", src: "https://www.w3schools.com/html/mov_bbb.mp4", poster: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400", label: "Video thả hoa đăng" },
+                    { type: "img", src: "https://images.unsplash.com/photo-1551009175-15bdf9dcb580?w=400", label: "Ẩm thực địa phương" },
+                    { type: "img", src: "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=400", label: "Biển An Bàng" },
+                    { type: "img", src: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400", label: "Hoàng hôn trên sông" },
+                ]
+            },
+            {
+                id: 3,
+                name: "Chuyến đi Hội An",
+                date: "Tháng 1, 2025",
+                media: [
+                    { type: "img", src: "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=400", label: "Phố đèn lồng" },
+                    { type: "img", src: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400", label: "Cầu Nhật Bản" },
+                    { type: "img", src: "https://images.unsplash.com/photo-1565967511849-76a60a516170?w=400", label: "Phố cổ ban đêm" },
+                    { type: "video", src: "https://www.w3schools.com/html/mov_bbb.mp4", poster: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400", label: "Video thả hoa đăng" },
+                    { type: "img", src: "https://images.unsplash.com/photo-1551009175-15bdf9dcb580?w=400", label: "Ẩm thực địa phương" },
+                    { type: "img", src: "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=400", label: "Biển An Bàng" },
+                    { type: "img", src: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400", label: "Hoàng hôn trên sông" },
+                ]
+            },
+            {
+                id: 4,
+                name: "Chuyến đi Hội An",
+                date: "Tháng 1, 2025",
+                media: [
+                    { type: "img", src: "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=400", label: "Phố đèn lồng" },
+                    { type: "img", src: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400", label: "Cầu Nhật Bản" },
+                    { type: "img", src: "https://images.unsplash.com/photo-1565967511849-76a60a516170?w=400", label: "Phố cổ ban đêm" },
+                    { type: "video", src: "https://www.w3schools.com/html/mov_bbb.mp4", poster: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400", label: "Video thả hoa đăng" },
+                    { type: "img", src: "https://images.unsplash.com/photo-1551009175-15bdf9dcb580?w=400", label: "Ẩm thực địa phương" },
+                    { type: "img", src: "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=400", label: "Biển An Bàng" },
+                    { type: "img", src: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400", label: "Hoàng hôn trên sông" },
+                ]
+            },
+            {
+                id: 5,
+                name: "Chuyến đi Hội An",
+                date: "Tháng 1, 2025",
+                media: [
+                    { type: "img", src: "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=400", label: "Phố đèn lồng" },
+                    { type: "img", src: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400", label: "Cầu Nhật Bản" },
+                    { type: "img", src: "https://images.unsplash.com/photo-1565967511849-76a60a516170?w=400", label: "Phố cổ ban đêm" },
+                    { type: "video", src: "https://www.w3schools.com/html/mov_bbb.mp4", poster: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400", label: "Video thả hoa đăng" },
+                    { type: "img", src: "https://images.unsplash.com/photo-1551009175-15bdf9dcb580?w=400", label: "Ẩm thực địa phương" },
+                    { type: "img", src: "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=400", label: "Biển An Bàng" },
+                    { type: "img", src: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400", label: "Hoàng hôn trên sông" },
+                ]
+            }
+        ];
 
-    // ============================================================
-    // TRANG CHỦ
-    // ============================================================
-    function renderAlbums() {
-      const g = document.getElementById('album-grid');
-      g.innerHTML = ALBUMS.map(a => {
-        const imgs = a.media.filter(m => m.type === 'img').slice(0, 4);
-        const vidCount = a.media.filter(m => m.type === 'video').length;
-        let thumb = '';
-        if (imgs.length >= 4) {
-          thumb = `<div class="album-thumb-grid">${imgs.map(i => `<img src="${i.src}" loading="lazy" alt="">`).join('')}</div>`;
-        } else {
-          const first = a.media[0];
-          thumb = `<img class="album-thumb" src="${first.poster || first.src}" loading="lazy" alt="">`;
-        }
-        return `
+        // ============================================================
+        // STATE
+        // ============================================================
+        let currentAlbum = null;
+        let lbIdx = 0;
+
+        // ============================================================
+        // TRANG CHỦ
+        // ============================================================
+        function renderAlbums() {
+            const g = document.getElementById('album-grid');
+            g.innerHTML = ALBUMS.map(a => {
+                const imgs = a.media.filter(m => m.type === 'img').slice(0, 4);
+                const vidCount = a.media.filter(m => m.type === 'video').length;
+                let thumb = '';
+                if (imgs.length >= 4) {
+                    thumb = `<div class="album-thumb-grid">${imgs.map(i => `<img src="${i.src}" loading="lazy" alt="">`).join('')}</div>`;
+                } else {
+                    const first = a.media[0];
+                    thumb = `<img class="album-thumb" src="${first.poster || first.src}" loading="lazy" alt="">`;
+                }
+                return `
       <div class="album-card" onclick="openAlbum(${a.id})">
         ${thumb}
         <div class="album-info">
@@ -1473,221 +1544,220 @@ body.lb-open { overflow: hidden }
           </div>
         </div>
       </div>`;
-      }).join('');
-    }
+            }).join('');
+        }
 
-    // ============================================================
-    // TRANG ALBUM
-    // ============================================================
-    function openAlbum(id) {
-  currentAlbum = ALBUMS.find(a => a.id === id);
-  document.getElementById('album-title').textContent = currentAlbum.name;
-  document.getElementById('album-sub').textContent = currentAlbum.media.length + ' mục';
-  renderMedia();
-  document.getElementById('home-page').classList.remove('active');
-  document.getElementById('album-page').classList.add('active');
-  // Scroll đến đầu section album, không phải đầu trang
-  document.getElementById('album-page').scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
+        // ============================================================
+        // TRANG ALBUM
+        // ============================================================
+        function openAlbum(id) {
+            currentAlbum = ALBUMS.find(a => a.id === id);
+            document.getElementById('album-title').textContent = currentAlbum.name;
+            document.getElementById('album-sub').textContent = currentAlbum.media.length + ' mục';
+            renderMedia();
+            document.getElementById('home-page').classList.remove('active');
+            document.getElementById('album-page').classList.add('active');
+            // Scroll đến đầu section album, không phải đầu trang
+            document.getElementById('album-page').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
 
-function showHome() {
-  document.getElementById('album-page').classList.remove('active');
-  document.getElementById('home-page').classList.add('active');
-  // Scroll đến đầu section home
-  document.getElementById('home-page').scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
+        function showHome() {
+            document.getElementById('album-page').classList.remove('active');
+            document.getElementById('home-page').classList.add('active');
+            document.getElementById('album-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
 
-    function renderMedia() {
-      const g = document.getElementById('media-grid');
-      g.innerHTML = currentAlbum.media.map((m, i) => {
-        if (m.type === 'video') {
-          return `
+        function renderMedia() {
+            const g = document.getElementById('media-grid');
+            g.innerHTML = currentAlbum.media.map((m, i) => {
+                if (m.type === 'video') {
+                    return `
         <div class="media-item" onclick="openLb(${i})">
           <video src="${m.src}" poster="${m.poster}" preload="none"></video>
           <div class="vid-badge"><i class="ti ti-player-play" style="font-size:10px"></i> Video</div>
         </div>`;
-        }
-        return `
+                }
+                return `
       <div class="media-item" onclick="openLb(${i})">
         <img src="${m.src}" loading="lazy" alt="${m.label}">
       </div>`;
-      }).join('');
-    }
+            }).join('');
+        }
 
-    // ============================================================
-    // LIGHTBOX
-    // ============================================================
-    // ============================================================
-// LIGHTBOX — kéo mượt như Instagram
-// ============================================================
-const SLIDE_W = () => document.getElementById('lb-track').offsetWidth;
-const GAP = 24; // khoảng cách giữa các slide
+        // ============================================================
+        // LIGHTBOX
+        // ============================================================
+        // ============================================================
+        // LIGHTBOX — kéo mượt như Instagram
+        // ============================================================
+        const SLIDE_W = () => document.getElementById('lb-track').offsetWidth;
+        const GAP = 24; // khoảng cách giữa các slide
 
-let lbOpen = false;
-let dragStartX = 0, dragCurX = 0, isDragging = false;
-let dragStartTime = 0;
-let prevSlideEl = null, curSlideEl = null, nextSlideEl = null;
+        let lbOpen = false;
+        let dragStartX = 0, dragCurX = 0, isDragging = false;
+        let dragStartTime = 0;
+        let prevSlideEl = null, curSlideEl = null, nextSlideEl = null;
 
-function mediaEl(m) {
-  if (m.type === 'video') {
-    return `<video src="${m.src}" poster="${m.poster}" controls style="max-width:100%;max-height:100%;border-radius:10px"></video>`;
-  }
-  return `<img src="${m.src}" alt="${m.label}">`;
-}
+        function mediaEl(m) {
+            if (m.type === 'video') {
+                return `<video src="${m.src}" poster="${m.poster}" controls style="max-width:100%;max-height:100%;border-radius:10px"></video>`;
+            }
+            return `<img src="${m.src}" alt="${m.label}">`;
+        }
 
-function buildSlide(idx) {
-  if (idx < 0 || idx >= currentAlbum.media.length) return null;
-  const el = document.createElement('div');
-  el.className = 'lb-slide';
-  el.innerHTML = mediaEl(currentAlbum.media[idx]);
-  return el;
-}
+        function buildSlide(idx) {
+            if (idx < 0 || idx >= currentAlbum.media.length) return null;
+            const el = document.createElement('div');
+            el.className = 'lb-slide';
+            el.innerHTML = mediaEl(currentAlbum.media[idx]);
+            return el;
+        }
 
-function renderLb() {
-  const track = document.getElementById('lb-track');
-  track.innerHTML = '';
-  const W = SLIDE_W() + GAP;
+        function renderLb() {
+            const track = document.getElementById('lb-track');
+            track.innerHTML = '';
+            const W = SLIDE_W() + GAP;
 
-  prevSlideEl = buildSlide(lbIdx - 1);
-  curSlideEl  = buildSlide(lbIdx);
-  nextSlideEl = buildSlide(lbIdx + 1);
+            prevSlideEl = buildSlide(lbIdx - 1);
+            curSlideEl = buildSlide(lbIdx);
+            nextSlideEl = buildSlide(lbIdx + 1);
 
-  if (prevSlideEl) { prevSlideEl.style.transform = `translateX(${-W}px)`; track.appendChild(prevSlideEl); }
-  if (curSlideEl)  { curSlideEl.style.transform  = `translateX(0px)`;     track.appendChild(curSlideEl); }
-  if (nextSlideEl) { nextSlideEl.style.transform = `translateX(${W}px)`;  track.appendChild(nextSlideEl); }
+            if (prevSlideEl) { prevSlideEl.style.transform = `translateX(${-W}px)`; track.appendChild(prevSlideEl); }
+            if (curSlideEl) { curSlideEl.style.transform = `translateX(0px)`; track.appendChild(curSlideEl); }
+            if (nextSlideEl) { nextSlideEl.style.transform = `translateX(${W}px)`; track.appendChild(nextSlideEl); }
 
-  updateHint();
-}
+            updateHint();
+        }
 
-function updateHint() {
-  const m = currentAlbum.media[lbIdx];
-  document.getElementById('lb-hint').textContent = `${lbIdx + 1} / ${currentAlbum.media.length} · ${m.label}`;
-}
+        function updateHint() {
+            const m = currentAlbum.media[lbIdx];
+            document.getElementById('lb-hint').textContent = `${lbIdx + 1} / ${currentAlbum.media.length} · ${m.label}`;
+        }
 
-function setSlideTransition(on) {
-  [prevSlideEl, curSlideEl, nextSlideEl].forEach(el => {
-    if (el) el.style.transition = on ? 'transform .32s cubic-bezier(.25,.46,.45,.94)' : 'none';
-  });
-}
+        function setSlideTransition(on) {
+            [prevSlideEl, curSlideEl, nextSlideEl].forEach(el => {
+                if (el) el.style.transition = on ? 'transform .32s cubic-bezier(.25,.46,.45,.94)' : 'none';
+            });
+        }
 
-function shiftSlides(offsetX) {
-  const W = SLIDE_W() + GAP;
-  if (prevSlideEl) prevSlideEl.style.transform = `translateX(${-W + offsetX}px)`;
-  if (curSlideEl)  curSlideEl.style.transform  = `translateX(${offsetX}px)`;
-  if (nextSlideEl) nextSlideEl.style.transform = `translateX(${W + offsetX}px)`;
-}
+        function shiftSlides(offsetX) {
+            const W = SLIDE_W() + GAP;
+            if (prevSlideEl) prevSlideEl.style.transform = `translateX(${-W + offsetX}px)`;
+            if (curSlideEl) curSlideEl.style.transform = `translateX(${offsetX}px)`;
+            if (nextSlideEl) nextSlideEl.style.transform = `translateX(${W + offsetX}px)`;
+        }
 
-function commitNav(dir) {
-  // dir: -1 = đi trái (prev), 1 = đi phải (next)
-  const W = SLIDE_W() + GAP;
-  const targetOffset = -dir * W;
+        function commitNav(dir) {
+            // dir: -1 = đi trái (prev), 1 = đi phải (next)
+            const W = SLIDE_W() + GAP;
+            const targetOffset = -dir * W;
 
-  setSlideTransition(true);
-  shiftSlides(targetOffset);
+            setSlideTransition(true);
+            shiftSlides(targetOffset);
 
-  setTimeout(() => {
-    lbIdx = Math.max(0, Math.min(currentAlbum.media.length - 1, lbIdx + dir));
-    renderLb();
-  }, 320);
-}
+            setTimeout(() => {
+                lbIdx = Math.max(0, Math.min(currentAlbum.media.length - 1, lbIdx + dir));
+                renderLb();
+            }, 320);
+        }
 
-function snapBack() {
-  setSlideTransition(true);
-  shiftSlides(0);
-}
+        function snapBack() {
+            setSlideTransition(true);
+            shiftSlides(0);
+        }
 
-function openLb(idx) {
-  lbIdx = idx;
-  lbOpen = true;
-  document.getElementById('lightbox').classList.add('open');
-  document.body.classList.add('lb-open');
-  renderLb();
-  setupLbDrag();
-}
+        function openLb(idx) {
+            lbIdx = idx;
+            lbOpen = true;
+            document.getElementById('lightbox').classList.add('open');
+            document.body.classList.add('lb-open');
+            renderLb();
+            setupLbDrag();
+        }
 
-function closeLb() {
-  document.getElementById('lightbox').classList.remove('open');
-  document.body.classList.remove('lb-open');
-  lbOpen = false;
-}
+        function closeLb() {
+            document.getElementById('lightbox').classList.remove('open');
+            document.body.classList.remove('lb-open');
+            lbOpen = false;
+        }
 
-function lbNav(d) {
-  const next = lbIdx + d;
-  if (next < 0 || next >= currentAlbum.media.length) return;
-  commitNav(d);
-}
+        function lbNav(d) {
+            const next = lbIdx + d;
+            if (next < 0 || next >= currentAlbum.media.length) return;
+            commitNav(d);
+        }
 
-// ---- Drag / Touch ----
-function setupLbDrag() {
-  const track = document.getElementById('lb-track');
+        // ---- Drag / Touch ----
+        function setupLbDrag() {
+            const lb = document.getElementById('lightbox');
 
-  // Mouse
-  track.onmousedown = e => startDrag(e.clientX);
-  window.onmousemove = e => { if (isDragging) onDrag(e.clientX); };
-  window.onmouseup   = e => { if (isDragging) endDrag(e.clientX); };
+            lb.onmousedown = e => { if (!e.target.closest('.lb-close, .lb-nav')) startDrag(e.clientX); };
+            window.onmousemove = e => { if (isDragging) onDrag(e.clientX); };
+            window.onmouseup = e => { if (isDragging) endDrag(e.clientX); };
 
-  // Touch
-  track.ontouchstart = e => startDrag(e.touches[0].clientX);
-  track.ontouchmove  = e => { if (isDragging) { e.preventDefault(); onDrag(e.touches[0].clientX); } };
-  track.ontouchend   = e => { if (isDragging) endDrag(e.changedTouches[0].clientX); };
-}
+            lb.ontouchstart = e => { if (!e.target.closest('.lb-close, .lb-nav')) startDrag(e.touches[0].clientX); };
+            lb.ontouchmove = e => { if (isDragging) { e.preventDefault(); onDrag(e.touches[0].clientX); } };
+            lb.ontouchend = e => { if (isDragging) endDrag(e.changedTouches[0].clientX); };
+        }
 
-function startDrag(x) {
-  isDragging = true;
-  dragStartX = x;
-  dragCurX   = x;
-  dragStartTime = Date.now();
-  setSlideTransition(false);
-}
+        function startDrag(x) {
+            isDragging = true;
+            dragStartX = x;
+            dragCurX = x;
+            dragStartTime = Date.now();
+            setSlideTransition(false);
+        }
 
-function onDrag(x) {
-  dragCurX = x;
-  const dx = x - dragStartX;
-  // Chặn kéo vượt đầu/cuối
-  if ((lbIdx === 0 && dx > 0) || (lbIdx === currentAlbum.media.length - 1 && dx < 0)) {
-    shiftSlides(dx * 0.2); // kéo có lực cản
-  } else {
-    shiftSlides(dx);
-  }
-}
+        function onDrag(x) {
+            dragCurX = x;
+            const dx = x - dragStartX;
+            // Chặn kéo vượt đầu/cuối
+            if ((lbIdx === 0 && dx > 0) || (lbIdx === currentAlbum.media.length - 1 && dx < 0)) {
+                shiftSlides(dx * 0.2); // kéo có lực cản
+            } else {
+                shiftSlides(dx);
+            }
+        }
 
-function endDrag(x) {
-  isDragging = false;
-  const dx       = x - dragStartX;
-  const dt       = Date.now() - dragStartTime;
-  const velocity = Math.abs(dx) / dt; // px/ms
-  const W        = SLIDE_W();
-  const threshold = W * 0.3;
+        function endDrag(x) {
+            isDragging = false;
+            const dx = x - dragStartX;
+            const dt = Date.now() - dragStartTime;
+            const velocity = Math.abs(dx) / dt; // px/ms
+            const W = SLIDE_W();
+            const threshold = W * 0.3;
 
-  if ((Math.abs(dx) > threshold || velocity > 0.4) && Math.abs(dx) > 10) {
-    const dir = dx < 0 ? 1 : -1;
-    const next = lbIdx + dir;
-    if (next >= 0 && next < currentAlbum.media.length) {
-      commitNav(dir);
-    } else {
-      snapBack();
-    }
-  } else {
-    snapBack();
-  }
-}
+            if ((Math.abs(dx) > threshold || velocity > 0.4) && Math.abs(dx) > 10) {
+                const dir = dx < 0 ? 1 : -1;
+                const next = lbIdx + dir;
+                if (next >= 0 && next < currentAlbum.media.length) {
+                    commitNav(dir);
+                } else {
+                    snapBack();
+                }
+            } else {
+                snapBack();
+            }
+        }
 
-// Click ngoài hình đóng lightbox
-document.getElementById('lightbox').addEventListener('click', function(e) {
-  if (!e.target.closest('img, video, .lb-close, .lb-nav, #lb-track')) closeLb();
-});
+        // Click ngoài hình đóng lightbox
+        document.getElementById('lightbox').addEventListener('click', function (e) {
+            // Nếu đã drag (kéo > 5px) thì không đóng
+            if (Math.abs(dragCurX - dragStartX) > 5) return;
+            if (!e.target.closest('img, video, .lb-close, .lb-nav')) closeLb();
+        });
 
-// Phím tắt
-document.addEventListener('keydown', e => {
-  if (!lbOpen) return;
-  if (e.key === 'ArrowRight') lbNav(1);
-  if (e.key === 'ArrowLeft')  lbNav(-1);
-  if (e.key === 'Escape')     closeLb();
-});
+        // Phím tắt
+        document.addEventListener('keydown', e => {
+            if (!lbOpen) return;
+            if (e.key === 'ArrowRight') lbNav(1);
+            if (e.key === 'ArrowLeft') lbNav(-1);
+            if (e.key === 'Escape') closeLb();
+        });
 
-    // Khởi động
-    renderAlbums();
-  </script>
+        // Khởi động
+        renderAlbums();
+    </script>
     <!-- ==================== MODAL CHUYẾN ĐI (KHÔNG XUNG ĐỘT) ==================== -->
     <div id="trip-modal" class="trip-modal">
         <div class="trip-modal-content">
@@ -1917,79 +1987,79 @@ document.addEventListener('keydown', e => {
     })();
 </script>
 <!-- Ngày đặc biệt tiếp theo -->
-   <script>
+<script>
     const events = [
-      { name: "💕 Valentine", date: "14/02" },
-      { name: "👩 Ngày Quốc tế Phụ nữ", date: "08/03" },
-      { name: "🎂 Sinh nhật Pink", date: "25/03" },
-      { name: "💍 Lễ dạm ngõ", date: "22/07" },
-      { name: "🎂 Sinh nhật Kay", date: "05/09" },
-      { name: "👰🤵 Đám cưới", date: "01/10" },
-      { name: "🌹 Ngày Phụ nữ Việt Nam", date: "20/10" },
-      { name: "💑 Ngày quen nhau", date: "29/11" },
-      { name: "🎄 Giáng sinh", date: "25/12" }
+        { name: "💕 Valentine", date: "14/02" },
+        { name: "👩 Ngày Quốc tế Phụ nữ", date: "08/03" },
+        { name: "🎂 Sinh nhật Pink", date: "25/03" },
+        { name: "💍 Lễ dạm ngõ", date: "22/07" },
+        { name: "🎂 Sinh nhật Kay", date: "05/09" },
+        { name: "👰🤵 Đám cưới", date: "01/10" },
+        { name: "🌹 Ngày Phụ nữ Việt Nam", date: "20/10" },
+        { name: "💑 Ngày quen nhau", date: "29/11" },
+        { name: "🎄 Giáng sinh", date: "25/12" }
     ];
 
     let timerInterval = null;
 
     function getNextEvent() {
-      const today = new Date();
-      let soonest = null;
-      let minMs = Infinity;
+        const today = new Date();
+        let soonest = null;
+        let minMs = Infinity;
 
-      events.forEach(event => {
-        const [day, month] = event.date.split('/').map(Number);
-        let target = new Date(today.getFullYear(), month - 1, day);
+        events.forEach(event => {
+            const [day, month] = event.date.split('/').map(Number);
+            let target = new Date(today.getFullYear(), month - 1, day);
 
-        if (target < today) {
-          target = new Date(today.getFullYear() + 1, month - 1, day);
-        }
+            if (target < today) {
+                target = new Date(today.getFullYear() + 1, month - 1, day);
+            }
 
-        const diffMs = target - today;
-        if (diffMs < minMs) {
-          minMs = diffMs;
-          soonest = { ...event, targetDate: target };
-        }
-      });
-      return soonest;
+            const diffMs = target - today;
+            if (diffMs < minMs) {
+                minMs = diffMs;
+                soonest = { ...event, targetDate: target };
+            }
+        });
+        return soonest;
     }
 
     function formatDateVN(date) {
-      const weekdays = ["Chủ Nhật", "Thứ Hai", "Thứ Ba", "Thứ Tư", "Thứ Năm", "Thứ Sáu", "Thứ Bảy"];
-      const dayOfWeek = weekdays[date.getDay()];
-      
-      const day = String(date.getDate()).padStart(2, '0');
-      const month = String(date.getMonth() + 1).padStart(2, '0');
-      const year = date.getFullYear();
+        const weekdays = ["Chủ Nhật", "Thứ Hai", "Thứ Ba", "Thứ Tư", "Thứ Năm", "Thứ Sáu", "Thứ Bảy"];
+        const dayOfWeek = weekdays[date.getDay()];
 
-      return `${dayOfWeek}, ${day}-${month}-${year}`;
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = date.getFullYear();
+
+        return `${dayOfWeek}, ${day}-${month}-${year}`;
     }
 
     function updateCountdown() {
-      const next = getNextEvent();
-      if (!next) return;
+        const next = getNextEvent();
+        if (!next) return;
 
-      const now = new Date();
-      let diff = next.targetDate - now;
+        const now = new Date();
+        let diff = next.targetDate - now;
 
-      if (diff < 0) {
-        clearInterval(timerInterval);
-        setTimeout(() => location.reload(), 1000);
-        return;
-      }
+        if (diff < 0) {
+            clearInterval(timerInterval);
+            setTimeout(() => location.reload(), 1000);
+            return;
+        }
 
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      diff -= days * (1000 * 60 * 60 * 24);
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        diff -= days * (1000 * 60 * 60 * 24);
 
-      const hours = Math.floor(diff / (1000 * 60 * 60));
-      diff -= hours * (1000 * 60 * 60);
+        const hours = Math.floor(diff / (1000 * 60 * 60));
+        diff -= hours * (1000 * 60 * 60);
 
-      const minutes = Math.floor(diff / (1000 * 60));
-      diff -= minutes * (1000 * 60);
+        const minutes = Math.floor(diff / (1000 * 60));
+        diff -= minutes * (1000 * 60);
 
-      const seconds = Math.floor(diff / 1000);
+        const seconds = Math.floor(diff / 1000);
 
-      document.getElementById('content').innerHTML = `
+        document.getElementById('content').innerHTML = `
         <div class="name">${next.name}</div>
         <div class="date">${formatDateVN(next.targetDate)}</div>
         
@@ -2017,5 +2087,6 @@ document.addEventListener('keydown', e => {
     // Khởi chạy
     updateCountdown();
     timerInterval = setInterval(updateCountdown, 1000);
-  </script>
+</script>
+
 </html>
