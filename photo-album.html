@@ -1,180 +1,407 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Album Ảnh</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:system-ui,sans-serif;background:#f5f5f3;color:#1a1a18;min-height:100vh}
-.container{max-width:900px;margin:0 auto;padding:0 1rem 2rem}
-.page{display:none}
-.page.active{display:block}
-
-/* Home */
-#home-page .header{margin-bottom:1.5rem;padding-top:2rem}
-#home-page .header h1{font-size:22px;font-weight:500}
-#home-page .header p{font-size:14px;color:#666;margin-top:4px}
-.album-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
-.album-card{background:#fff;border:0.5px solid rgba(0,0,0,.12);border-radius:12px;overflow:hidden;cursor:pointer;transition:border-color .15s}
-.album-card:hover{border-color:rgba(0,0,0,.3)}
-.album-thumb-grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;width:100%;aspect-ratio:1}
-.album-thumb-grid img{width:100%;height:100%;object-fit:cover;display:block}
-.album-thumb{width:100%;aspect-ratio:1;object-fit:cover;display:block}
-.album-info{padding:12px}
-.album-info h3{font-size:15px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.album-info .meta{font-size:13px;color:#888;margin-top:4px}
-
-/* Album page */
-.sticky-header{position:sticky;top:0;z-index:10;background:#f5f5f3;padding:1rem 0 0.75rem;border-bottom:0.5px solid rgba(0,0,0,.08)}
-#album-page .topbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.back-btn{background:none;border:0.5px solid rgba(0,0,0,.25);border-radius:8px;padding:6px 12px;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:6px}
-.back-btn:hover{background:#f0f0ee}
-#album-page .album-title{font-size:18px;font-weight:500}
-#album-page .album-sub{font-size:13px;color:#888;margin-left:auto}
-.media-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:6px;margin-top:1rem}
-.media-item{position:relative;aspect-ratio:1;border-radius:8px;overflow:hidden;cursor:pointer}
-.media-item img,.media-item video{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
-.vid-badge{position:absolute;bottom:6px;left:6px;background:rgba(0,0,0,.55);border-radius:4px;padding:2px 6px;font-size:11px;color:#fff;display:flex;align-items:center;gap:4px}
-
-/* Lightbox */
-.lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:100;align-items:center;justify-content:center;flex-direction:column;touch-action:pan-y}
-.lightbox.open{display:flex}
-body.lb-open{overflow:hidden}
-.lightbox img,.lightbox video{max-width:90vw;max-height:80vh;border-radius:8px;object-fit:contain}
-.lb-close{position:absolute;top:16px;right:20px;background:rgba(255,255,255,.15);border:none;color:#fff;font-size:22px;width:36px;height:36px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center}
-.lb-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.15);border:none;color:#fff;font-size:20px;width:42px;height:42px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center}
-.lb-prev{left:12px}.lb-next{right:12px}
-.lb-hint{color:rgba(255,255,255,.6);font-size:12px;margin-top:12px}
-</style>
-</head>
-<body>
-<div class="container">
-
-  <!-- Trang chủ -->
-  <div id="home-page" class="page active">
-    <div class="header">
-      <h1>Album của tôi</h1>
-      <p>3 album · bấm vào album để xem ảnh &amp; video</p>
-    </div>
-    <div class="album-grid" id="album-grid"></div>
-  </div>
-
-  <!-- Trang album -->
-  <div id="album-page" class="page">
-    <div class="sticky-header">
-      <div class="topbar">
-        <button class="back-btn" onclick="showHome()">
-          <i class="ti ti-arrow-left"></i> Quay lại
-        </button>
-        <span class="album-title" id="album-title"></span>
-        <span class="album-sub" id="album-sub"></span>
-      </div>
-    </div>
-    <div class="media-grid" id="media-grid"></div>
-  </div>
-
-</div>
-
-<!-- Lightbox -->
-<div class="lightbox" id="lightbox">
-  <button class="lb-close" onclick="closeLb()">✕</button>
-  <button class="lb-nav lb-prev" onclick="lbNav(-1)"><i class="ti ti-chevron-left"></i></button>
-  <div id="lb-content"></div>
-  <button class="lb-nav lb-next" onclick="lbNav(1)"><i class="ti ti-chevron-right"></i></button>
-  <span class="lb-hint" id="lb-hint"></span>
-</div>
-
-<script>
-// ============================================================
-// DỮ LIỆU ALBUM — thay src bằng ảnh/video thực của bạn
-// ============================================================
-const ALBUMS = [
-  {
-    id: 0,
-    name: "Kỳ nghỉ Đà Lạt",
-    date: "Tháng 3, 2025",
-    media: [
-      { type:"img",  src:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400", label:"Bờ biển buổi sáng" },
-      { type:"img",  src:"https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=400", label:"Núi mây" },
-      { type:"img",  src:"https://images.unsplash.com/photo-1501854140801-50d01698950b?w=400", label:"Đồng cỏ xanh" },
-      { type:"video",src:"https://www.w3schools.com/html/mov_bbb.mp4", poster:"https://images.unsplash.com/photo-1464422845204-6b6b69f2b9e2?w=400", label:"Video thác nước" },
-      { type:"img",  src:"https://images.unsplash.com/photo-1540390769625-2fc3f8b1d50c?w=400", label:"Rừng thông" },
-      { type:"img",  src:"https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400", label:"Hoàng hôn đỉnh núi" },
-    ]
-  },
-  {
-    id: 1,
-    name: "Tiệc sinh nhật",
-    date: "Tháng 5, 2025",
-    media: [
-      { type:"img",  src:"https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=400", label:"Bánh sinh nhật" },
-      { type:"img",  src:"https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400", label:"Không khí tiệc" },
-      { type:"video",src:"https://www.w3schools.com/html/mov_bbb.mp4", poster:"https://images.unsplash.com/photo-1533294455009-a77b7557d2d1?w=400", label:"Video thổi nến" },
-      { type:"img",  src:"https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=400", label:"Bóng bay" },
-      { type:"img",  src:"https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=400", label:"Chụp ảnh cùng nhau" },
-      { type:"img",  src:"https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=400", label:"Phố đèn lồng" },
-      { type:"img",  src:"https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400", label:"Cầu Nhật Bản" },
-      { type:"img",  src:"https://images.unsplash.com/photo-1565967511849-76a60a516170?w=400", label:"Phố cổ ban đêm" },
-      { type:"video",src:"https://www.w3schools.com/html/mov_bbb.mp4", poster:"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400", label:"Video thả hoa đăng" },
-      { type:"img",  src:"https://images.unsplash.com/photo-1551009175-15bdf9dcb580?w=400", label:"Ẩm thực địa phương" },
-      { type:"img",  src:"https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=400", label:"Biển An Bàng" },
-      { type:"img",  src:"https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400", label:"Hoàng hôn trên sông" },
-    ]
-  },
-  {
-    id: 2,
-    name: "Chuyến đi Hội An",
-    date: "Tháng 1, 2025",
-    media: [
-      { type:"img",  src:"https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=400", label:"Phố đèn lồng" },
-      { type:"img",  src:"https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400", label:"Cầu Nhật Bản" },
-      { type:"img",  src:"https://images.unsplash.com/photo-1565967511849-76a60a516170?w=400", label:"Phố cổ ban đêm" },
-      { type:"video",src:"https://www.w3schools.com/html/mov_bbb.mp4", poster:"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400", label:"Video thả hoa đăng" },
-      { type:"img",  src:"https://images.unsplash.com/photo-1551009175-15bdf9dcb580?w=400", label:"Ẩm thực địa phương" },
-      { type:"img",  src:"https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=400", label:"Biển An Bàng" },
-      { type:"img",  src:"https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400", label:"Hoàng hôn trên sông" },
-      { type:"img",  src:"https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=400", label:"Phố đèn lồng" },
-      { type:"img",  src:"https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400", label:"Cầu Nhật Bản" },
-      { type:"img",  src:"https://images.unsplash.com/photo-1565967511849-76a60a516170?w=400", label:"Phố cổ ban đêm" },
-      { type:"video",src:"https://www.w3schools.com/html/mov_bbb.mp4", poster:"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400", label:"Video thả hoa đăng" },
-      { type:"img",  src:"https://images.unsplash.com/photo-1551009175-15bdf9dcb580?w=400", label:"Ẩm thực địa phương" },
-      { type:"img",  src:"https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=400", label:"Biển An Bàng" },
-      { type:"img",  src:"https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400", label:"Hoàng hôn trên sông" },
-      { type:"img",  src:"https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=400", label:"Phố đèn lồng" },
-      { type:"img",  src:"https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400", label:"Cầu Nhật Bản" },
-      { type:"img",  src:"https://images.unsplash.com/photo-1565967511849-76a60a516170?w=400", label:"Phố cổ ban đêm" },
-      { type:"video",src:"https://www.w3schools.com/html/mov_bbb.mp4", poster:"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400", label:"Video thả hoa đăng" },
-      { type:"img",  src:"https://images.unsplash.com/photo-1551009175-15bdf9dcb580?w=400", label:"Ẩm thực địa phương" },
-      { type:"img",  src:"https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=400", label:"Biển An Bàng" },
-      { type:"img",  src:"https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400", label:"Hoàng hôn trên sông" },
-    ]
-  }
-];
-
-// ============================================================
-// STATE
-// ============================================================
-let currentAlbum = null;
-let lbIdx = 0;
-
-// ============================================================
-// TRANG CHỦ
-// ============================================================
-function renderAlbums() {
-  const g = document.getElementById('album-grid');
-  g.innerHTML = ALBUMS.map(a => {
-    const imgs = a.media.filter(m => m.type === 'img').slice(0, 4);
-    const vidCount = a.media.filter(m => m.type === 'video').length;
-    let thumb = '';
-    if (imgs.length >= 4) {
-      thumb = `<div class="album-thumb-grid">${imgs.map(i => `<img src="${i.src}" loading="lazy" alt="">`).join('')}</div>`;
-    } else {
-      const first = a.media[0];
-      thumb = `<img class="album-thumb" src="${first.poster || first.src}" loading="lazy" alt="">`;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Album Ảnh</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
     }
-    return `
+
+    body {
+      font-family: system-ui, sans-serif;
+      background: #f5f5f3;
+      color: #1a1a18;
+      min-height: 100vh
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 1rem 2rem
+    }
+
+    .page {
+      display: none
+    }
+
+    .page.active {
+      display: block
+    }
+
+    /* Home */
+    #home-page .header {
+      margin-bottom: 1.5rem;
+      padding-top: 2rem
+    }
+
+    #home-page .header h1 {
+      font-size: 22px;
+      font-weight: 500
+    }
+
+    #home-page .header p {
+      font-size: 14px;
+      color: #666;
+      margin-top: 4px
+    }
+
+    .album-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px
+    }
+
+    .album-card {
+      background: #fff;
+      border: 0.5px solid rgba(0, 0, 0, .12);
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: border-color .15s
+    }
+
+    .album-card:hover {
+      border-color: rgba(0, 0, 0, .3)
+    }
+
+    .album-thumb-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      width: 100%;
+      aspect-ratio: 1
+    }
+
+    .album-thumb-grid img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block
+    }
+
+    .album-thumb {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      display: block
+    }
+
+    .album-info {
+      padding: 12px
+    }
+
+    .album-info h3 {
+      font-size: 15px;
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis
+    }
+
+    .album-info .meta {
+      font-size: 13px;
+      color: #888;
+      margin-top: 4px
+    }
+
+    /* Album page */
+    .sticky-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: #f5f5f3;
+      padding: 1rem 0 0.75rem;
+      border-bottom: 0.5px solid rgba(0, 0, 0, .08)
+    }
+
+    #album-page .topbar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap
+    }
+
+    .back-btn {
+      background: none;
+      border: 0.5px solid rgba(0, 0, 0, .25);
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px
+    }
+
+    .back-btn:hover {
+      background: #f0f0ee
+    }
+
+    #album-page .album-title {
+      font-size: 18px;
+      font-weight: 500
+    }
+
+    #album-page .album-sub {
+      font-size: 13px;
+      color: #888;
+      margin-left: auto
+    }
+
+    .media-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 6px;
+      margin-top: 1rem
+    }
+
+    .media-item {
+      position: relative;
+      aspect-ratio: 1;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer
+    }
+
+    .media-item img,
+    .media-item video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      pointer-events: none
+    }
+
+    .vid-badge {
+      position: absolute;
+      bottom: 6px;
+      left: 6px;
+      background: rgba(0, 0, 0, .55);
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-size: 11px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 4px
+    }
+
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .85);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      touch-action: pan-y
+    }
+
+    .lightbox.open {
+      display: flex
+    }
+
+    body.lb-open {
+      overflow: hidden
+    }
+
+    #lb-content {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-width: 90vw;
+      max-height: 80vh
+    }
+
+    #lb-content img,
+    #lb-content video {
+      max-width: 90vw;
+      max-height: 80vh;
+      border-radius: 8px;
+      object-fit: contain;
+      display: block
+    }
+
+    .lb-slide {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform .3s ease
+    }
+
+    .lb-slide img,
+    .lb-slide video {
+      max-width: 90vw;
+      max-height: 80vh;
+      border-radius: 8px;
+      object-fit: contain
+    }
+
+    .lb-close {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      background: rgba(255, 255, 255, .15);
+      border: none;
+      color: #fff;
+      font-size: 22px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .lb-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, .15);
+      border: none;
+      color: #fff;
+      font-size: 20px;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .lb-prev {
+      left: 12px
+    }
+
+    .lb-next {
+      right: 12px
+    }
+
+    .lb-hint {
+      color: rgba(255, 255, 255, .6);
+      font-size: 12px;
+      margin-top: 12px
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <!-- Trang chủ -->
+    <div id="home-page" class="page active">
+      <div class="header">
+        <h1>Album của tôi</h1>
+        <p>3 album · bấm vào album để xem ảnh &amp; video</p>
+      </div>
+      <div class="album-grid" id="album-grid"></div>
+    </div>
+
+    <!-- Trang album -->
+    <div id="album-page" class="page">
+      <div class="sticky-header">
+        <div class="topbar">
+          <button class="back-btn" onclick="showHome()">
+            <i class="ti ti-arrow-left"></i> Quay lại
+          </button>
+          <span class="album-title" id="album-title"></span>
+          <span class="album-sub" id="album-sub"></span>
+        </div>
+      </div>
+      <div class="media-grid" id="media-grid"></div>
+    </div>
+
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <button class="lb-close" onclick="closeLb()">✕</button>
+    <button class="lb-nav lb-prev" onclick="lbNav(-1)"><i class="ti ti-chevron-left"></i></button>
+    <div id="lb-content"></div>
+    <button class="lb-nav lb-next" onclick="lbNav(1)"><i class="ti ti-chevron-right"></i></button>
+    <span class="lb-hint" id="lb-hint"></span>
+  </div>
+
+  <script>
+    // ============================================================
+    // DỮ LIỆU ALBUM — thay src bằng ảnh/video thực của bạn
+    // ============================================================
+    const ALBUMS = [
+      {
+        id: 0,
+        name: "Kỳ nghỉ Đà Lạt",
+        date: "Tháng 3, 2025",
+        media: [
+          { type: "img", src: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400", label: "Bờ biển buổi sáng" },
+          { type: "img", src: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=400", label: "Núi mây" },
+          { type: "img", src: "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=400", label: "Đồng cỏ xanh" },
+          { type: "video", src: "https://www.w3schools.com/html/mov_bbb.mp4", poster: "https://images.unsplash.com/photo-1464422845204-6b6b69f2b9e2?w=400", label: "Video thác nước" },
+          { type: "img", src: "https://images.unsplash.com/photo-1540390769625-2fc3f8b1d50c?w=400", label: "Rừng thông" },
+          { type: "img", src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400", label: "Hoàng hôn đỉnh núi" },
+        ]
+      },
+      {
+        id: 1,
+        name: "Tiệc sinh nhật",
+        date: "Tháng 5, 2025",
+        media: [
+          { type: "img", src: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=400", label: "Bánh sinh nhật" },
+          { type: "img", src: "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400", label: "Không khí tiệc" },
+          { type: "video", src: "https://www.w3schools.com/html/mov_bbb.mp4", poster: "https://images.unsplash.com/photo-1533294455009-a77b7557d2d1?w=400", label: "Video thổi nến" },
+          { type: "img", src: "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=400", label: "Bóng bay" },
+          { type: "img", src: "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=400", label: "Chụp ảnh cùng nhau" },
+        ]
+      },
+      {
+        id: 2,
+        name: "Chuyến đi Hội An",
+        date: "Tháng 1, 2025",
+        media: [
+          { type: "img", src: "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=400", label: "Phố đèn lồng" },
+          { type: "img", src: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400", label: "Cầu Nhật Bản" },
+          { type: "img", src: "https://images.unsplash.com/photo-1565967511849-76a60a516170?w=400", label: "Phố cổ ban đêm" },
+          { type: "video", src: "https://www.w3schools.com/html/mov_bbb.mp4", poster: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400", label: "Video thả hoa đăng" },
+          { type: "img", src: "https://images.unsplash.com/photo-1551009175-15bdf9dcb580?w=400", label: "Ẩm thực địa phương" },
+          { type: "img", src: "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=400", label: "Biển An Bàng" },
+          { type: "img", src: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400", label: "Hoàng hôn trên sông" },
+        ]
+      }
+    ];
+
+    let currentAlbum = null;
+    let lbIdx = 0;
+
+    // ============================================================
+    // TRANG CHỦ
+    // ============================================================
+    function renderAlbums() {
+      const g = document.getElementById('album-grid');
+      g.innerHTML = ALBUMS.map(a => {
+        const imgs = a.media.filter(m => m.type === 'img').slice(0, 4);
+        const vidCount = a.media.filter(m => m.type === 'video').length;
+        let thumb = '';
+        if (imgs.length >= 4) {
+          thumb = `<div class="album-thumb-grid">${imgs.map(i => `<img src="${i.src}" loading="lazy" alt="">`).join('')}</div>`;
+        } else {
+          const first = a.media[0];
+          thumb = `<img class="album-thumb" src="${first.poster || first.src}" loading="lazy" alt="">`;
+        }
+        return `
       <div class="album-card" onclick="openAlbum(${a.id})">
         ${thumb}
         <div class="album-info">
@@ -185,106 +412,133 @@ function renderAlbums() {
           </div>
         </div>
       </div>`;
-  }).join('');
-}
+      }).join('');
+    }
 
-// ============================================================
-// TRANG ALBUM
-// ============================================================
-function openAlbum(id) {
-  currentAlbum = ALBUMS.find(a => a.id === id);
-  document.getElementById('album-title').textContent = currentAlbum.name;
-  document.getElementById('album-sub').textContent = currentAlbum.media.length + ' mục';
-  renderMedia();
-  document.getElementById('home-page').classList.remove('active');
-  document.getElementById('album-page').classList.add('active');
-  window.scrollTo({ top: 0 });
-}
+    // ============================================================
+    // TRANG ALBUM
+    // ============================================================
+    function openAlbum(id) {
+      currentAlbum = ALBUMS.find(a => a.id === id);
+      document.getElementById('album-title').textContent = currentAlbum.name;
+      document.getElementById('album-sub').textContent = currentAlbum.media.length + ' mục';
+      renderMedia();
+      document.getElementById('home-page').classList.remove('active');
+      document.getElementById('album-page').classList.add('active');
+      window.scrollTo({ top: 0 });
+    }
 
-function showHome() {
-  document.getElementById('album-page').classList.remove('active');
-  document.getElementById('home-page').classList.add('active');
-  window.scrollTo({ top: 0 });
-}
+    function showHome() {
+      document.getElementById('album-page').classList.remove('active');
+      document.getElementById('home-page').classList.add('active');
+      window.scrollTo({ top: 0 });
+    }
 
-function renderMedia() {
-  const g = document.getElementById('media-grid');
-  g.innerHTML = currentAlbum.media.map((m, i) => {
-    if (m.type === 'video') {
-      return `
+    function renderMedia() {
+      const g = document.getElementById('media-grid');
+      g.innerHTML = currentAlbum.media.map((m, i) => {
+        if (m.type === 'video') {
+          return `
         <div class="media-item" onclick="openLb(${i})">
           <video src="${m.src}" poster="${m.poster}" preload="none"></video>
           <div class="vid-badge"><i class="ti ti-player-play" style="font-size:10px"></i> Video</div>
         </div>`;
-    }
-    return `
+        }
+        return `
       <div class="media-item" onclick="openLb(${i})">
         <img src="${m.src}" loading="lazy" alt="${m.label}">
       </div>`;
-  }).join('');
-}
+      }).join('');
+    }
 
-// ============================================================
-// LIGHTBOX
-// ============================================================
-function openLb(idx) {
-  lbIdx = idx;
-  renderLb();
-  document.getElementById('lightbox').classList.add('open');
-  document.body.classList.add('lb-open');
-}
+    // ============================================================
+    // LIGHTBOX
+    // ============================================================
+    function openLb(idx) {
+      lbIdx = idx;
+      renderLb();
+      document.getElementById('lightbox').classList.add('open');
+      document.body.classList.add('lb-open');
+    }
 
-function closeLb() {
-  document.getElementById('lightbox').classList.remove('open');
-  document.body.classList.remove('lb-open');
-}
+    function closeLb() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.classList.remove('lb-open');
+    }
 
-function lbNav(d) {
-  lbIdx = (lbIdx + d + currentAlbum.media.length) % currentAlbum.media.length;
-  renderLb();
-}
+    function lbNav(d) {
+      const next = (lbIdx + d + currentAlbum.media.length) % currentAlbum.media.length;
+      slideTo(next, d);
+    }
 
-function renderLb() {
-  const m = currentAlbum.media[lbIdx];
-  const c = document.getElementById('lb-content');
-  if (m.type === 'video') {
-    c.innerHTML = `<video src="${m.src}" poster="${m.poster}" controls style="max-width:90vw;max-height:80vh;border-radius:8px"></video>`;
-  } else {
-    c.innerHTML = `<img src="${m.src}" alt="${m.label}" style="max-width:90vw;max-height:80vh;border-radius:8px;object-fit:contain">`;
-  }
-  document.getElementById('lb-hint').textContent = `${lbIdx + 1} / ${currentAlbum.media.length} · ${m.label}`;
-}
+    function renderLb() {
+      const m = currentAlbum.media[lbIdx];
+      const c = document.getElementById('lb-content');
+      c.style.width = '90vw';
+      c.style.height = '80vh';
+      c.innerHTML = `<div class="lb-slide" style="transform:translateX(0)">${mediaEl(m)}</div>`;
+      document.getElementById('lb-hint').textContent = `${lbIdx + 1} / ${currentAlbum.media.length} · ${m.label}`;
+    }
 
-// Đóng lightbox khi click ngoài
-document.getElementById('lightbox').addEventListener('click', function(e) {
-  if (e.target === this) closeLb();
-});
+    function slideTo(next, dir) {
+      const m = currentAlbum.media[next];
+      const c = document.getElementById('lb-content');
+      const cur = c.querySelector('.lb-slide');
+      const incoming = document.createElement('div');
+      incoming.className = 'lb-slide';
+      incoming.style.transform = `translateX(${dir > 0 ? '100%' : '-100%'})`;
+      incoming.innerHTML = mediaEl(m);
+      c.appendChild(incoming);
 
-// Swipe trên lightbox
-let tsX = 0, tsY = 0;
-const lb = document.getElementById('lightbox');
-lb.addEventListener('touchstart', e => {
-  tsX = e.touches[0].clientX;
-  tsY = e.touches[0].clientY;
-}, { passive: true });
-lb.addEventListener('touchend', e => {
-  const dx = e.changedTouches[0].clientX - tsX;
-  const dy = e.changedTouches[0].clientY - tsY;
-  if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
-    lbNav(dx < 0 ? 1 : -1);
-  }
-}, { passive: true });
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          cur.style.transform = `translateX(${dir > 0 ? '-100%' : '100%'})`;
+          incoming.style.transform = 'translateX(0)';
+        });
+      });
 
-// Phím tắt
-document.addEventListener('keydown', e => {
-  if (!document.getElementById('lightbox').classList.contains('open')) return;
-  if (e.key === 'ArrowRight') lbNav(1);
-  if (e.key === 'ArrowLeft')  lbNav(-1);
-  if (e.key === 'Escape')     closeLb();
-});
+      incoming.addEventListener('transitionend', () => {
+        cur.remove();
+        lbIdx = next;
+        document.getElementById('lb-hint').textContent = `${lbIdx + 1} / ${currentAlbum.media.length} · ${m.label}`;
+      }, { once: true });
+    }
 
-// Khởi động
-renderAlbums();
-</script>
+    function mediaEl(m) {
+      if (m.type === 'video') {
+        return `<video src="${m.src}" poster="${m.poster}" controls style="max-width:90vw;max-height:80vh;border-radius:8px"></video>`;
+      }
+      return `<img src="${m.src}" alt="${m.label}" style="max-width:90vw;max-height:80vh;border-radius:8px;object-fit:contain">`;
+    }
+
+    // Đóng khi click nền
+    document.getElementById('lightbox').addEventListener('click', function (e) {
+      if (e.target === this) closeLb();
+    });
+
+    // Swipe
+    let tsX = 0, tsY = 0;
+    const lb = document.getElementById('lightbox');
+    lb.addEventListener('touchstart', e => {
+      tsX = e.touches[0].clientX;
+      tsY = e.touches[0].clientY;
+    }, { passive: true });
+    lb.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - tsX;
+      const dy = e.changedTouches[0].clientY - tsY;
+      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) lbNav(dx < 0 ? 1 : -1);
+    }, { passive: true });
+
+    // Phím tắt
+    document.addEventListener('keydown', e => {
+      if (!document.getElementById('lightbox').classList.contains('open')) return;
+      if (e.key === 'ArrowRight') lbNav(1);
+      if (e.key === 'ArrowLeft') lbNav(-1);
+      if (e.key === 'Escape') closeLb();
+    });
+
+    renderAlbums();
+  </script>
 </body>
+
 </html>
