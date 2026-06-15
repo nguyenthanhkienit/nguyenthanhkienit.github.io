@@ -1711,13 +1711,22 @@ function showHome() {
         }
 
         function openLb(idx) {
-            lbIdx = idx;
-            lbOpen = true;
-            document.getElementById('lightbox').classList.add('open');
-            document.body.classList.add('lb-open');
-            // Render sau 1 frame để DOM có kích thước thật
-            requestAnimationFrame(() => { requestAnimationFrame(renderLb); });
-        }
+  lbIdx = idx;
+  lbOpen = true;
+
+  const track = document.getElementById('lb-track');
+  track.style.visibility = 'hidden'; // ẩn trước khi render
+
+  document.getElementById('lightbox').classList.add('open');
+  document.body.classList.add('lb-open');
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      renderLb();
+      track.style.visibility = ''; // hiện lại sau khi scroll đúng vị trí
+    });
+  });
+}
 
         function closeLb() {
             document.getElementById('lightbox').classList.remove('open');
