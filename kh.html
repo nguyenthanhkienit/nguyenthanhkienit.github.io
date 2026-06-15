@@ -829,16 +829,16 @@
     }
 
     /* Album page */
-    #album-page {
-        position: fixed;
+  #album-page {
+  position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
   overflow-y: auto;
   background: #1d1d1d;
   z-index: 200;
   transform: translateY(100%);
   transition: transform 0.4s cubic-bezier(.4,0,.2,1);
-  display: block !important; /* luôn tồn tại trong DOM */
-  /* để trống, JS tự set khi mở */
+  display: block !important;
+  overscroll-behavior: contain; /* chặn scroll lan ra ngoài */
 }
 #album-page.open {
   transform: translateY(0);
@@ -1590,10 +1590,16 @@ function openAlbum(id) {
 
   document.getElementById('album-page').scrollTop = 0;
   document.getElementById('album-page').classList.add('open');
+
+  // Khóa scroll trang ngoài
+  document.body.style.overflow = 'hidden';
 }
 
 function showHome() {
   document.getElementById('album-page').classList.remove('open');
+
+  // Mở lại scroll trang ngoài
+  document.body.style.overflow = '';
 }
 
         function renderMedia() {
