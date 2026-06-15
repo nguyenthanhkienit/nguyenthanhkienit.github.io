@@ -825,9 +825,19 @@
 
     /* Album page */
     #album-page {
+        position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  overflow-y: auto;
+  background: #1d1d1d;
+  z-index: 200;
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(.4,0,.2,1);
+  display: block !important; /* luôn tồn tại trong DOM */
   /* để trống, JS tự set khi mở */
 }
-
+#album-page.open {
+  transform: translateY(0);
+}
 .sticky-header {
   position: sticky;
   top: 0;
@@ -1400,19 +1410,18 @@
                     <div class="album-grid" id="album-grid"></div>
                 </div>
 
-                <!-- Trang album -->
                 <div id="album-page" class="page">
-                    <div class="sticky-header">
-                        <div class="topbar">
-                            <button class="back-btn" onclick="showHome()">
-                                <i class="ti ti-arrow-left"></i> Quay lại
-                            </button>
-                            <span class="album-title" id="album-title"></span>
-                            <span class="album-sub" id="album-sub"></span>
-                        </div>
-                    </div>
-                    <div class="media-grid" id="media-grid"></div>
-                </div>
+  <div class="sticky-header">
+    <div class="topbar">
+      <button class="back-btn" onclick="showHome()">
+        <i class="ti ti-x"></i> Đóng
+      </button>
+      <span class="album-title" id="album-title"></span>
+      <span class="album-sub" id="album-sub"></span>
+    </div>
+  </div>
+  <div class="media-grid" id="media-grid"></div>
+</div>
 
             </div>
 
@@ -1609,64 +1618,18 @@
         // ============================================================
         // TRANG ALBUM
         // ============================================================
-let savedScrollY = 0;
-
 function openAlbum(id) {
   currentAlbum = ALBUMS.find(a => a.id === id);
   document.getElementById('album-title').textContent = currentAlbum.name;
   document.getElementById('album-sub').textContent = currentAlbum.media.length + ' mục';
   renderMedia();
 
-  savedScrollY = window.scrollY;
-  document.body.style.position = 'fixed';
-  document.body.style.top = `-${savedScrollY}px`;
-  document.body.style.width = '100%';
-
-  // Ẩn footer và nút scroll top TRƯỚC khi fixed
-  document.querySelector('footer').style.visibility = 'hidden';
-  document.getElementById('scrollTopBtn').style.visibility = 'hidden';
-
-  const albumEl = document.getElementById('album-page');
-  albumEl.style.cssText = `
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    overflow-y: auto;
-    background: #1d1d1d;
-    z-index: 100;
-    transform: translateY(100%);
-    transition: transform 0.35s cubic-bezier(.4,0,.2,1);
-  `;
-  albumEl.scrollTop = 0;
-
-  document.getElementById('home-page').classList.remove('active');
-  albumEl.classList.add('active');
-
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      albumEl.style.transform = 'translateY(0)';
-    });
-  });
+  document.getElementById('album-page').scrollTop = 0;
+  document.getElementById('album-page').classList.add('open');
 }
 
 function showHome() {
-  const albumEl = document.getElementById('album-page');
-  albumEl.style.transform = 'translateY(100%)';
-
-  setTimeout(() => {
-    document.body.style.position = '';
-    document.body.style.top = '';
-    document.body.style.width = '';
-
-    albumEl.style.cssText = '';
-    albumEl.classList.remove('active');
-    document.getElementById('home-page').classList.add('active');
-
-    window.scrollTo({ top: savedScrollY, behavior: 'instant' });
-
-    // Hiện lại footer và nút scroll top
-    document.querySelector('footer').style.visibility = '';
-    document.getElementById('scrollTopBtn').style.visibility = '';
-  }, 350);
+  document.getElementById('album-page').classList.remove('open');
 }
 
         function renderMedia() {
