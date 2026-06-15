@@ -767,7 +767,8 @@
     .album-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        gap: 16px
+        gap: 25px;
+        padding-top: 20px;
     }
 
     .album-card {
@@ -777,7 +778,6 @@
         cursor: pointer;
         transition: border-color .15s;
         box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.6);
-        
     }
 
     .album-card:hover {
@@ -1411,7 +1411,7 @@
             <div class="container">
 
                 <!-- Trang chủ -->
-                <div id="home-page" class="page active" style="padding-top: 20px;">
+                <div id="home-page" class="page active">
                     <div class="album-grid" id="album-grid"></div>
                 </div>
 
