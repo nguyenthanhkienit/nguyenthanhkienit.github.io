@@ -771,32 +771,37 @@
     }
 
     .album-card {
-        background: #fff;
-        border: 0.5px solid rgba(0, 0, 0, .12);
-        border-radius: 12px;
+
+        border-radius: 5px;
         overflow: hidden;
         cursor: pointer;
-        transition: border-color .15s
+        transition: border-color .15s;
+        box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.6);
+        
     }
 
     .album-card:hover {
         border-color: rgba(0, 0, 0, .3)
     }
 
-    .album-thumb-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr 1fr;
-        width: 100%;
-        aspect-ratio: 1
-    }
+   .album-thumb-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  grid-template-rows: 1fr 1fr !important;
+  width: 100% !important;
+  aspect-ratio: 1 !important;
+  gap: 2px !important;
+  overflow: hidden !important;
+}
 
-    .album-thumb-grid img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block
-    }
+.album-thumb-grid img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  display: block !important;
+  min-height: 0 !important; /* quan trọng — fix grid item không co lại */
+}
 
     .album-thumb {
         width: 100%;
@@ -1406,7 +1411,7 @@
             <div class="container">
 
                 <!-- Trang chủ -->
-                <div id="home-page" class="page active">
+                <div id="home-page" class="page active" style="padding-top: 20px;">
                     <div class="album-grid" id="album-grid"></div>
                 </div>
 
@@ -1442,8 +1447,8 @@
         const ALBUMS = [
             {
                 id: 0,
-                name: "Kỳ nghỉ Đà Lạt",
-                date: "Tháng 3, 2025",
+                name: "Cầu hôn",
+                date: "11-06-2026 / Hồ Chí Minh",
                 media: [
                     { type: "img", src: "images/kh/31-05-2026/31-05-2026.jpg", label: "Bờ biển buổi sáng" },
                     { type: "img", src: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=400", label: "Núi mây" },
@@ -1535,48 +1540,6 @@
                     { type: "img", src: "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=400", label: "Biển An Bàng" },
                     { type: "img", src: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400", label: "Hoàng hôn trên sông" },
                 ]
-            },
-            {
-                id: 3,
-                name: "Chuyến đi Hội An",
-                date: "Tháng 1, 2025",
-                media: [
-                    { type: "img", src: "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=400", label: "Phố đèn lồng" },
-                    { type: "img", src: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400", label: "Cầu Nhật Bản" },
-                    { type: "img", src: "https://images.unsplash.com/photo-1565967511849-76a60a516170?w=400", label: "Phố cổ ban đêm" },
-                    { type: "video", src: "https://www.w3schools.com/html/mov_bbb.mp4", poster: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400", label: "Video thả hoa đăng" },
-                    { type: "img", src: "https://images.unsplash.com/photo-1551009175-15bdf9dcb580?w=400", label: "Ẩm thực địa phương" },
-                    { type: "img", src: "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=400", label: "Biển An Bàng" },
-                    { type: "img", src: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400", label: "Hoàng hôn trên sông" },
-                ]
-            },
-            {
-                id: 4,
-                name: "Chuyến đi Hội An",
-                date: "Tháng 1, 2025",
-                media: [
-                    { type: "img", src: "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=400", label: "Phố đèn lồng" },
-                    { type: "img", src: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400", label: "Cầu Nhật Bản" },
-                    { type: "img", src: "https://images.unsplash.com/photo-1565967511849-76a60a516170?w=400", label: "Phố cổ ban đêm" },
-                    { type: "video", src: "https://www.w3schools.com/html/mov_bbb.mp4", poster: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400", label: "Video thả hoa đăng" },
-                    { type: "img", src: "https://images.unsplash.com/photo-1551009175-15bdf9dcb580?w=400", label: "Ẩm thực địa phương" },
-                    { type: "img", src: "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=400", label: "Biển An Bàng" },
-                    { type: "img", src: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400", label: "Hoàng hôn trên sông" },
-                ]
-            },
-            {
-                id: 5,
-                name: "Chuyến đi Hội An",
-                date: "Tháng 1, 2025",
-                media: [
-                    { type: "img", src: "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=400", label: "Phố đèn lồng" },
-                    { type: "img", src: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400", label: "Cầu Nhật Bản" },
-                    { type: "img", src: "https://images.unsplash.com/photo-1565967511849-76a60a516170?w=400", label: "Phố cổ ban đêm" },
-                    { type: "video", src: "https://www.w3schools.com/html/mov_bbb.mp4", poster: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400", label: "Video thả hoa đăng" },
-                    { type: "img", src: "https://images.unsplash.com/photo-1551009175-15bdf9dcb580?w=400", label: "Ẩm thực địa phương" },
-                    { type: "img", src: "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=400", label: "Biển An Bàng" },
-                    { type: "img", src: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400", label: "Hoàng hôn trên sông" },
-                ]
             }
         ];
 
@@ -1605,12 +1568,13 @@
       <div class="album-card" onclick="openAlbum(${a.id})">
         ${thumb}
         <div class="album-info">
-          <h3>${a.name}</h3>
-          <div class="meta">
-            <i class="ti ti-photo" style="font-size:13px;vertical-align:-1px"></i>
-            ${a.media.length} mục${vidCount > 0 ? ' · ' + vidCount + ' video' : ''} · ${a.date}
-          </div>
-        </div>
+      <h3>${a.name}</h3>
+      <div class="meta">${a.date}</div>
+      <div class="meta">
+        <i class="ti ti-photo" style="font-size:13px;vertical-align:-1px"></i>
+        ${a.media.length} mục${vidCount > 0 ? ' · ' + vidCount + ' video' : ''}
+      </div>
+    </div>
       </div>`;
             }).join('');
         }
