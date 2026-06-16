@@ -926,41 +926,39 @@
     }
 
     /* Lightbox */
-    /* Lightbox */
     .lightbox {
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, .92);
-        z-index: 100;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        z-index: 300;
-    }
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,.92);
+  z-index: 1000; /* tăng z-index cao hơn album-page (200) */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  display: none;
+  touch-action: none; /* chặn hoàn toàn scroll tràn ra ngoài */
+  overscroll-behavior: none;
+}
 
-    .lightbox.open {
-        display: flex
-    }
+.lightbox.open {
+  display: flex;
+}
 
-    body.lb-open {
+#lb-track {
+  display: flex;
+  width: 90vw;
+  height: 80vh;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  gap: 24px;
+  cursor: grab;
+  overscroll-behavior: contain;
+  touch-action: pan-x; /* chỉ cho phép vuốt ngang trong track */
+}
+ body.lb-open {
         overflow: hidden
     }
-
-    #lb-track {
-        display: flex;
-        width: 90vw;
-        height: 80vh;
-        overflow-x: scroll;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        gap: 24px;
-        cursor: grab;
-        z-index: 300;
-        overscroll-behavior: contain; /* thêm dòng này */
-    }
-
     #lb-track:active {
         cursor: grabbing
     }
