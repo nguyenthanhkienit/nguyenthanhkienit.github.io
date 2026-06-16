@@ -1001,7 +1001,7 @@
     .lb-slide video {
         max-width: 100%;
         max-height: 100%;
-        border-radius: 10px;
+        border-radius: 5px;
         object-fit: contain;
         pointer-events: none;
         box-shadow: 0 8px 40px rgba(0, 0, 0, .6);
@@ -1587,7 +1587,7 @@
         function mediaEl(m) {
             if (m.type === 'video') {
                 return `<video src="${m.src}" poster="${m.poster}" controls
-      style="max-width:100%;max-height:100%;border-radius:10px"></video>`;
+      style="max-width:100%;max-height:100%;border-radius:5px"></video>`;
             }
             return `<img src="${m.src}" alt="${m.label}">`;
         }
