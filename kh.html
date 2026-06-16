@@ -784,24 +784,25 @@
         border-color: rgba(0, 0, 0, .3)
     }
 
-   .album-thumb-grid {
-  display: grid !important;
-  grid-template-columns: 1fr 1fr !important;
-  grid-template-rows: 1fr 1fr !important;
-  width: 100% !important;
-  aspect-ratio: 1 !important;
-  gap: 2px !important;
-  overflow: hidden !important;
-}
+    .album-thumb-grid {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        grid-template-rows: 1fr 1fr !important;
+        width: 100% !important;
+        aspect-ratio: 1 !important;
+        gap: 2px !important;
+        overflow: hidden !important;
+    }
 
-.album-thumb-grid img {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-  object-position: center !important;
-  display: block !important;
-  min-height: 0 !important; /* quan trọng — fix grid item không co lại */
-}
+    .album-thumb-grid img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        object-position: center !important;
+        display: block !important;
+        min-height: 0 !important;
+        /* quan trọng — fix grid item không co lại */
+    }
 
     .album-thumb {
         width: 100%;
@@ -815,42 +816,48 @@
     }
 
     .album-info h3 {
-        font-size: 15px;
-        font-weight: 500;
+        font-size: 20px;
+        color: #EB2F8C;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis
     }
 
     .album-info .meta {
-        font-size: 13px;
-        color: #888;
+        color: #a4a5a6;
+        font-size: 16px;
         margin-top: 4px
     }
 
     /* Album page */
-  #album-page {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  overflow-y: auto;
-  background: #1d1d1d;
-  z-index: 200;
-  transform: translateY(100%);
-  transition: transform 0.4s cubic-bezier(.4,0,.2,1);
-  display: block !important;
-  overscroll-behavior: contain; /* chặn scroll lan ra ngoài */
-}
-#album-page.open {
-  transform: translateY(0);
-}
-.sticky-header {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  background: #1d1d1d;
-  padding: 1rem 0 0.75rem;
-  border-bottom: 0.5px solid rgba(255,255,255,.08);
-}
+    #album-page {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        overflow-y: auto;
+        background: #1d1d1d;
+        z-index: 200;
+        transform: translateY(100%);
+        transition: transform 0.4s cubic-bezier(.4, 0, .2, 1);
+        display: block !important;
+        overscroll-behavior: contain;
+        /* chặn scroll lan ra ngoài */
+    }
+
+    #album-page.open {
+        transform: translateY(0);
+    }
+
+    .sticky-header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: #1d1d1d;
+        padding: 1rem 0 0.75rem;
+        border-bottom: 0.5px solid rgba(255, 255, 255, .08);
+    }
 
 
     #album-page .topbar {
@@ -861,7 +868,7 @@
     }
 
     .back-btn {
-        background: none;
+        background: #a4a5a6;
         border: 0.5px solid rgba(0, 0, 0, .25);
         border-radius: 8px;
         padding: 6px 12px;
@@ -869,35 +876,40 @@
         cursor: pointer;
         display: flex;
         align-items: center;
-        gap: 6px
+        gap: 6px;
+        color: #1d1d1d;
+        margin-left: 20px;
     }
 
     .back-btn:hover {
-        background: #f0f0ee
+        background: #EB2F8C
     }
 
     #album-page .album-title {
-        font-size: 18px;
-        font-weight: 500
+        font-size: 20px;
+
+        color: #EB2F8C;
     }
 
     #album-page .album-sub {
-        font-size: 13px;
-        color: #888;
-        margin-left: auto
+        color: #a4a5a6;
+        font-size: 16px;
+        margin-left: auto;
+        margin-right: 20px;
     }
 
     .media-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
         gap: 6px;
-        margin-top: 1rem
+        padding: 10px;
+
     }
 
     .media-item {
         position: relative;
         aspect-ratio: 1;
-        border-radius: 8px;
+        border-radius: 5px;
         overflow: hidden;
         cursor: pointer
     }
@@ -927,38 +939,46 @@
 
     /* Lightbox */
     .lightbox {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,.92);
-  z-index: 1000; /* tăng z-index cao hơn album-page (200) */
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  display: none;
-  touch-action: none; /* chặn hoàn toàn scroll tràn ra ngoài */
-  overscroll-behavior: none;
-}
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, .92);
+        z-index: 1000;
+        /* tăng z-index cao hơn album-page (200) */
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        display: none;
+        touch-action: none;
+        /* chặn hoàn toàn scroll tràn ra ngoài */
+        overscroll-behavior: none;
+    }
 
-.lightbox.open {
-  display: flex;
-}
+    .lightbox.open {
+        display: flex;
+    }
 
-#lb-track {
-  display: flex;
-  width: 90vw;
-  height: 80vh;
-  overflow-x: scroll;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  gap: 24px;
-  cursor: grab;
-  overscroll-behavior: contain;
-  touch-action: pan-x; /* chỉ cho phép vuốt ngang trong track */
-}
- body.lb-open {
+    #lb-track {
+        display: flex;
+        width: 90vw;
+        height: 80vh;
+        overflow-x: scroll;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        gap: 24px;
+        cursor: grab;
+        overscroll-behavior: contain;
+        touch-action: pan-x;
+        /* chỉ cho phép vuốt ngang trong track */
+    }
+
+    body.lb-open {
         overflow: hidden
     }
+
     #lb-track:active {
         cursor: grabbing
     }
@@ -1415,17 +1435,17 @@
                 </div>
 
                 <div id="album-page" class="page">
-  <div class="sticky-header">
-    <div class="topbar">
-      <button class="back-btn" onclick="showHome()">
-        <i class="ti ti-x"></i> Đóng
-      </button>
-      <span class="album-title" id="album-title"></span>
-      <span class="album-sub" id="album-sub"></span>
-    </div>
-  </div>
-  <div class="media-grid" id="media-grid"></div>
-</div>
+                    <div class="sticky-header">
+                        <div class="topbar">
+                            <button class="back-btn" onclick="showHome()">
+                                <i class="ti ti-x"></i> Đóng
+                            </button>
+                            <span class="album-title" id="album-title"></span>
+                            <span class="album-sub" id="album-sub"></span>
+                        </div>
+                    </div>
+                    <div class="media-grid" id="media-grid"></div>
+                </div>
 
             </div>
 
@@ -1555,6 +1575,7 @@
             const g = document.getElementById('album-grid');
             g.innerHTML = ALBUMS.map(a => {
                 const imgs = a.media.filter(m => m.type === 'img').slice(0, 4);
+                const imgsCount = a.media.filter(m => m.type === 'img').length;
                 const vidCount = a.media.filter(m => m.type === 'video').length;
                 let thumb = '';
                 if (imgs.length >= 4) {
@@ -1571,7 +1592,7 @@
       <div class="meta">${a.date}</div>
       <div class="meta">
         <i class="ti ti-photo" style="font-size:13px;vertical-align:-1px"></i>
-        ${a.media.length} mục${vidCount > 0 ? ' · ' + vidCount + ' video' : ''}
+        ${imgsCount} ảnh ${vidCount > 0 ? ' · ' + vidCount + ' video' : ''}
       </div>
     </div>
       </div>`;
@@ -1581,25 +1602,25 @@
         // ============================================================
         // TRANG ALBUM
         // ============================================================
-function openAlbum(id) {
-  currentAlbum = ALBUMS.find(a => a.id === id);
-  document.getElementById('album-title').textContent = currentAlbum.name;
-  document.getElementById('album-sub').textContent = currentAlbum.media.length + ' mục';
-  renderMedia();
+        function openAlbum(id) {
+            currentAlbum = ALBUMS.find(a => a.id === id);
+            document.getElementById('album-title').textContent = currentAlbum.name;
+            document.getElementById('album-sub').textContent = currentAlbum.media.length + ' mục';
+            renderMedia();
 
-  document.getElementById('album-page').scrollTop = 0;
-  document.getElementById('album-page').classList.add('open');
+            document.getElementById('album-page').scrollTop = 0;
+            document.getElementById('album-page').classList.add('open');
 
-  // Khóa scroll trang ngoài
-  document.body.style.overflow = 'hidden';
-}
+            // Khóa scroll trang ngoài
+            document.body.style.overflow = 'hidden';
+        }
 
-function showHome() {
-  document.getElementById('album-page').classList.remove('open');
+        function showHome() {
+            document.getElementById('album-page').classList.remove('open');
 
-  // Mở lại scroll trang ngoài
-  document.body.style.overflow = '';
-}
+            // Mở lại scroll trang ngoài
+            document.body.style.overflow = '';
+        }
 
         function renderMedia() {
             const g = document.getElementById('media-grid');
@@ -1680,33 +1701,33 @@ function showHome() {
         }
 
         function openLb(idx) {
-  lbIdx = idx;
-  lbOpen = true;
+            lbIdx = idx;
+            lbOpen = true;
 
-  const track = document.getElementById('lb-track');
-  track.style.visibility = 'hidden';
+            const track = document.getElementById('lb-track');
+            track.style.visibility = 'hidden';
 
-  document.getElementById('lightbox').classList.add('open');
+            document.getElementById('lightbox').classList.add('open');
 
-  // Khóa scroll album-page khi xem hình
-  document.getElementById('album-page').style.overflow = 'hidden';
+            // Khóa scroll album-page khi xem hình
+            document.getElementById('album-page').style.overflow = 'hidden';
 
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      renderLb();
-      track.style.visibility = '';
-    });
-  });
-}
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    renderLb();
+                    track.style.visibility = '';
+                });
+            });
+        }
 
-function closeLb() {
-  document.getElementById('lightbox').classList.remove('open');
+        function closeLb() {
+            document.getElementById('lightbox').classList.remove('open');
 
-  // Mở lại scroll album-page
-  document.getElementById('album-page').style.overflow = 'auto';
+            // Mở lại scroll album-page
+            document.getElementById('album-page').style.overflow = 'auto';
 
-  lbOpen = false;
-}
+            lbOpen = false;
+        }
 
         function lbNav(d) {
             const next = lbIdx + d;
