@@ -958,6 +958,7 @@
         gap: 24px;
         cursor: grab;
         z-index: 300;
+        overscroll-behavior: contain; /* thêm dòng này */
     }
 
     #lb-track:active {
@@ -1685,24 +1686,29 @@ function showHome() {
   lbOpen = true;
 
   const track = document.getElementById('lb-track');
-  track.style.visibility = 'hidden'; // ẩn trước khi render
+  track.style.visibility = 'hidden';
 
   document.getElementById('lightbox').classList.add('open');
-  document.body.classList.add('lb-open');
+
+  // Khóa scroll album-page khi xem hình
+  document.getElementById('album-page').style.overflow = 'hidden';
 
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
       renderLb();
-      track.style.visibility = ''; // hiện lại sau khi scroll đúng vị trí
+      track.style.visibility = '';
     });
   });
 }
 
-        function closeLb() {
-            document.getElementById('lightbox').classList.remove('open');
-            document.body.classList.remove('lb-open');
-            lbOpen = false;
-        }
+function closeLb() {
+  document.getElementById('lightbox').classList.remove('open');
+
+  // Mở lại scroll album-page
+  document.getElementById('album-page').style.overflow = 'auto';
+
+  lbOpen = false;
+}
 
         function lbNav(d) {
             const next = lbIdx + d;
