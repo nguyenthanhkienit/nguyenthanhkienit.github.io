@@ -76,30 +76,81 @@ function createTripCard(trip, isNew = false) {
 
     // ====================== MỞ MODAL ======================
     function openTripGallery(trip) {
-        const tripModal = document.getElementById('trip-modal');
-        const tripModalTitle = document.getElementById('trip-modal-title');
-        const tripMasonryGallery = document.getElementById('trip-masonry-gallery');
+    const tripModal = document.getElementById('trip-modal');
+    const tripModalTitle = document.getElementById('trip-modal-title');
+    const tripMasonryGallery = document.getElementById('trip-masonry-gallery');
+    const loadingEl = document.getElementById('trip-gallery-loading');
 
-        if (tripModalTitle) tripModalTitle.textContent = trip.title;
+    if (tripModalTitle) tripModalTitle.textContent = trip.title;
 
-        if (tripMasonryGallery) {
-            tripMasonryGallery.innerHTML = '';
-            trip.images.forEach(src => {
-                const img = document.createElement('img');
+    if (tripMasonryGallery) {
+        tripMasonryGallery.innerHTML = '';
+        tripMasonryGallery.classList.add('loading-state');
+        loadingEl.classList.add('active');
+
+        const fragment = document.createDocumentFragment();
+        const imgEls = [];
+
+        // Chỉ chờ N ảnh đầu load xong rồi ẩn loading, còn lại lazy load như cũ
+        const eagerCount = Math.min(4, trip.images.length);
+        let loadedCount = 0;
+
+        function checkAllLoaded() {
+            loadedCount++;
+            if (loadedCount >= eagerCount) {
+                loadingEl.classList.remove('active');
+                tripMasonryGallery.classList.remove('loading-state');
+            }
+        }
+
+        trip.images.forEach((src, index) => {
+            const img = document.createElement('img');
+            img.alt = trip.title;
+
+            if (index < eagerCount) {
+                img.onload = checkAllLoaded;
+                img.onerror = checkAllLoaded; // tránh kẹt loading nếu ảnh lỗi
                 img.src = src;
-                img.alt = trip.title;
-                img.loading = "lazy";
-                tripMasonryGallery.appendChild(img);
-            });
+            } else {
+                img.dataset.src = src;
+                img.classList.add('lazy-trip-img');
+            }
+            imgEls.push(img);
+            fragment.appendChild(img);
+        });
+
+        tripMasonryGallery.appendChild(fragment);
+
+        // Lazy load phần còn lại khi cuộn tới
+        const lazyImgs = tripMasonryGallery.querySelectorAll('.lazy-trip-img');
+        if (lazyImgs.length) {
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.classList.remove('lazy-trip-img');
+                        obs.unobserve(img);
+                    }
+                });
+            }, { root: document.getElementById('trip-gallery-container'), rootMargin: '200px' });
+
+            lazyImgs.forEach(img => observer.observe(img));
         }
 
-        if (tripModal) {
-            tripModal.style.display = 'flex';
-            resetScrollStrong();
-            setTimeout(resetScrollStrong, 150);
-        }
+        // Phòng trường hợp ảnh load quá lâu / bị treo -> tự ẩn loading sau X giây
+        setTimeout(() => {
+            loadingEl.classList.remove('active');
+            tripMasonryGallery.classList.remove('loading-state');
+        }, 8000);
     }
 
+    if (tripModal) {
+        tripModal.style.display = 'flex';
+        resetScrollStrong();
+        setTimeout(resetScrollStrong, 150);
+    }
+}
     // ====================== KHỞI TẠO ======================
     function initTrips() {
         if (!tripsGrid || !allTrips) return;
