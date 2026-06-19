@@ -75,7 +75,7 @@
                 }
                 return `
       <div class="media-item" onclick="openLb(${i})">
-        <img src="${m.src}" loading="lazy" alt="${m.label}">
+        <img src="${m.src}" loading="lazy">
       </div>`;
             }).join('');
         }
@@ -94,7 +94,7 @@
                 return `<video src="${m.src}" poster="${m.poster}" controls
       style="max-width:100%;max-height:100%;border-radius:5px"></video>`;
             }
-            return `<img src="${m.src}" alt="${m.label}">`;
+            return `<img src="${m.src}">`;
         }
 
         function renderLb() {
@@ -114,7 +114,7 @@
         function updateHint() {
             const m = currentAlbum.media[lbIdx];
             document.getElementById('lb-hint').textContent =
-                `${lbIdx + 1} / ${currentAlbum.media.length} · ${m.label}`;
+                `${lbIdx + 1} / ${currentAlbum.media.length}`;
         }
 
         function watchScroll() {
