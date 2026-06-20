@@ -118,28 +118,27 @@
         }
 
         function watchScroll() {
-            const track = document.getElementById('lb-track');
-            track.onscroll = () => {
-                if (lbScrolling) return;
-                lbScrolling = true;
-                // Dùng requestAnimationFrame để đợi snap xong
-                const check = () => {
-                    const slideW = track.offsetWidth + 24;
-                    const newIdx = Math.round(track.scrollLeft / slideW);
-                    if (newIdx !== lbIdx && newIdx >= 0 && newIdx < currentAlbum.media.length) {
-                        lbIdx = newIdx;
-                        updateHint();
-                    }
-                    // Kiểm tra xem scroll đã dừng chưa
-                    if (Math.abs(track.scrollLeft - lbIdx * slideW) < 2) {
-                        lbScrolling = false;
-                    } else {
-                        requestAnimationFrame(check);
-                    }
-                };
+    const track = document.getElementById('lb-track');
+    track.onscroll = () => {
+        if (lbScrolling) return;
+        lbScrolling = true;
+        const check = () => {
+            const slideW = track.offsetWidth + 24;
+            const newIdx = Math.round(track.scrollLeft / slideW);
+            if (newIdx !== lbIdx && newIdx >= 0 && newIdx < currentAlbum.media.length) {
+                lbIdx = newIdx;
+                updateHint();
+                watchCurrentSlideLoading(); // thêm dòng này
+            }
+            if (Math.abs(track.scrollLeft - lbIdx * slideW) < 2) {
+                lbScrolling = false;
+            } else {
                 requestAnimationFrame(check);
-            };
-        }
+            }
+        };
+        requestAnimationFrame(check);
+    };
+}
 
         function openLb(idx) {
             lbIdx = idx;
@@ -171,12 +170,15 @@
         }
 
         function lbNav(d) {
-            const next = lbIdx + d;
-            if (next < 0 || next >= currentAlbum.media.length) return;
-            const track = document.getElementById('lb-track');
-            const slideW = track.offsetWidth + 24;
-            track.scrollTo({ left: next * slideW, behavior: 'smooth' });
-        }
+    const next = lbIdx + d;
+    if (next < 0 || next >= currentAlbum.media.length) return;
+    lbIdx = next; // cập nhật ngay để loading check đúng slide
+    updateHint();
+    watchCurrentSlideLoading();
+    const track = document.getElementById('lb-track');
+    const slideW = track.offsetWidth + 24;
+    track.scrollTo({ left: next * slideW, behavior: 'smooth' });
+}
 
         // Click ngoài đóng
         document.getElementById('lightbox').addEventListener('mousedown', e => {

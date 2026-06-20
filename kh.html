@@ -407,6 +407,7 @@
 </style>
 <!-- Chuyến đi -->
 <style>
+    
     .trips-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -534,7 +535,7 @@
     justify-content: center;
     padding: 60px 0;
     gap: 12px;
-    color: #666;
+    color: #EB2F8C;
 }
 
 .trip-gallery-loading.active {
@@ -544,7 +545,7 @@
 .spinner {
     width: 36px;
     height: 36px;
-    border: 3px solid #ddd;
+    border: 3px solid #EB2F8C;
     border-top-color: #333;
     border-radius: 50%;
     animation: spin 0.8s linear infinite;
@@ -564,7 +565,7 @@
         right: 10px;
         font-size: 30px;
         cursor: pointer;
-        color: #a4a5a6;
+        color: #EB2F8C;
     }
 
     .trip-gallery-container {
@@ -1096,6 +1097,47 @@
         font-size: 16px;
         margin-top: 14px;
     }
+    .media-grid-loading,
+.lb-loading {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 0;
+}
+
+.media-grid-loading.active,
+.lb-loading.active {
+    display: flex;
+}
+
+.lb-loading {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    background: rgba(0,0,0,0.3);
+}
+
+.media-grid.loading-state {
+    opacity: 0;
+}
+
+.spinner {
+    width: 36px;
+    height: 36px;
+    border: 3px solid #ddd;
+    border-top-color: #333;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+.spinner-light {
+    border: 3px solid rgba(255,255,255,0.3);
+    border-top-color: #fff;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
 </style>
 
 <body>
@@ -1479,19 +1521,30 @@
                             <span class="album-sub" id="album-sub"></span>
                         </div>
                     </div>
-                    <div class="media-grid" id="media-grid"></div>
+                    <!-- THÊM MỚI -->
+    <div id="media-grid-loading" class="media-grid-loading">
+        <div class="spinner"></div>
+    </div>
+
+    <div class="media-grid" id="media-grid"></div>
                 </div>
 
             </div>
 
             <!-- Lightbox -->
             <div class="lightbox" id="lightbox">
-                <button class="lb-close" onclick="closeLb()">✕</button>
-                <button class="lb-nav lb-prev" onclick="lbNav(-1)"><i class="ti ti-chevron-left"></i></button>
-                <div id="lb-track"></div>
-                <button class="lb-nav lb-next" onclick="lbNav(1)"><i class="ti ti-chevron-right"></i></button>
-                <span class="lb-hint" id="lb-hint"></span>
-            </div>
+    <button class="lb-close" onclick="closeLb()">✕</button>
+    <button class="lb-nav lb-prev" onclick="lbNav(-1)"><i class="ti ti-chevron-left"></i></button>
+
+    <!-- THÊM MỚI -->
+    <div id="lb-loading" class="lb-loading">
+        <div class="spinner spinner-light"></div>
+    </div>
+
+    <div id="lb-track"></div>
+    <button class="lb-nav lb-next" onclick="lbNav(1)"><i class="ti ti-chevron-right"></i></button>
+    <span class="lb-hint" id="lb-hint"></span>
+</div>
         </div>
     </section>
 
