@@ -64,63 +64,21 @@
         }
 
         function renderMedia() {
-    const g = document.getElementById('media-grid');
-    const loadingEl = document.getElementById('media-grid-loading');
-
-    g.classList.add('loading-state');
-    loadingEl.classList.add('active');
-
-    g.innerHTML = currentAlbum.media.map((m, i) => {
-        if (m.type === 'video') {
-            return `
+            const g = document.getElementById('media-grid');
+            g.innerHTML = currentAlbum.media.map((m, i) => {
+                if (m.type === 'video') {
+                    return `
         <div class="media-item" onclick="openLb(${i})">
           <video src="${m.src}" poster="${m.poster}" preload="none"></video>
           <div class="vid-badge"><i class="ti ti-player-play" style="font-size:10px"></i> Video</div>
         </div>`;
-        }
-        return `
+                }
+                return `
       <div class="media-item" onclick="openLb(${i})">
         <img src="${m.src}" loading="lazy">
       </div>`;
-    }).join('');
-
-    // Đợi N ảnh đầu load xong rồi mới ẩn loading
-    const imgs = g.querySelectorAll('img');
-    const eagerCount = Math.min(8, imgs.length); // số ảnh trong viewport ban đầu, chỉnh theo layout của bạn
-
-    if (eagerCount === 0) {
-        // Không có ảnh nào (toàn video) -> ẩn loading ngay
-        loadingEl.classList.remove('active');
-        g.classList.remove('loading-state');
-        return;
-    }
-
-    let loadedCount = 0;
-    function checkDone() {
-        loadedCount++;
-        if (loadedCount >= eagerCount) {
-            loadingEl.classList.remove('active');
-            g.classList.remove('loading-state');
+            }).join('');
         }
-    }
-
-    for (let i = 0; i < eagerCount; i++) {
-        const img = imgs[i];
-        if (img.complete) {
-            // Ảnh đã có trong cache -> tính luôn
-            checkDone();
-        } else {
-            img.onload = checkDone;
-            img.onerror = checkDone;
-        }
-    }
-
-    // Lưới an toàn, tránh kẹt loading nếu mạng chậm/lỗi
-    setTimeout(() => {
-        loadingEl.classList.remove('active');
-        g.classList.remove('loading-state');
-    }, 8000);
-}
 
         // ============================================================
         // LIGHTBOX
@@ -140,50 +98,19 @@
         }
 
         function renderLb() {
-    const track = document.getElementById('lb-track');
-    track.innerHTML = currentAlbum.media.map((m, i) =>
-        `<div class="lb-slide" data-idx="${i}">${mediaEl(m)}</div>`
-    ).join('');
+            const track = document.getElementById('lb-track');
+            track.innerHTML = currentAlbum.media.map((m, i) =>
+                `<div class="lb-slide" data-idx="${i}">${mediaEl(m)}</div>`
+            ).join('');
 
-    const slideW = track.offsetWidth + 24;
-    track.scrollLeft = lbIdx * slideW;
+            // Scroll đến slide hiện tại không có animation
+            const slideW = track.offsetWidth + 24; // width + gap
+            track.scrollLeft = lbIdx * slideW;
 
-    updateHint();
-    watchScroll();
-    watchCurrentSlideLoading(); // mới thêm
-}
-// Theo dõi slide hiện tại đã load xong chưa, hiện/ẩn loading tương ứng
-function watchCurrentSlideLoading() {
-    const loadingEl = document.getElementById('lb-loading');
-    const track = document.getElementById('lb-track');
-
-    function checkSlide() {
-        const slide = track.querySelector(`.lb-slide[data-idx="${lbIdx}"]`);
-        if (!slide) return;
-
-        const media = slide.querySelector('img, video');
-        if (!media) {
-            loadingEl.classList.remove('active');
-            return;
+            updateHint();
+            watchScroll();
         }
 
-        const isLoaded = media.tagName === 'IMG'
-            ? media.complete
-            : media.readyState >= 2; // video đã có data để hiển thị frame đầu
-
-        if (isLoaded) {
-            loadingEl.classList.remove('active');
-        } else {
-            loadingEl.classList.add('active');
-            media.addEventListener(media.tagName === 'IMG' ? 'load' : 'loadeddata', () => {
-                if (slide.dataset.idx == lbIdx) loadingEl.classList.remove('active');
-            }, { once: true });
-            media.addEventListener('error', () => loadingEl.classList.remove('active'), { once: true });
-        }
-    }
-
-    checkSlide();
-}
         function updateHint() {
             const m = currentAlbum.media[lbIdx];
             document.getElementById('lb-hint').textContent =
@@ -191,27 +118,28 @@ function watchCurrentSlideLoading() {
         }
 
         function watchScroll() {
-    const track = document.getElementById('lb-track');
-    track.onscroll = () => {
-        if (lbScrolling) return;
-        lbScrolling = true;
-        const check = () => {
-            const slideW = track.offsetWidth + 24;
-            const newIdx = Math.round(track.scrollLeft / slideW);
-            if (newIdx !== lbIdx && newIdx >= 0 && newIdx < currentAlbum.media.length) {
-                lbIdx = newIdx;
-                updateHint();
-                watchCurrentSlideLoading(); // thêm dòng này
-            }
-            if (Math.abs(track.scrollLeft - lbIdx * slideW) < 2) {
-                lbScrolling = false;
-            } else {
+            const track = document.getElementById('lb-track');
+            track.onscroll = () => {
+                if (lbScrolling) return;
+                lbScrolling = true;
+                // Dùng requestAnimationFrame để đợi snap xong
+                const check = () => {
+                    const slideW = track.offsetWidth + 24;
+                    const newIdx = Math.round(track.scrollLeft / slideW);
+                    if (newIdx !== lbIdx && newIdx >= 0 && newIdx < currentAlbum.media.length) {
+                        lbIdx = newIdx;
+                        updateHint();
+                    }
+                    // Kiểm tra xem scroll đã dừng chưa
+                    if (Math.abs(track.scrollLeft - lbIdx * slideW) < 2) {
+                        lbScrolling = false;
+                    } else {
+                        requestAnimationFrame(check);
+                    }
+                };
                 requestAnimationFrame(check);
-            }
-        };
-        requestAnimationFrame(check);
-    };
-}
+            };
+        }
 
         function openLb(idx) {
             lbIdx = idx;
@@ -243,15 +171,12 @@ function watchCurrentSlideLoading() {
         }
 
         function lbNav(d) {
-    const next = lbIdx + d;
-    if (next < 0 || next >= currentAlbum.media.length) return;
-    lbIdx = next; // cập nhật ngay để loading check đúng slide
-    updateHint();
-    watchCurrentSlideLoading();
-    const track = document.getElementById('lb-track');
-    const slideW = track.offsetWidth + 24;
-    track.scrollTo({ left: next * slideW, behavior: 'smooth' });
-}
+            const next = lbIdx + d;
+            if (next < 0 || next >= currentAlbum.media.length) return;
+            const track = document.getElementById('lb-track');
+            const slideW = track.offsetWidth + 24;
+            track.scrollTo({ left: next * slideW, behavior: 'smooth' });
+        }
 
         // Click ngoài đóng
         document.getElementById('lightbox').addEventListener('mousedown', e => {
