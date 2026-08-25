@@ -653,15 +653,6 @@
   }
 
   /* ---------- MAP ---------- */
-  .map-frame{
-    width:100%;
-    border-radius:18px;
-    overflow:hidden;
-    border:1px solid var(--line);
-    margin-top:28px;
-    filter:saturate(0.85);
-  }
-  .map-frame iframe{width:100%;height:320px;border:0;display:block;}
 
   /* ---------- SECTION TITLES ---------- */
   .section-title{
@@ -710,9 +701,25 @@
   }
 
   /* ---------- TIMELINE (signature element: tidal thread) ---------- */
+  /* ---------- TIMELINE — nền đỏ full-bleed ---------- */
+  section#timeline{
+    width:100vw;
+    max-width:100vw;
+    position:relative;
+    left:50%;
+    right:50%;
+    margin-left:-50vw;
+    margin-right:-50vw;
+    background:var(--deep-pink);
+    padding:100px 24px;
+  }
+  #timeline .section-eyebrow{color:rgba(255,255,255,0.75);}
+  #timeline .section-heading{color:#FFFBF8;}
   .timeline{
     position:relative;
     padding-left:0;
+    max-width:900px;
+    margin:0 auto;
   }
   .tide-line{
     position:absolute;
@@ -721,8 +728,8 @@
     bottom:0;
     width:2px;
     transform:translateX(-50%);
-    background:linear-gradient(to bottom, var(--pink), var(--sea));
-    opacity:0.5;
+    background:rgba(255,255,255,0.45);
+    opacity:0.9;
   }
   .tide-line::before,.tide-line::after{content:none;}
 
@@ -740,12 +747,12 @@
     font-family:'Dancing Script',cursive;
     font-style:italic;
     font-size:1.5rem;
-    color:var(--deep-pink);
+    color:#FFFBF8;
     margin-bottom:4px;
   }
-  .t-item:nth-child(even) .t-time{color:var(--deep-sea);}
-  .t-title{font-size:1.05rem;letter-spacing:0.04em;font-weight:500;margin-bottom:6px;color:var(--ink);}
-  .t-desc{font-size:0.88rem;color:var(--ink-soft);line-height:1.6;}
+  .t-item:nth-child(even) .t-time{color:#F3D9DE;}
+  .t-title{font-size:1.05rem;letter-spacing:0.04em;font-weight:500;margin-bottom:6px;color:#FFFBF8;}
+  .t-desc{font-size:0.88rem;color:rgba(255,255,255,0.78);line-height:1.6;}
 
   .t-dot{
     position:absolute;
@@ -761,14 +768,14 @@
     height:14px;
     border-radius:50%;
 
-    background:var(--cream);
-    border:2px solid var(--pink);
+    background:var(--deep-pink);
+    border:2px solid #fff;
     z-index:2;
 }
   .t-item:nth-child(even) .t-dot{
     left:-7px;
     right:auto;
-    border-color:var(--sea);
+    border-color:#F3D9DE;
 }
 
   @media (max-width:640px){
@@ -795,10 +802,25 @@
     }
 }
 
-  /* ---------- VENUE ---------- */
+  /* ---------- VENUE — nền đỏ full-bleed ---------- */
+  section.venue-section{
+    width:100vw;
+    max-width:100vw;
+    position:relative;
+    left:50%;
+    right:50%;
+    margin-left:-50vw;
+    margin-right:-50vw;
+    background:var(--deep-pink);
+    padding:100px 24px;
+  }
+  .venue-section .section-eyebrow{color:rgba(255,255,255,0.75);}
+  .venue-section .section-heading{color:#FFFBF8;}
   .venue-card{
-    background:linear-gradient(160deg, rgba(255,179,199,0.35), rgba(214,51,108,0.28));
-    border:1px solid var(--line);
+    max-width:640px;
+    margin:0 auto;
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.35);
     border-radius:22px;
     padding:48px 36px;
     text-align:center;
@@ -807,21 +829,32 @@
     font-family:'Dancing Script',cursive;
     font-size:1.7rem;
     font-style:italic;
+    color:#FFFBF8;
     margin-bottom:10px;
   }
-  .venue-addr{color:var(--ink-soft);font-size:0.95rem;margin-bottom:26px;line-height:1.6;}
+  .venue-addr{color:rgba(255,255,255,0.8);font-size:0.95rem;margin-bottom:26px;line-height:1.6;}
   .venue-btn{
     display:inline-block;
     padding:13px 34px;
     border-radius:999px;
-    background:var(--deep-pink);
-    color:#fff;
+    background:#F3E7DE;
+    color:var(--deep-pink);
     text-decoration:none;
     font-size:0.85rem;
     letter-spacing:0.08em;
     transition:background 0.3s ease, transform 0.3s ease;
   }
-  .venue-btn:hover{background:var(--deep-sea);transform:translateY(-2px);}
+  .venue-btn:hover{background:#fff;transform:translateY(-2px);}
+  .map-frame{
+    width:100%;
+    max-width:640px;
+    margin:28px auto 0;
+    border-radius:18px;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,0.35);
+    filter:saturate(0.85);
+  }
+  .map-frame iframe{width:100%;height:320px;border:0;display:block;}
 
   /* ---------- RSVP ---------- */
   .rsvp{text-align:center;}
@@ -1098,7 +1131,7 @@
   <div class="envelope-scene">
     <div class="photo-card">
       <div class="photo-card-inner">
-        <img src="./images/kh/02-05-2026/02-05-2026 (1).jpg" alt="Thành Kiên & Thúy Hồng"> 
+        <img src="./images//kh/04-07-2026/04-07-2026 (1).jpg" alt="Thành Kiên & Thúy Hồng"> 
         <!--<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9.5" cy="10" r="1.6"/><path d="m21 16-5.5-5.5L4 20"/></svg>-->
         <div class="photo-card-caption">
           <div class="caption-names">Thành Kiên &amp; Thúy Hồng</div>
@@ -1270,7 +1303,7 @@
 </section>
 
 <!-- VENUE -->
-<section class="reveal">
+<section class="reveal venue-section">
   <div class="section-title">
     <div class="section-eyebrow">Địa điểm</div>
     <h2 class="section-heading">Nơi chúng mình nói lời yêu thương</h2>
