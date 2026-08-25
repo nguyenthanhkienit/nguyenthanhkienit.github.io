@@ -24,7 +24,7 @@
   body{
     background:var(--cream);
     color:var(--ink);
-    font-family:'Jost',sans-serif;
+    font-family:'Dancing Script',cursive;
     font-weight:300;
     overflow-x:hidden;
     overflow-y:hidden;
@@ -34,7 +34,7 @@
     overflow-y:auto;
     height:auto;
   }
-  .display{font-family:'Cormorant Garamond',serif;}
+  .display{font-family:'Dancing Script',cursive;}
   .script{font-family:'Dancing Script',cursive;}
 
   /* ---------- background wave texture ---------- */
@@ -88,6 +88,7 @@
     font-weight:500;
     line-height:1.15;
     color:var(--ink);
+    font-family:'Dancing Script',cursive;
   }
   .hero-amp{
     display:block;
@@ -137,10 +138,59 @@
     100%{transform:scaleY(0.3);opacity:0.3;}
   }
 
+  /* ---------- COUNTDOWN ---------- */
+  .countdown-section{text-align:center;}
+  .countdown-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:16px;
+    max-width:560px;
+    margin:0 auto;
+  }
+  .countdown-box{
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:26px 10px 20px;
+    background:rgba(255,255,255,0.4);
+  }
+  .countdown-num{
+    font-family:'Dancing Script',cursive;
+    font-weight:700;
+    font-size:clamp(2.1rem, 6vw, 3rem);
+    color:var(--deep-pink);
+    line-height:1;
+  }
+  .countdown-box:nth-child(even) .countdown-num{color:var(--deep-sea);}
+  .countdown-label{
+    margin-top:10px;
+    font-size:0.68rem;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+  .countdown-note{
+    margin-top:30px;
+    font-family:'Dancing Script',cursive;
+    font-style:italic;
+    font-size:1.15rem;
+    color:var(--ink-soft);
+  }
+  .countdown-note b{color:var(--deep-pink);font-weight:700;}
+  .countdown-done{
+    font-family:'Dancing Script',cursive;
+    font-style:italic;
+    font-size:1.6rem;
+    color:var(--deep-pink);
+  }
+  @media (max-width:480px){
+    .countdown-grid{gap:10px;}
+    .countdown-box{padding:18px 4px 14px;border-radius:14px;}
+  }
+
   /* ---------- QUOTE ---------- */
   .quote-section{text-align:center;padding-top:60px;padding-bottom:60px;}
   .quote-section p{
-    font-family:'Cormorant Garamond',serif;
+    font-family:'Dancing Script',cursive;
     font-style:italic;
     font-size:clamp(1.2rem, 3vw, 1.6rem);
     line-height:1.8;
@@ -148,13 +198,13 @@
     max-width:640px;
     margin:0 auto;
   }
-  .quote-mark{font-size:2.4rem;color:var(--sea);display:block;margin-bottom:6px;font-family:'Cormorant Garamond',serif;}
+  .quote-mark{font-size:2.4rem;color:var(--sea);display:block;margin-bottom:6px;font-family:'Dancing Script',cursive;}
 
   /* ---------- ẢNH CHUNG CÔ DÂU CHÚ RỂ ---------- */
   .envelope-scene{
     position:relative;
     width:100%;
-    max-width:340px;
+    max-width:400px;
     margin:34px auto 8px;
     display:flex;
     justify-content:center;
@@ -162,7 +212,7 @@
 
   .photo-card{
     width:100%;
-    max-width:280px;
+    max-width:340px;
     aspect-ratio:4/5;
     background:#fff;
     border-radius:10px;
@@ -181,7 +231,7 @@
   .photo-card-inner svg{width:48px;height:48px;color:var(--deep-sea);opacity:0.5;}
 
   @media (max-width:420px){
-    .photo-card{max-width:230px;}
+    .photo-card{max-width:270px;}
   }
 
   .avatars{
@@ -231,7 +281,7 @@
   .info-icon{width:26px;height:26px;color:var(--deep-pink);margin:0 auto 14px;display:block;}
   .info-card:nth-child(even) .info-icon{color:var(--deep-sea);}
   .info-label{font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:8px;}
-  .info-value{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.35rem;color:var(--ink);}
+  .info-value{font-family:'Dancing Script',cursive;font-style:italic;font-size:1.35rem;color:var(--ink);}
   @media (max-width:560px){.info-grid{grid-template-columns:1fr;}}
 
   /* ---------- ALBUM — mosaic theo mẫu ---------- */
@@ -302,7 +352,7 @@
   .album-col-center .album-item:nth-child(1) {height:263px;width:calc(100% - 100px);}
   .album-col-center .album-item:nth-child(2){height:424px;}
 
-  .album-col-right .album-item:nth-child(1){height:160px;margin-left: -100px;}
+  .album-col-right .album-item:nth-child(1){height:240px; margin-left: -100px; margin-top: -80px;}
   .album-col-right .album-item:nth-child(2){height:270px;}
   .album-col-right .album-item:nth-child(3){height:154px;}
 
@@ -318,7 +368,7 @@
     .album-col-left .album-item:nth-child(3){height:236px;}
     .album-col-center .album-item:nth-child(1){height:204px;}
     .album-col-center .album-item:nth-child(2){height:338px;}
-    .album-col-right .album-item:nth-child(1){height:126px;}
+    .album-col-right .album-item:nth-child(1){height:186px; margin-top: -60px;}
     .album-col-right .album-item:nth-child(2){height:215px;}
     .album-col-right .album-item:nth-child(3){height:122px;}
 
@@ -473,13 +523,13 @@
     margin-bottom:14px;
   }
   .section-heading{
-    font-family:'Cormorant Garamond',serif;
+    font-family:'Dancing Script',cursive;
     font-style:italic;
     font-size:clamp(1.8rem,4vw,2.6rem);
     font-weight:500;
   }
   .album-title{
-    font-family:'Jost',sans-serif;
+    font-family:'Dancing Script',cursive;
     font-style:normal;
     font-size:clamp(1.1rem,2.8vw,1.45rem);
     font-weight:300;
@@ -516,7 +566,7 @@
   .t-item:nth-child(even) .t-card{margin-left:auto;text-align:left;padding-left:52px;}
   .t-card{width:50%;position:relative;}
   .t-time{
-    font-family:'Cormorant Garamond',serif;
+    font-family:'Dancing Script',cursive;
     font-style:italic;
     font-size:1.5rem;
     color:var(--deep-pink);
@@ -583,7 +633,7 @@
     text-align:center;
   }
   .venue-name{
-    font-family:'Cormorant Garamond',serif;
+    font-family:'Dancing Script',cursive;
     font-size:1.7rem;
     font-style:italic;
     margin-bottom:10px;
@@ -612,7 +662,7 @@
     gap:16px;
   }
   .rsvp-form input, .rsvp-form select, .rsvp-form textarea{
-    font-family:'Jost',sans-serif;
+    font-family:'Dancing Script',cursive;
     font-weight:300;
     font-size:0.95rem;
     padding:14px 18px;
@@ -734,7 +784,7 @@
     border:1px solid var(--deep-pink);
     background:transparent;
     color:var(--deep-pink);
-    font-family:'Jost',sans-serif;
+    font-family:'Dancing Script',cursive;
     font-size:0.85rem;
     letter-spacing:0.12em;
     text-transform:uppercase;
@@ -767,7 +817,7 @@
     animation:coverFadeUp 0.7s ease 0.15s forwards;
   }
   .cover-names{
-    font-family:'Cormorant Garamond',serif;
+    font-family:'Dancing Script',cursive;
     font-style:italic;
     font-weight:500;
     font-size:clamp(2rem,7vw,2.9rem);
@@ -899,7 +949,6 @@
   </div>
 
   <div class="hero-date">Chủ nhật, 15.11.2026</div>
-  <div class="scroll-hint"><span></span>Lướt xuống</div>
   </div>
 </section>
 
@@ -1078,6 +1127,37 @@
   </div>
 </section>
 
+<!-- ĐẾM NGƯỢC -->
+<section class="countdown-section reveal">
+  <div class="section-title">
+    <div class="section-eyebrow">Chỉ còn</div>
+    <h2 class="section-heading">Đếm ngược đến ngày cưới</h2>
+  </div>
+
+  <div class="countdown-grid" id="countdown">
+    <div class="countdown-box">
+      <div class="countdown-num" id="cd-days">00</div>
+      <div class="countdown-label">Ngày</div>
+    </div>
+    <div class="countdown-box">
+      <div class="countdown-num" id="cd-hours">00</div>
+      <div class="countdown-label">Giờ</div>
+    </div>
+    <div class="countdown-box">
+      <div class="countdown-num" id="cd-minutes">00</div>
+      <div class="countdown-label">Phút</div>
+    </div>
+    <div class="countdown-box">
+      <div class="countdown-num" id="cd-seconds">00</div>
+      <div class="countdown-label">Giây</div>
+    </div>
+  </div>
+
+  <div class="countdown-note" id="countdownNote">
+    Hẹn gặp mọi người vào <b>19:00, Chủ nhật 15.11.2026</b>
+  </div>
+</section>
+
 <!-- RSVP -->
 <section class="rsvp reveal">
   <div class="section-title">
@@ -1119,6 +1199,45 @@
     document.getElementById('rsvpNote').classList.add('show');
     e.target.reset();
   }
+
+  // đếm ngược đến ngày cưới — 19:00, Chủ nhật 15/11/2026 (giờ Việt Nam, UTC+7)
+  const weddingDate = new Date('2026-11-15T19:00:00+07:00').getTime();
+
+  function pad(n){ return String(n).padStart(2,'0'); }
+
+  function updateCountdown(){
+    const now = new Date().getTime();
+    const distance = weddingDate - now;
+
+    const daysEl = document.getElementById('cd-days');
+    const hoursEl = document.getElementById('cd-hours');
+    const minsEl = document.getElementById('cd-minutes');
+    const secsEl = document.getElementById('cd-seconds');
+
+    if(distance <= 0){
+      daysEl.textContent = '00';
+      hoursEl.textContent = '00';
+      minsEl.textContent = '00';
+      secsEl.textContent = '00';
+      const note = document.getElementById('countdownNote');
+      if(note){ note.innerHTML = '<span class="countdown-done">Hôm nay là ngày trọng đại! 💕</span>'; }
+      clearInterval(countdownTimer);
+      return;
+    }
+
+    const days = Math.floor(distance / (1000*60*60*24));
+    const hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
+    const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
+    const seconds = Math.floor((distance % (1000*60)) / 1000);
+
+    daysEl.textContent = pad(days);
+    hoursEl.textContent = pad(hours);
+    minsEl.textContent = pad(minutes);
+    secsEl.textContent = pad(seconds);
+  }
+
+  updateCountdown();
+  const countdownTimer = setInterval(updateCountdown, 1000);
 </script>
 
 </body>
