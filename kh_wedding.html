@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -9,15 +10,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Dancing+Script:wght@500;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --cream:#FFF7F5;
-    --blush:#FFD3DE;
-    --pink:#FF8FAB;
-    --deep-pink:#E8386B;
-    --sea:#FFB8CB;
-    --deep-sea:#D6336C;
-    --ink:#3A3A45;
-    --ink-soft:#6b6b78;
-    --line:rgba(214,51,108,0.28);
+    --cream:#FFFFFF;
+    --blush:#F1D8D5;
+    --pink:#A52A2A;
+    --deep-pink:#8B0000;
+    --sea:#C77A7A;
+    --deep-sea:#7A0B0B;
+    --ink:#4B2020;
+    --ink-soft:#755252;
+    --line:rgba(139,0,0,0.22);
   }
   *{margin:0;padding:0;box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -42,12 +43,8 @@
     position:fixed;
     inset:0;
     z-index:-1;
-    opacity:0.55;
-    background:
-      radial-gradient(ellipse 60% 40% at 15% 8%, rgba(255,143,171,0.26), transparent 60%),
-      radial-gradient(ellipse 55% 35% at 90% 20%, rgba(214,51,108,0.28), transparent 60%),
-      radial-gradient(ellipse 50% 30% at 10% 85%, rgba(214,51,108,0.22), transparent 60%),
-      radial-gradient(ellipse 60% 35% at 95% 90%, rgba(255,143,171,0.22), transparent 60%);
+    opacity:0;
+    background:none;
   }
 
   section{
@@ -217,14 +214,14 @@
     background:#fff;
     border-radius:10px;
     padding:12px 12px 26px;
-    box-shadow:0 24px 40px -18px rgba(58,58,69,0.35);
+    box-shadow:0 24px 40px -18px rgba(75,32,32,0.28);
   }
   .photo-card-inner{
     width:100%;
     height:100%;
     border-radius:5px;
     overflow:hidden;
-    background:linear-gradient(160deg, rgba(255,143,171,0.3), rgba(214,51,108,0.26));
+    background:linear-gradient(160deg, rgba(165,42,42,0.22), rgba(139,0,0,0.20));
     display:flex;align-items:center;justify-content:center;
   }
   .photo-card-inner img{width:100%;height:100%;object-fit:cover;display:block;}
@@ -247,7 +244,7 @@
     width:132px;height:132px;
     border-radius:50%;
     display:flex;align-items:center;justify-content:center;
-    background:linear-gradient(160deg, rgba(255,143,171,0.28), rgba(214,51,108,0.24));
+    background:linear-gradient(160deg, rgba(165,42,42,0.20), rgba(139,0,0,0.18));
     border:1.5px solid var(--line);
     position:relative;
     overflow:hidden;
@@ -327,7 +324,7 @@
     position:relative;
     overflow:hidden;
     min-width:0;
-    background:#e8dfd5;
+    background:#E8D9D5;
     border-radius:0;
     border:0;
     cursor:pointer;
@@ -341,7 +338,7 @@
   }
   .album-item:hover{
     transform:translateY(-2px);
-    box-shadow:0 10px 22px -14px rgba(58,58,69,.45);
+    box-shadow:0 10px 22px -14px rgba(75,32,32,.32);
     z-index:3;
   }
 
@@ -643,7 +640,7 @@
     font-size:clamp(1.1rem,2.8vw,1.45rem);
     font-weight:300;
     letter-spacing:0.02em;
-    color:#8b7c70;
+    color:#866565;
     margin-bottom:42px;
   }
 
@@ -735,7 +732,7 @@
 
   /* ---------- VENUE ---------- */
   .venue-card{
-    background:linear-gradient(160deg, rgba(255,179,199,0.35), rgba(214,51,108,0.28));
+    background:linear-gradient(160deg, rgba(165,42,42,0.22), rgba(139,0,0,0.22));
     border:1px solid var(--line);
     border-radius:22px;
     padding:48px 36px;
@@ -846,13 +843,13 @@
   }
   .cover-half-left{
     left:0;
-    background-image:radial-gradient(ellipse 70% 45% at 24% 15%, rgba(255,143,171,0.35), transparent 60%),
-      radial-gradient(ellipse 60% 40% at 20% 90%, rgba(214,51,108,0.28), transparent 60%);
+    background-image:radial-gradient(ellipse 70% 45% at 24% 15%, rgba(165,42,42,0.26), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 20% 90%, rgba(139,0,0,0.22), transparent 60%);
   }
   .cover-half-right{
     right:0;
-    background-image:radial-gradient(ellipse 70% 45% at 76% 20%, rgba(214,51,108,0.32), transparent 60%),
-      radial-gradient(ellipse 60% 40% at 80% 92%, rgba(255,143,171,0.30), transparent 60%);
+    background-image:radial-gradient(ellipse 70% 45% at 76% 20%, rgba(139,0,0,0.25), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 92%, rgba(165,42,42,0.22), transparent 60%);
   }
   #openToggle:checked ~ .cover .cover-half-left{transform:translateX(-100%);}
   #openToggle:checked ~ .cover .cover-half-right{transform:translateX(100%);}
@@ -904,8 +901,8 @@
     animation:coverFadeUp 0.7s ease 0.8s forwards, btnPulse 2.2s ease-in-out 1.5s infinite;
   }
   @keyframes btnPulse{
-    0%,100%{box-shadow:0 0 0 0 rgba(201,116,140,0.35);}
-    50%{box-shadow:0 0 0 10px rgba(201,116,140,0);}
+    0%,100%{box-shadow:0 0 0 0 rgba(139,0,0,0.25);}
+    50%{box-shadow:0 0 0 10px rgba(139,0,0,0);}
   }
   .open-btn:hover{
     background:linear-gradient(90deg, var(--deep-pink), var(--deep-sea));
@@ -1041,8 +1038,8 @@
             fill="none" stroke="url(#waveGrad)" stroke-width="2.5" stroke-linecap="round"/>
       <defs>
         <linearGradient id="waveGrad" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stop-color="#FF8FAB"/>
-          <stop offset="100%" stop-color="#D6336C"/>
+          <stop offset="0%" stop-color="#A52A2A"/>
+          <stop offset="100%" stop-color="#7A0B0B"/>
         </linearGradient>
       </defs>
     </svg>
