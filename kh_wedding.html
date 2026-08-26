@@ -44,7 +44,7 @@
   }
 
   /* CHẶN MỞ/CLICK TRÊN CÁC HÌNH ẢNH NẰM NGOÀI ALBUM */
-  img:not(.album-img) {
+  img:not(.album-img):not(.lightbox-img) {
     pointer-events: none;
     user-select: none;
   }
@@ -1105,7 +1105,6 @@
 
   // Đếm ngược đến 25/12/2026
   const weddingDate = new Date('2026-12-25T17:30:00+07:00').getTime();
-
   function pad(n){ return String(n).padStart(2,'0'); }
 
   function updateCountdown(){
@@ -1118,10 +1117,10 @@
     const secsEl = document.getElementById('cd-seconds');
 
     if(distance <= 0){
-      daysEl.textContent = '00';
-      hoursEl.textContent = '00';
-      minsEl.textContent = '00';
-      secsEl.textContent = '00';
+      if(daysEl) daysEl.textContent = '00';
+      if(hoursEl) hoursEl.textContent = '00';
+      if(minsEl) minsEl.textContent = '00';
+      if(secsEl) secsEl.textContent = '00';
       const note = document.getElementById('countdownNote');
       if(note){ note.innerHTML = '<span class="countdown-done">Hôm nay là ngày trọng đại! 💕</span>'; }
       clearInterval(countdownTimer);
@@ -1133,16 +1132,16 @@
     const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
     const seconds = Math.floor((distance % (1000*60)) / 1000);
 
-    daysEl.textContent = pad(days);
-    hoursEl.textContent = pad(hours);
-    minsEl.textContent = pad(minutes);
-    secsEl.textContent = pad(seconds);
+    if(daysEl) daysEl.textContent = pad(days);
+    if(hoursEl) hoursEl.textContent = pad(hours);
+    if(minsEl) minsEl.textContent = pad(minutes);
+    if(secsEl) secsEl.textContent = pad(seconds);
   }
 
   updateCountdown();
   const countdownTimer = setInterval(updateCountdown, 1000);
 
-  // LIGHTBOX
+  // LIGHTBOX XỬ LÝ CHUẨN
   (function(){
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightboxImg');
@@ -1159,83 +1158,43 @@
       return Array.from(document.querySelectorAll('img.album-img'));
     }
 
-    function showImage(item, direction, isInitial){
-      if(!item) return;
-      const src = item.getAttribute('src');
-      const alt = item.getAttribute('alt') || '';
-
-      const swapIn = () => {
-        lightboxImg.src = src;
-        lightboxImg.alt = alt;
-        lightboxImg.classList.remove('show', 'dir-next', 'dir-prev');
-        if(direction === 'next') lightboxImg.classList.add('dir-next');
-        if(direction === 'prev') lightboxImg.classList.add('dir-prev');
-        void lightboxImg.offsetWidth;
-        requestAnimationFrame(()=> {
-          lightboxImg.classList.remove('dir-next', 'dir-prev');
-          lightboxImg.classList.add('show');
-        });
-      };
-
-      if(isInitial){
-        lightboxImg.classList.remove('show');
-        const preload = new Image();
-        preload.onload = swapIn;
-        preload.onerror = swapIn;
-        preload.src = src;
-        return;
-      }
-
-      let loaded = false, faded = false, done = false;
-      const tryReady = () => {
-        if(done || !loaded || !faded) return;
-        done = true;
-        clearTimeout(safety);
-        swapIn();
-      };
-
-      const preload = new Image();
-      preload.onload = () => { loaded = true; tryReady(); };
-      preload.onerror = () => { loaded = true; tryReady(); };
-      preload.src = src;
-
-      const safety = setTimeout(() => { loaded = true; faded = true; tryReady(); }, 600);
-
-      lightboxImg.classList.remove('show');
-      const onFadeOutEnd = (e) => {
-        if(e.target !== lightboxImg || e.propertyName !== 'opacity') return;
-        lightboxImg.removeEventListener('transitionend', onFadeOutEnd);
-        faded = true;
-        tryReady();
-      };
-      lightboxImg.addEventListener('transitionend', onFadeOutEnd);
-    }
-
     function render(direction){
-      const img = gallery[currentIndex];
+      const item = gallery[currentIndex];
+      if(!item) return;
+
       lightboxCounter.textContent = (currentIndex + 1) + ' / ' + gallery.length;
       const single = gallery.length <= 1;
       btnPrev.style.display = single ? 'none' : 'flex';
       btnNext.style.display = single ? 'none' : 'flex';
-      showImage(img, direction, false);
+
+      lightboxImg.classList.remove('show', 'dir-next', 'dir-prev');
+      if(direction === 'next') lightboxImg.classList.add('dir-next');
+      if(direction === 'prev') lightboxImg.classList.add('dir-prev');
+
+      lightboxImg.src = item.getAttribute('src');
+      lightboxImg.alt = item.getAttribute('alt') || '';
+
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          lightboxImg.classList.remove('dir-next', 'dir-prev');
+          lightboxImg.classList.add('show');
+        });
+      });
     }
 
     function open(clickedImg){
       gallery = getAlbumImgs();
       const idx = gallery.indexOf(clickedImg);
       currentIndex = idx >= 0 ? idx : 0;
-      const img = gallery[currentIndex];
-      lightboxCounter.textContent = (currentIndex + 1) + ' / ' + gallery.length;
-      const single = gallery.length <= 1;
-      btnPrev.style.display = single ? 'none' : 'flex';
-      btnNext.style.display = single ? 'none' : 'flex';
-      showImage(img, null, true);
+      render(null);
       lightbox.classList.add('open');
       document.body.style.overflow = 'hidden';
     }
 
     function close(){
       lightbox.classList.remove('open');
+      lightboxImg.classList.remove('show');
+      lightboxImg.src = ''; // Clear src để giải phóng bộ nhớ và không kẹt ảnh cũ
       document.body.style.overflow = '';
     }
 
@@ -1260,7 +1219,9 @@
     btnNext.addEventListener('click', next);
 
     lightbox.addEventListener('click', (e) => {
-      if(e.target === lightbox){ close(); }
+      if(e.target === lightbox || e.target === stage || e.target.classList.contains('lightbox-img-wrap')){ 
+        close(); 
+      }
     });
 
     document.addEventListener('keydown', (e) => {
