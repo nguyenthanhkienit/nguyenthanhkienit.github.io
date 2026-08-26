@@ -762,7 +762,9 @@
       </div>
       <div class="cover-divider">❦</div>
       <div class="cover-date">Thứ Sáu, 25 tháng 12, 2026</div>
-      <div class="cover-tagline">Thân mời</div>
+      <div class="cover-tagline">
+  Thân mời: <span id="guestName" style="color: #FFFBF8; font-weight: bold;">Quý khách</span>
+</div>
       <label class="open-btn" for="openToggle" id="openBtn" aria-label="Mở thiệp cưới">
         Mở thiệp
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
@@ -809,13 +811,16 @@
           </div>
         </div>
       </div>
-
+  </div>
+  
       <!-- PHẦN THIỆP MỜI CHI TIẾT -->
       <div class="invitation-detail-card">
+        <div class="reveal">
         <h2 class="invitation-top-title">
           TRÂN TRỌNG KÍNH MỜI QUÝ KHÁCH ĐẾN<br>CHUNG VUI CÙNG GIA ĐÌNH CHÚNG TÔI
         </h2>
-
+</div>
+<div class="reveal">
         <div class="family-grid">
           <div class="family-col">
             <div class="family-label">NHÀ TRAI</div>
@@ -834,13 +839,15 @@
             </div>
           </div>
         </div>
-
+</div>
+<div class="reveal">
         <div class="couple-names-block">
           <div class="groom-name">Thành Kiên</div>
           <span class="ampersand">&amp;</span>
           <div class="bride-name">Thúy Hồng</div>
         </div>
-
+</div>
+<div class="reveal">
         <div class="party-info-box">
           <div class="party-title">BỮA TIỆC CHUNG VUI</div>
           <div class="party-subtitle">ĐƯỢC TỔ CHỨC VÀO LÚC 17:30 - THỨ SÁU</div>
@@ -861,9 +868,8 @@
           </a>
         </div>
       </div>
-
+</div>
     </div>
-  </div>
 </section>
 
 <!-- BỘ SƯU TẬP ẢNH CƯỚI -->
@@ -954,13 +960,14 @@
 
 <!-- OUR LOVE & COUNTDOWN -->
 <section class="our-love-countdown-section">
-  <div class="reveal">
+  
     <div class="our-love-wrap">
-      
+      <div class="reveal">
       <div class="our-love-main-photo">
         <img src="./image_wedding/10.jpg" alt="Our Love Main Banner">
       </div>
-
+</div>
+<div class="reveal">
       <h2 class="our-love-title">OUR LOVE</h2>
       
       <div class="our-love-grid">
@@ -968,13 +975,15 @@
         <div class="our-love-item"><img src="./image_wedding/9.jpg" alt="Our Love Photo 2"></div>
         <div class="our-love-item"><img src="./image_wedding/7.jpg" alt="Our Love Photo 3"></div>
       </div>
-      
+      </div>
+      <div class="reveal">
       <p class="our-love-text">
         Mỗi câu chuyện tình yêu đều có một hành trình riêng. Sau những ngày tháng cùng nhau trưởng thành, chúng tôi quyết định về chung một nhà và viết tiếp câu chuyện ấy bằng tình yêu, sự tin tưởng và hạnh phúc.
       </p>
 
       <div class="divider-line"></div>
-
+</div>
+<div class="reveal">
       <div class="countdown-card">
         <div class="countdown-card-header">
           <div class="countdown-eyebrow">CHỈ CÒN</div>
@@ -1004,9 +1013,9 @@
           Hẹn gặp mọi người vào <b>17:30, Thứ Sáu 25.12.2026</b>
         </div>
       </div>
-
+</div>
     </div>
-  </div>
+  
 </section>
 
 <!-- RSVP -->
@@ -1064,8 +1073,35 @@
     </div>
   </div>
 </footer>
-
 <script>
+  // Chỉ hiển thị tên nếu Mã/Tên tồn tại trong GUEST_LIST
+(function setGuestName() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const guestCode = urlParams.get('to');
+    const guestEl = document.getElementById('guestName');
+
+    if (guestEl) {
+      if (guestCode) {
+        try {
+          // Giải mã chuỗi mã hóa trên URL về Tiếng Việt (Base64 UTF-8)
+          const decodedName = decodeURIComponent(escape(atob(guestCode)));
+          
+          // Kiểm tra xem chuỗi giải mã có hợp lệ không (tránh chuỗi rác)
+          if (decodedName && decodedName.trim() !== '') {
+            guestEl.textContent = decodedName;
+          } else {
+            guestEl.textContent = "";
+          }
+        } catch (e) {
+          // Nếu mã bị gõ sai, bị hỏng hoặc người dùng cố tình nhập chuỗi không phải Base64
+          guestEl.textContent = "";
+        }
+      } else {
+        // Trường hợp truy cập link gốc không có ?to=
+        guestEl.textContent = "";
+      }
+    }
+  })();
   // Hiệu ứng cuộn trang reveal
   const items = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver((entries)=>{
@@ -1082,7 +1118,7 @@
   }
 
   // Đếm ngược đến 25/12/2026
-  const weddingDate = new Date('2026-12-25T17:30:00+07:00').getTime();
+  const weddingDate = new Date('2026-10-01').getTime();
   function pad(n){ return String(n).padStart(2,'0'); }
 
   function updateCountdown(){
