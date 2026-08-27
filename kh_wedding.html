@@ -132,7 +132,7 @@
     display: inline-block;
     font-family:'Cormorant Garamond', serif;
     font-weight:700;
-    font-size:clamp(1.9rem, 6vw, 3.2rem);
+    font-size:clamp(1.5rem, 6vw, 3.2rem);
     color:#fff;
     letter-spacing:0.01em;
     text-shadow:0 4px 18px rgba(0,0,0,0.6);
@@ -764,36 +764,38 @@
   }
 
   /* ANIMATION RUNG RINH NÚT MỞ THIỆP */
+  /* ANIMATION RUNG RINH NÚT MỞ THIỆP (NHANH & MẠNH MỚI) */
   @keyframes shakePulse {
     0%, 100% {
       transform: scale(1) rotate(0deg);
     }
     10%, 30%, 50%, 70% {
-      transform: scale(1.05) rotate(-3deg);
+      transform: scale(1.12) rotate(-6deg); /* Phóng to 1.12 và xoay mạnh hơn */
     }
     20%, 40%, 60%, 80% {
-      transform: scale(1.05) rotate(3deg);
+      transform: scale(1.12) rotate(6deg);
     }
     90% {
-      transform: scale(1.03) rotate(0deg);
+      transform: scale(1.05) rotate(0deg);
     }
   }
 
   .open-btn{
     display:inline-flex; align-items:center; gap:10px; padding:14px 36px;
     border-radius:999px; border:1px solid #FFFBF8; background:transparent;
-    color:#FFFBF8; font-family:'Cormorant Garamond', serif;; font-size:0.9rem;
+    color:#FFFBF8; font-family:'Cormorant Garamond', serif; font-size:0.9rem;
     letter-spacing:0.12em; text-transform:uppercase; cursor:pointer; user-select:none;
     transition:background 0.35s ease, color 0.35s ease, transform 0.3s ease;
     opacity:0; 
+    /* Giảm thời gian lặp từ 2.5s xuống 1.1s để hiệu ứng diễn ra dồn dập, nhanh hơn */
     animation: coverFadeUp 0.7s ease 0.8s forwards,
-               shakePulse 2.5s ease-in-out 1.6s infinite;
+               shakePulse 1.1s ease-in-out 1.2s infinite;
   }
   .open-btn:hover{ 
     animation-play-state: paused;
     background:#FFFBF8; 
     color:var(--deep-pink); 
-    transform:scale(1.08); 
+    transform:scale(1.15); 
   }
   .open-btn svg{width:14px;height:14px;transition:transform 0.35s ease;}
   .open-btn:hover svg{transform:translateX(3px);}
@@ -856,13 +858,11 @@
           <div class="photo-card-caption">
             <!-- PHÂN TÁCH TỪNG KÝ TỰ ĐỂ CHẠY NỐI TIẾP -->
             <div class="caption-names">
-              <span class="char" style="--char-index: 0;">T</span><span class="char" style="--char-index: 1;">h</span><span class="char" style="--char-index: 2;">à</span><span class="char" style="--char-index: 3;">n</span><span class="char" style="--char-index: 4;">h</span>
-              <span class="char" style="--char-index: 6;">K</span><span class="char" style="--char-index: 7;">i</span><span class="char" style="--char-index: 8;">ê</span><span class="char" style="--char-index: 9;">n</span>
-              <span class="char" style="--char-index: 10;">&nbsp;</span>
+              <span class="char" style="--char-index: 0;">T</span><span class="char" style="--char-index: 1;">H</span><span class="char" style="--char-index: 2;">À</span><span class="char" style="--char-index: 3;">N</span><span class="char" style="--char-index: 4;">H</span>
+              <span class="char" style="--char-index: 6;">K</span><span class="char" style="--char-index: 7;">I</span><span class="char" style="--char-index: 8;">Ê</span><span class="char" style="--char-index: 9;">N</span>
               <span class="char" style="--char-index: 11;">&amp;</span>
-              <span class="char" style="--char-index: 12;">&nbsp;</span>
-              <span class="char" style="--char-index: 13;">T</span><span class="char" style="--char-index: 14;">h</span><span class="char" style="--char-index: 15;">ú</span><span class="char" style="--char-index: 16;">y</span>
-              <span class="char" style="--char-index: 18;">H</span><span class="char" style="--char-index: 19;">ồ</span><span class="char" style="--char-index: 20;">n</span><span class="char" style="--char-index: 21;">g</span>
+              <span class="char" style="--char-index: 13;">T</span><span class="char" style="--char-index: 14;">H</span><span class="char" style="--char-index: 15;">Ú</span><span class="char" style="--char-index: 16;">Y</span>
+              <span class="char" style="--char-index: 18;">H</span><span class="char" style="--char-index: 19;">Ồ</span><span class="char" style="--char-index: 20;">N</span><span class="char" style="--char-index: 21;">G</span>
             </div>
           </div>
         </div>
