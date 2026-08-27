@@ -127,16 +127,28 @@
     overflow: hidden;
   }
 
-  /* KÍCH THƯỚC CHỮ BAN ĐẦU */
+/* KÍCH THƯỚC CHỮ BAN ĐẦU */
   .caption-names{
     display: inline-block;
     font-family:'Cormorant Garamond', serif;
     font-weight:700;
-    font-size:clamp(1.5rem, 6vw, 3.2rem);
+    font-size:clamp(2.5rem, 6vw, 3.2rem);
     color:#fff;
     letter-spacing:0.01em;
     text-shadow:0 4px 18px rgba(0,0,0,0.6);
     white-space: nowrap;
+  }
+
+  /* ĐIỀU CHỈNH TRÊN ĐIỆN THOẠI (HIỂN THỊ 2 DÒNG) */
+  @media (max-width: 640px) {
+    .caption-names {
+      white-space: normal; /* Cho phép ngắt dòng trên điện thoại */
+      line-height: 1.25;
+    }
+    .caption-names .amp-break {
+      display: block; /* Ép dấu & và phần phía sau xuống dòng mới */
+      margin-top: 4px;
+    }
   }
 
   /* TỪNG KÝ TỰ CHẠY LẦN LƯỢT TỪ BÊN PHẢI VÀO */
@@ -857,13 +869,19 @@
           <img src="./image_wedding/1.jpg" alt="Thành Kiên & Thúy Hồng">
           <div class="photo-card-caption">
             <!-- PHÂN TÁCH TỪNG KÝ TỰ ĐỂ CHẠY NỐI TIẾP -->
-            <div class="caption-names">
-              <span class="char" style="--char-index: 0;">T</span><span class="char" style="--char-index: 1;">H</span><span class="char" style="--char-index: 2;">À</span><span class="char" style="--char-index: 3;">N</span><span class="char" style="--char-index: 4;">H</span>
-              <span class="char" style="--char-index: 6;">K</span><span class="char" style="--char-index: 7;">I</span><span class="char" style="--char-index: 8;">Ê</span><span class="char" style="--char-index: 9;">N</span>
-              <span class="char" style="--char-index: 11;">&amp;</span>
-              <span class="char" style="--char-index: 13;">T</span><span class="char" style="--char-index: 14;">H</span><span class="char" style="--char-index: 15;">Ú</span><span class="char" style="--char-index: 16;">Y</span>
-              <span class="char" style="--char-index: 18;">H</span><span class="char" style="--char-index: 19;">Ồ</span><span class="char" style="--char-index: 20;">N</span><span class="char" style="--char-index: 21;">G</span>
-            </div>
+            <!-- CỤM TÊN TRÊN HERO BACKGROUND -->
+<div class="caption-names">
+  <span class="char" style="--char-index: 0;">T</span><span class="char" style="--char-index: 1;">H</span><span class="char" style="--char-index: 2;">À</span><span class="char" style="--char-index: 3;">N</span><span class="char" style="--char-index: 4;">H</span>
+  <span class="char" style="--char-index: 6;">K</span><span class="char" style="--char-index: 7;">I</span><span class="char" style="--char-index: 8;">Ê</span><span class="char" style="--char-index: 9;">N</span>
+  
+  <!-- BỌC THÊM CLASS amp-break VÀO ĐÂY -->
+  <span class="amp-break">
+    <span class="char" style="--char-index: 11;">&amp;</span>
+  </span>
+
+  <span class="char" style="--char-index: 13;">T</span><span class="char" style="--char-index: 14;">H</span><span class="char" style="--char-index: 15;">Ú</span><span class="char" style="--char-index: 16;">Y</span>
+  <span class="char" style="--char-index: 18;">H</span><span class="char" style="--char-index: 19;">Ồ</span><span class="char" style="--char-index: 20;">N</span><span class="char" style="--char-index: 21;">G</span>
+</div>
           </div>
         </div>
       </div>
