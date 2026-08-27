@@ -470,8 +470,21 @@
     color:var(--ink-soft); margin-bottom:14px;
   }
   .section-heading{
-    font-family:'Cormorant Garamond', serif;; font-style:italic;
+    font-family:'Cormorant Garamond', serif;
     font-size:clamp(2rem,4vw,2.8rem); font-weight:500; color:#FFFBF8;
+    position: relative;
+    display: inline-block; /* Giúp gạch ngang tính theo chiều rộng dòng chữ */
+    padding-bottom: 7px;  /* Khoảng cách giữa chữ và đường gạch */
+  }
+  .section-heading::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;            /* Độ dài của đường gạch ngang (có thể chỉnh to/nhỏ) */
+    height: 2px;           /* Độ mỏng của đường gạch */
+    background: rgba(255, 251, 248, 0.6); /* Màu gạch trắng mờ nhẹ đồng bộ với chữ */
   }
 
   /* TIMELINE */
