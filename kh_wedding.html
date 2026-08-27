@@ -102,48 +102,79 @@
     display: block !important;
   }
 
-.reveal {
-  opacity: 0;
-  transform: translateY(60px); /* Trượt từ khoảng cách xa hơn */
-  /* Xuất hiện trong 2.2 giây + trễ 0.2 giây sau khi cuộn tới */
-  transition: opacity 2.2s cubic-bezier(0.16, 1, 0.3, 1), 
-              transform 5.2s cubic-bezier(0.16, 1, 0.3, 1);
-  transition-delay: 0.2s;
-  will-change: opacity, transform;
-}
+  /* HIỆU ỨNG REVEAL CUỘN TRANG */
+  .reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.6s ease-out, 
+                transform 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
 
-.reveal.in {
-  opacity: 1;
-  transform: translateY(0);
-}
+  .reveal.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
 
+  /* KHUNG CHỨA TÊN (ĐÃ NÂNG VỊ TRÍ LÊN TRÊN XÍU) */
   .photo-card-caption{
     position:absolute;
-    left:0;right:0;bottom:0;
-    padding:40px 24px 56px;
-    padding-bottom:calc(56px + env(safe-area-inset-bottom));
-    background:linear-gradient(to top, rgba(20,8,12,0.85) 0%, rgba(20,8,12,0.4) 50%, transparent 100%);
+    left:0; right:0; bottom:0;
+    padding:40px 24px 110px; /* Tăng padding-bottom từ 56px -> 110px để đẩy cụm tên lên cao hơn */
+    padding-bottom:calc(110px + env(safe-area-inset-bottom));
+    background:linear-gradient(to top, rgba(20,8,12,0.85) 0%, rgba(20,8,12,0.4) 60%, transparent 100%);
     text-align:center;
+    overflow: hidden;
   }
+
+  /* KÍCH THƯỚC CHỮ BAN ĐẦU */
   .caption-names{
+    display: inline-block;
     font-family:'Dancing Script',cursive;
     font-weight:700;
-    font-size:clamp(2rem, 7vw, 3rem);
+    font-size:clamp(2.2rem, 6vw, 3.2rem);
     color:#fff;
     letter-spacing:0.01em;
-    text-shadow:0 2px 14px rgba(0,0,0,0.45);
+    text-shadow:0 4px 18px rgba(0,0,0,0.6);
+    white-space: nowrap;
   }
+
+  /* TỪNG KÝ TỰ CHẠY LẦN LƯỢT TỪ BÊN PHẢI VÀO */
+  .caption-names span.char {
+    display: inline-block;
+    opacity: 0;
+    transform: translateX(40px);
+    transition: opacity 0.5s ease-out, 
+                transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* KHI BẤM MỞ THIỆP -> CÁC CHỮ CHẠY VÀO NỐI TIẾP NHAU */
+  #openToggle:checked ~ .hero .caption-names span.char {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: calc(0.4s + var(--char-index) * 0.04s);
+  }
+
   .caption-tagline{
     margin-top:8px;
     font-family:'Dancing Script',cursive;
     font-style:italic;
     font-weight:400;
-    font-size:clamp(1.1rem, 3vw, 1.5rem);
+    font-size:clamp(1.2rem, 3.5vw, 1.8rem);
     color:rgba(255,255,255,0.92);
     text-shadow:0 2px 10px rgba(0,0,0,0.35);
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.8s ease-out 1.2s, 
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.2s;
   }
 
-  /* SECTION BÌA THƯ HÌNH MẪU */
+  #openToggle:checked ~ .hero .caption-tagline {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* SECTION BÌA THƯ */
   .envelope-intro-section {
     padding-top: 50px;
     padding-bottom: 20px;
@@ -695,8 +726,7 @@
     margin: 0 auto;
   }
 
-
-  /* COVER SCREEN */
+  /* COVER SCREEN & NÚT MỞ THIỆP RUNG RINH */
   .open-toggle{ position:absolute; width:1px; height:1px; opacity:0; pointer-events:none; }
   .cover{position:fixed;inset:0;z-index:1000;}
   #openToggle:checked ~ .cover{pointer-events:none;}
@@ -722,15 +752,38 @@
     backdrop-filter:blur(4px); text-align:center;
   }
 
+  /* ANIMATION RUNG RINH NÚT MỞ THIỆP */
+  @keyframes shakePulse {
+    0%, 100% {
+      transform: scale(1) rotate(0deg);
+    }
+    10%, 30%, 50%, 70% {
+      transform: scale(1.05) rotate(-3deg);
+    }
+    20%, 40%, 60%, 80% {
+      transform: scale(1.05) rotate(3deg);
+    }
+    90% {
+      transform: scale(1.03) rotate(0deg);
+    }
+  }
+
   .open-btn{
     display:inline-flex; align-items:center; gap:10px; padding:14px 36px;
     border-radius:999px; border:1px solid #FFFBF8; background:transparent;
     color:#FFFBF8; font-family:'Dancing Script',cursive; font-size:0.9rem;
     letter-spacing:0.12em; text-transform:uppercase; cursor:pointer; user-select:none;
     transition:background 0.35s ease, color 0.35s ease, transform 0.3s ease;
-    opacity:0; animation:coverFadeUp 0.7s ease 0.8s forwards;
+    opacity:0; 
+    animation: coverFadeUp 0.7s ease 0.8s forwards,
+               shakePulse 2.5s ease-in-out 1.6s infinite;
   }
-  .open-btn:hover{ background:#FFFBF8; color:var(--deep-pink); transform:translateY(-2px); }
+  .open-btn:hover{ 
+    animation-play-state: paused;
+    background:#FFFBF8; 
+    color:var(--deep-pink); 
+    transform:scale(1.08); 
+  }
   .open-btn svg{width:14px;height:14px;transition:transform 0.35s ease;}
   .open-btn:hover svg{transform:translateX(3px);}
 
@@ -744,7 +797,7 @@
 
   .hero-content{
     position:relative; width:100%; height:100%; min-height:100svh; opacity:0;
-    transform:translateY(22px) scale(0.97); filter:blur(4px);
+    transform:scale(0.97); filter:blur(4px);
     transition:opacity 0.9s ease 0.2s, transform 0.9s cubic-bezier(.22,1,.36,1) 0.2s, filter 0.9s ease 0.2s;
   }
   #openToggle:checked ~ .hero .hero-content{ opacity:1; transform:none; filter:none; }
@@ -770,8 +823,8 @@
       <div class="cover-divider">❦</div>
       <div class="cover-date">Thứ Sáu, 25 tháng 12, 2026</div>
       <div class="cover-tagline">
-  Thân mời: <span id="guestName" style="color: #FFFBF8; font-weight: bold;">Quý khách</span>
-</div>
+        Thân mời: <span id="guestName" style="color: #FFFBF8; font-weight: bold;">Quý khách</span>
+      </div>
       <label class="open-btn" for="openToggle" id="openBtn" aria-label="Mở thiệp cưới">
         Mở thiệp
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
@@ -790,7 +843,14 @@
         <div class="photo-card-inner">
           <img src="./image_wedding/1.jpg" alt="Thành Kiên & Thúy Hồng">
           <div class="photo-card-caption">
-            <div class="caption-names">Thành Kiên &amp; Thúy Hồng</div>
+            <!-- PHÂN TÁCH TỪNG KÝ TỰ ĐỂ CHẠY NỐI TIẾP -->
+            <div class="caption-names">
+              <span class="char" style="--char-index: 0;">T</span><span class="char" style="--char-index: 1;">h</span><span class="char" style="--char-index: 2;">à</span><span class="char" style="--char-index: 3;">n</span><span class="char" style="--char-index: 4;">h</span>
+              <span class="char" style="--char-index: 6;">K</span><span class="char" style="--char-index: 7;">i</span><span class="char" style="--char-index: 8;">ê</span><span class="char" style="--char-index: 9;">n</span>
+              <span class="char" style="--char-index: 11;">&amp;</span>
+              <span class="char" style="--char-index: 13;">T</span><span class="char" style="--char-index: 14;">h</span><span class="char" style="--char-index: 15;">ú</span><span class="char" style="--char-index: 16;">y</span>
+              <span class="char" style="--char-index: 18;">H</span><span class="char" style="--char-index: 19;">ồ</span><span class="char" style="--char-index: 20;">n</span><span class="char" style="--char-index: 21;">g</span>
+            </div>
             <div class="caption-tagline">♥ ♥ ♥</div>
           </div>
         </div>
@@ -818,65 +878,65 @@
           </div>
         </div>
       </div>
+    </div>
   </div>
   
-      <!-- PHẦN THIỆP MỜI CHI TIẾT -->
-      <div class="invitation-detail-card">
-        <div class="reveal">
-        <h2 class="invitation-top-title">
-          TRÂN TRỌNG KÍNH MỜI QUÝ KHÁCH ĐẾN<br>CHUNG VUI CÙNG GIA ĐÌNH CHÚNG TÔI
-        </h2>
-</div>
-<div class="reveal">
-        <div class="family-grid">
-          <div class="family-col">
-            <div class="family-label">NHÀ TRAI</div>
-            <div class="family-names">
-              Ông: Nguyễn Anh Tuấn<br>
-              Bà: Nguyễn Ngọc Bích<br>
-              TP. Hà Nội
-            </div>
-          </div>
-          <div class="family-col">
-            <div class="family-label">NHÀ GÁI</div>
-            <div class="family-names">
-              Ông: Nguyễn Minh Toàn<br>
-              Bà: Nguyễn Thu Nga<br>
-              TP. Hà Nội
-            </div>
+  <!-- PHẦN THIỆP MỜI CHI TIẾT -->
+  <div class="invitation-detail-card">
+    <div class="reveal">
+      <h2 class="invitation-top-title">
+        TRÂN TRỌNG KÍNH MỜI QUÝ KHÁCH ĐẾN<br>CHUNG VUI CÙNG GIA ĐÌNH CHÚNG TÔI
+      </h2>
+    </div>
+    <div class="reveal">
+      <div class="family-grid">
+        <div class="family-col">
+          <div class="family-label">NHÀ TRAI</div>
+          <div class="family-names">
+            Ông: Nguyễn Anh Tuấn<br>
+            Bà: Nguyễn Ngọc Bích<br>
+            TP. Hà Nội
           </div>
         </div>
-</div>
-<div class="reveal">
-        <div class="couple-names-block">
-          <div class="groom-name">Thành Kiên</div>
-          <span class="ampersand">&amp;</span>
-          <div class="bride-name">Thúy Hồng</div>
-        </div>
-</div>
-<div class="reveal">
-        <div class="party-info-box">
-          <div class="party-title">BỮA TIỆC CHUNG VUI</div>
-          <div class="party-subtitle">ĐƯỢC TỔ CHỨC VÀO LÚC 17:30 - THỨ SÁU</div>
-
-          <div class="date-display-wrap">
-            <div class="solar-date">01.10.2026</div>
+        <div class="family-col">
+          <div class="family-label">NHÀ GÁI</div>
+          <div class="family-names">
+            Ông: Nguyễn Minh Toàn<br>
+            Bà: Nguyễn Thu Nga<br>
+            TP. Hà Nội
           </div>
-
-          <div class="lunar-date">(Tức ngày 17 tháng 11 năm Bính Ngọ)</div>
-
-          <div class="venue-type">TẠI TƯ GIA NHÀ TRAI</div>
-          <div class="venue-address">
-            Số 88 Vũ Trọng Phụng - Thanh Xuân - Hà Nội
-          </div>
-
-          <a href="https://www.google.com/maps/search/?api=1&query=S%E1%BB%91+88+V%C6%A1+Tr%E1%BB%8Dng+Ph%E1%BB%A5ng+-+Thanh+Xu%C3%A2n+-+H%C3%A0+N%E1%BB%99i" target="_blank" rel="noopener" class="direction-btn">
-            XEM CHỈ ĐƯỜNG
-          </a>
         </div>
       </div>
-</div>
     </div>
+    <div class="reveal">
+      <div class="couple-names-block">
+        <div class="groom-name">Thành Kiên</div>
+        <span class="ampersand">&amp;</span>
+        <div class="bride-name">Thúy Hồng</div>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="party-info-box">
+        <div class="party-title">BỮA TIỆC CHUNG VUI</div>
+        <div class="party-subtitle">ĐƯỢC TỔ CHỨC VÀO LÚC 17:30 - THỨ SÁU</div>
+
+        <div class="date-display-wrap">
+          <div class="solar-date">01.10.2026</div>
+        </div>
+
+        <div class="lunar-date">(Tức ngày 17 tháng 11 năm Bính Ngọ)</div>
+
+        <div class="venue-type">TẠI TƯ GIA NHÀ TRAI</div>
+        <div class="venue-address">
+          Số 88 Vũ Trọng Phụng - Thanh Xuân - Hà Nội
+        </div>
+
+        <a href="https://www.google.com/maps/search/?api=1&query=S%E1%BB%91+88+V%C6%A1+Tr%E1%BB%8Dng+Ph%E1%BB%A5ng+-+Thanh+Xu%C3%A2n+-+H%C3%A0+N%E1%BB%99i" target="_blank" rel="noopener" class="direction-btn">
+          XEM CHỈ ĐƯỜNG
+        </a>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- BỘ SƯU TẬP ẢNH CƯỚI -->
@@ -937,15 +997,6 @@
           <div class="t-desc">Đón tiếp quan khách, chụp ảnh lưu niệm và khai tiệc tại tư gia.</div>
         </div>
       </div>
-
-      <div class="t-item">
-        <div class="t-card">
-          <div class="t-dot"></div>
-          <div class="t-time">10:30</div>
-          <div class="t-title">Lễ thành hôn</div>
-          <div class="t-desc">Nghi lễ chính thức trước bàn thờ gia tiên, ra mắt cô dâu chú rể.</div>
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -967,30 +1018,27 @@
 
 <!-- OUR LOVE & COUNTDOWN -->
 <section class="our-love-countdown-section">
-  
-    <div class="our-love-wrap">
-      <div class="reveal">
+  <div class="our-love-wrap">
+    <div class="reveal">
       <div class="our-love-main-photo">
         <img src="./image_wedding/10.jpg" alt="Our Love Main Banner">
       </div>
-</div>
-<div class="reveal">
+    </div>
+    <div class="reveal">
       <h2 class="our-love-title">OUR LOVE</h2>
-      
       <div class="our-love-grid">
         <div class="our-love-item"><img src="./image_wedding/8.jpg" alt="Our Love Photo 1"></div>
         <div class="our-love-item"><img src="./image_wedding/9.jpg" alt="Our Love Photo 2"></div>
         <div class="our-love-item"><img src="./image_wedding/7.jpg" alt="Our Love Photo 3"></div>
       </div>
-      </div>
-      <div class="reveal">
+    </div>
+    <div class="reveal">
       <p class="our-love-text">
         Mỗi câu chuyện tình yêu đều có một hành trình riêng. Sau những ngày tháng cùng nhau trưởng thành, chúng tôi quyết định về chung một nhà và viết tiếp câu chuyện ấy bằng tình yêu, sự tin tưởng và hạnh phúc.
       </p>
-
       <div class="divider-line"></div>
-</div>
-<div class="reveal">
+    </div>
+    <div class="reveal">
       <div class="countdown-card">
         <div class="countdown-card-header">
           <div class="countdown-eyebrow">CHỈ CÒN</div>
@@ -1020,9 +1068,8 @@
           Hẹn gặp mọi người vào <b>17:30, Thứ Sáu 01.10.2026</b>
         </div>
       </div>
-</div>
     </div>
-  
+  </div>
 </section>
 
 <!-- RSVP -->
@@ -1048,7 +1095,7 @@
   </div>
 </section>
 
-<!-- LIGHTBOX KHUNG HIỂN THỊ HÌNH ẢNH MỞ TO -->
+<!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox">
   <div class="lightbox-stage" id="lightboxStage">
     <div class="lightbox-close" id="lightboxClose" aria-label="Đóng">
@@ -1080,9 +1127,10 @@
     </div>
   </div>
 </footer>
+
 <script>
-  // Chỉ hiển thị tên nếu Mã/Tên tồn tại trong GUEST_LIST
-(function setGuestName() {
+  // Giải mã tên người nhận từ URL (?to=BASE64)
+  (function setGuestName() {
     const urlParams = new URLSearchParams(window.location.search);
     const guestCode = urlParams.get('to');
     const guestEl = document.getElementById('guestName');
@@ -1090,25 +1138,21 @@
     if (guestEl) {
       if (guestCode) {
         try {
-          // Giải mã chuỗi mã hóa trên URL về Tiếng Việt (Base64 UTF-8)
           const decodedName = decodeURIComponent(escape(atob(guestCode)));
-          
-          // Kiểm tra xem chuỗi giải mã có hợp lệ không (tránh chuỗi rác)
           if (decodedName && decodedName.trim() !== '') {
             guestEl.textContent = decodedName;
           } else {
-            guestEl.textContent = "";
+            guestEl.textContent = "Quý khách";
           }
         } catch (e) {
-          // Nếu mã bị gõ sai, bị hỏng hoặc người dùng cố tình nhập chuỗi không phải Base64
-          guestEl.textContent = "";
+          guestEl.textContent = "Quý khách";
         }
       } else {
-        // Trường hợp truy cập link gốc không có ?to=
-        guestEl.textContent = "";
+        guestEl.textContent = "Quý khách";
       }
     }
   })();
+
   // Hiệu ứng cuộn trang reveal
   const items = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver((entries)=>{
@@ -1124,8 +1168,8 @@
     e.target.reset();
   }
 
-  // Đếm ngược đến 25/12/2026
-  const weddingDate = new Date('2026-10-01').getTime();
+  // Đếm ngược ngày cưới
+  const weddingDate = new Date('2026-10-01T17:30:00').getTime();
   function pad(n){ return String(n).padStart(2,'0'); }
 
   function updateCountdown(){
@@ -1162,7 +1206,7 @@
   updateCountdown();
   const countdownTimer = setInterval(updateCountdown, 1000);
 
-  // LIGHTBOX XỬ LÝ CHUẨN
+  // LIGHTBOX XỬ LÝ ẢNH
   (function(){
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightboxImg');
@@ -1215,7 +1259,7 @@
     function close(){
       lightbox.classList.remove('open');
       lightboxImg.classList.remove('show');
-      lightboxImg.src = ''; // Clear src để giải phóng bộ nhớ và không kẹt ảnh cũ
+      lightboxImg.src = '';
       document.body.style.overflow = '';
     }
 
