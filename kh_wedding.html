@@ -132,7 +132,7 @@
     display: inline-block;
     font-family:'Dancing Script',cursive;
     font-weight:700;
-    font-size:clamp(2.2rem, 6vw, 3.2rem);
+    font-size:clamp(1.9rem, 6vw, 3.2rem);
     color:#fff;
     letter-spacing:0.01em;
     text-shadow:0 4px 18px rgba(0,0,0,0.6);
@@ -153,25 +153,6 @@
     opacity: 1;
     transform: translateX(0);
     transition-delay: calc(0.4s + var(--char-index) * 0.04s);
-  }
-
-  .caption-tagline{
-    margin-top:8px;
-    font-family:'Dancing Script',cursive;
-    font-style:italic;
-    font-weight:400;
-    font-size:clamp(1.2rem, 3.5vw, 1.8rem);
-    color:rgba(255,255,255,0.92);
-    text-shadow:0 2px 10px rgba(0,0,0,0.35);
-    opacity: 0;
-    transform: translateY(15px);
-    transition: opacity 0.8s ease-out 1.2s, 
-                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.2s;
-  }
-
-  #openToggle:checked ~ .hero .caption-tagline {
-    opacity: 1;
-    transform: translateY(0);
   }
 
   /* SECTION BÌA THƯ */
@@ -512,18 +493,48 @@
   }
 
   /* VENUE */
-  .venue-card{
-    max-width:640px; margin:0 auto; background:rgba(255,255,255,0.08);
-    border:1px solid var(--line); border-radius:22px; padding:48px 36px; text-align:center;
+ .venue-card{
+    max-width:640px; 
+    margin:0 auto; 
+    background:#EFE8E1; /* Màu nền kem ngà giống hình 2 */
+    border:1px solid rgba(122, 27, 46, 0.2); 
+    border-radius:28px; /* Bo góc 28px mềm mại */
+    padding:40px 24px; 
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
   }
-  .venue-name{ font-family:'Dancing Script',cursive; font-size:1.8rem; font-style:italic; color:#FFFBF8; margin-bottom:10px; }
-  .venue-addr{ color:rgba(255,255,255,0.85); font-size:0.95rem; margin-bottom:26px; line-height:1.6; }
+  .venue-name{ 
+    font-family:'Dancing Script', cursive; 
+    font-size: clamp(2rem, 5vw, 2.8rem); 
+    font-weight: 700;
+    color:#7A1B2E; /* Màu chữ đỏ đô */
+    margin-bottom:8px; 
+  }
+  .venue-addr{ 
+    font-family:'Dancing Script', cursive;
+    color:#7A1B2E; 
+    font-size: clamp(1.1rem, 3vw, 1.35rem); 
+    margin-bottom:28px; 
+    line-height:1.5; 
+    opacity: 0.9;
+  }
   .venue-btn{
-    display:inline-block; padding:13px 34px; border-radius:999px;
-    background:#FFFBF8; color:var(--deep-pink); text-decoration:none;
-    font-size:0.85rem; letter-spacing:0.08em; transition:background 0.3s ease, transform 0.3s ease;
+    display:inline-block; 
+    padding:10px 32px; 
+    border-radius:999px;
+    background:#7A1B2E; 
+    color:#FFF; 
+    text-decoration:none;
+    font-family:'Dancing Script', cursive;
+    font-size:1.1rem; 
+    font-weight:700;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition:background 0.3s ease, transform 0.3s ease;
   }
-  .venue-btn:hover{background:#fff;transform:translateY(-2px);}
+  .venue-btn:hover{
+    background:#5C1220;
+    transform:translateY(-2px);
+  }
 
   /* OUR LOVE & COUNTDOWN */
   .our-love-countdown-section {
@@ -847,11 +858,12 @@
             <div class="caption-names">
               <span class="char" style="--char-index: 0;">T</span><span class="char" style="--char-index: 1;">h</span><span class="char" style="--char-index: 2;">à</span><span class="char" style="--char-index: 3;">n</span><span class="char" style="--char-index: 4;">h</span>
               <span class="char" style="--char-index: 6;">K</span><span class="char" style="--char-index: 7;">i</span><span class="char" style="--char-index: 8;">ê</span><span class="char" style="--char-index: 9;">n</span>
+              <span class="char" style="--char-index: 10;">&nbsp;</span>
               <span class="char" style="--char-index: 11;">&amp;</span>
+              <span class="char" style="--char-index: 12;">&nbsp;</span>
               <span class="char" style="--char-index: 13;">T</span><span class="char" style="--char-index: 14;">h</span><span class="char" style="--char-index: 15;">ú</span><span class="char" style="--char-index: 16;">y</span>
               <span class="char" style="--char-index: 18;">H</span><span class="char" style="--char-index: 19;">ồ</span><span class="char" style="--char-index: 20;">n</span><span class="char" style="--char-index: 21;">g</span>
             </div>
-            <div class="caption-tagline">♥ ♥ ♥</div>
           </div>
         </div>
       </div>
