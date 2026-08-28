@@ -128,17 +128,24 @@
   }
 
 /* KÍCH THƯỚC CHỮ BAN ĐẦU */
-  .caption-names{
+ .caption-names {
     display: inline-block;
-    font-family:'Cormorant Garamond', serif;
-    font-weight:900;
-    font-size:clamp(2.5rem, 6vw, 3.2rem);
-    color:#fff;
-    letter-spacing:0.01em;
-    text-shadow:0 4px 18px rgba(0,0,0,0.6);
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700; /* Dùng độ dày chuẩn tối đa của phông */
+    font-size: clamp(2.5rem, 6vw, 3.2rem);
+    color: #fff;
+    letter-spacing: 0.01em;
     white-space: nowrap;
+    
+    /* Tạo viền nét mỏng xung quanh giúp chữ tăng độ nét & đậm đà */
+    -webkit-text-stroke: 0.5px #fff;
+    /* Đổ bóng đậm hơn giúp chữ nổi bật hoàn toàn trên nền ảnh */
+    text-shadow: 0 4px 18px rgba(0, 0, 0, 0.85), 0 0 2px rgba(0,0,0,0.5);
   }
-
+.caption-names .amp-break {
+      font-style: italic;
+      font-weight: 500; /* Dùng độ dày chuẩn tối đa của phông */
+    }
   /* ĐIỀU CHỈNH TRÊN ĐIỆN THOẠI (HIỂN THỊ 2 DÒNG) */
   @media (max-width: 640px) {
     .caption-names {
@@ -147,7 +154,7 @@
     }
     .caption-names .amp-break {
       display: block; /* Ép dấu & và phần phía sau xuống dòng mới */
-      margin-top: 4px;
+      margin-top: -5px;
     }
   }
 
