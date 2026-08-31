@@ -6,7 +6,7 @@
 <title>Thành Kiên &amp; Thúy Hồng | Thiệp Mời</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Dancing+Script:wght@500;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,700&family=Dancing+Script:wght@500;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
   :root{
@@ -103,12 +103,12 @@
     display: block !important;
   }
 
-  /* HIỆU ỨNG REVEAL CUỘN TRANG */
+  /* HIỆU ỨNG REVEAL CUỘN TRANG (MẶC ĐỊNH) */
   .reveal {
     opacity: 0;
     transform: translateY(50px);
-    transition: opacity 0.6s ease-out, 
-                transform 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: opacity 1.2s ease-out, 
+                transform 2s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: opacity, transform;
   }
 
@@ -117,49 +117,44 @@
     transform: translateY(0);
   }
 
-  /* KHUNG CHỨA TÊN (ĐÃ NÂNG VỊ TRÍ LÊN TRÊN XÍU) */
+  /* KHUNG CHỨA TÊN */
   .photo-card-caption{
     position:absolute;
     left:0; right:0; bottom:0;
-    padding:40px 24px 110px; /* Tăng padding-bottom từ 56px -> 110px để đẩy cụm tên lên cao hơn */
+    padding:40px 24px 110px;
     padding-bottom:calc(60px + env(safe-area-inset-bottom));
     background:linear-gradient(to top, rgba(20,8,12,0.85) 0%, rgba(20,8,12,0.4) 60%, transparent 100%);
     text-align:center;
     overflow: hidden;
   }
 
-/* KÍCH THƯỚC CHỮ BAN ĐẦU */
- .caption-names {
+  .caption-names {
     display: inline-block;
     font-family: 'Cormorant Garamond', serif;
-    font-weight: 700; /* Dùng độ dày chuẩn tối đa của phông */
+    font-weight: 700;
     font-size: clamp(2.5rem, 6vw, 3.2rem);
     color: #fff;
     letter-spacing: 0.01em;
     white-space: nowrap;
-    
-    /* Tạo viền nét mỏng xung quanh giúp chữ tăng độ nét & đậm đà */
     -webkit-text-stroke: 0.5px #fff;
-    /* Đổ bóng đậm hơn giúp chữ nổi bật hoàn toàn trên nền ảnh */
     text-shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
   }
-.caption-names .amp-break {
-      font-style: italic;
-      font-weight: 500; /* Dùng độ dày chuẩn tối đa của phông */
-    }
-  /* ĐIỀU CHỈNH TRÊN ĐIỆN THOẠI (HIỂN THỊ 2 DÒNG) */
+  .caption-names .amp-break {
+    font-style: italic;
+    font-weight: 500;
+  }
+
   @media (max-width: 640px) {
     .caption-names {
-      white-space: normal; /* Cho phép ngắt dòng trên điện thoại */
+      white-space: normal;
       line-height: 1.25;
     }
     .caption-names .amp-break {
-      display: block; /* Ép dấu & và phần phía sau xuống dòng mới */
+      display: block;
       margin-top: -5px;
     }
   }
 
-  /* TỪNG KÝ TỰ CHẠY LẦN LƯỢT TỪ BÊN PHẢI VÀO */
   .caption-names span.char {
     display: inline-block;
     opacity: 0;
@@ -168,7 +163,6 @@
                 transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  /* KHI BẤM MỞ THIỆP -> CÁC CHỮ CHẠY VÀO NỐI TIẾP NHAU */
   #openToggle:checked ~ .hero .caption-names span.char {
     opacity: 1;
     transform: translateX(0);
@@ -283,10 +277,11 @@
     color: rgba(255, 255, 255, 0.9);
   }
   .family-location {
-  color: #ffffff;   /* Đảm bảo màu chữ hiển thị rõ nét */
-  display: inline-block;
-  margin-top: 10px;
-}
+    color: #ffffff;
+    display: inline-block;
+    margin-top: 10px;
+    font-weight: 700;
+  }
   .couple-names-block {
     margin: 20px 0 40px;
     font-family: 'Cormorant Garamond', serif;
@@ -304,20 +299,33 @@
     display: block;
     font-weight: 600;
     font-style: italic;
-
   }
 
   /* KHUNG THÔNG TIN BỮA TIỆC MÀU KEM */
-  .party-info-box {
-    background: #EFE8E1;
-    border-radius: 24px;
-    padding: 36px 20px;
-    color: #7A1B2E;
-    max-width: 460px;
-    margin: 0 auto;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-    font-family: 'Cormorant Garamond', serif;
-  }
+  /* KHUNG THÔNG TIN BỮA TIỆC MÀU KEM (HIỆU ỨNG ZOOM IN) */
+.party-info-box {
+  background: #EFE8E1;
+  border-radius: 24px;
+  padding: 36px 20px;
+  color: #7A1B2E;
+  max-width: 460px;
+  margin: 0 auto;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  font-family: 'Cormorant Garamond', serif;
+
+  /* Hiệu ứng Phóng to khi cuộn tới */
+  opacity: 0;
+  transform: scale(0.6); /* Trạng thái ban đầu: Thu nhỏ 60% */
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+/* Khi cuộn tới (thêm class .in nhờ IntersectionObserver) */
+.party-info-box.in {
+  opacity: 1;
+  transform: scale(1); /* Phóng to về kích thước chuẩn 100% */
+}
   .party-title {
     font-size: 1.1rem;
     font-weight: 600;
@@ -388,7 +396,7 @@
     transform: translateY(-2px);
   }
 
-  /* BỐ CỤC ALBUM */
+  /* BỐ CỤC ALBUM VÀ HIỆU ỨNG TRƯỢT CHẬM MƯỢT TỪ 2 BÊN */
   .album-wrap {
     position: relative;
     max-width: 530px;
@@ -408,7 +416,10 @@
     border-radius: 8px;
     cursor: pointer;
     box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    opacity: 0;
+    /* Đã tăng thời gian trượt lên 1.6 giây để cực kỳ mượt và từ tốn */
+    transition: opacity 1.5s ease-out, transform 1.6s cubic-bezier(0.12, 0.85, 0.25, 1), box-shadow 0.3s ease;
+    will-change: opacity, transform;
   }
   .album-item-6 img.album-img {
     width: 100%;
@@ -417,8 +428,24 @@
     display: block;
     cursor: pointer;
   }
+
+  /* Cột bên trái: Lướt từ Trái sang */
+  .album-item-6:nth-child(odd) {
+    transform: translateX(-100px);
+  }
+  /* Cột bên phải: Lướt từ Phải sang */
+  .album-item-6:nth-child(even) {
+    transform: translateX(100px);
+  }
+
+  /* Khi cuộn màn hình đến nơi (có class .in) -> Trở về vị trí chuẩn */
+  .album-item-6.in {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
   .album-item-6:hover {
-    transform: translateY(-4px);
+    transform: translateY(-4px) !important;
     box-shadow: 0 8px 25px rgba(0,0,0,0.4);
   }
 
@@ -476,7 +503,7 @@
   .lightbox-prev{left:14px;} .lightbox-next{right:14px;}
   .lightbox-counter{
     position:absolute; bottom:22px; left:50%; transform:translateX(-50%);
-    font-family:'Cormorant Garamond', serif;; font-size:1.15rem; color:rgba(255,255,255,0.85);
+    font-family:'Cormorant Garamond', serif; font-size:1.15rem; color:rgba(255,255,255,0.85);
   }
 
   /* SECTION TITLES */
@@ -489,8 +516,8 @@
     font-family:'Cormorant Garamond', serif;
     font-size:clamp(2rem,4vw,2.8rem); font-weight:500; color:#FFFBF8;
     position: relative;
-    display: inline-block; /* Giúp gạch ngang tính theo chiều rộng dòng chữ */
-    padding-bottom: 7px;  /* Khoảng cách giữa chữ và đường gạch */
+    display: inline-block;
+    padding-bottom: 7px;
   }
   .section-heading::after {
     content: '';
@@ -498,9 +525,9 @@
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 80px;            /* Độ dài của đường gạch ngang (có thể chỉnh to/nhỏ) */
-    height: 1px;           /* Độ mỏng của đường gạch */
-    background: rgba(255, 251, 248, 0.6); /* Màu gạch trắng mờ nhẹ đồng bộ với chữ */
+    width: 80px;
+    height: 1px;
+    background: rgba(255, 251, 248, 0.6);
   }
 
   /* TIMELINE */
@@ -514,7 +541,7 @@
   .t-item:nth-child(odd) .t-card{margin-right:auto;text-align:right;padding-right:52px;}
   .t-item:nth-child(even) .t-card{margin-left:auto;text-align:left;padding-left:52px;}
   .t-card{width:50%;position:relative;}
-  .t-time{ font-family:'Cormorant Garamond', serif;; font-style:italic; font-size:1.6rem; color:#FFFBF8; margin-bottom:10px; margin-top: -10px; }
+  .t-time{ font-family:'Cormorant Garamond', serif; font-style:italic; font-size:1.6rem; color:#FFFBF8; margin-bottom:10px; margin-top: -10px; }
   .t-item:nth-child(even) .t-time{color:#F3D9DE;}
   .t-title{font-size:1.1rem;letter-spacing:0.04em;font-weight:500;margin-bottom:6px;color:#FFFBF8;}
   .t-desc{font-size:0.92rem;color:rgba(255,255,255,0.85);line-height:1.6;}
@@ -534,12 +561,12 @@
   }
 
   /* VENUE */
- .venue-card{
+  .venue-card{
     max-width:640px; 
     margin:0 auto; 
-    background:#EFE8E1; /* Màu nền kem ngà giống hình 2 */
+    background:#EFE8E1; 
     border:1px solid rgba(122, 27, 46, 0.2); 
-    border-radius:28px; /* Bo góc 28px mềm mại */
+    border-radius:28px; 
     padding:40px 24px; 
     text-align:center;
     box-shadow:0 10px 30px rgba(0,0,0,0.2);
@@ -548,7 +575,7 @@
     font-family:'Cormorant Garamond', serif; 
     font-size: clamp(2rem, 5vw, 2.8rem); 
     font-weight: 700;
-    color:#7A1B2E; /* Màu chữ đỏ đô */
+    color:#7A1B2E; 
     margin-bottom:8px; 
   }
   .venue-addr{ 
@@ -710,7 +737,7 @@
   .rsvp{text-align:center;}
   .rsvp-form{ max-width:440px; margin:0 auto; display:flex; flex-direction:column; gap:16px; }
   .rsvp-form input, .rsvp-form select, .rsvp-form textarea{
-    font-family:'Cormorant Garamond', serif;; font-weight:300; font-size:1rem;
+    font-family:'Cormorant Garamond', serif; font-weight:300; font-size:1rem;
     padding:14px 18px; border-radius:12px; border:1px solid var(--line);
     background:rgba(255,255,255,0.1); color:#fff; outline:none; transition:border-color 0.3s ease;
   }
@@ -721,7 +748,7 @@
   .rsvp-submit{
     margin-top:6px; padding:14px; border:none; border-radius:999px;
     background:#FFFBF8; color:var(--deep-pink); font-size:0.95rem; letter-spacing:0.08em;
-    cursor:pointer; font-weight:bold; transition:opacity 0.3s ease, transform 0.3s ease;
+    cursor:pointer; font-weight:bold; transition:opacity 0.3s ease, transform 0.3s ease; font-family:'Cormorant Garamond', serif;
   }
   .rsvp-submit:hover{opacity:0.9;transform:translateY(-2px);}
   .rsvp-note{ margin-top:18px; font-size:0.95rem; color:#F3D9DE; display:none; }
@@ -805,13 +832,12 @@
   }
 
   /* ANIMATION RUNG RINH NÚT MỞ THIỆP */
-  /* ANIMATION RUNG RINH NÚT MỞ THIỆP (NHANH & MẠNH MỚI) */
   @keyframes shakePulse {
     0%, 100% {
       transform: scale(1) rotate(0deg);
     }
     10%, 30%, 50%, 70% {
-      transform: scale(1.12) rotate(-6deg); /* Phóng to 1.12 và xoay mạnh hơn */
+      transform: scale(1.12) rotate(-6deg);
     }
     20%, 40%, 60%, 80% {
       transform: scale(1.12) rotate(6deg);
@@ -828,7 +854,6 @@
     letter-spacing:0.12em; text-transform:uppercase; cursor:pointer; user-select:none;
     transition:background 0.35s ease, color 0.35s ease, transform 0.3s ease;
     opacity:0; 
-    /* Giảm thời gian lặp từ 2.5s xuống 1.1s để hiệu ứng diễn ra dồn dập, nhanh hơn */
     animation: coverFadeUp 0.7s ease 0.8s forwards,
                shakePulse 1.1s ease-in-out 1.2s infinite;
   }
@@ -842,8 +867,8 @@
   .open-btn:hover svg{transform:translateX(3px);}
 
   .cover-eyebrow{ font-size:0.75rem; letter-spacing:0.35em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:22px; opacity:0; animation:coverFadeUp 0.7s ease 0.15s forwards; }
-  .cover-names{ font-family:'Cormorant Garamond', serif;; font-style:italic; font-weight:500; font-size:clamp(2rem,7vw,2.9rem); color:#FFFBF8; opacity:0; animation:coverFadeUp 0.7s ease 0.3s forwards; }
-  .cover-amp{ display:block; font-family:'Cormorant Garamond', serif;; font-size:1.6rem; color:var(--blush); margin:2px 0; }
+  .cover-names{ font-family:'Cormorant Garamond', serif; font-style:italic; font-weight:500; font-size:clamp(2rem,7vw,2.9rem); color:#FFFBF8; opacity:0; animation:coverFadeUp 0.7s ease 0.3s forwards; }
+  .cover-amp{ display:block; font-family:'Cormorant Garamond', serif; font-size:1.6rem; color:var(--blush); margin:2px 0; }
   .cover-divider{ font-size:1rem; color:var(--sea); margin:20px 0; opacity:0; animation:coverFadeUp 0.7s ease 0.45s forwards; }
   .cover-date{ font-size:0.95rem; letter-spacing:0.08em; color:var(--ink-soft); margin-bottom:30px; opacity:0; animation:coverFadeUp 0.7s ease 0.55s forwards; }
   .cover-tagline{ font-size:0.8rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:26px; opacity:0; animation:coverFadeUp 0.7s ease 0.65s forwards; }
@@ -897,20 +922,18 @@
         <div class="photo-card-inner">
           <img src="./image_wedding/1.jpg" alt="Thành Kiên & Thúy Hồng">
           <div class="photo-card-caption">
-            <!-- PHÂN TÁCH TỪNG KÝ TỰ ĐỂ CHẠY NỐI TIẾP -->
             <!-- CỤM TÊN TRÊN HERO BACKGROUND -->
-<div class="caption-names">
-  <span class="char" style="--char-index: 0;">T</span><span class="char" style="--char-index: 1;">H</span><span class="char" style="--char-index: 2;">À</span><span class="char" style="--char-index: 3;">N</span><span class="char" style="--char-index: 4;">H</span>
-  <span class="char" style="--char-index: 6;">K</span><span class="char" style="--char-index: 7;">I</span><span class="char" style="--char-index: 8;">Ê</span><span class="char" style="--char-index: 9;">N</span>
-  
-  <!-- BỌC THÊM CLASS amp-break VÀO ĐÂY -->
-  <span class="amp-break">
-    <span class="char" style="--char-index: 11;">&amp;</span>
-  </span>
+            <div class="caption-names">
+              <span class="char" style="--char-index: 0;">T</span><span class="char" style="--char-index: 1;">H</span><span class="char" style="--char-index: 2;">À</span><span class="char" style="--char-index: 3;">N</span><span class="char" style="--char-index: 4;">H</span>
+              <span class="char" style="--char-index: 6;">K</span><span class="char" style="--char-index: 7;">I</span><span class="char" style="--char-index: 8;">Ê</span><span class="char" style="--char-index: 9;">N</span>
+              
+              <span class="amp-break">
+                <span class="char" style="--char-index: 11;">&amp;</span>
+              </span>
 
-  <span class="char" style="--char-index: 13;">T</span><span class="char" style="--char-index: 14;">H</span><span class="char" style="--char-index: 15;">Ú</span><span class="char" style="--char-index: 16;">Y</span>
-  <span class="char" style="--char-index: 18;">H</span><span class="char" style="--char-index: 19;">Ồ</span><span class="char" style="--char-index: 20;">N</span><span class="char" style="--char-index: 21;">G</span>
-</div>
+              <span class="char" style="--char-index: 13;">T</span><span class="char" style="--char-index: 14;">H</span><span class="char" style="--char-index: 15;">Ú</span><span class="char" style="--char-index: 16;">Y</span>
+              <span class="char" style="--char-index: 18;">H</span><span class="char" style="--char-index: 19;">Ồ</span><span class="char" style="--char-index: 20;">N</span><span class="char" style="--char-index: 21;">G</span>
+            </div>
           </div>
         </div>
       </div>
@@ -974,46 +997,44 @@
         <div class="bride-name">Thúy Hồng</div>
       </div>
     </div>
-    <div class="reveal">
-      <div class="party-info-box">
-        <div class="party-title">BỮA TIỆC CHUNG VUI</div>
-        <div class="party-subtitle">ĐƯỢC TỔ CHỨC VÀO LÚC 17:30 - THỨ NĂM</div>
+    <div class="reveal party-info-box">
+  <div class="party-title">BỮA TIỆC CHUNG VUI</div>
+  <div class="party-subtitle">ĐƯỢC TỔ CHỨC VÀO LÚC 17:30 - THỨ NĂM</div>
 
-        <div class="date-display-wrap">
-          <div class="solar-date">01.10.2026</div>
-        </div>
+  <div class="date-display-wrap">
+    <div class="solar-date">01.10.2026</div>
+  </div>
 
-        <div class="lunar-date">(Tức ngày 17 tháng 11 năm Bính Ngọ)</div>
+  <div class="lunar-date">(Tức ngày 17 tháng 11 năm Bính Ngọ)</div>
 
-        <div class="venue-type">TẠI TƯ GIA NHÀ TRAI</div>
-        <div class="venue-address">
-          Khê Thanh - Tịnh Khê - TP. Quảng Ngãi
-        </div>
+  <div class="venue-type">TẠI TƯ GIA NHÀ TRAI</div>
+  <div class="venue-address">
+    Khê Thanh - Tịnh Khê - TP. Quảng Ngãi
+  </div>
 
-        <a href="https://www.google.com/maps/search/?api=1&query=S%E1%BB%91+88+V%C6%A1+Tr%E1%BB%8Dng+Ph%E1%BB%A5ng+-+Thanh+Xu%C3%A2n+-+H%C3%A0+N%E1%BB%99i" target="_blank" rel="noopener" class="direction-btn">
-          XEM CHỈ ĐƯỜNG
-        </a>
-      </div>
-    </div>
+  <a href="https://www.google.com/maps/search/?api=1&query=Khê+Thanh+Tịnh+Khê+Quảng+Ngãi" target="_blank" rel="noopener" class="direction-btn">
+    XEM CHỈ ĐƯỜNG
+  </a>
+</div>
   </div>
 </section>
 
-<!-- BỘ SƯU TẬP ẢNH CƯỚI -->
+<!-- BỘ SƯU TẬP ẢNH CƯỚI (TRƯỢT CHẬM MƯỢT TỪ 2 BÊN) -->
 <section class="album-section">
-  <div class="reveal">
-    <div class="section-title">
+  <div>
+    <div class="section-title reveal">
       <div class="section-eyebrow">Kỷ niệm</div>
       <h2 class="section-heading">Bộ sưu tập ảnh cưới</h2>
     </div>
 
     <div class="album-wrap">
       <div class="album-grid-6">
-        <div class="album-item-6"><img class="album-img" src="./image_wedding/4.jpg" alt="Ảnh cưới 1"></div>
-        <div class="album-item-6"><img class="album-img" src="./image_wedding/5.jpg" alt="Ảnh cưới 2"></div>
-        <div class="album-item-6"><img class="album-img" src="./image_wedding/11.jpg" alt="Ảnh cưới 3"></div>
-        <div class="album-item-6"><img class="album-img" src="./image_wedding/12.jpg" alt="Ảnh cưới 4"></div>
-        <div class="album-item-6"><img class="album-img" src="./image_wedding/6.jpg" alt="Ảnh cưới 5"></div>
-        <div class="album-item-6"><img class="album-img" src="./image_wedding/7.jpg" alt="Ảnh cưới 6"></div>
+        <div class="album-item-6 reveal"><img class="album-img" src="./image_wedding/4.jpg" alt="Ảnh cưới 1"></div>
+        <div class="album-item-6 reveal"><img class="album-img" src="./image_wedding/5.jpg" alt="Ảnh cưới 2"></div>
+        <div class="album-item-6 reveal"><img class="album-img" src="./image_wedding/11.jpg" alt="Ảnh cưới 3"></div>
+        <div class="album-item-6 reveal"><img class="album-img" src="./image_wedding/12.jpg" alt="Ảnh cưới 4"></div>
+        <div class="album-item-6 reveal"><img class="album-img" src="./image_wedding/6.jpg" alt="Ảnh cưới 5"></div>
+        <div class="album-item-6 reveal"><img class="album-img" src="./image_wedding/7.jpg" alt="Ảnh cưới 6"></div>
       </div>
     </div>
   </div>
@@ -1138,21 +1159,91 @@
       <div class="section-eyebrow">Xác nhận tham dự</div>
       <h2 class="section-heading">Gửi lời chúc &amp; xác nhận</h2>
     </div>
-    <form class="rsvp-form" onsubmit="handleRSVP(event)">
-      <input type="text" placeholder="Họ và tên" required>
-      <select required>
+
+    <form class="rsvp-form" id="weddingRsvpForm">
+      <input type="hidden" name="access_key" value="c73933e8-36f3-431d-8e9a-38203615699d">
+      <input type="checkbox" name="botcheck" style="display: none;">
+
+      <!-- Sửa name="from_name" thành name="name" để Web3Forms nhận đúng cột Name -->
+      <input type="text" id="guestNameInput" name="name" placeholder="Họ và tên" required>
+      
+      <select name="attendance" required>
         <option value="" disabled selected>Bạn sẽ tham dự chứ?</option>
-        <option value="yes">Chắc chắn có mặt</option>
-        <option value="no">Xin phép vắng mặt</option>
-        <option value="maybe">Chưa chắc chắn</option>
+        <option value="Chắc chắn có mặt">Chắc chắn có mặt</option>
+        <option value="Xin phép vắng mặt">Xin phép vắng mặt</option>
+        <option value="Chưa chắc chắn">Chưa chắc chắn</option>
       </select>
-      <input type="number" min="1" placeholder="Số lượng người tham dự">
-      <textarea placeholder="Lời chúc gửi đến cô dâu chú rể..."></textarea>
-      <button class="rsvp-submit" type="submit">Gửi xác nhận</button>
+
+      <input type="number" name="guests" min="1" placeholder="Số lượng người tham dự">
+      <textarea name="message" placeholder="Lời chúc gửi đến cô dâu chú rể..."></textarea>
+      
+      <button class="rsvp-submit" id="rsvpSubmitBtn" type="submit">Gửi xác nhận</button>
     </form>
-    <div class="rsvp-note" id="rsvpNote">Cảm ơn bạn đã phản hồi! Cô dâu chú rể rất mong được gặp bạn. 💕</div>
+
+    <div class="rsvp-note" id="rsvpNote" style="display: none; margin-top: 15px;">
+      Cảm ơn bạn đã phản hồi 💕
+    </div>
   </div>
 </section>
+
+<script>
+// 1. Hàm tự động đọc tham số ?to= từ URL và giải mã Base64 điền vào ô "Họ và tên"
+document.addEventListener("DOMContentLoaded", function() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const encodedTo = urlParams.get('to');
+
+  if (encodedTo) {
+    try {
+      // Giải mã Base64 hỗ trợ tiếng Việt có dấu (UTF-8)
+      const decodedName = decodeURIComponent(escape(atob(encodedTo.trim())));
+      const nameInput = document.getElementById('guestNameInput');
+      if (nameInput) {
+        nameInput.value = decodedName; // Tự động điền tên giải mã vào ô nhập
+      }
+    } catch (e) {
+      console.error("Không thể giải mã tham số 'to':", e);
+    }
+  }
+});
+
+// 2. Xử lý gửi Form
+document.getElementById('weddingRsvpForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+
+  const form = e.target;
+  const submitBtn = document.getElementById('rsvpSubmitBtn');
+  const rsvpNote = document.getElementById('rsvpNote');
+
+  const originalBtnText = submitBtn.textContent;
+  submitBtn.textContent = 'Đang gửi...';
+  submitBtn.disabled = true;
+
+  try {
+    const formData = new FormData(form);
+    const response = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      body: formData
+    });
+
+    const result = await response.json();
+
+    if (response.status === 200 && result.success) {
+      alert('Gửi xác nhận thành công! ❤️');
+      form.reset();
+      rsvpNote.style.display = 'block';
+      submitBtn.textContent = 'Đã gửi thành công!';
+    } else {
+      alert('LỖI GỬI THẤT BẠI: ' + (result.message || 'Mã Access Key không hợp lệ!'));
+      submitBtn.textContent = originalBtnText;
+      submitBtn.disabled = false;
+    }
+  } catch (error) {
+    alert('LỖI KẾT NỐI: Kiểm tra lại mạng internet!');
+    submitBtn.textContent = originalBtnText;
+    submitBtn.disabled = false;
+  }
+});
+</script>
 
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox">
@@ -1212,13 +1303,13 @@
     }
   })();
 
-  // Hiệu ứng cuộn trang reveal
+  // Hiệu ứng cuộn trang reveal với ngưỡng xuất hiện mượt hơn
   const items = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver((entries)=>{
     entries.forEach(e=>{
       if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
     });
-  }, {threshold:0.15});
+  }, {threshold: 0.1});
   items.forEach(el=>io.observe(el));
 
   function handleRSVP(e){
