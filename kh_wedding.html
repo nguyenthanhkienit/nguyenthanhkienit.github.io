@@ -1513,99 +1513,123 @@ document.getElementById('weddingRsvpForm').addEventListener('submit', async func
 
   // LIGHTBOX XỬ LÝ ẢNH
   (function(){
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightboxImg');
-    const lightboxCounter = document.getElementById('lightboxCounter');
-    const btnClose = document.getElementById('lightboxClose');
-    const btnPrev = document.getElementById('lightboxPrev');
-    const btnNext = document.getElementById('lightboxNext');
-    const stage = document.getElementById('lightboxStage');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxCounter = document.getElementById('lightboxCounter');
+  const btnClose = document.getElementById('lightboxClose');
+  const btnPrev = document.getElementById('lightboxPrev');
+  const btnNext = document.getElementById('lightboxNext');
+  const stage = document.getElementById('lightboxStage');
 
-    let gallery = [];
-    let currentIndex = 0;
+  let gallery = [];
+  let currentIndex = 0;
 
-    function getAlbumImgs(){
-      return Array.from(document.querySelectorAll('img.album-img'));
-    }
+  function getAlbumImgs(){
+    return Array.from(document.querySelectorAll('img.album-img'));
+  }
 
-    function render(direction){
-      const item = gallery[currentIndex];
-      if(!item) return;
+  function render(direction){
+    const item = gallery[currentIndex];
+    if(!item) return;
 
+    if (lightboxCounter) {
       lightboxCounter.textContent = (currentIndex + 1) + ' / ' + gallery.length;
-      const single = gallery.length <= 1;
-      btnPrev.style.display = single ? 'none' : 'flex';
-      btnNext.style.display = single ? 'none' : 'flex';
+    }
+    
+    const single = gallery.length <= 1;
+    if (btnPrev) btnPrev.style.display = single ? 'none' : 'flex';
+    if (btnNext) btnNext.style.display = single ? 'none' : 'flex';
 
-      lightboxImg.classList.remove('show', 'dir-next', 'dir-prev');
-      if(direction === 'next') lightboxImg.classList.add('dir-next');
-      if(direction === 'prev') lightboxImg.classList.add('dir-prev');
+    lightboxImg.classList.remove('show', 'dir-next', 'dir-prev');
+    if(direction === 'next') lightboxImg.classList.add('dir-next');
+    if(direction === 'prev') lightboxImg.classList.add('dir-prev');
 
-      lightboxImg.src = item.getAttribute('src');
-      lightboxImg.alt = item.getAttribute('alt') || '';
+    lightboxImg.src = item.getAttribute('src');
+    lightboxImg.alt = item.getAttribute('alt') || '';
 
+    requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          lightboxImg.classList.remove('dir-next', 'dir-prev');
-          lightboxImg.classList.add('show');
-        });
+        lightboxImg.classList.remove('dir-next', 'dir-prev');
+        lightboxImg.classList.add('show');
       });
-    }
-
-    function open(clickedImg){
-      gallery = getAlbumImgs();
-      const idx = gallery.indexOf(clickedImg);
-      currentIndex = idx >= 0 ? idx : 0;
-      render(null);
-      lightbox.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function close(){
-      lightbox.classList.remove('open');
-      lightboxImg.classList.remove('show');
-      lightboxImg.src = '';
-      document.body.style.overflow = '';
-    }
-
-    function prev(){
-      currentIndex = (currentIndex - 1 + gallery.length) % gallery.length;
-      render('prev');
-    }
-
-    function next(){
-      currentIndex = (currentIndex + 1) % gallery.length;
-      render('next');
-    }
-
-    document.addEventListener('click', (e) => {
-      if (e.target.matches('img.album-img')) {
-        open(e.target);
-      }
     });
+  }
 
-    btnClose.addEventListener('click', close);
-    btnPrev.addEventListener('click', prev);
-    btnNext.addEventListener('click', next);
+  function open(clickedImg){
+    gallery = getAlbumImgs();
+    const idx = gallery.indexOf(clickedImg);
+    currentIndex = idx >= 0 ? idx : 0;
+    render(null);
+    
+    lightbox.classList.add('open');
+    // Mở khóa pointer-events cho lightbox
+    lightbox.style.pointerEvents = 'auto'; 
+    document.body.style.overflow = 'hidden';
+  }
 
+  function close(){
+    lightbox.classList.remove('open');
+    lightboxImg.classList.remove('show');
+    lightboxImg.src = '';
+    
+    // Tắt hoàn toàn khả năng nhận cảm ứng của lightbox để không đè lên form
+    lightbox.style.pointerEvents = 'none'; 
+    
+    // Khôi phục lại cuộn trang
+    document.body.style.overflow = '';
+    document.body.style.removeProperty('overflow');
+
+    // SỬA LỖI ĐIỆN THOẠI: Bỏ active focus khỏi lightbox và kích hoạt lại bàn phím
+    if (document.activeElement) {
+      document.activeElement.blur();
+    }
+
+    // Ép trình duyệt di động cập nhật lại vùng nhận tương tác (Hit-test trigger)
+    window.scrollTo(window.scrollX, window.scrollY);
+  }
+
+  function prev(){
+    currentIndex = (currentIndex - 1 + gallery.length) % gallery.length;
+    render('prev');
+  }
+
+  function next(){
+    currentIndex = (currentIndex + 1) % gallery.length;
+    render('next');
+  }
+
+  document.addEventListener('click', (e) => {
+    if (e.target.matches('img.album-img')) {
+      open(e.target);
+    }
+  });
+
+  if (btnClose) btnClose.addEventListener('click', close);
+  if (btnPrev) btnPrev.addEventListener('click', prev);
+  if (btnNext) btnNext.addEventListener('click', next);
+
+  if (lightbox) {
     lightbox.addEventListener('click', (e) => {
       if(e.target === lightbox || e.target === stage || e.target.classList.contains('lightbox-img-wrap')){ 
         close(); 
       }
     });
+  }
 
-    document.addEventListener('keydown', (e) => {
-      if(!lightbox.classList.contains('open')) return;
-      if(e.key === 'Escape') close();
-      if(e.key === 'ArrowLeft') prev();
-      if(e.key === 'ArrowRight') next();
-    });
+  document.addEventListener('keydown', (e) => {
+    if(!lightbox.classList.contains('open')) return;
+    if(e.key === 'Escape') close();
+    if(e.key === 'ArrowLeft') prev();
+    if(e.key === 'ArrowRight') next();
+  });
 
-    let touchStartX = 0, touchStartY = 0;
+  // Xử lý vuốt cảm ứng trên di động
+  let touchStartX = 0, touchStartY = 0;
+  if (stage) {
     stage.addEventListener('touchstart', (e) => {
       touchStartX = e.changedTouches[0].clientX;
       touchStartY = e.changedTouches[0].clientY;
-    }, {passive:true});
+    }, {passive: true});
 
     stage.addEventListener('touchend', (e) => {
       const dx = e.changedTouches[0].clientX - touchStartX;
@@ -1613,8 +1637,9 @@ document.getElementById('weddingRsvpForm').addEventListener('submit', async func
       if(Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)){
         if(dx < 0){ next(); } else { prev(); }
       }
-    }, {passive:true});
-  })();
+    }, {passive: true});
+  }
+})();
 </script>
 </body>
 </html>
