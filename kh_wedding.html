@@ -881,6 +881,105 @@
   }
   #openToggle:checked ~ .hero .hero-content{ opacity:1; transform:none; filter:none; }
 </style>
+<!-- CSS Thiết kế giao diện sang trọng -->
+<style>
+  /* --- KHUNG TỔNG THỂ --- */
+.wishes-wrapper {
+  max-width: 500px;
+  margin: 30px auto;
+  padding: 0 15px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+/* Tiêu đề phần lời chúc */
+.wishes-title {
+  text-align: center;
+  color: #ffffff;
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* --- DANH SÁCH & THANH CUỘN (CHỈ HIỆN ~3 LỜI CHÚC) --- */
+.wishes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  
+  /* Giới hạn chiều cao cố định để chứa 3 lời chúc */
+  max-height: 290px; 
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+/* Tùy chỉnh thanh cuộn cho Chrome, Safari, Edge */
+.wishes-list::-webkit-scrollbar {
+  width: 5px;
+}
+
+.wishes-list::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.wishes-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 10px;
+}
+
+.wishes-list::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+/* Tùy chỉnh thanh cuộn cho Firefox */
+.wishes-list {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.35) rgba(0, 0, 0, 0.1);
+}
+
+/* --- THẺ HỘP LỜI CHÚC (CARD) --- */
+.wish-card {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 10px;
+  padding: 12px 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
+}
+
+.wish-card:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Tên người chúc */
+.wish-header {
+  margin-bottom: 6px;
+}
+
+.wish-author {
+  color: #ffd700; /* Màu vàng kim sang trọng */
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.3px;
+}
+
+/* Nội dung lời chúc */
+.wish-text {
+  color: #ffffff;
+  font-size: 0.92rem;
+  line-height: 1.45;
+  margin: 0;
+  font-style: italic;
+  opacity: 0.95;
+  word-wrap: break-word;
+}
+</style>
 </head>
 <body>
 
@@ -1185,20 +1284,75 @@
     </div>
   </div>
 </section>
+<!-- Cấu trúc HTML hiển thị danh sách lời chúc -->
+<div class="wishes-wrapper">
+  <h3 class="wishes-title">Lời chúc từ khách mời</h3>
+  <div id="wishesList" class="wishes-list">
+    <!-- Lời chúc sẽ tự động được thêm vào đây -->
+  </div>
+</div>
+<!-- 1. Thêm thư viện Supabase vào thẻ <head> hoặc trước thẻ <script> này -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-// 1. Hàm tự động đọc tham số ?to= từ URL và giải mã Base64 điền vào ô "Họ và tên"
+// 1. CHÚ Ý: CHỈ LẤY TÊN MIỀN GỐC (BỎ ĐOẠN /rest/v1 HOẶC BẤM NÚT COPY TRÊN SUPABASE)
+const SUPABASE_URL = 'https://xfeazemkmwiyhtfiyijc.supabase.co'; 
+const SUPABASE_KEY = 'sb_publishable_7RY3lmAN5yLAxSIRlJUTPw_tBOLlQHp';
+
+const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+// 2. Hàm tải lời chúc từ bảng 'List'
+async function loadWishes() {
+  const container = document.getElementById('wishesList');
+  if (!container) return;
+
+  const { data, error } = await db
+    .from('List')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    console.error('Lỗi lấy dữ liệu Supabase:', error.message);
+    return;
+  }
+
+  container.innerHTML = '';
+  
+  data.forEach(item => {
+    // Chỉ hiển thị những khách có để lại lời chúc
+    if (item.message && item.message.trim() !== '') {
+      const card = document.createElement('div');
+      card.className = 'wish-card';
+      
+      card.innerHTML = `
+        <div class="wish-header">
+          <span class="wish-author">${item.name || 'Khách mời ẩn danh'}</span>
+        </div>
+        <p class="wish-text">"${item.message}"</p>
+      `;
+      
+      container.appendChild(card);
+    }
+  });
+
+  if (container.children.length === 0) {
+    container.innerHTML = '<p style="text-align:center; color:rgba(255,255,255,0.7);">Chưa có lời chúc nào. Hãy là người đầu tiên gửi lời chúc nhé! 💕</p>';
+  }
+}
+
+// 3. Hàm tự động đọc tham số ?to= từ URL
 document.addEventListener("DOMContentLoaded", function() {
+  loadWishes();
+
   const urlParams = new URLSearchParams(window.location.search);
   const encodedTo = urlParams.get('to');
 
   if (encodedTo) {
     try {
-      // Giải mã Base64 hỗ trợ tiếng Việt có dấu (UTF-8)
       const decodedName = decodeURIComponent(escape(atob(encodedTo.trim())));
       const nameInput = document.getElementById('guestNameInput');
       if (nameInput) {
-        nameInput.value = decodedName; // Tự động điền tên giải mã vào ô nhập
+        nameInput.value = decodedName;
       }
     } catch (e) {
       console.error("Không thể giải mã tham số 'to':", e);
@@ -1206,7 +1360,7 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 });
 
-// 2. Xử lý gửi Form
+// 4. Xử lý gửi Form lưu vào bảng 'List'
 document.getElementById('weddingRsvpForm').addEventListener('submit', async function(e) {
   e.preventDefault();
 
@@ -1220,6 +1374,26 @@ document.getElementById('weddingRsvpForm').addEventListener('submit', async func
 
   try {
     const formData = new FormData(form);
+
+    const wishData = {
+      name: formData.get('name') || '',
+      attendance: formData.get('attendance') || '',
+      guests: formData.get('guests') ? parseInt(formData.get('guests')) : 1,
+      message: formData.get('message') || ''
+    };
+
+    // Thêm bản ghi mới vào bảng 'List'
+    const { error: dbError } = await db.from('List').insert([wishData]);
+
+    if (dbError) {
+      console.error("LỖI SUPABASE:", dbError);
+      alert("Lỗi Supabase: " + dbError.message);
+      submitBtn.textContent = originalBtnText;
+      submitBtn.disabled = false;
+      return;
+    }
+
+    // Gửi tiếp thông báo về Web3Forms
     const response = await fetch('https://api.web3forms.com/submit', {
       method: 'POST',
       body: formData
@@ -1232,13 +1406,14 @@ document.getElementById('weddingRsvpForm').addEventListener('submit', async func
       form.reset();
       rsvpNote.style.display = 'block';
       submitBtn.textContent = 'Đã gửi thành công!';
+      loadWishes(); // Cập nhật lại danh sách lời chúc ngay sau khi gửi thành công
     } else {
-      alert('LỖI GỬI THẤT BẠI: ' + (result.message || 'Mã Access Key không hợp lệ!'));
+      alert('LỖI WEB3FORMS: ' + (result.message || 'Mã Access Key không hợp lệ!'));
       submitBtn.textContent = originalBtnText;
       submitBtn.disabled = false;
     }
   } catch (error) {
-    alert('LỖI KẾT NỐI: Kiểm tra lại mạng internet!');
+    alert('LỖI KẾT NỐI: ' + error.message);
     submitBtn.textContent = originalBtnText;
     submitBtn.disabled = false;
   }
@@ -1461,6 +1636,5 @@ document.getElementById('weddingRsvpForm').addEventListener('submit', async func
     }, {passive:true});
   })();
 </script>
-
 </body>
 </html>
