@@ -27,6 +27,7 @@
     max-width: 100% !important;
     overflow-x: hidden !important;
     background: var(--deep-pink);
+    -webkit-tap-highlight-color: transparent;
   }
 
   *{margin:0;padding:0;box-sizing:border-box;}
@@ -43,10 +44,11 @@
     height:auto;
   }
 
-  /* CHẶN MỞ/CLICK TRÊN CÁC HÌNH ẢNH NẰM NGOÀI ALBUM */
+  /* CHẶN TƯƠNG TÁC TRÊN CÁC HÌNH ẢNH NGOÀI ALBUM */
   img:not(.album-img):not(.lightbox-img) {
     pointer-events: none;
     user-select: none;
+    -webkit-user-select: none;
   }
 
   /* Background hiệu ứng ánh sáng mờ */
@@ -421,6 +423,7 @@
     object-fit: cover;
     display: block;
     cursor: pointer;
+    pointer-events: auto !important;
   }
 
   .album-item-6:nth-child(odd) { transform: translateX(-100px); }
@@ -444,11 +447,11 @@
     .polaroid-right { right: 0px; top: 10px; }
   }
 
-  /* LIGHTBOX XEM ALBUM HÌNH ĐÃ KHÓA LƯỚT NỀN */
+  /* LIGHTBOX XEM ALBUM */
   .lightbox{
     position:fixed;
     inset:0;
-    z-index:2000;
+    z-index:99999;
     background:rgba(30,26,30,0.95);
     display:flex;
     align-items:center;
@@ -456,16 +459,17 @@
     opacity:0;
     pointer-events:none;
     transition:opacity 0.3s ease;
-    touch-action: none; /* Khóa hoàn toàn lướt cuộn trang phía dưới */
+    visibility: hidden;
   }
   .lightbox.open{ 
     opacity:1; 
     pointer-events:auto; 
+    visibility: visible;
   }
   .lightbox-stage{
     position:relative; width:100%; height:100%;
     display:flex; align-items:center; justify-content:center;
-    padding:70px 20px; touch-action:none;
+    padding:70px 20px;
   }
   .lightbox-img-wrap{
     max-width:min(92vw, 780px); max-height:82vh;
@@ -724,8 +728,8 @@
     color: #7A1B2E;
   }
 
-  /* RSVP FORM - ĐÃ TỐI ƯU ĐỂ LUÔN NHẬP DỄ DÀNG */
-  .rsvp{text-align:center;}
+  /* RSVP FORM - ÉP SAFARI CHO PHÉP NHẬP LIỆU BÌNH THƯỜNG */
+  .rsvp{text-align:center; position: relative; z-index: 100;}
   .rsvp-form{ 
     max-width:440px; 
     margin:0 auto; 
@@ -733,7 +737,8 @@
     flex-direction:column; 
     gap:16px; 
     position: relative;
-    z-index: 10;
+    z-index: 101;
+    pointer-events: auto !important;
   }
   .rsvp-form input, .rsvp-form select, .rsvp-form textarea{
     font-family:'Cormorant Garamond', serif; 
@@ -1024,7 +1029,7 @@
   </div>
 </section>
 
-<!-- SECTION POLAROID & PHẦN THIỆP THÔNG TIN MỚI -->
+<!-- SECTION POLAROID & PHẦN THIỆP THÔNG TIN -->
 <section class="envelope-intro-section">
   <div class="reveal">
     <div class="envelope-intro-wrap">
@@ -1173,7 +1178,7 @@
     <div class="venue-card">
       <div class="venue-name">Tư Gia Nhà Trai</div>
       <div class="venue-addr">Khê Thanh - Tịnh Khê - TP. Quảng Ngãi</div>
-      <a class="venue-btn" href="https://www.google.com/maps/search/?api=1&query=S%E1%BB%91+88+V%C6%A1+Tr%E1%BB%8Dng+Ph%E1%BB%A5ng+-+Thanh+Xu%C3%A2n+-+H%C3%A0+N%E1%BB%99i" target="_blank" rel="noopener">Xem bản đồ</a>
+      <a class="venue-btn" href="https://www.google.com/maps/search/?api=1&query=Khê+Thanh+Tịnh+Khê+Quảng+Ngãi" target="_blank" rel="noopener">Xem bản đồ</a>
     </div>
   </div>
 </section>
@@ -1246,7 +1251,7 @@
       <input type="hidden" name="access_key" value="c73933e8-36f3-431d-8e9a-38203615699d">
       <input type="checkbox" name="botcheck" style="display: none;">
 
-      <input type="text" id="guestNameInput" name="name" placeholder="Họ và tên" required>
+      <input type="text" id="guestNameInput" name="name" placeholder="Họ và tên" required autocomplete="off">
       
       <select name="attendance" required>
         <option value="" disabled selected>Bạn sẽ tham dự chứ?</option>
@@ -1255,7 +1260,7 @@
         <option value="Chưa chắc chắn">Chưa chắc chắn</option>
       </select>
 
-      <input type="number" name="guests" min="1" placeholder="Số lượng người tham dự">
+      <input type="number" name="guests" min="1" placeholder="Số lượng người tham dự" inputmode="numeric">
       <textarea name="message" placeholder="Lời chúc gửi đến cô dâu chú rể..."></textarea>
       
       <button class="rsvp-submit" id="rsvpSubmitBtn" type="submit">Gửi xác nhận</button>
@@ -1485,7 +1490,7 @@ document.getElementById('weddingRsvpForm').addEventListener('submit', async func
   updateCountdown();
   const countdownTimer = setInterval(updateCountdown, 1000);
 
-  // LIGHTBOX XỬ LÝ ẢNH CHỐNG TRUỢT NỀN VÀ MỞ LẠI INPUT FORM KHI ĐÓNG
+  // LIGHTBOX TỐI ƯU DÀNH RIÊNG CHO SAFARI
   (function(){
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightboxImg');
@@ -1497,10 +1502,10 @@ document.getElementById('weddingRsvpForm').addEventListener('submit', async func
 
   let gallery = [];
   let currentIndex = 0;
+  let isLightboxOpen = false;
 
-  // Ngăn chặn hoàn toàn thao tác cuộn/lướt nền phía sau khi mở album
   function preventTouchMove(e) {
-    if (lightbox.classList.contains('open')) {
+    if (isLightboxOpen) {
       e.preventDefault();
     }
   }
@@ -1542,30 +1547,34 @@ document.getElementById('weddingRsvpForm').addEventListener('submit', async func
     currentIndex = idx >= 0 ? idx : 0;
     render(null);
     
+    isLightboxOpen = true;
     lightbox.classList.add('open');
-    lightbox.style.pointerEvents = 'auto'; 
     document.body.style.overflow = 'hidden';
-    document.documentElement.style.overflow = 'hidden';
 
-    // Bật chặn cuộn lướt màn hình phía sau
+    // Chặn lướt trên Safari
     window.addEventListener('touchmove', preventTouchMove, { passive: false });
   }
 
   function close(){
+    isLightboxOpen = false;
     lightbox.classList.remove('open');
     lightboxImg.classList.remove('show');
     lightboxImg.src = '';
-    
-    lightbox.style.pointerEvents = 'none'; 
-    
-    // Mở khóa cuộn trang
-    document.body.style.overflow = 'auto';
-    document.documentElement.style.overflow = 'auto';
 
-    // Tắt trình chặn cuộn
+    // Mở khóa cuộn trang
+    document.body.style.overflow = '';
     window.removeEventListener('touchmove', preventTouchMove);
 
-    // Giải phóng Focus để người dùng gõ phím/nhập thông tin form bình thường
+    // FIX SAFARI: Khôi phục quyền tương tác Form
+    const rsvpForm = document.getElementById('weddingRsvpForm');
+    if (rsvpForm) {
+      rsvpForm.style.pointerEvents = 'auto';
+      const inputs = rsvpForm.querySelectorAll('input, select, textarea, button');
+      inputs.forEach(el => {
+        el.style.pointerEvents = 'auto';
+      });
+    }
+
     if (document.activeElement) {
       document.activeElement.blur();
     }
@@ -1600,7 +1609,7 @@ document.getElementById('weddingRsvpForm').addEventListener('submit', async func
   }
 
   document.addEventListener('keydown', (e) => {
-    if(!lightbox.classList.contains('open')) return;
+    if(!isLightboxOpen) return;
     if(e.key === 'Escape') close();
     if(e.key === 'ArrowLeft') prev();
     if(e.key === 'ArrowRight') next();
