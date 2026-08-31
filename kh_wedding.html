@@ -1353,35 +1353,40 @@ document.getElementById('weddingRsvpForm').addEventListener('submit', async func
   submitBtn.textContent = 'Đang gửi...';
   submitBtn.disabled = true;
 
-  try {
-    const formData = new FormData(form);
+  const formData = new FormData(form);
+  const wishData = {
+    name: formData.get('name') || '',
+    attendance: formData.get('attendance') || '',
+    guests: formData.get('guests') ? parseInt(formData.get('guests')) : 1,
+    message: formData.get('message') || ''
+  };
 
-    const wishData = {
-      name: formData.get('name') || '',
-      attendance: formData.get('attendance') || '',
-      guests: formData.get('guests') ? parseInt(formData.get('guests')) : 1,
-      message: formData.get('message') || ''
-    };
-
-    const { error: dbError } = await db.from('List').insert([wishData]);
-
-    if (dbError) {
-      console.error("LỖI SUPABASE:", dbError);
-      alert("Gửi thất bại: " + dbError.message);
-      submitBtn.textContent = originalBtnText;
-      submitBtn.disabled = false;
-      return;
+  // Hàm tự động thử lại tối đa 3 lần nếu gặp lỗi mạng trên Safari
+  async function insertWithRetry(data, retries = 2, delay = 1000) {
+    for (let i = 0; i <= retries; i++) {
+      try {
+        const res = await db.from('List').insert([data]);
+        if (!res.error) return res;
+        if (i === retries) throw res.error;
+      } catch (err) {
+        if (i === retries) throw err;
+        await new Promise(resolve => setTimeout(resolve, delay));
+      }
     }
+  }
+
+  try {
+    await insertWithRetry(wishData);
 
     alert('Gửi lời chúc thành công! ❤️');
     form.reset();
     if (rsvpNote) rsvpNote.style.display = 'block';
     submitBtn.textContent = 'Đã gửi thành công!';
-
     loadWishes();
 
   } catch (error) {
-    alert('LỖI KẾT NỐI: Kiểm tra lại mạng internet!');
+    console.error("Lỗi gửi dữ liệu:", error);
+    alert('Kết nối mạng không ổn định. Bạn vui lòng bấm "Gửi xác nhận" lại giúp mình nhé!');
     submitBtn.textContent = originalBtnText;
     submitBtn.disabled = false;
   }
