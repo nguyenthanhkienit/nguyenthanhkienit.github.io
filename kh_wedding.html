@@ -26,6 +26,7 @@
     width: 100% !important;
     max-width: 100% !important;
     overflow-x: hidden !important;
+    touch-action: none; /* HOẶC overflow-x: hidden; */
     background: var(--deep-pink);
   }
 
@@ -457,19 +458,26 @@
   }
 
   /* LIGHTBOX */
-  .lightbox{
-    position:fixed;
-    inset:0;
-    z-index:2000;
-    background:rgba(30,26,30,0.95);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    opacity:0;
-    pointer-events:none;
-    transition:opacity 0.3s ease;
-  }
-  .lightbox.open{ opacity:1; pointer-events:auto; }
+  /* Trạng thái mặc định: ẨN HOÀN TOÀN và KHÔNG NHẬN CẢM ỨNG */
+#lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 99999;
+  
+  /* Hai dòng quan trọng nhất để sửa lỗi bấm */
+  display: none !important; 
+  pointer-events: none !important;
+}
+
+/* Khi có class open: Mới bắt đầu HIỆN và NHẬN CẢM ỨNG */
+#lightbox.open {
+  display: flex !important;
+  pointer-events: auto !important;
+}
   .lightbox-stage{
     position:relative; width:100%; height:100%;
     display:flex; align-items:center; justify-content:center;
@@ -1640,6 +1648,21 @@ document.getElementById('weddingRsvpForm').addEventListener('submit', async func
     }, {passive: true});
   }
 })();
+</script>
+<script>
+  // Tự động giải phóng lớp đè cảm ứng khi chạm vào bất kỳ ô input nào trên điện thoại
+  document.querySelectorAll('input, textarea').forEach(element => {
+    element.addEventListener('touchstart', function(e) {
+      // Đảm bảo lightbox đã đóng ẩn hẳn
+      const lb = document.getElementById('lightbox');
+      if (lb && !lb.classList.contains('open')) {
+        lb.style.display = 'none';
+        lb.style.pointerEvents = 'none';
+      }
+      // Ép bàn phím bật lên
+      this.focus();
+    }, { passive: true });
+  });
 </script>
 </body>
 </html>
