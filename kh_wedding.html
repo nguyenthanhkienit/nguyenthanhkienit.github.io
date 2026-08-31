@@ -768,7 +768,27 @@
   .rsvp-submit:hover{opacity:0.9;transform:translateY(-2px);}
   .rsvp-note{ margin-top:18px; font-size:0.95rem; color:#F3D9DE; display:none; }
   .rsvp-note.show{display:block;}
+/* Áp dụng cho thẻ select chọn tham dự */
+select {
+    /* 1. Xóa style mặc định của trình duyệt điện thoại (iOS Safari/Android) */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 
+    /* 2. Ép chiều cao đồng bộ với các ô input khác */
+    height: 50px; /* Hoặc điều chỉnh theo chiều cao của ô "Họ và tên" */
+    line-height: 1.5;
+    padding: 10px 15px;
+    box-sizing: border-box;
+    width: 100%;
+
+    /* 3. Giữ nguyên màu nền, bo góc và font */
+    background-color: transparent; /* Hoặc màu nền ô của bạn */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    color: inherit;
+    font-size: 16px; /* Để tránh iOS tự động zoom vào khi bấm chọn */
+}
   /* FOOTER */
   footer {
     padding: 0 !important;
@@ -970,6 +990,7 @@
   opacity: 0.95;
   word-wrap: break-word;
 }
+
 </style>
 </head>
 <body>
