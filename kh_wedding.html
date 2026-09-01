@@ -371,25 +371,7 @@
     font-size: clamp(1.2rem, 2.5vw, 1.4rem);
     color: #7A1B2E;
     opacity: 0.9;
-    margin-bottom: 24px;
     line-height: 1.5;
-  }
-  .direction-btn {
-    display: inline-block;
-    background: #7A1B2E;
-    color: var(--ink);
-    text-decoration: none;
-    padding: 10px 28px;
-    border-radius: 999px;
-    font-size: clamp(1.2rem, 2.5vw, 1.4rem);
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    transition: background 0.3s ease, transform 0.3s ease;
-  }
-  .direction-btn:hover {
-    background: #5C1220;
-    transform: translateY(-2px);
   }
 
   /* BỐ CỤC ALBUM */
@@ -781,14 +763,14 @@
 .countdown-num {
   font-family: 'Cormorant Garamond', serif;
   font-weight: 700;
-  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  font-size: clamp(2rem, 4vw, 2.6rem);
   color: #7A1B2E;
   line-height: 1;
 }
 
 .countdown-label {
   margin-top: 6px;
-  font-size: 0.7rem;
+  font-size: clamp(1.2rem, 2.5vw, 1.4rem);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: #7A1B2E;
@@ -906,7 +888,7 @@ select {
 
   .footer-message {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    font-size: clamp(1.2rem, 2.5vw, 1.4rem);
     line-height: 1.6;
     font-weight: 500;
     text-shadow: 0 2px 8px rgba(0,0,0,0.6);
@@ -967,7 +949,7 @@ select {
   .open-btn svg{width:14px;height:14px;transition:transform 0.35s ease;}
   .open-btn:hover svg{transform:translateX(3px);}
 
-  .cover-eyebrow{ font-size:0.75rem; letter-spacing:0.35em; text-transform:uppercase; color:var(--blush); margin-bottom:22px; opacity:0; animation:coverFadeUp 0.7s ease 0.15s forwards; }
+  .cover-eyebrow{ font-size:0.8rem; letter-spacing:0.35em; text-transform:uppercase; color:var(--blush); margin-bottom:22px; opacity:0; animation:coverFadeUp 0.7s ease 0.15s forwards; }
   .cover-names{ font-family:'Cormorant Garamond', serif; font-style:italic; font-weight:500; font-size:clamp(2rem,7vw,2.9rem); color:var(--ink); opacity:0; animation:coverFadeUp 0.7s ease 0.3s forwards; }
   .cover-amp{ display:block; font-family:'Cormorant Garamond', serif; font-size:1.6rem; color:var(--blush); margin:2px 0; }
   .cover-divider{ font-size:1rem; color:var(--ink); margin:20px 0; opacity:0; animation:coverFadeUp 0.7s ease 0.45s forwards; }
@@ -1059,12 +1041,12 @@ select {
 .wish-author {
   color: var(--ink);
   font-weight: 600;
-  font-size: 1rem;
+  font-size: clamp(1.2rem, 2.5vw, 1.4rem);
 }
 
 .wish-text {
   color: var(--blush);
-  font-size: 0.92rem;
+  font-size: clamp(1.2rem, 2.5vw, 1.4rem);
   line-height: 1.45;
   margin: 0;
   font-style: italic;
@@ -1201,10 +1183,6 @@ select {
       <div class="venue-address">
         Khê Thanh - Tịnh Khê - TP. Quảng Ngãi
       </div>
-
-      <a href="https://www.google.com/maps/search/?api=1&query=Khê+Thanh+Tịnh+Khê+Quảng+Ngãi" target="_blank" rel="noopener" class="direction-btn">
-        XEM CHỈ ĐƯỜNG
-      </a>
     </div>
   </div>
 </section>
