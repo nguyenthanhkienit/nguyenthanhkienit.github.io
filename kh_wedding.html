@@ -556,178 +556,240 @@
   }
 
   /* VENUE */
-  .venue-card{
-    max-width:640px; 
-    margin:0 auto; 
-    background:#EFE8E1; 
-    border:1px solid rgba(122, 27, 46, 0.2); 
-    border-radius:28px; 
-    padding:40px 24px; 
-    text-align:center;
-    box-shadow:0 10px 30px rgba(0,0,0,0.2);
-  }
-  .venue-name{ 
-    font-family:'Cormorant Garamond', serif; 
-    font-size: clamp(2rem, 5vw, 2.8rem); 
-    font-weight: 700;
-    color:#7A1B2E; 
-    margin-bottom:8px; 
-  }
-  .venue-addr{ 
-    font-family:'Cormorant Garamond', serif;
-    color:#7A1B2E; 
-    font-size: clamp(1.1rem, 3vw, 1.35rem); 
-    margin-bottom:28px; 
-    line-height:1.5; 
-    opacity: 0.9;
-  }
-  .venue-btn{
-    display:inline-block; 
-    padding:10px 32px; 
-    border-radius:999px;
-    background:#7A1B2E; 
-    color:#FFF; 
-    text-decoration:none;
-    font-family:'Cormorant Garamond', serif;
-    font-size:1.1rem; 
-    font-weight:700;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    transition:background 0.3s ease, transform 0.3s ease;
-  }
-  .venue-btn:hover{
-    background:#5C1220;
-    transform:translateY(-2px);
-  }
+.venue-card {
+  max-width: 640px; 
+  margin: 0 auto; 
+  background: #EFE8E1; 
+  border: 1px solid rgba(122, 27, 46, 0.2); 
+  border-radius: 28px; 
+  padding: 40px 24px; 
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+
+  /* Trạng thái ẩn + thu nhỏ ban đầu */
+  opacity: 0;
+  transform: scale(0.85);
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease;
+  will-change: transform, opacity;
+}
+
+/* Khi cuộn tới, script reveal có sẵn sẽ tự động thêm class .active */
+.venue-card.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.venue-name { 
+  font-family: 'Cormorant Garamond', serif; 
+  font-size: clamp(2rem, 5vw, 2.8rem); 
+  font-weight: 700;
+  color: #7A1B2E; 
+  margin-bottom: 8px; 
+}
+
+.venue-addr { 
+  font-family: 'Cormorant Garamond', serif;
+  color: #7A1B2E; 
+  font-size: clamp(1.1rem, 3vw, 1.35rem); 
+  margin-bottom: 28px; 
+  line-height: 1.5; 
+  opacity: 0.9;
+}
+
+.venue-btn {
+  display: inline-block; 
+  padding: 10px 32px; 
+  border-radius: 999px;
+  background: #7A1B2E; 
+  color: #FFF; 
+  text-decoration: none;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem; 
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.venue-btn:hover {
+  background: #5C1220;
+  transform: translateY(-2px);
+}
 
   /* OUR LOVE & COUNTDOWN */
-  .our-love-countdown-section {
-    padding: 60px 20px;
-  }
-  .our-love-wrap {
-    max-width: 580px;
-    margin: 0 auto;
-    text-align: center;
-  }
+.our-love-countdown-section {
+  padding: 60px 20px;
+}
+
+.our-love-wrap {
+  max-width: 580px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* --- BANNER ẢNH CHÍNH & TIÊU ĐỀ --- */
+.our-love-main-photo {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 28px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.our-love-main-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.our-love-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 6vw, 3.8rem);
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  color: #ffffff;
+  margin-bottom: 28px;
+  text-transform: uppercase;
+}
+
+/* --- HIỆU ỨNG MARQUEE (CHẠY ẢNH NGANG) --- */
+.marquee-container {
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.marquee-track {
+  display: flex;
+  gap: 15px;
+  width: max-content;
+  animation: marqueeScroll 25s linear infinite;
+  animation-play-state: paused; /* Mặc định đứng yên */
+}
+
+/* Ép buộc chạy ngang khi được JS thêm class */
+.marquee-track.is-running {
+  animation-play-state: running !important;
+}
+
+/* Dừng khi rê chuột hoặc chạm tay */
+.marquee-track.is-running:hover {
+  animation-play-state: paused !important;
+}
+
+/* --- ĐỊNH DẠNG KHUNG ẢNH & TĂNG TỐC --- */
+.our-love-item {
+  flex-shrink: 0;
+  width: 170px;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
   
-  .our-love-main-photo {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    border-radius: 12px;
-    overflow: hidden;
-    margin-bottom: 28px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-  }
-  .our-love-main-photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
+  /* Chống lag/giật cho iOS & Android */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform;
+}
 
-  .our-love-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.5rem, 6vw, 3.8rem);
-    font-weight: 400;
-    letter-spacing: 0.12em;
-    color: #ffffff;
-    margin-bottom: 28px;
-    text-transform: uppercase;
-  }
-  .our-love-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    margin-bottom: 24px;
-  }
-  .our-love-item {
-    width: 100%;
-    aspect-ratio: 3 / 4;
-    overflow: hidden;
-    border-radius: 4px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-  }
-  .our-love-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-  .our-love-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1.05rem, 2.2vw, 1.2rem);
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.95);
-    max-width: 520px;
-    margin: 0 auto;
-  }
+.our-love-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 
-  .divider-line {
-    width: 1px;
-    height: 45px;
-    background: rgba(255, 255, 255, 0.5);
-    margin: 28px auto;
-  }
+/* --- ANIMATION CUỘN CHUYỂN ĐỘNG --- */
+@keyframes marqueeScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
 
-  .countdown-card {
-    background: #f2eae1;
-    border-radius: 28px;
-    padding: 36px 24px;
-    color: #7A1B2E;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-  }
-  .countdown-eyebrow {
-    font-size: 0.75rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: #7A1B2E;
-    margin-bottom: 6px;
-    opacity: 0.8;
-  }
-  .countdown-card-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1.5rem, 3.5vw, 2.1rem);
-    font-weight: 500;
-    color: #7A1B2E;
-    margin-bottom: 24px;
-    text-transform: uppercase;
-  }
+/* --- ĐOẠN VĂN & ĐƯỜNG KẺ --- */
+.our-love-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.05rem, 2.2vw, 1.2rem);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.95);
+  max-width: 520px;
+  margin: 0 auto;
+}
 
-  .countdown-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    max-width: 440px;
-    margin: 0 auto;
-  }
-  .countdown-box {
-    background: rgba(122, 27, 46, 0.06);
-    border: 1px solid rgba(122, 27, 46, 0.2);
-    border-radius: 12px;
-    padding: 14px 6px;
-    text-align: center;
-  }
-  .countdown-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 700;
-    font-size: clamp(1.8rem, 4vw, 2.4rem);
-    color: #7A1B2E;
-    line-height: 1;
-  }
-  .countdown-label {
-    margin-top: 6px;
-    font-size: 0.7rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: #7A1B2E;
-    opacity: 0.8;
-  }
-  .countdown-note {
-    margin-top: 24px;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.25rem;
-    color: #7A1B2E;
-  }
+.divider-line {
+  width: 1px;
+  height: 45px;
+  background: rgba(255, 255, 255, 0.5);
+  margin: 28px auto;
+}
 
+/* --- THẺ ĐẾM NGƯỢC (COUNTDOWN CARD) --- */
+.countdown-card {
+  background: #f2eae1;
+  border-radius: 28px;
+  padding: 36px 24px;
+  color: #7A1B2E;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.countdown-eyebrow {
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #7A1B2E;
+  margin-bottom: 6px;
+  opacity: 0.8;
+}
+
+.countdown-card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.5rem, 3.5vw, 2.1rem);
+  font-weight: 500;
+  color: #7A1B2E;
+  margin-bottom: 24px;
+  text-transform: uppercase;
+}
+
+.countdown-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+.countdown-box {
+  background: rgba(122, 27, 46, 0.06);
+  border: 1px solid rgba(122, 27, 46, 0.2);
+  border-radius: 12px;
+  padding: 14px 6px;
+  text-align: center;
+}
+
+.countdown-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 700;
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  color: #7A1B2E;
+  line-height: 1;
+}
+
+.countdown-label {
+  margin-top: 6px;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #7A1B2E;
+  opacity: 0.8;
+}
+
+.countdown-note {
+  margin-top: 24px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.25rem;
+  color: #7A1B2E;
+}
   /* RSVP FORM - ÉP SAFARI CHO PHÉP NHẬP LIỆU BÌNH THƯỜNG */
   .rsvp{text-align:center; position: relative; z-index: 100;}
   .rsvp-form{ 
@@ -933,22 +995,28 @@ select {
   gap: 12px;
   max-height: 290px;
   overflow-y: auto;
-  padding-right: 6px;
+  padding-right: 12px;
+  /* TUYỆT ĐỐI KHÔNG DÙNG: scroll-behavior: smooth; */
+
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.35) rgba(0, 0, 0, 0.1);
 }
 
+/* Tùy chỉnh thanh cuộn cho Webkit (Chrome, Safari, iOS) */
 .wishes-list::-webkit-scrollbar {
   width: 5px;
 }
+
 .wishes-list::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.1);
   border-radius: 10px;
 }
+
 .wishes-list::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.35);
   border-radius: 10px;
 }
+
 .wishes-list::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.6);
 }
@@ -1192,16 +1260,16 @@ select {
 
 <!-- ĐỊA ĐIỂM -->
 <section class="venue-section">
-  <div class="reveal">
-    <div class="section-title">
-      <div class="section-eyebrow">Địa điểm</div>
-      <h2 class="section-heading">Nơi chúng mình nói lời yêu thương</h2>
-    </div>
-    <div class="venue-card">
-      <div class="venue-name">Tư Gia Nhà Trai</div>
-      <div class="venue-addr">Khê Thanh - Tịnh Khê - TP. Quảng Ngãi</div>
-      <a class="venue-btn" href="https://www.google.com/maps/search/?api=1&query=Khê+Thanh+Tịnh+Khê+Quảng+Ngãi" target="_blank" rel="noopener">Xem bản đồ</a>
-    </div>
+  <div class="section-title">
+    <div class="section-eyebrow">Địa điểm</div>
+    <h2 class="section-heading">Nơi chúng mình nói lời yêu thương</h2>
+  </div>
+
+  <!-- Gộp class reveal và venue-card vào một thẻ duy nhất -->
+  <div class="reveal venue-card">
+    <div class="venue-name">Tư Gia Nhà Trai</div>
+    <div class="venue-addr">Khê Thanh - Tịnh Khê - TP. Quảng Ngãi</div>
+    <a class="venue-btn" href="https://www.google.com/maps/search/?api=1&query=Khê+Thanh+Tịnh+Khê+Quảng+Ngãi" target="_blank" rel="noopener">Xem bản đồ</a>
   </div>
 </section>
 
@@ -1213,20 +1281,39 @@ select {
         <img src="./image_wedding/10.jpg" alt="Our Love Main Banner">
       </div>
     </div>
+    
     <div class="reveal">
       <h2 class="our-love-title">OUR LOVE</h2>
-      <div class="our-love-grid">
-        <div class="our-love-item"><img src="./image_wedding/8.jpg" alt="Our Love Photo 1"></div>
-        <div class="our-love-item"><img src="./image_wedding/9.jpg" alt="Our Love Photo 2"></div>
-        <div class="our-love-item"><img src="./image_wedding/7.jpg" alt="Our Love Photo 3"></div>
+      
+      <!-- PHẦN CHỈNH SỬA: Thay our-love-grid thành marquee container -->
+      <div class="marquee-container">
+        <div class="marquee-track">
+          <!-- 6 ảnh đầu tiên (Thay đường dẫn ảnh 4, 5, 6 theo ý bạn) -->
+          <div class="our-love-item"><img src="./image_wedding/8.jpg" alt="Our Love Photo 1"></div>
+          <div class="our-love-item"><img src="./image_wedding/9.jpg" alt="Our Love Photo 2"></div>
+          <div class="our-love-item"><img src="./image_wedding/7.jpg" alt="Our Love Photo 3"></div>
+          <div class="our-love-item"><img src="./image_wedding/4.jpg" alt="Our Love Photo 4"></div>
+          <div class="our-love-item"><img src="./image_wedding/5.jpg" alt="Our Love Photo 5"></div>
+          <div class="our-love-item"><img src="./image_wedding/6.jpg" alt="Our Love Photo 6"></div>
+
+          <!-- Lặp lại đúng 6 ảnh trên để hiệu ứng cuộn nối tiếp mượt mà -->
+          <div class="our-love-item"><img src="./image_wedding/8.jpg" alt="Our Love Photo 1"></div>
+          <div class="our-love-item"><img src="./image_wedding/9.jpg" alt="Our Love Photo 2"></div>
+          <div class="our-love-item"><img src="./image_wedding/7.jpg" alt="Our Love Photo 3"></div>
+          <div class="our-love-item"><img src="./image_wedding/4.jpg" alt="Our Love Photo 4"></div>
+          <div class="our-love-item"><img src="./image_wedding/5.jpg" alt="Our Love Photo 5"></div>
+          <div class="our-love-item"><img src="./image_wedding/6.jpg" alt="Our Love Photo 6"></div>
+        </div>
       </div>
     </div>
+
     <div class="reveal">
       <p class="our-love-text">
         Mỗi câu chuyện tình yêu đều có một hành trình riêng. Sau những ngày tháng cùng nhau trưởng thành, chúng tôi quyết định về chung một nhà và viết tiếp câu chuyện ấy bằng tình yêu, sự tin tưởng và hạnh phúc.
       </p>
       <div class="divider-line"></div>
     </div>
+
     <div class="reveal">
       <div class="countdown-card">
         <div class="countdown-card-header">
@@ -1405,6 +1492,7 @@ document.getElementById('weddingRsvpForm').addEventListener('submit', async func
     if (rsvpNote) rsvpNote.style.display = 'block';
     submitBtn.textContent = 'Đã gửi thành công!';
     loadWishes();
+    resetWishesScroll();
 
   } catch (error) {
     console.error("Lỗi gửi dữ liệu:", error);
@@ -1413,6 +1501,72 @@ document.getElementById('weddingRsvpForm').addEventListener('submit', async func
     submitBtn.disabled = false;
   }
 });
+const wishesList = document.getElementById('wishesList');
+
+let scrollSpeed = 1;
+let scrollInterval = null;
+let hasStarted = false; // Cờ đánh dấu để chỉ delay 3s ở lần đầu tiên cuộn đến
+
+function startAutoScroll() {
+  if (scrollInterval || !wishesList) return;
+
+  scrollInterval = setInterval(() => {
+    const prevScrollTop = wishesList.scrollTop;
+    wishesList.scrollTop += scrollSpeed;
+
+    // Khi chạm tin nhắn cuối -> Nhảy ngay về tin nhắn đầu tiên
+    if (wishesList.scrollTop === prevScrollTop && wishesList.scrollTop > 0) {
+      wishesList.scrollTop = 0;
+    }
+  }, 30);
+}
+
+function stopAutoScroll() {
+  clearInterval(scrollInterval);
+  scrollInterval = null;
+}
+
+// BỘ THEO DÕI: Chỉ kích hoạt đếm ngược 2s khi người dùng lướt màn hình tới khung lời chúc
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && !hasStarted) {
+      hasStarted = true; // Đánh dấu đã thấy khung lời chúc
+      
+      // Chờ đúng 2 giây (2000ms) rồi mới bắt đầu tự động cuộn
+      setTimeout(() => {
+        startAutoScroll();
+      }, 2000);
+    }
+  });
+}, { threshold: 0.3 }); // Khi khung lời chúc hiện khoảng 30% trên màn hình
+
+if (wishesList) {
+  observer.observe(wishesList);
+}
+
+// Sự kiện tạm dừng khi người dùng tương tác chuột / chạm tay
+wishesList.addEventListener('mouseenter', stopAutoScroll);
+wishesList.addEventListener('mouseleave', startAutoScroll);
+
+wishesList.addEventListener('touchstart', stopAutoScroll, { passive: true });
+wishesList.addEventListener('touchend', () => {
+  setTimeout(startAutoScroll, 1500); // Thả tay ra 1.5s sau chạy tiếp
+}, { passive: true });
+// Hàm reset danh sách về đầu và bắt đầu chạy lại từ đầu
+function resetWishesScroll() {
+  if (!wishesList) return;
+
+  // Dừng chạy hiện tại
+  stopAutoScroll();
+
+  // Đưa danh sách về tin nhắn đầu tiên lập tức
+  wishesList.scrollTop = 0;
+
+  // Chờ 1 giây cho người gửi nhìn thấy lời chúc mới của mình ở trên cùng rồi bắt đầu cuộn tiếp
+  setTimeout(() => {
+    startAutoScroll();
+  }, 1000);
+}
 </script>
 
 <!-- LIGHTBOX -->
@@ -1439,7 +1593,7 @@ document.getElementById('weddingRsvpForm').addEventListener('submit', async func
   <div class="footer-banner">
     <div class="footer-overlay"></div>
     <div class="footer-content reveal">
-      <div class="footer-thankyou">Thank you</div>
+      <div class="footer-thankyou">Cảm ơn </div>
       <p class="footer-message">
         Cảm ơn Quý Khách đã dành tình cảm cho gia đình chúng tôi!<br>
         Sự hiện diện của Quý Khách chính là món quà ý nghĩa nhất, gia đình chúng tôi vô cùng trân quý khi được cùng Quý Khách chia sẻ niềm hạnh phúc trong ngày trọng đại này.
@@ -1658,6 +1812,28 @@ document.getElementById('weddingRsvpForm').addEventListener('submit', async func
     }, {passive: true});
   }
 })();
+const marqueeTrack = document.querySelector('.marquee-track');
+
+if (marqueeTrack) {
+  const marqueeObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Hủy theo dõi ngay
+        observer.unobserve(entry.target);
+        
+        // Chờ 2 giây
+        setTimeout(() => {
+          // Dùng requestAnimationFrame để gắn class mượt mà nhất
+          requestAnimationFrame(() => {
+            marqueeTrack.classList.add('is-running');
+          });
+        }, 2000);
+      }
+    });
+  }, { threshold: 0.1 }); // Chỉ cần hiện 10% là tính
+
+  marqueeObserver.observe(marqueeTrack);
+}
 </script>
 </body>
 </html>
