@@ -11,12 +11,11 @@
 <style>
   :root{
     --cream:#7A1B2E;
-    --blush:#F3DEE0;
+    --blush:rgba(255, 255, 255, 0.9);
     --pink:#A83250;
     --deep-pink:#7A1B2E;
     --deep-sea:#5C1220;
     --ink:#FFFBF8;
-    --ink-soft:#F3D9DE;
     --line:rgba(255,255,255,0.3);
   }
 
@@ -191,9 +190,9 @@
   }
   .envelope-intro-quote {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(0.9rem, 2.5vw, 1.05rem);
+    font-size: clamp(1.2rem, 2.5vw, 1.4rem);
     font-weight: 300;
-    color: rgba(255, 255, 255, 0.95);
+    color: var(--blush);
     line-height: 1.6;
     margin-bottom: 55px;
     padding: 0 10px;
@@ -273,15 +272,15 @@
     margin-bottom: 8px;
   }
   .family-names {
-    font-size: 1rem;
+    font-size: clamp(1.2rem, 2.5vw, 1.4rem);
     line-height: 1.6;
-    color: rgba(255, 255, 255, 0.9);
+    color: var(--blush);
   }
   .family-location {
     color: var(--ink);
     display: inline-block;
     margin-top: 10px;
-    font-weight: 700;
+    font-style: italic;
   }
   .couple-names-block {
     margin: 20px 0 40px;
@@ -505,7 +504,7 @@
   .section-title{ text-align:center; margin-bottom:56px; }
   .section-eyebrow{
     font-size:0.75rem; letter-spacing:0.3em; text-transform:uppercase;
-    color:var(--ink-soft); margin-bottom:14px;
+    color:var(--blush); margin-bottom:14px;
   }
   .section-heading{
     font-family:'Cormorant Garamond', serif;
@@ -536,10 +535,10 @@
   .t-item:nth-child(odd) .t-card{margin-right:auto;text-align:right;padding-right:52px;}
   .t-item:nth-child(even) .t-card{margin-left:auto;text-align:left;padding-left:52px;}
   .t-card{width:50%;position:relative;}
-  .t-time{ font-family:'Cormorant Garamond', serif; font-style:italic; font-size:1.6rem; color:#FFFBF8; margin-bottom:10px; margin-top: -10px; }
-  .t-item:nth-child(even) .t-time{color:#F3D9DE;}
-  .t-title{font-size:1.1rem;letter-spacing:0.04em;font-weight:500;margin-bottom:6px;color:#FFFBF8;}
-  .t-desc{font-size:0.92rem;color:rgba(255,255,255,0.85);line-height:1.6;}
+  .t-time{ font-family:'Cormorant Garamond', serif; font-style:italic; font-size:1.6rem; color:var(--ink); margin-bottom:10px; margin-top: -10px; }
+  .t-item:nth-child(even) .t-time{color:var(--blush);}
+  .t-title{font-size:1.1rem;letter-spacing:0.04em;font-weight:500;margin-bottom:6px;color:var(--blush);}
+  .t-desc{font-size:0.92rem;color:var(--blush);line-height:1.6;}
 
   .t-dot{
     position:absolute; top:2px; left:auto; right:-7px; width:14px; height:14px;
@@ -648,7 +647,7 @@
   font-size: clamp(2.5rem, 6vw, 3.8rem);
   font-weight: 400;
   letter-spacing: 0.12em;
-  color: #ffffff;
+  color: var(--ink);
   margin-bottom: 28px;
   text-transform: uppercase;
 }
@@ -724,7 +723,7 @@
   font-family: 'Cormorant Garamond', serif;
   font-size: clamp(1.05rem, 2.2vw, 1.2rem);
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.95);
+  color: var(--blush);
   max-width: 520px;
   margin: 0 auto;
 }
@@ -822,7 +821,7 @@
     border-radius:12px; 
     border:1px solid var(--line);
     background:rgba(255,255,255,0.1); 
-    color:#fff; 
+    color:var(--blush); 
     outline:none; 
     transition:border-color 0.3s ease;
     pointer-events: auto !important;
@@ -902,6 +901,7 @@ select {
     font-weight: 700;
     margin-bottom: 20px;
     text-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    color: var(--ink);
   }
 
   .footer-message {
@@ -912,6 +912,7 @@ select {
     text-shadow: 0 2px 8px rgba(0,0,0,0.6);
     max-width: 720px;
     margin: 0 auto;
+    color: var(--blush);
   }
 
   /* COVER SCREEN */
@@ -949,8 +950,8 @@ select {
 
   .open-btn{
     display:inline-flex; align-items:center; gap:10px; padding:14px 36px;
-    border-radius:999px; border:1px solid #FFFBF8; background:transparent;
-    color:#FFFBF8; font-family:'Cormorant Garamond', serif; font-size:0.9rem;
+    border-radius:999px; border:1px solid var(--ink); background:transparent;
+    color:var(--ink); font-family:'Cormorant Garamond', serif; font-size:1rem;
     letter-spacing:0.12em; text-transform:uppercase; cursor:pointer; user-select:none;
     transition:background 0.35s ease, color 0.35s ease, transform 0.3s ease;
     opacity:0; 
@@ -959,19 +960,19 @@ select {
   }
   .open-btn:hover{ 
     animation-play-state: paused;
-    background:#FFFBF8; 
+    background:var(--ink); 
     color:var(--deep-pink); 
     transform:scale(1.15); 
   }
   .open-btn svg{width:14px;height:14px;transition:transform 0.35s ease;}
   .open-btn:hover svg{transform:translateX(3px);}
 
-  .cover-eyebrow{ font-size:0.75rem; letter-spacing:0.35em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:22px; opacity:0; animation:coverFadeUp 0.7s ease 0.15s forwards; }
-  .cover-names{ font-family:'Cormorant Garamond', serif; font-style:italic; font-weight:500; font-size:clamp(2rem,7vw,2.9rem); color:#FFFBF8; opacity:0; animation:coverFadeUp 0.7s ease 0.3s forwards; }
+  .cover-eyebrow{ font-size:0.75rem; letter-spacing:0.35em; text-transform:uppercase; color:var(--blush); margin-bottom:22px; opacity:0; animation:coverFadeUp 0.7s ease 0.15s forwards; }
+  .cover-names{ font-family:'Cormorant Garamond', serif; font-style:italic; font-weight:500; font-size:clamp(2rem,7vw,2.9rem); color:var(--ink); opacity:0; animation:coverFadeUp 0.7s ease 0.3s forwards; }
   .cover-amp{ display:block; font-family:'Cormorant Garamond', serif; font-size:1.6rem; color:var(--blush); margin:2px 0; }
   .cover-divider{ font-size:1rem; color:var(--ink); margin:20px 0; opacity:0; animation:coverFadeUp 0.7s ease 0.45s forwards; }
-  .cover-date{ font-size:0.95rem; letter-spacing:0.08em; color:var(--ink-soft); margin-bottom:30px; opacity:0; animation:coverFadeUp 0.7s ease 0.55s forwards; }
-  .cover-tagline{ font-size:0.8rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:26px; opacity:0; animation:coverFadeUp 0.7s ease 0.65s forwards; }
+  .cover-date{ font-size:1.5rem; letter-spacing:0.08em; color:var(--blush); margin-bottom:30px; opacity:0; animation:coverFadeUp 0.7s ease 0.55s forwards; }
+  .cover-tagline{ font-size:0.8rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--blush); margin-bottom:26px; opacity:0; animation:coverFadeUp 0.7s ease 0.65s forwards; }
   @keyframes coverFadeUp{ from{opacity:0;transform:translateY(14px);} to{opacity:1;transform:translateY(0);} }
 
   .hero-content{
@@ -993,7 +994,7 @@ select {
 
 .wishes-title {
   text-align: center;
-  color: #ffffff;
+  color: var(--blush);
   font-size: 1.4rem;
   font-weight: 600;
   margin-bottom: 20px;
@@ -1062,7 +1063,7 @@ select {
 }
 
 .wish-text {
-  color: #ffffff;
+  color: var(--blush);
   font-size: 0.92rem;
   line-height: 1.45;
   margin: 0;
@@ -1093,7 +1094,7 @@ select {
       <div class="cover-divider">❦</div>
       <div class="cover-date">Thứ năm, 01.10.2026</div>
       <div class="cover-tagline">
-        Thân mời: <span id="guestName" style="color: #FFFBF8; font-weight: bold;"></span><span id="guest-name"></span>
+        Thân mời: <span id="guestName" style="color: var(--ink); font-weight: bold;"></span><span id="guest-name" style="font-size: 1.5rem"></span>
       </div>
       <label class="open-btn" for="openToggle" id="openBtn" aria-label="Mở thiệp cưới">
         Mở thiệp
