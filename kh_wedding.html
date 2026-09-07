@@ -102,7 +102,7 @@
     display: block !important;
   }
 
-  /* HIỆU ỨNG REVEAL CUỘN TRANG (ĐÃ CHỈNH CHẬM LẠI MƯỢT MÀ HƠN) */
+  /* HIỆU ỨNG REVEAL CUỘN TRANG */
   .reveal {
     opacity: 0;
     transform: translateY(70px);
@@ -174,7 +174,7 @@
     padding-bottom: 20px;
   }
   .envelope-intro-wrap {
-    max-width: 520px;
+    max-width: 580px;
     margin: 0 auto;
     text-align: center;
   }
@@ -193,47 +193,37 @@
     font-weight: 300;
     color: var(--blush);
     line-height: 1.6;
-    margin-bottom: 55px;
+    margin-bottom: 35px;
     padding: 0 10px;
   }
   
   .envelope-graphic {
     position: relative;
     width: 100%;
-    max-width: 440px;
     margin: 0 auto;
-    padding-top: 0px;
   }
 
+  /* KHUNG ẢNH NGANG GIỐNG OUR-LOVE-MAIN-PHOTO */
   .envelope-photos {
     position: relative;
     width: 100%;
-    height: 320px;
+    max-width: 580px;
+    margin: 0 auto;
     z-index: 2;
+    padding: 10px 0;
   }
-  .polaroid {
-    position: absolute;
-    width: 210px;
-    background: #ffffff;
-    padding: 10px 10px 28px 10px;
-    box-shadow: 0 12px 30px rgba(0,0,0,0.35);
-    border-radius: 2px;
-  }
-  .polaroid img {
+  .envelope-main-photo {
     width: 100%;
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 16 / 9;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  }
+  .envelope-main-photo img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     display: block;
-  }
-  .polaroid-left {
-    left: 10px;
-    top: 35px;
-    transform: rotate(-10deg);
-  }
-  .polaroid-right {
-    right: 10px;
-    top: 25px;
-    transform: rotate(12deg);
   }
 
   /* PHẦN THIỆP MỜI CHI TIẾT */
@@ -300,7 +290,7 @@
     font-style: italic;
   }
 
-  /* KHUNG THÔNG TIN BỮA TIỆC MÀU KEM (ĐÃ CHỈNH CHẬM) */
+  /* KHUNG THÔNG TIN BỮA TIỆC MÀU KEM */
   .party-info-box {
     background: #EFE8E1;
     border-radius: 24px;
@@ -373,7 +363,7 @@
     line-height: 1.5;
   }
 
-  /* BỐ CỤC ALBUM (ĐÃ CHỈNH CHẬM CHUYỂN ĐỘNG TRƯỢT NGANG) */
+  /* BỐ CỤC ALBUM */
   .album-wrap {
     position: relative;
     max-width: 530px;
@@ -421,10 +411,6 @@
 
   @media (max-width: 560px) {
     .album-grid-6 { gap: 8px; }
-    .envelope-photos { height: 260px; }
-    .polaroid { width: 170px; }
-    .polaroid-left { left: 0px; top: 20px; }
-    .polaroid-right { right: 0px; top: 10px; }
   }
 
   /* LIGHTBOX XEM ALBUM */
@@ -518,8 +504,8 @@
   .t-card{width:50%;position:relative;}
   .t-time{ font-family:'Cormorant Garamond', serif; font-style:italic; font-size:1.6rem; color:var(--ink); margin-bottom:10px; margin-top: -10px; }
   .t-item:nth-child(even) .t-time{color:var(--blush);}
-  .t-title{font-size: clamp(1.2rem, 2.5vw, 1.4rem);;letter-spacing:0.04em;font-weight:500;margin-bottom:6px;color:var(--blush);}
-  .t-desc{font-size: clamp(1.2rem, 2.5vw, 1.4rem);;color:var(--blush);line-height:1.6;}
+  .t-title{font-size: clamp(1.2rem, 2.5vw, 1.4rem);letter-spacing:0.04em;font-weight:500;margin-bottom:6px;color:var(--blush);}
+  .t-desc{font-size: clamp(1.2rem, 2.5vw, 1.4rem);color:var(--blush);line-height:1.6;}
 
   .t-dot{
     position:absolute; top:2px; left:auto; right:-7px; width:14px; height:14px;
@@ -535,253 +521,239 @@
     .t-dot{ left:20px !important; right:auto !important; top:2px; transform:translateX(-50%); }
   }
 
-  /* VENUE (ĐÃ CHỈNH CHẬM HƠN) */
-.venue-card {
-  max-width: 640px; 
-  margin: 0 auto; 
-  background: #EFE8E1; 
-  border: 1px solid rgba(122, 27, 46, 0.2); 
-  border-radius: 28px; 
-  padding: 40px 24px; 
-  text-align: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  /* VENUE */
+  .venue-card {
+    max-width: 640px; 
+    margin: 0 auto; 
+    background: #EFE8E1; 
+    border: 1px solid rgba(122, 27, 46, 0.2); 
+    border-radius: 28px; 
+    padding: 40px 24px; 
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transform: scale(0.85);
+    transition: transform 1.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 1.8s ease;
+    will-change: transform, opacity;
+  }
 
-  /* Trạng thái ẩn + thu nhỏ ban đầu */
-  opacity: 0;
-  transform: scale(0.85);
-  transition: transform 1.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 1.8s ease;
-  will-change: transform, opacity;
-}
+  .venue-card.in, .venue-card.active {
+    opacity: 1;
+    transform: scale(1);
+  }
 
-.venue-card.in, .venue-card.active {
-  opacity: 1;
-  transform: scale(1);
-}
+  .venue-name { 
+    font-family: 'Cormorant Garamond', serif; 
+    font-size: clamp(2rem, 5vw, 2.8rem); 
+    font-weight: 700;
+    color: #7A1B2E; 
+    margin-bottom: 8px; 
+  }
 
-.venue-name { 
-  font-family: 'Cormorant Garamond', serif; 
-  font-size: clamp(2rem, 5vw, 2.8rem); 
-  font-weight: 700;
-  color: #7A1B2E; 
-  margin-bottom: 8px; 
-}
+  .venue-addr { 
+    font-family: 'Cormorant Garamond', serif;
+    color: #7A1B2E; 
+    font-size: clamp(1.2rem, 2.5vw, 1.4rem);
+    margin-bottom: 28px; 
+    line-height: 1.5; 
+    opacity: 0.9;
+  }
 
-.venue-addr { 
-  font-family: 'Cormorant Garamond', serif;
-  color: #7A1B2E; 
-  font-size: clamp(1.2rem, 2.5vw, 1.4rem);
-  margin-bottom: 28px; 
-  line-height: 1.5; 
-  opacity: 0.9;
-}
+  .venue-btn {
+    display: inline-block; 
+    padding: 10px 32px; 
+    border-radius: 999px;
+    background: #7A1B2E; 
+    color: #FFF; 
+    text-decoration: none;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.2rem, 2.5vw, 1.4rem);
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: background 0.3s ease, transform 0.3s ease;
+  }
 
-.venue-btn {
-  display: inline-block; 
-  padding: 10px 32px; 
-  border-radius: 999px;
-  background: #7A1B2E; 
-  color: #FFF; 
-  text-decoration: none;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(1.2rem, 2.5vw, 1.4rem);
-  font-weight: 700;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  transition: background 0.3s ease, transform 0.3s ease;
-}
-
-.venue-btn:hover {
-  background: #5C1220;
-  transform: translateY(-2px);
-}
+  .venue-btn:hover {
+    background: #5C1220;
+    transform: translateY(-2px);
+  }
 
   /* OUR LOVE & COUNTDOWN */
-.our-love-countdown-section {
-  padding: 60px 20px;
-}
+  .our-love-countdown-section {
+    padding: 60px 20px;
+  }
 
-.our-love-wrap {
-  max-width: 580px;
-  margin: 0 auto;
-  text-align: center;
-}
+  .our-love-wrap {
+    max-width: 580px;
+    margin: 0 auto;
+    text-align: center;
+  }
 
-/* --- BANNER ẢNH CHÍNH & TIÊU ĐỀ --- */
-.our-love-main-photo {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  border-radius: 12px;
-  overflow: hidden;
-  margin-bottom: 28px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-}
+  .our-love-main-photo {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 28px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  }
 
-.our-love-main-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
+  .our-love-main-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
 
-.our-love-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2.5rem, 6vw, 3.8rem);
-  font-weight: 400;
-  letter-spacing: 0.12em;
-  color: var(--ink);
-  margin-bottom: 28px;
-  text-transform: uppercase;
-}
+  .our-love-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 6vw, 3.8rem);
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    color: var(--ink);
+    margin-bottom: 28px;
+    text-transform: uppercase;
+  }
 
-/* --- HIỆU ỨNG MARQUEE (CHẠY ẢNH NGANG) --- */
-.marquee-container {
-  width: 100%;
-  overflow: hidden;
-  margin-bottom: 24px;
-}
+  .marquee-container {
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
 
-.marquee-track {
-  display: flex;
-  width: max-content;
-  animation: marqueeScroll 25s linear infinite;
-  animation-play-state: paused;
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marqueeScroll 25s linear infinite;
+    animation-play-state: paused;
+    will-change: transform;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform: translate3d(0, 0, 0);
+  }
 
-  /* Ép trình duyệt xử lý bằng GPU */
-  will-change: transform;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  transform: translate3d(0, 0, 0);
-}
+  .marquee-track.is-running {
+    animation-play-state: running !important;
+  }
 
-/* Ép buộc chạy ngang khi được JS thêm class */
-.marquee-track.is-running {
-  animation-play-state: running !important;
-}
+  .marquee-track.is-running:hover {
+    animation-play-state: paused !important;
+  }
 
-/* Dừng khi rê chuột hoặc chạm tay */
-.marquee-track.is-running:hover {
-  animation-play-state: paused !important;
-}
+  .marquee-group {
+    display: flex;
+    gap: 15px;
+    padding-right: 15px;
+  }
 
-/* --- TÁCH THÀNH 2 NHÓM ĐỂ NỐI VÒNG LẶP KHÔNG BỊ GIẬT --- */
-.marquee-group {
-  display: flex;
-  gap: 15px; /* Khoảng cách giữa các tấm ảnh */
-  padding-right: 15px; /* Tạo khoảng trống đúng bằng gap ở cuối nhóm để nối mượt */
-}
+  .our-love-item {
+    flex-shrink: 0;
+    width: 170px;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    will-change: transform;
+  }
 
-/* --- ĐỊNH DẠNG KHUNG ẢNH & TĂNG TỐC --- */
-.our-love-item {
-  flex-shrink: 0;
-  width: 170px;
-  aspect-ratio: 3 / 4;
-  overflow: hidden;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-  
-  /* Chống lag/giật cho iOS & Android */
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  backface-visibility: hidden;
-  will-change: transform;
-}
+  .our-love-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
 
-.our-love-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
+  @keyframes marqueeScroll {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-50%, 0, 0); }
+  }
 
-/* --- ANIMATION CUỘN CHUYỂN ĐỘNG --- */
-@keyframes marqueeScroll {
-  0% { transform: translate3d(0, 0, 0); }
-  100% { transform: translate3d(-50%, 0, 0); }
-}
+  .our-love-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.2rem, 2.5vw, 1.4rem);
+    line-height: 1.6;
+    color: var(--blush);
+    max-width: 520px;
+    margin: 0 auto;
+  }
 
-/* --- ĐOẠN VĂN & ĐƯỜNG KẺ --- */
-.our-love-text {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(1.2rem, 2.5vw, 1.4rem);
-  line-height: 1.6;
-  color: var(--blush);
-  max-width: 520px;
-  margin: 0 auto;
-}
+  .divider-line {
+    width: 1px;
+    height: 45px;
+    background: rgba(255, 255, 255, 0.5);
+    margin: 28px auto;
+  }
 
-.divider-line {
-  width: 1px;
-  height: 45px;
-  background: rgba(255, 255, 255, 0.5);
-  margin: 28px auto;
-}
+  .countdown-card {
+    background: #f2eae1;
+    border-radius: 28px;
+    padding: 36px 24px;
+    color: #7A1B2E;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
 
-/* --- THẺ ĐẾM NGƯỢC (COUNTDOWN CARD) --- */
-.countdown-card {
-  background: #f2eae1;
-  border-radius: 28px;
-  padding: 36px 24px;
-  color: #7A1B2E;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
+  .countdown-eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #7A1B2E;
+    margin-bottom: 6px;
+    opacity: 0.8;
+  }
 
-.countdown-eyebrow {
-  font-size: 0.75rem;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: #7A1B2E;
-  margin-bottom: 6px;
-  opacity: 0.8;
-}
+  .countdown-card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.5rem, 3.5vw, 2.1rem);
+    font-weight: 500;
+    color: #7A1B2E;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+  }
 
-.countdown-card-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(1.5rem, 3.5vw, 2.1rem);
-  font-weight: 500;
-  color: #7A1B2E;
-  margin-bottom: 24px;
-  text-transform: uppercase;
-}
+  .countdown-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    max-width: 440px;
+    margin: 0 auto;
+  }
 
-.countdown-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-  max-width: 440px;
-  margin: 0 auto;
-}
+  .countdown-box {
+    background: rgba(122, 27, 46, 0.06);
+    border: 1px solid rgba(122, 27, 46, 0.2);
+    border-radius: 12px;
+    padding: 14px 6px;
+    text-align: center;
+  }
 
-.countdown-box {
-  background: rgba(122, 27, 46, 0.06);
-  border: 1px solid rgba(122, 27, 46, 0.2);
-  border-radius: 12px;
-  padding: 14px 6px;
-  text-align: center;
-}
+  .countdown-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: clamp(2rem, 4vw, 2.6rem);
+    color: #7A1B2E;
+    line-height: 1;
+  }
 
-.countdown-num {
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 700;
-  font-size: clamp(2rem, 4vw, 2.6rem);
-  color: #7A1B2E;
-  line-height: 1;
-}
+  .countdown-label {
+    margin-top: 6px;
+    font-size: clamp(1.2rem, 2.5vw, 1.4rem);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #7A1B2E;
+    opacity: 0.8;
+  }
 
-.countdown-label {
-  margin-top: 6px;
-  font-size: clamp(1.2rem, 2.5vw, 1.4rem);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #7A1B2E;
-  opacity: 0.8;
-}
+  .countdown-note {
+    margin-top: 24px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.2rem, 2.5vw, 1.4rem);
+    color: #7A1B2E;
+  }
 
-.countdown-note {
-  margin-top: 24px;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(1.2rem, 2.5vw, 1.4rem);
-  color: #7A1B2E;
-}
-  /* RSVP FORM - ÉP SAFARI CHO PHÉP NHẬP LIỆU BÌNH THƯỜNG */
+  /* RSVP FORM */
   .rsvp{text-align:center; position: relative; z-index: 100;}
   .rsvp-form{ 
     max-width:440px; 
@@ -815,28 +787,29 @@
   .rsvp-form textarea{resize:none;height:90px;}
   .rsvp-submit{
     margin-top:6px; padding:14px; border:none; border-radius:999px;
-    background:#FFFBF8; color:var(--deep-pink); font-size: clamp(1.2rem, 2.5vw, 1.4rem);; letter-spacing:0.08em;
+    background:#FFFBF8; color:var(--deep-pink); font-size: clamp(1.2rem, 2.5vw, 1.4rem); letter-spacing:0.08em;
     cursor:pointer; font-weight:bold; transition:opacity 0.3s ease, transform 0.3s ease; font-family:'Cormorant Garamond', serif;
     pointer-events: auto !important;
   }
   .rsvp-submit:hover{opacity:0.9;transform:translateY(-2px);}
-  .rsvp-note{ margin-top:18px; font-size: clamp(1.2rem, 2.5vw, 1.4rem);; color:var(--blush); display:none; }
+  .rsvp-note{ margin-top:18px; font-size: clamp(1.2rem, 2.5vw, 1.4rem); color:var(--blush); display:none; }
   .rsvp-note.show{display:block;}
-/* Áp dụng cho thẻ select chọn tham dự */
-select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    height: 50px;
-    padding: 10px 15px;
-    box-sizing: border-box;
-    width: 100%;
-    background-color: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 12px;
-    color: inherit;
-    font-size: 16px;
-}
+
+  select {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      height: 50px;
+      padding: 10px 15px;
+      box-sizing: border-box;
+      width: 100%;
+      background-color: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 12px;
+      color: inherit;
+      font-size: 16px;
+  }
+
   /* FOOTER */
   footer {
     padding: 0 !important;
@@ -916,6 +889,46 @@ select {
     backdrop-filter:blur(4px); text-align:center;
   }
 
+  /* CSS CỦA HIỆU ỨNG CHỮ HỶ RƠI BÌA MỞ THIỆP */
+  .hi-container {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1000;
+    overflow: hidden;
+  }
+  #openToggle:checked ~ .cover .hi-container {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+  .hi-item {
+    position: absolute;
+    top: -50px;
+    color: #7A1B2E;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: bold;
+    user-select: none;
+    pointer-events: none;
+    opacity: 0.7;
+    animation: fallLinear linear infinite;
+  }
+  @keyframes fallLinear {
+    0% {
+      transform: translateY(0) rotate(0deg);
+      opacity: 0;
+    }
+    15% {
+      opacity: 0.75;
+    }
+    85% {
+      opacity: 0.75;
+    }
+    100% {
+      transform: translateY(105vh) rotate(360deg);
+      opacity: 0;
+    }
+  }
+
   @keyframes shakePulse {
     0%, 100% { transform: scale(1) rotate(0deg); }
     10%, 30%, 50%, 70% { transform: scale(1.12) rotate(-6deg); }
@@ -956,93 +969,92 @@ select {
     transition:opacity 1.2s ease 0.2s, transform 1.2s cubic-bezier(.22,1,.36,1) 0.2s, filter 1.2s ease 0.2s;
   }
   #openToggle:checked ~ .hero .hero-content{ opacity:1; transform:none; filter:none; }
-</style>
 
-<style>
-.wishes-wrapper {
-  max-width: 500px;
-  margin: 30px auto;
-  padding: 0 15px;
-  font-family: 'Cormorant Garamond', serif;
-  box-sizing: border-box;
-}
+  /* WISHES LIST */
+  .wishes-wrapper {
+    max-width: 500px;
+    margin: 30px auto;
+    padding: 0 15px;
+    font-family: 'Cormorant Garamond', serif;
+    box-sizing: border-box;
+  }
 
-.wishes-title {
-  text-align: center;
-  color: var(--blush);
-  font-size: 1.4rem;
-  font-weight: 600;
-  margin-bottom: 20px;
-  letter-spacing: 0.5px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
+  .wishes-title {
+    text-align: center;
+    color: var(--blush);
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
 
-.wishes-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  max-height: 300px;
-  overflow-y: auto;
-  padding-right: 5px;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.35) rgba(0, 0, 0, 0.1);
-}
+  .wishes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 5px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.35) rgba(0, 0, 0, 0.1);
+  }
 
-.wishes-list::-webkit-scrollbar {
-  width: 5px;
-}
+  .wishes-list::-webkit-scrollbar {
+    width: 5px;
+  }
 
-.wishes-list::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-}
+  .wishes-list::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
 
-.wishes-list::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.35);
-  border-radius: 10px;
-}
+  .wishes-list::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.35);
+    border-radius: 10px;
+  }
 
-.wishes-list::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.6);
-}
+  .wishes-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.6);
+  }
 
-.wish-card {
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 10px;
-  padding: 12px 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  transition: all 0.2s ease;
-  text-align: left;
-  margin-right: 5px;
-}
+  .wish-card {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 10px;
+    padding: 12px 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: all 0.2s ease;
+    text-align: left;
+    margin-right: 5px;
+  }
 
-.wish-card:hover {
-  background: rgba(255, 255, 255, 0.18);
-  border-color: rgba(255, 255, 255, 0.3);
-}
+  .wish-card:hover {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.3);
+  }
 
-.wish-header {
-  margin-bottom: 6px;
-}
+  .wish-header {
+    margin-bottom: 6px;
+  }
 
-.wish-author {
-  color: var(--ink);
-  font-weight: 600;
-  font-size: clamp(1.2rem, 2.5vw, 1.4rem);
-}
+  .wish-author {
+    color: var(--ink);
+    font-weight: 600;
+    font-size: clamp(1.2rem, 2.5vw, 1.4rem);
+  }
 
-.wish-text {
-  color: var(--blush);
-  font-size: clamp(1.2rem, 2.5vw, 1.4rem);
-  line-height: 1.45;
-  margin: 0;
-  font-style: italic;
-  opacity: 0.95;
-  word-wrap: break-word;
-}
+  .wish-text {
+    color: var(--blush);
+    font-size: clamp(1.2rem, 2.5vw, 1.4rem);
+    line-height: 1.45;
+    margin: 0;
+    font-style: italic;
+    opacity: 0.95;
+    word-wrap: break-word;
+  }
 </style>
 </head>
 <body>
@@ -1051,6 +1063,9 @@ select {
 
 <!-- BÌA MỞ THIỆP -->
 <div class="cover" id="cover">
+  <!-- Khung chứa hiệu ứng chữ Hỷ rơi -->
+  <div class="hi-container" id="hiContainer"></div>
+
   <div class="cover-half cover-half-left" id="coverLeft"></div>
   <div class="cover-half cover-half-right" id="coverRight"></div>
 
@@ -1103,7 +1118,7 @@ select {
   </div>
 </section>
 
-<!-- SECTION POLAROID & PHẦN THIỆP THÔNG TIN -->
+<!-- SECTION HÌNH ẢNH NGANG & PHẦN THIỆP THÔNG TIN -->
 <section class="envelope-intro-section">
   <div class="reveal">
     <div class="envelope-intro-wrap">
@@ -1114,11 +1129,8 @@ select {
 
       <div class="envelope-graphic">
         <div class="envelope-photos">
-          <div class="polaroid polaroid-left">
-            <img src="./image_wedding/2.jpg" alt="Thành Kiên & Thúy Hồng 1">
-          </div>
-          <div class="polaroid polaroid-right">
-            <img src="./image_wedding/3.jpg" alt="Thành Kiên & Thúy Hồng 2">
+          <div class="envelope-main-photo">
+            <img src="./image_wedding/2.jpg" alt="Thành Kiên & Thúy Hồng">
           </div>
         </div>
       </div>
@@ -1373,6 +1385,32 @@ select {
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
+// --- JS TẠO HIỆU ỨNG CHỮ HỶ RƠI ---
+(function createFallingHi() {
+  const container = document.getElementById('hiContainer');
+  if (!container) return;
+
+  const count = 20;
+
+  for (let i = 0; i < count; i++) {
+    const hi = document.createElement('div');
+    hi.className = 'hi-item';
+    hi.textContent = '囍';
+
+    const size = Math.random() * 16 + 18;
+    hi.style.fontSize = `${size}px`;
+
+    hi.style.left = `${Math.random() * 100}%`;
+
+    const duration = Math.random() * 5 + 5;
+    hi.style.animationDuration = `${duration}s`;
+
+    hi.style.animationDelay = `${Math.random() * 5}s`;
+
+    container.appendChild(hi);
+  }
+})();
+
 // --- CẤU HÌNH SUPABASE ---
 const SUPABASE_URL = 'https://xfeazemkmwiyhtfiyijc.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_7RY3lmAN5yLAxSIRlJUTPw_tBOLlQHp';
@@ -1683,7 +1721,7 @@ function resetWishesScroll() {
   updateCountdown();
   const countdownTimer = setInterval(updateCountdown, 1000);
 
-  // LIGHTBOX TỐI ƯU DÀNH RIÊNG CHO SAFARI
+  // LIGHTBOX TỐI ƯU RIÊNG CHO SAFARI
   (function(){
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightboxImg');
