@@ -203,7 +203,7 @@
     margin: 0 auto;
   }
 
-  /* KHUNG ẢNH NGANG GIỐNG OUR-LOVE-MAIN-PHOTO */
+  /* HIỆU ỨNG ZOOM IN CHẬM & MƯỢT HƠN (CINEMATIC) */
   .envelope-photos {
     position: relative;
     width: 100%;
@@ -211,7 +211,32 @@
     margin: 0 auto;
     z-index: 2;
     padding: 10px 0;
+    opacity: 0;
+    transform: scale(0.3);
+    transition: transform 1.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 1.8s ease;
+    will-change: opacity, transform;
   }
+
+  .envelope-photos.in {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  @media (max-width: 767px) {
+    .envelope-photos {
+      width: 100vw;
+      max-width: 100vw;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+    }
+
+    .envelope-photos .envelope-main-photo {
+      border-radius: 0;
+    }
+  }
+
   .envelope-main-photo {
     width: 100%;
     aspect-ratio: 16 / 9;
@@ -239,7 +264,7 @@
     color: var(--ink);
     text-transform: uppercase;
     line-height: 1.4;
-    margin-top: 100px;
+    margin-top: 50px;
     margin-bottom: 32px;
   }
   .family-grid {
@@ -274,13 +299,39 @@
   .couple-names-block {
     margin: 20px 0 40px;
     font-family: 'Cormorant Garamond', serif;
+    overflow: hidden;
   }
+
+  /* HIỆU ỨNG TRƯỢT NGANG CHO TÊN CÔ DÂU CHÚ RỂ */
   .groom-name, .bride-name {
     font-size: clamp(2.8rem, 8vw, 4rem);
     font-weight: 700;
     color: var(--ink);
-    line-height: 1.1;
+    line-height: 1.2;
+    transition: opacity 1.8s ease-out, transform 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
   }
+
+  .groom-name {
+    opacity: 0;
+    transform: translateX(-120px);
+    transition: all 1.5s ease-in-out;
+  }
+  .groom-name.in {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .bride-name {
+    opacity: 0;
+    transform: translateX(120px);
+    transition: all 1.5s ease-in-out;
+  }
+  .bride-name.in {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
   .ampersand {
     font-size: clamp(2rem, 5vw, 2.8rem);
     color: var(--ink);
@@ -302,8 +353,7 @@
     font-family: 'Cormorant Garamond', serif;
     opacity: 0;
     transform: scale(0.6);
-    transition: opacity 2.2s cubic-bezier(0.16, 1, 0.3, 1), 
-                transform 2.5s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 1.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 1.8s ease;
     will-change: opacity, transform;
   }
 
@@ -1055,6 +1105,28 @@
     opacity: 0.95;
     word-wrap: break-word;
   }
+  /* Trạng thái ban đầu - Phần tử bên trái */
+.slide-from-left {
+  opacity: 0;
+  transform: translateX(-120px);
+  transition: opacity 1.5s ease-out, transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+/* Trạng thái ban đầu - Phần tử bên phải */
+.slide-from-right {
+  opacity: 0;
+  transform: translateX(120px);
+  transition: opacity 1.5s ease-out, transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+/* Trạng thái đích khi cuộn tới (dùng chung cho cả 2) */
+.slide-from-left.in,
+.slide-from-right.in {
+  opacity: 1;
+  transform: translateX(0);
+}
 </style>
 </head>
 <body>
@@ -1063,7 +1135,6 @@
 
 <!-- BÌA MỞ THIỆP -->
 <div class="cover" id="cover">
-  <!-- Khung chứa hiệu ứng chữ Hỷ rơi -->
   <div class="hi-container" id="hiContainer"></div>
 
   <div class="cover-half cover-half-left" id="coverLeft"></div>
@@ -1080,7 +1151,7 @@
       <div class="cover-divider">❦</div>
       <div class="cover-date">Thứ năm, 01.10.2026</div>
       <div class="cover-tagline">
-        Thân mời: <span id="guestName" style="color: var(--ink); font-weight: bold;"></span><span id="guest-name" style="font-size: 1.5rem"></span>
+        Thân mời: <span id="guestName" style="color: var(--ink); font-weight: bold; font-size: 1.5rem"></span>
       </div>
       <label class="open-btn" for="openToggle" id="openBtn" aria-label="Mở thiệp cưới">
         Mở thiệp
@@ -1120,17 +1191,17 @@
 
 <!-- SECTION HÌNH ẢNH NGANG & PHẦN THIỆP THÔNG TIN -->
 <section class="envelope-intro-section">
-  <div class="reveal">
+  <div>
     <div class="envelope-intro-wrap">
-      <div class="envelope-date-big">01.10.2026</div>
-      <p class="envelope-intro-quote">
+      <div class="reveal envelope-date-big">01.10.2026</div>
+      <p class="reveal envelope-intro-quote">
         Cùng nhau bước sang một chương mới, nắm tay xây dựng tổ ấm và đón chờ những ngày tháng hạnh phúc phía trước.
       </p>
 
       <div class="envelope-graphic">
-        <div class="envelope-photos">
+        <div class="reveal envelope-photos">
           <div class="envelope-main-photo">
-            <img src="./image_wedding/2.jpg" alt="Thành Kiên & Thúy Hồng">
+            <img src="./image_wedding/13.jpg" alt="Thành Kiên & Thúy Hồng">
           </div>
         </div>
       </div>
@@ -1150,7 +1221,7 @@
           <div class="family-names">
             Ông:<br>Nguyễn Văn Hải<br>
             Bà:<br>Nguyễn Thị Tuyết<br>
-            <span class="family-location">Địa chi: Khê Thanh - Tịnh Khê - TP. Quảng Ngãi</span>
+            <span class="family-location">Địa chỉ: Mỹ Lại - Tịnh Khê - Quảng Ngãi</span>
           </div>
         </div>
         <div class="family-col">
@@ -1158,18 +1229,18 @@
           <div class="family-names">
             Ông:<br>Dương Văn Rượu<br>
             Bà:<br>Phạm Thị Quá<br>
-            <span class="family-location">Địa chi: Kỳ Xuyên - Tịnh Khê - TP. Quảng Ngãi</span>
+            <span class="family-location">Địa chỉ: Kỳ Xuyên - Tịnh Khê - Quảng Ngãi</span>
           </div>
         </div>
       </div>
     </div>
-    <div class="reveal">
-      <div class="couple-names-block">
-        <div class="groom-name">Thành Kiên</div>
-        <span class="ampersand">&amp;</span>
-        <div class="bride-name">Thúy Hồng</div>
-      </div>
+
+    <div class="couple-names-block">
+      <div class="groom-name">Thành Kiên</div>
+      <span class="ampersand">&amp;</span>
+      <div class="bride-name">Thúy Hồng</div>
     </div>
+
     <div class="reveal party-info-box">
       <div class="party-title">BỮA TIỆC CHUNG VUI</div>
       <div class="party-subtitle">ĐƯỢC TỔ CHỨC VÀO LÚC 17:30 - THỨ NĂM</div>
@@ -1182,7 +1253,7 @@
 
       <div class="venue-type">TẠI TƯ GIA NHÀ TRAI</div>
       <div class="venue-address">
-        Địa chỉ: Khê Thanh - <br>Tịnh Khê - TP. Quảng Ngãi
+        Địa chỉ: 174 Lê Trọng Tấn, thôn Mỹ Lại, <br>xã Tịnh Khê, tỉnh Quảng Ngãi
       </div>
     </div>
   </div>
@@ -1218,48 +1289,52 @@
     </div>
 
     <div class="timeline">
-      <div class="tide-line"></div>
+  <div class="tide-line"></div>
 
-      <div class="t-item">
-        <div class="t-card">
-          <div class="t-dot"></div>
-          <div class="t-time">09:00</div>
-          <div class="t-title">Lễ đón dâu</div>
-          <div class="t-desc">Nhà trai đến nhà gái làm lễ, ra mắt hai họ và trao lễ vật.</div>
-        </div>
-      </div>
-
-      <div class="t-item">
-        <div class="t-card">
-          <div class="t-dot"></div>
-          <div class="t-time">10:30</div>
-          <div class="t-title">Lễ thành hôn</div>
-          <div class="t-desc">Nghi lễ chính thức trước bàn thờ gia tiên, ra mắt cô dâu chú rể.</div>
-        </div>
-      </div>
-
-      <div class="t-item">
-        <div class="t-card">
-          <div class="t-dot"></div>
-          <div class="t-time">17:30</div>
-          <div class="t-title">Đón khách &amp; Tiệc cưới</div>
-          <div class="t-desc">Đón tiếp quan khách, chụp ảnh lưu niệm và khai tiệc tại tư gia.</div>
-        </div>
-      </div>
+  <!-- Mục 1: Chạy từ trái vào -->
+  <div class="t-item slide-from-right">
+    <div class="t-card">
+      <div class="t-dot"></div>
+      <div class="t-time">09:00</div>
+      <div class="t-title">Lễ đón dâu</div>
+      <div class="t-desc">Nhà trai đến nhà gái làm lễ, ra mắt hai họ và trao lễ vật.</div>
     </div>
+  </div>
+
+  <!-- Mục 2: Chạy từ phải vào -->
+  <div class="t-item slide-from-left">
+    <div class="t-card">
+      <div class="t-dot"></div>
+      <div class="t-time">10:30</div>
+      <div class="t-title">Lễ thành hôn</div>
+      <div class="t-desc">Nghi lễ chính thức trước bàn thờ gia tiên, ra mắt cô dâu chú rể.</div>
+    </div>
+  </div>
+
+  <!-- Mục 3: Chạy từ trái vào -->
+  <div class="t-item slide-from-right">
+    <div class="t-card">
+      <div class="t-dot"></div>
+      <div class="t-time">17:30</div>
+      <div class="t-title">Đón khách &amp; Tiệc cưới</div>
+      <div class="t-desc">Đón tiếp quan khách, chụp ảnh lưu niệm và khai tiệc tại tư gia.</div>
+    </div>
+  </div>
+</div>
   </div>
 </section>
 
 <!-- ĐỊA ĐIỂM -->
 <section class="venue-section">
+  <div class="reveal">
   <div class="section-title">
     <div class="section-eyebrow">Địa điểm</div>
     <h2 class="section-heading">Nơi chúng mình nói lời yêu thương</h2>
   </div>
-
+</div>
   <div class="reveal venue-card">
     <div class="venue-name">Tư Gia Nhà Trai</div>
-    <div class="venue-addr">Địa chỉ: Khê Thanh - <br>Tịnh Khê - TP. Quảng Ngãi</div>
+    <div class="venue-addr">Địa chỉ: 174 Lê Trọng Tấn, thôn Mỹ Lại, <br>xã Tịnh Khê, tỉnh Quảng Ngãi</div>
     <a class="venue-btn" href="https://www.google.com/maps/search/?api=1&query=Khê+Thanh+Tịnh+Khê+Quảng+Ngãi" target="_blank" rel="noopener">Xem bản đồ</a>
   </div>
 </section>
@@ -1335,7 +1410,7 @@
         </div>
 
         <div class="countdown-note" id="countdownNote">
-          Hẹn gặp mọi người vào <b>17:30, Thứ Sáu 01.10.2026</b>
+          Hẹn gặp mọi người vào <b>17:30, Thứ Năm 01.10.2026</b>
         </div>
       </div>
     </div>
@@ -1381,6 +1456,39 @@
   </div>
 </section>
 
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-stage" id="lightboxStage">
+    <div class="lightbox-close" id="lightboxClose" aria-label="Đóng">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </div>
+    <div class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Ảnh trước">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg>
+    </div>
+    <div class="lightbox-img-wrap">
+      <img class="lightbox-img" id="lightboxImg" src="" alt="Ảnh cưới">
+    </div>
+    <div class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Ảnh tiếp theo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+    </div>
+    <div class="lightbox-counter" id="lightboxCounter"></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-banner">
+    <div class="footer-overlay"></div>
+    <div class="footer-content reveal">
+      <div class="footer-thankyou">Cảm ơn</div>
+      <p class="footer-message">
+        Cảm ơn Quý Khách đã dành tình cảm cho gia đình chúng tôi!<br>
+        Sự hiện diện của Quý Khách chính là món quà ý nghĩa nhất, gia đình chúng tôi vô cùng trân quý khi được cùng Quý Khách chia sẻ niềm hạnh phúc trong ngày trọng đại này.
+      </p>
+    </div>
+  </div>
+</footer>
+
 <!-- Supabase SDK -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -1399,12 +1507,10 @@
 
     const size = Math.random() * 16 + 18;
     hi.style.fontSize = `${size}px`;
-
     hi.style.left = `${Math.random() * 100}%`;
 
     const duration = Math.random() * 5 + 5;
     hi.style.animationDuration = `${duration}s`;
-
     hi.style.animationDelay = `${Math.random() * 5}s`;
 
     container.appendChild(hi);
@@ -1453,15 +1559,26 @@ async function loadWishes() {
   }
 }
 
-// --- 2. LẤY TÊN KHÁCH MỜI TỪ SUPABASE THEO SLUG (?to=...) ---
+// --- 2. LẤY TÊN KHÁCH MỜI ---
 async function loadGuestName() {
   const urlParams = new URLSearchParams(window.location.search);
   const guestSlug = urlParams.get('to');
+  const nameInput = document.getElementById('guestNameInput');
+  const guestNameElement = document.getElementById('guestName');
 
   if (!guestSlug) return;
 
-  const nameInput = document.getElementById('guestNameInput');
-  const guestNameElement = document.getElementById('guest-name');
+  // Try decoding Base64 first
+  try {
+    const decodedName = decodeURIComponent(escape(atob(guestSlug)));
+    if (decodedName && decodedName.trim() !== '') {
+      if (guestNameElement) guestNameElement.textContent = decodedName;
+      if (nameInput) nameInput.value = decodedName;
+      return;
+    }
+  } catch (e) {
+    // Fallback to Supabase query
+  }
 
   async function fetchGuestWithRetry(retries = 3, delay = 2000) {
     for (let i = 0; i < retries; i++) {
@@ -1477,7 +1594,6 @@ async function loadGuestName() {
         if (error) throw error;
         if (guest) return guest;
       } catch (err) {
-        console.warn(`Thử lại lấy tên khách lần ${i + 1}/${retries}...`);
         if (i === retries - 1) console.error("Lỗi tải thông tin khách mời:", err.message);
         await new Promise(res => setTimeout(res, delay));
       }
@@ -1490,15 +1606,6 @@ async function loadGuestName() {
   if (guest) {
     if (nameInput) nameInput.value = guest.name;
     if (guestNameElement) guestNameElement.textContent = guest.name;
-  } else {
-    window.addEventListener('online', async () => {
-      console.log("Đã khôi phục kết nối mạng. Đang tải lại tên khách...");
-      guest = await fetchGuestWithRetry();
-      if (guest) {
-        if (nameInput) nameInput.value = guest.name;
-        if (guestNameElement) guestNameElement.textContent = guest.name;
-      }
-    }, { once: true });
   }
 }
 
@@ -1617,112 +1724,59 @@ function resetWishesScroll() {
     startAutoScroll();
   }, 1000);
 }
-</script>
 
-<!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox">
-  <div class="lightbox-stage" id="lightboxStage">
-    <div class="lightbox-close" id="lightboxClose" aria-label="Đóng">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>
-    </div>
-    <div class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Ảnh trước">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg>
-    </div>
-    <div class="lightbox-img-wrap">
-      <img class="lightbox-img" id="lightboxImg" src="" alt="Ảnh cưới">
-    </div>
-    <div class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Ảnh tiếp theo">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
-    </div>
-    <div class="lightbox-counter" id="lightboxCounter"></div>
-  </div>
-</div>
+/* INTERSECTION OBSERVER BẬT HIỆU ỨNG CUỘN TRANG */
+const items = document.querySelectorAll('.reveal, .groom-name, .bride-name, .slide-from-left, .slide-from-right');
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+  });
+}, {
+  threshold: 0.05,
+  rootMargin: '0px 0px -50px 0px'
+});
+items.forEach(el=>io.observe(el));
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-banner">
-    <div class="footer-overlay"></div>
-    <div class="footer-content reveal">
-      <div class="footer-thankyou">Cảm ơn </div>
-      <p class="footer-message">
-        Cảm ơn Quý Khách đã dành tình cảm cho gia đình chúng tôi!<br>
-        Sự hiện diện của Quý Khách chính là món quà ý nghĩa nhất, gia đình chúng tôi vô cùng trân quý khi được cùng Quý Khách chia sẻ niềm hạnh phúc trong ngày trọng đại này.
-      </p>
-    </div>
-  </div>
-</footer>
+/* BỘ ĐẾM NGƯỢC THỜI GIAN */
+const weddingDate = new Date('2026-10-01T17:30:00').getTime();
+function pad(n){ return String(n).padStart(2,'0'); }
 
-<script>
-  (function setGuestName() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const guestCode = urlParams.get('to');
-    const guestEl = document.getElementById('guestName');
+function updateCountdown(){
+  const now = new Date().getTime();
+  const distance = weddingDate - now;
 
-    if (guestEl) {
-      if (guestCode) {
-        try {
-          const decodedName = decodeURIComponent(escape(atob(guestCode)));
-          if (decodedName && decodedName.trim() !== '') {
-            guestEl.textContent = decodedName;
-          } else {
-            guestEl.textContent = "";
-          }
-        } catch (e) {
-          guestEl.textContent = "";
-        }
-      } else {
-        guestEl.textContent = "";
-      }
-    }
-  })();
+  const daysEl = document.getElementById('cd-days');
+  const hoursEl = document.getElementById('cd-hours');
+  const minsEl = document.getElementById('cd-minutes');
+  const secsEl = document.getElementById('cd-seconds');
 
-  const items = document.querySelectorAll('.reveal');
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
-    });
-  }, {threshold: 0.1});
-  items.forEach(el=>io.observe(el));
-
-  const weddingDate = new Date('2026-10-01T17:30:00').getTime();
-  function pad(n){ return String(n).padStart(2,'0'); }
-
-  function updateCountdown(){
-    const now = new Date().getTime();
-    const distance = weddingDate - now;
-
-    const daysEl = document.getElementById('cd-days');
-    const hoursEl = document.getElementById('cd-hours');
-    const minsEl = document.getElementById('cd-minutes');
-    const secsEl = document.getElementById('cd-seconds');
-
-    if(distance <= 0){
-      if(daysEl) daysEl.textContent = '00';
-      if(hoursEl) hoursEl.textContent = '00';
-      if(minsEl) minsEl.textContent = '00';
-      if(secsEl) secsEl.textContent = '00';
-      const note = document.getElementById('countdownNote');
-      if(note){ note.innerHTML = '<span class="countdown-done">Hôm nay là ngày trọng đại! 💕</span>'; }
-      clearInterval(countdownTimer);
-      return;
-    }
-
-    const days = Math.floor(distance / (1000*60*60*24));
-    const hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
-    const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
-    const seconds = Math.floor((distance % (1000*60)) / 1000);
-
-    if(daysEl) daysEl.textContent = pad(days);
-    if(hoursEl) hoursEl.textContent = pad(hours);
-    if(minsEl) minsEl.textContent = pad(minutes);
-    if(secsEl) secsEl.textContent = pad(seconds);
+  if(distance <= 0){
+    if(daysEl) daysEl.textContent = '00';
+    if(hoursEl) hoursEl.textContent = '00';
+    if(minsEl) minsEl.textContent = '00';
+    if(secsEl) secsEl.textContent = '00';
+    const note = document.getElementById('countdownNote');
+    if(note){ note.innerHTML = '<span class="countdown-done">Hôm nay là ngày trọng đại! 💕</span>'; }
+    clearInterval(countdownTimer);
+    return;
   }
 
-  updateCountdown();
-  const countdownTimer = setInterval(updateCountdown, 1000);
+  const days = Math.floor(distance / (1000*60*60*24));
+  const hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
+  const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
+  const seconds = Math.floor((distance % (1000*60)) / 1000);
 
-  // LIGHTBOX TỐI ƯU RIÊNG CHO SAFARI
-  (function(){
+  if(daysEl) daysEl.textContent = pad(days);
+  if(hoursEl) hoursEl.textContent = pad(hours);
+  if(minsEl) minsEl.textContent = pad(minutes);
+  if(secsEl) secsEl.textContent = pad(seconds);
+}
+
+updateCountdown();
+const countdownTimer = setInterval(updateCountdown, 1000);
+
+// LIGHTBOX ALBUM XEM ẢNH TỐI ƯU
+(function(){
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightboxImg');
   const lightboxCounter = document.getElementById('lightboxCounter');
@@ -1860,6 +1914,7 @@ function resetWishesScroll() {
   }
 })();
 
+/* MARQUEE RUNNER */
 const marqueeTrack = document.querySelector('.marquee-track');
 
 if (marqueeTrack) {
