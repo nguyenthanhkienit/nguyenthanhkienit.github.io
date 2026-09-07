@@ -541,34 +541,83 @@
     background: rgba(255, 251, 248, 0.6);
   }
 
-  /* TIMELINE */
-  .timeline{ position:relative; padding-left:0; max-width:900px; margin:0 auto; }
-  .tide-line{
-    position:absolute; left:50%; top:0; bottom:0; width:2px;
-    transform:translateX(-50%); background:rgba(255,255,255,0.35);
+  /* TIMELINE MỚI CỐ ĐỊNH 2 CỘT */
+  .timeline-clean {
+    position: relative;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 20px 0;
   }
-  .t-item{ position:relative; width:100%; display:flex; margin-bottom:64px; }
-  .t-item:last-child{margin-bottom:0;}
-  .t-item:nth-child(odd) .t-card{margin-right:auto;text-align:right;padding-right:52px;}
-  .t-item:nth-child(even) .t-card{margin-left:auto;text-align:left;padding-left:52px;}
-  .t-card{width:50%;position:relative;}
-  .t-time{ font-family:'Cormorant Garamond', serif; font-style:italic; font-size:1.6rem; color:var(--ink); margin-bottom:10px; margin-top: -10px; }
-  .t-item:nth-child(even) .t-time{color:var(--blush);}
-  .t-title{font-size: clamp(1.2rem, 2.5vw, 1.4rem);letter-spacing:0.04em;font-weight:500;margin-bottom:6px;color:var(--blush);}
-  .t-desc{font-size: clamp(1.2rem, 2.5vw, 1.4rem);color:var(--blush);line-height:1.6;}
 
-  .t-dot{
-    position:absolute; top:2px; left:auto; right:-7px; width:14px; height:14px;
-    border-radius:50%; background:var(--deep-pink); border:2px solid #fff; z-index:2;
+  .tide-line-clean {
+    position: absolute;
+    left: 35%;
+    top: 35px;
+    bottom: 35px;
+    width: 1px;
+    background: rgba(255, 255, 255, 0.4);
+    transform: translateX(-50%);
+    z-index: 1;
   }
-  .t-item:nth-child(even) .t-dot{ left:-7px; right:auto; border-color:#F3D9DE; }
 
-  @media (max-width:640px){
-    .tide-line{ left:20px; }
-    .t-item:nth-child(odd) .t-card, .t-item:nth-child(even) .t-card{
-      width:100%; margin:0; text-align:left !important; padding-left:52px !important; padding-right:0 !important;
+  .t-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 36px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .t-row:last-child {
+    margin-bottom: 0;
+  }
+
+  .t-time-col {
+    width: 35%;
+    padding-right: 25px;
+    text-align: right;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.3rem, 3vw, 1.6rem);
+    font-weight: 500;
+    color: var(--blush);
+    letter-spacing: 0.05em;
+  }
+
+  .t-dot-col {
+    position: absolute;
+    left: 35%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .t-dot-clean {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #fdf5e6;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+  }
+
+  .t-content-col {
+    width: 65%;
+    padding-left: 30px;
+    text-align: left;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.3rem, 3.2vw, 1.6rem);
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: 0.02em;
+  }
+
+  @media (max-width: 480px) {
+    .t-time-col {
+      padding-right: 18px;
     }
-    .t-dot{ left:20px !important; right:auto !important; top:2px; transform:translateX(-50%); }
+    .t-content-col {
+      padding-left: 22px;
+    }
   }
 
   /* VENUE */
@@ -1105,33 +1154,69 @@
     opacity: 0.95;
     word-wrap: break-word;
   }
+
   /* Trạng thái ban đầu - Phần tử bên trái */
-.slide-from-left {
-  opacity: 0;
-  transform: translateX(-120px);
-  transition: opacity 1.5s ease-out, transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
-}
+  .slide-from-left {
+    opacity: 0;
+    transform: translateX(-120px);
+    transition: opacity 1.5s ease-out, transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
 
-/* Trạng thái ban đầu - Phần tử bên phải */
-.slide-from-right {
-  opacity: 0;
-  transform: translateX(120px);
-  transition: opacity 1.5s ease-out, transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
-}
+  /* Trạng thái ban đầu - Phần tử bên phải */
+  .slide-from-right {
+    opacity: 0;
+    transform: translateX(120px);
+    transition: opacity 1.5s ease-out, transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
 
-/* Trạng thái đích khi cuộn tới (dùng chung cho cả 2) */
-.slide-from-left.in,
-.slide-from-right.in {
-  opacity: 1;
-  transform: translateX(0);
-}
+  /* Trạng thái đích khi cuộn tới */
+  .slide-from-left.in,
+  .slide-from-right.in {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* BUTTON NÚT PHÁT NHẠC */
+  .music-control {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(122, 27, 46, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease;
+  }
+  .music-control.playing {
+    animation: rotateMusic 4s linear infinite;
+  }
+  @keyframes rotateMusic {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
 </style>
 </head>
 <body>
 
 <input type="checkbox" id="openToggle" class="open-toggle" aria-hidden="true">
+
+<!-- MUSIC PLAYER -->
+<audio id="bgMusic" loop preload="auto">
+  <source src="./music_wedding/một đời.mp3" type="audio/mpeg">
+</audio>
+<button id="musicToggle" class="music-control" aria-label="Toggle Music">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+</button>
 
 <!-- BÌA MỞ THIỆP -->
 <div class="cover" id="cover">
@@ -1280,7 +1365,7 @@
   </div>
 </section>
 
-<!-- LỊCH TRÌNH NGÀY CƯỚI -->
+<!-- LỊCH TRÌNH NGÀY CƯỚI (ĐÃ CẬP NHẬT THEO MẪU 2 CỘT) -->
 <section id="timeline">
   <div class="reveal">
     <div class="section-title">
@@ -1288,50 +1373,50 @@
       <h2 class="section-heading">Lịch trình ngày cưới</h2>
     </div>
 
-    <div class="timeline">
-  <div class="tide-line"></div>
+    <div class="timeline-clean">
+      <div class="tide-line-clean"></div>
 
-  <!-- Mục 1: Chạy từ trái vào -->
-  <div class="t-item slide-from-right">
-    <div class="t-card">
-      <div class="t-dot"></div>
-      <div class="t-time">09:00</div>
-      <div class="t-title">Lễ đón dâu</div>
-      <div class="t-desc">Nhà trai đến nhà gái làm lễ, ra mắt hai họ và trao lễ vật.</div>
-    </div>
-  </div>
+      <div class="t-row slide-from-left">
+        <div class="t-time-col">17:30</div>
+        <div class="t-dot-col"><span class="t-dot-clean"></span></div>
+        <div class="t-content-col">Đón khách</div>
+      </div>
 
-  <!-- Mục 2: Chạy từ phải vào -->
-  <div class="t-item slide-from-left">
-    <div class="t-card">
-      <div class="t-dot"></div>
-      <div class="t-time">10:30</div>
-      <div class="t-title">Lễ thành hôn</div>
-      <div class="t-desc">Nghi lễ chính thức trước bàn thờ gia tiên, ra mắt cô dâu chú rể.</div>
-    </div>
-  </div>
+      <div class="t-row slide-from-left">
+        <div class="t-time-col">18:30</div>
+        <div class="t-dot-col"><span class="t-dot-clean"></span></div>
+        <div class="t-content-col">Khai tiệc</div>
+      </div>
 
-  <!-- Mục 3: Chạy từ trái vào -->
-  <div class="t-item slide-from-right">
-    <div class="t-card">
-      <div class="t-dot"></div>
-      <div class="t-time">17:30</div>
-      <div class="t-title">Đón khách &amp; Tiệc cưới</div>
-      <div class="t-desc">Đón tiếp quan khách, chụp ảnh lưu niệm và khai tiệc tại tư gia.</div>
+      <div class="t-row slide-from-left">
+        <div class="t-time-col">18:45</div>
+        <div class="t-dot-col"><span class="t-dot-clean"></span></div>
+        <div class="t-content-col">Rót rượu, cắt bánh</div>
+      </div>
+
+      <div class="t-row slide-from-left">
+        <div class="t-time-col">19:00</div>
+        <div class="t-dot-col"><span class="t-dot-clean"></span></div>
+        <div class="t-content-col">Phục vụ món chính</div>
+      </div>
+
+      <div class="t-row slide-from-left">
+        <div class="t-time-col">21:00</div>
+        <div class="t-dot-col"><span class="t-dot-clean"></span></div>
+        <div class="t-content-col">Kết thúc tiệc</div>
+      </div>
     </div>
-  </div>
-</div>
   </div>
 </section>
 
 <!-- ĐỊA ĐIỂM -->
 <section class="venue-section">
   <div class="reveal">
-  <div class="section-title">
-    <div class="section-eyebrow">Địa điểm</div>
-    <h2 class="section-heading">Nơi chúng mình nói lời yêu thương</h2>
+    <div class="section-title">
+      <div class="section-eyebrow">Địa điểm</div>
+      <h2 class="section-heading">Nơi chúng mình nói lời yêu thương</h2>
+    </div>
   </div>
-</div>
   <div class="reveal venue-card">
     <div class="venue-name">Tư Gia Nhà Trai</div>
     <div class="venue-addr">Địa chỉ: 174 Lê Trọng Tấn, thôn Mỹ Lại, <br>xã Tịnh Khê, tỉnh Quảng Ngãi</div>
@@ -1540,19 +1625,21 @@ async function loadWishes() {
 
   container.innerHTML = '';
 
-  data.forEach(item => {
-    if (item.message && item.message.trim() !== '') {
-      const card = document.createElement('div');
-      card.className = 'wish-card';
-      card.innerHTML = `
-        <div class="wish-header">
-          <span class="wish-author">${item.name || 'Khách mời ẩn danh'}</span>
-        </div>
-        <p class="wish-text">"${item.message}"</p>
-      `;
-      container.appendChild(card);
-    }
-  });
+  if (data && data.length > 0) {
+    data.forEach(item => {
+      if (item.message && item.message.trim() !== '') {
+        const card = document.createElement('div');
+        card.className = 'wish-card';
+        card.innerHTML = `
+          <div class="wish-header">
+            <span class="wish-author">${item.name || 'Khách mời ẩn danh'}</span>
+          </div>
+          <p class="wish-text">"${item.message}"</p>
+        `;
+        container.appendChild(card);
+      }
+    });
+  }
 
   if (container.children.length === 0) {
     container.innerHTML = '<p style="text-align:center; color:rgba(255,255,255,0.7); font-style:italic;">Chưa có lời chúc nào. Hãy là người đầu tiên gửi lời chúc nhé! 💕</p>';
@@ -1568,7 +1655,6 @@ async function loadGuestName() {
 
   if (!guestSlug) return;
 
-  // Try decoding Base64 first
   try {
     const decodedName = decodeURIComponent(escape(atob(guestSlug)));
     if (decodedName && decodedName.trim() !== '') {
@@ -1609,10 +1695,40 @@ async function loadGuestName() {
   }
 }
 
-// --- INITIALIZATION ---
+// --- INITIALIZATION & MUSIC AUTO-PLAY ---
 document.addEventListener("DOMContentLoaded", function() {
   loadWishes();
   loadGuestName();
+
+  const bgMusic = document.getElementById('bgMusic');
+  const musicToggle = document.getElementById('musicToggle');
+  const openBtn = document.getElementById('openBtn1');
+
+  function playMusic() {
+    if (bgMusic && bgMusic.paused) {
+      bgMusic.play().then(() => {
+        if (musicToggle) musicToggle.classList.add('playing');
+      }).catch(err => {
+        console.log("Autoplay blocked:", err);
+      });
+    }
+  }
+
+  if (openBtn) {
+    openBtn.addEventListener('click', playMusic);
+  }
+
+  if (musicToggle) {
+    musicToggle.addEventListener('click', function() {
+      if (bgMusic.paused) {
+        bgMusic.play();
+        musicToggle.classList.add('playing');
+      } else {
+        bgMusic.pause();
+        musicToggle.classList.remove('playing');
+      }
+    });
+  }
 });
 
 // --- 3. XỬ LÝ GỬI FORM RSVP ---
