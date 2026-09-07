@@ -102,12 +102,12 @@
     display: block !important;
   }
 
-  /* HIỆU ỨNG REVEAL CUỘN TRANG */
+  /* HIỆU ỨNG REVEAL CUỘN TRANG (ĐÃ CHỈNH CHẬM LẠI MƯỢT MÀ HƠN) */
   .reveal {
     opacity: 0;
-    transform: translateY(50px);
-    transition: opacity 1.2s ease-out, 
-                transform 2s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateY(70px);
+    transition: opacity 2.2s ease-out, 
+                transform 2.8s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: opacity, transform;
   }
 
@@ -158,14 +158,14 @@
     display: inline-block;
     opacity: 0;
     transform: translateX(40px);
-    transition: opacity 0.5s ease-out, 
-                transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: opacity 0.8s ease-out, 
+                transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   #openToggle:checked ~ .hero .caption-names span.char {
     opacity: 1;
     transform: translateX(0);
-    transition-delay: calc(0.4s + var(--char-index) * 0.04s);
+    transition-delay: calc(0.5s + var(--char-index) * 0.06s);
   }
 
   /* SECTION BÌA THƯ */
@@ -300,7 +300,7 @@
     font-style: italic;
   }
 
-  /* KHUNG THÔNG TIN BỮA TIỆC MÀU KEM */
+  /* KHUNG THÔNG TIN BỮA TIỆC MÀU KEM (ĐÃ CHỈNH CHẬM) */
   .party-info-box {
     background: #EFE8E1;
     border-radius: 24px;
@@ -312,8 +312,8 @@
     font-family: 'Cormorant Garamond', serif;
     opacity: 0;
     transform: scale(0.6);
-    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
-                transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: opacity 2.2s cubic-bezier(0.16, 1, 0.3, 1), 
+                transform 2.5s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: opacity, transform;
   }
 
@@ -373,7 +373,7 @@
     line-height: 1.5;
   }
 
-  /* BỐ CỤC ALBUM */
+  /* BỐ CỤC ALBUM (ĐÃ CHỈNH CHẬM CHUYỂN ĐỘNG TRƯỢT NGANG) */
   .album-wrap {
     position: relative;
     max-width: 530px;
@@ -394,7 +394,7 @@
     cursor: pointer;
     box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     opacity: 0;
-    transition: opacity 1.5s ease-out, transform 1.6s cubic-bezier(0.12, 0.85, 0.25, 1), box-shadow 0.3s ease;
+    transition: opacity 2.5s ease-out, transform 2.6s cubic-bezier(0.12, 0.85, 0.25, 1), box-shadow 0.3s ease;
     will-change: opacity, transform;
   }
   .album-item-6 img.album-img {
@@ -535,7 +535,7 @@
     .t-dot{ left:20px !important; right:auto !important; top:2px; transform:translateX(-50%); }
   }
 
-  /* VENUE */
+  /* VENUE (ĐÃ CHỈNH CHẬM HƠN) */
 .venue-card {
   max-width: 640px; 
   margin: 0 auto; 
@@ -549,12 +549,11 @@
   /* Trạng thái ẩn + thu nhỏ ban đầu */
   opacity: 0;
   transform: scale(0.85);
-  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease;
+  transition: transform 1.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 1.8s ease;
   will-change: transform, opacity;
 }
 
-/* Khi cuộn tới, script reveal có sẵn sẽ tự động thêm class .active */
-.venue-card.active {
+.venue-card.in, .venue-card.active {
   opacity: 1;
   transform: scale(1);
 }
@@ -825,24 +824,18 @@
   .rsvp-note.show{display:block;}
 /* Áp dụng cho thẻ select chọn tham dự */
 select {
-    /* 1. Xóa style mặc định của trình duyệt điện thoại (iOS Safari/Android) */
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-
-    /* 2. Ép chiều cao đồng bộ với các ô input khác */
-    height: 50px; /* Hoặc điều chỉnh theo chiều cao của ô "Họ và tên" */
+    height: 50px;
     padding: 10px 15px;
     box-sizing: border-box;
     width: 100%;
-
-    /* 3. Giữ nguyên màu nền, bo góc và font */
-    background-color: transparent; /* Hoặc màu nền ô của bạn */
+    background-color: transparent;
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 12px;
     color: inherit;
-    font-size: 16px; /* Để tránh iOS tự động zoom vào khi bấm chọn */
-    
+    font-size: 16px;
 }
   /* FOOTER */
   footer {
@@ -904,7 +897,7 @@ select {
 
   .cover-half{
     position:fixed; top:0; height:100%; width:50.5%; overflow:hidden;
-    background:#5C1220; transform:translateX(0);
+    background:#EFE8E1; transform:translateX(0);
     transition:transform 0.9s cubic-bezier(.65,0,.35,1);
   }
   .cover-half-left{ left:0; }
@@ -918,7 +911,7 @@ select {
   }
   #openToggle:checked ~ .cover .cover-frame{ opacity:0; transform:scale(1.06); pointer-events:none; }
   .cover-frame-inner{
-    border:1px solid var(--line); border-radius:12px; padding:56px 40px;
+    border:1px solid rgba(122, 27, 46, 0.88); border-radius:12px; padding:56px 40px;
     max-width:420px; width:calc(100% - 48px); background:rgba(122, 27, 46, 0.88);
     backdrop-filter:blur(4px); text-align:center;
   }
@@ -960,7 +953,7 @@ select {
   .hero-content{
     position:relative; width:100%; height:100%; min-height:100svh; opacity:0;
     transform:scale(0.97); filter:blur(4px);
-    transition:opacity 0.9s ease 0.2s, transform 0.9s cubic-bezier(.22,1,.36,1) 0.2s, filter 0.9s ease 0.2s;
+    transition:opacity 1.2s ease 0.2s, transform 1.2s cubic-bezier(.22,1,.36,1) 0.2s, filter 1.2s ease 0.2s;
   }
   #openToggle:checked ~ .hero .hero-content{ opacity:1; transform:none; filter:none; }
 </style>
@@ -991,13 +984,10 @@ select {
   max-height: 300px;
   overflow-y: auto;
   padding-right: 5px;
-  /* TUYỆT ĐỐI KHÔNG DÙNG: scroll-behavior: smooth; */
-
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.35) rgba(0, 0, 0, 0.1);
 }
 
-/* Tùy chỉnh thanh cuộn cho Webkit (Chrome, Safari, iOS) */
 .wishes-list::-webkit-scrollbar {
   width: 5px;
 }
@@ -1053,7 +1043,6 @@ select {
   opacity: 0.95;
   word-wrap: break-word;
 }
-
 </style>
 </head>
 <body>
@@ -1256,7 +1245,6 @@ select {
     <h2 class="section-heading">Nơi chúng mình nói lời yêu thương</h2>
   </div>
 
-  <!-- Gộp class reveal và venue-card vào một thẻ duy nhất -->
   <div class="reveal venue-card">
     <div class="venue-name">Tư Gia Nhà Trai</div>
     <div class="venue-addr">Địa chỉ: Khê Thanh - <br>Tịnh Khê - TP. Quảng Ngãi</div>
@@ -1276,30 +1264,29 @@ select {
     <div class="reveal">
       <h2 class="our-love-title">OUR LOVE</h2>
       
-      <!-- PHẦN CHỈNH SỬA: Thay our-love-grid thành marquee container -->
       <div class="marquee-container">
-  <div class="marquee-track">
-    <!-- Nhóm ảnh 1 -->
-    <div class="marquee-group">
-      <div class="our-love-item"><img src="./image_wedding/8.jpg" alt="Our Love Photo 1"></div>
-      <div class="our-love-item"><img src="./image_wedding/9.jpg" alt="Our Love Photo 2"></div>
-      <div class="our-love-item"><img src="./image_wedding/7.jpg" alt="Our Love Photo 3"></div>
-      <div class="our-love-item"><img src="./image_wedding/4.jpg" alt="Our Love Photo 4"></div>
-      <div class="our-love-item"><img src="./image_wedding/5.jpg" alt="Our Love Photo 5"></div>
-      <div class="our-love-item"><img src="./image_wedding/6.jpg" alt="Our Love Photo 6"></div>
-    </div>
+        <div class="marquee-track">
+          <!-- Nhóm ảnh 1 -->
+          <div class="marquee-group">
+            <div class="our-love-item"><img src="./image_wedding/8.jpg" alt="Our Love Photo 1"></div>
+            <div class="our-love-item"><img src="./image_wedding/9.jpg" alt="Our Love Photo 2"></div>
+            <div class="our-love-item"><img src="./image_wedding/7.jpg" alt="Our Love Photo 3"></div>
+            <div class="our-love-item"><img src="./image_wedding/4.jpg" alt="Our Love Photo 4"></div>
+            <div class="our-love-item"><img src="./image_wedding/5.jpg" alt="Our Love Photo 5"></div>
+            <div class="our-love-item"><img src="./image_wedding/6.jpg" alt="Our Love Photo 6"></div>
+          </div>
 
-    <!-- Nhóm ảnh 2 (Nhân bản) -->
-    <div class="marquee-group" aria-hidden="true">
-      <div class="our-love-item"><img src="./image_wedding/8.jpg" alt="Our Love Photo 1"></div>
-      <div class="our-love-item"><img src="./image_wedding/9.jpg" alt="Our Love Photo 2"></div>
-      <div class="our-love-item"><img src="./image_wedding/7.jpg" alt="Our Love Photo 3"></div>
-      <div class="our-love-item"><img src="./image_wedding/4.jpg" alt="Our Love Photo 4"></div>
-      <div class="our-love-item"><img src="./image_wedding/5.jpg" alt="Our Love Photo 5"></div>
-      <div class="our-love-item"><img src="./image_wedding/6.jpg" alt="Our Love Photo 6"></div>
-    </div>
-  </div>
-</div>
+          <!-- Nhóm ảnh 2 (Nhân bản) -->
+          <div class="marquee-group" aria-hidden="true">
+            <div class="our-love-item"><img src="./image_wedding/8.jpg" alt="Our Love Photo 1"></div>
+            <div class="our-love-item"><img src="./image_wedding/9.jpg" alt="Our Love Photo 2"></div>
+            <div class="our-love-item"><img src="./image_wedding/7.jpg" alt="Our Love Photo 3"></div>
+            <div class="our-love-item"><img src="./image_wedding/4.jpg" alt="Our Love Photo 4"></div>
+            <div class="our-love-item"><img src="./image_wedding/5.jpg" alt="Our Love Photo 5"></div>
+            <div class="our-love-item"><img src="./image_wedding/6.jpg" alt="Our Love Photo 6"></div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="reveal">
@@ -1428,7 +1415,7 @@ async function loadWishes() {
   }
 }
 
-// --- 2. LẤY TÊN KHÁCH MỜI TỪ SUPABASE THEO SLUG (?to=...) (XỬ LÝ LỖI MẠNG & KHÔNG PHÂN BIỆT HOA/THƯỜNG) ---
+// --- 2. LẤY TÊN KHÁCH MỜI TỪ SUPABASE THEO SLUG (?to=...) ---
 async function loadGuestName() {
   const urlParams = new URLSearchParams(window.location.search);
   const guestSlug = urlParams.get('to');
@@ -1438,13 +1425,11 @@ async function loadGuestName() {
   const nameInput = document.getElementById('guestNameInput');
   const guestNameElement = document.getElementById('guest-name');
 
-  // Hàm truy vấn Supabase có tự động thử lại khi gián đoạn mạng
   async function fetchGuestWithRetry(retries = 3, delay = 2000) {
     for (let i = 0; i < retries; i++) {
       if (!navigator.onLine) return null;
 
       try {
-        // Sử dụng .ilike() để không phân biệt hoa/thường và .maybeSingle() tránh lỗi 406
         const { data: guest, error } = await db
           .from('guests')
           .select('name')
@@ -1462,14 +1447,12 @@ async function loadGuestName() {
     return null;
   }
 
-  // 1. Chạy tải dữ liệu lần đầu
   let guest = await fetchGuestWithRetry();
 
   if (guest) {
     if (nameInput) nameInput.value = guest.name;
     if (guestNameElement) guestNameElement.textContent = guest.name;
   } else {
-    // 2. Lắng nghe sự kiện kết nối lại mạng nếu bị gián đoạn giữa chừng
     window.addEventListener('online', async () => {
       console.log("Đã khôi phục kết nối mạng. Đang tải lại tên khách...");
       guest = await fetchGuestWithRetry();
@@ -1761,7 +1744,6 @@ function resetWishesScroll() {
     lightbox.classList.add('open');
     document.body.style.overflow = 'hidden';
 
-    // Chặn lướt trên Safari
     window.addEventListener('touchmove', preventTouchMove, { passive: false });
   }
 
@@ -1771,11 +1753,9 @@ function resetWishesScroll() {
     lightboxImg.classList.remove('show');
     lightboxImg.src = '';
 
-    // Mở khóa cuộn trang
     document.body.style.overflow = '';
     window.removeEventListener('touchmove', preventTouchMove);
 
-    // FIX SAFARI: Khôi phục quyền tương tác Form
     const rsvpForm = document.getElementById('weddingRsvpForm');
     if (rsvpForm) {
       rsvpForm.style.pointerEvents = 'auto';
@@ -1841,25 +1821,22 @@ function resetWishesScroll() {
     }, {passive: true});
   }
 })();
+
 const marqueeTrack = document.querySelector('.marquee-track');
 
 if (marqueeTrack) {
   const marqueeObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        // Hủy theo dõi ngay
         observer.unobserve(entry.target);
-        
-        // Chờ 2 giây
         setTimeout(() => {
-          // Dùng requestAnimationFrame để gắn class mượt mà nhất
           requestAnimationFrame(() => {
             marqueeTrack.classList.add('is-running');
           });
         }, 2000);
       }
     });
-  }, { threshold: 0.1 }); // Chỉ cần hiện 10% là tính
+  }, { threshold: 0.1 });
 
   marqueeObserver.observe(marqueeTrack);
 }
