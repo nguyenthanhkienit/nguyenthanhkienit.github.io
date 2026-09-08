@@ -1331,6 +1331,10 @@
 </section>
 
 <!-- SECTION HÌNH ẢNH NGANG & PHẦN THIỆP THÔNG TIN -->
+ <div class="color-picker-wrapper">
+  <label for="themeColor">Chọn màu chủ đạo:</label>
+  <input type="color" id="themeColor" value="#ff1493"> <!-- Đặt giá trị value ban đầu bằng màu --deep-pink hiện tại -->
+</div>
 <section class="envelope-intro-section">
   <div>
     <div class="envelope-intro-wrap">
@@ -2109,6 +2113,18 @@ if (marqueeTrack) {
 
   marqueeObserver.observe(marqueeTrack);
 }
+document.addEventListener("DOMContentLoaded", function() {
+  const colorPicker = document.getElementById('themeColor');
+
+  if (colorPicker) {
+    colorPicker.addEventListener('input', function(e) {
+      const selectedColor = e.target.value;
+      
+      // Thay đổi giá trị biến --deep-pink trên toàn bộ trang (:root)
+      document.documentElement.style.setProperty('--deep-pink', selectedColor);
+    });
+  }
+});
 </script>
 </body>
 </html>
