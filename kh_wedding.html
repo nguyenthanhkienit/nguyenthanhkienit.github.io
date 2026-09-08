@@ -1079,7 +1079,34 @@
 
   .cover-names{ font-family:'Cormorant Garamond', serif; font-style:italic; font-weight:500; font-size:clamp(2rem,7vw,2.9rem); color:var(--ink); opacity:0; animation:coverFadeUp 0.7s ease 0.3s forwards; }
   .cover-amp{ display:block; font-family:'Cormorant Garamond', serif; font-size:1.6rem; color:var(--blush); margin:2px 0; }
-  .cover-divider{ font-size:1rem; color:var(--ink); margin:20px 0; opacity:0; animation:coverFadeUp 0.7s ease 0.45s forwards; }
+  .cover-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 15px 0;
+  color: var(--ink);
+  font-size: 20px;
+}
+/* Đường kẻ bên trái (mờ dần về bên trái) */
+.cover-divider::before {
+  content: "";
+  flex: 1;
+  max-width: 100px; /* Độ dài tối đa của đường kẻ */
+  height: 1px;
+  background: linear-gradient(to left, var(--ink), transparent);
+  margin-right: 15px; /* Khoảng cách tới biểu tượng ❦ */
+}
+
+/* Đường kẻ bên phải (mờ dần về bên phải) */
+.cover-divider::after {
+  content: "";
+  flex: 1;
+  max-width: 100px; /* Độ dài tối đa của đường kẻ */
+  height: 1px;
+  background: linear-gradient(to right, var(--ink), transparent);
+  margin-left: 15px; /* Khoảng cách tới biểu tượng ❦ */
+}
   .cover-date{ font-size:1.5rem; letter-spacing:0.08em; color:var(--blush); margin-bottom:30px; opacity:0; animation:coverFadeUp 0.7s ease 0.55s forwards; }
   .cover-tagline{ font-size:0.8rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--blush); margin-bottom:26px; opacity:0; animation:coverFadeUp 0.7s ease 0.65s forwards; }
   @keyframes coverFadeUp{ from{opacity:0;transform:translateY(14px);} to{opacity:1;transform:translateY(0);} }
