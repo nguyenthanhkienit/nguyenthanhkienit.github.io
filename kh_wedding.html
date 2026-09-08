@@ -9,12 +9,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
   :root{
-    --cream:#740001;
+    --cream:#000;
     --blush:rgba(255, 255, 255, 0.9);
-    --pink:#740001;
+    --pink:#000;
     --deep-pink:#740001;
-    --deep-sea:#740001;
-    --ink:#FFFBF8;
+    --deep-sea:#000;
+    --ink:#EFE8E1;
     --line:rgba(255,255,255,0.3);
   }
 
@@ -910,13 +910,13 @@
     -webkit-user-select: text !important;
     height: 55px;
   }
-  .rsvp-form select option{ background:#5C1220; color:var(--blush); }
+  .rsvp-form select option{ background:#740001; color:var(--blush); }
   .rsvp-form input::placeholder, .rsvp-form textarea::placeholder{ color:var(--blush); }
   .rsvp-form input:focus, .rsvp-form select:focus, .rsvp-form textarea:focus{ border-color:var(--blush); }
   .rsvp-form textarea{resize:none;height:90px;}
   .rsvp-submit{
     margin-top:6px; padding:14px; border:none; border-radius:999px;
-    background:#FFFBF8; color:var(--deep-pink); font-size: clamp(1.2rem, 2.5vw, 1.4rem); letter-spacing:0.08em;
+    background:var(--ink); color:var(--deep-pink); font-size: clamp(1.2rem, 2.5vw, 1.4rem); letter-spacing:0.08em;
     cursor:pointer; font-weight:bold; transition:opacity 0.3s ease, transform 0.3s ease; font-family:'Cormorant Garamond', serif;
     pointer-events: auto !important;
   }
@@ -1085,7 +1085,7 @@
   .open-btn:hover svg{transform:translateX(3px);}
 
   .cover-names{ font-family:'Cormorant Garamond', serif; font-style:italic; font-weight:500; font-size:clamp(2rem,7vw,2.9rem); color:var(--ink); opacity:0; animation:coverFadeUp 0.7s ease 0.3s forwards; }
-  .cover-amp{ display:block; font-family:'Cormorant Garamond', serif; font-size:1.6rem; color:var(--blush); margin:2px 0; }
+  .cover-amp{ display:block; font-family:'Cormorant Garamond', serif; font-size:1.6rem; color:var(--ink); margin:2px 0; }
   .cover-divider {
   display: flex;
   align-items: center;
