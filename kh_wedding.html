@@ -127,7 +127,26 @@
     text-align:center;
     overflow: hidden;
   }
+.hy-icon {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto 15px;
+  
+  /* Gắn animation nhịp đập tỏa sáng */
+  animation: hyGlow 2s infinite alternate ease-in-out;
+}
 
+@keyframes hyGlow {
+  from {
+    filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.5));
+  }
+  to {
+    filter: drop-shadow(0 0 12px rgba(255, 235, 130, 0.9)) 
+            drop-shadow(0 0 15px rgba(255, 215, 0, 0.6));
+  }
+}
   .caption-names {
     display: inline-block;
     font-family: 'Cormorant Garamond', serif;
@@ -168,7 +187,11 @@
     transform: translateX(0);
     transition-delay: calc(0.5s + var(--char-index) * 0.06s);
   }
-
+ /*button:disabled, #openBtn1:disabled {
+  opacity: 0.6;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+}*/
   /* SECTION BÌA THƯ */
   .envelope-intro-section {
     padding-top: 50px;
@@ -240,7 +263,7 @@
 
   .envelope-main-photo {
     width: 100%;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 16 / 10.5;
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
@@ -983,7 +1006,7 @@
   }
   #openToggle:checked ~ .cover .cover-frame{ opacity:0; transform:scale(1.06); pointer-events:none; }
   .cover-frame-inner{
-    border:1px solid rgba(122, 27, 46, 0.88); border-radius:12px; padding:56px 40px;
+    border:1px solid rgba(122, 27, 46, 0.88); border-radius:12px; padding:40px 40px;
     max-width:420px; width:calc(100% - 48px); background:rgba(122, 27, 46, 0.88);
     backdrop-filter:blur(4px); text-align:center;
   }
@@ -1054,7 +1077,6 @@
   .open-btn svg{width:14px;height:14px;transition:transform 0.35s ease;}
   .open-btn:hover svg{transform:translateX(3px);}
 
-  .cover-eyebrow{ font-size:0.8rem; letter-spacing:0.35em; text-transform:uppercase; color:var(--blush); margin-bottom:22px; opacity:0; animation:coverFadeUp 0.7s ease 0.15s forwards; }
   .cover-names{ font-family:'Cormorant Garamond', serif; font-style:italic; font-weight:500; font-size:clamp(2rem,7vw,2.9rem); color:var(--ink); opacity:0; animation:coverFadeUp 0.7s ease 0.3s forwards; }
   .cover-amp{ display:block; font-family:'Cormorant Garamond', serif; font-size:1.6rem; color:var(--blush); margin:2px 0; }
   .cover-divider{ font-size:1rem; color:var(--ink); margin:20px 0; opacity:0; animation:coverFadeUp 0.7s ease 0.45s forwards; }
@@ -1227,7 +1249,7 @@
 
   <div class="cover-frame" id="coverFrame">
     <div class="cover-frame-inner">
-      <div class="cover-eyebrow">Save the date</div>
+      <img src="./image_wedding/chu-hy.webp" alt="Chữ Hỷ" class="hy-icon" />
       <div class="cover-names">
         Thành Kiên
         <span class="cover-amp">&amp;</span>
@@ -1601,7 +1623,6 @@
     container.appendChild(hi);
   }
 })();
-
 // --- CẤU HÌNH SUPABASE ---
 const SUPABASE_URL = 'https://xfeazemkmwiyhtfiyijc.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_7RY3lmAN5yLAxSIRlJUTPw_tBOLlQHp';
@@ -1613,100 +1634,117 @@ async function loadWishes() {
   const container = document.getElementById('wishesList');
   if (!container) return;
 
-  const { data, error } = await db
-    .from('list')
-    .select('*')
-    .order('created_at', { ascending: false });
+  try {
+    const { data, error } = await db
+      .from('list')
+      .select('*')
+      .order('created_at', { ascending: false });
 
-  if (error) {
-    console.error('Lỗi tải lời chúc từ Supabase:', error.message);
-    return;
-  }
+    if (error) throw error;
 
-  container.innerHTML = '';
+    container.innerHTML = '';
 
-  if (data && data.length > 0) {
-    data.forEach(item => {
-      if (item.message && item.message.trim() !== '') {
-        const card = document.createElement('div');
-        card.className = 'wish-card';
-        card.innerHTML = `
-          <div class="wish-header">
-            <span class="wish-author">${item.name || 'Khách mời ẩn danh'}</span>
-          </div>
-          <p class="wish-text">"${item.message}"</p>
-        `;
-        container.appendChild(card);
-      }
-    });
-  }
+    if (data && data.length > 0) {
+      data.forEach(item => {
+        if (item.message && item.message.trim() !== '') {
+          const card = document.createElement('div');
+          card.className = 'wish-card';
+          card.innerHTML = `
+            <div class="wish-header">
+              <span class="wish-author">${item.name || 'Khách mời ẩn danh'}</span>
+            </div>
+            <p class="wish-text">"${item.message}"</p>
+          `;
+          container.appendChild(card);
+        }
+      });
+    }
 
-  if (container.children.length === 0) {
-    container.innerHTML = '<p style="text-align:center; color:rgba(255,255,255,0.7); font-style:italic;">Chưa có lời chúc nào. Hãy là người đầu tiên gửi lời chúc nhé! 💕</p>';
+    if (container.children.length === 0) {
+      container.innerHTML = '<p style="text-align:center; color:rgba(255,255,255,0.7); font-style:italic;">Chưa có lời chúc nào. Hãy là người đầu tiên gửi lời chúc nhé! 💕</p>';
+    }
+  } catch (err) {
+    console.error('Lỗi tải lời chúc từ Supabase:', err.message);
   }
 }
 
-// --- 2. LẤY TÊN KHÁCH MỜI ---
+// --- 2. LẤY TÊN KHÁCH MỜI TỪ SUPABASE ---
 async function loadGuestName() {
   const urlParams = new URLSearchParams(window.location.search);
   const guestSlug = urlParams.get('to');
   const nameInput = document.getElementById('guestNameInput');
   const guestNameElement = document.getElementById('guestName');
 
-  if (!guestSlug) return;
+  // Nếu không có tham số ?to= trên URL
+  if (!guestSlug || guestSlug.trim() === '') return false;
 
   try {
-    const decodedName = decodeURIComponent(escape(atob(guestSlug)));
-    if (decodedName && decodedName.trim() !== '') {
-      if (guestNameElement) guestNameElement.textContent = decodedName;
-      if (nameInput) nameInput.value = decodedName;
-      return;
+    const { data: guest, error } = await db
+      .from('guests')
+      .select('name')
+      .ilike('slug', guestSlug.trim())
+      .maybeSingle();
+
+    if (error) {
+      console.error("Lỗi khi tải thông tin khách mời:", error.message);
+      return false;
     }
-  } catch (e) {
-    // Fallback to Supabase query
-  }
 
-  async function fetchGuestWithRetry(retries = 3, delay = 2000) {
-    for (let i = 0; i < retries; i++) {
-      if (!navigator.onLine) return null;
-
-      try {
-        const { data: guest, error } = await db
-          .from('guests')
-          .select('name')
-          .ilike('slug', guestSlug.trim())
-          .maybeSingle();
-
-        if (error) throw error;
-        if (guest) return guest;
-      } catch (err) {
-        if (i === retries - 1) console.error("Lỗi tải thông tin khách mời:", err.message);
-        await new Promise(res => setTimeout(res, delay));
-      }
+    // Nếu tìm thấy khách mời hợp lệ trong Database
+    if (guest && guest.name) {
+      if (nameInput) nameInput.value = guest.name;
+      if (guestNameElement) guestNameElement.textContent = guest.name;
+      return true;
     }
-    return null;
+  } catch (err) {
+    console.error("Lỗi kết nối Supabase:", err);
   }
 
-  let guest = await fetchGuestWithRetry();
-
-  if (guest) {
-    if (nameInput) nameInput.value = guest.name;
-    if (guestNameElement) guestNameElement.textContent = guest.name;
-  }
+  return false; // Không tìm thấy trong DB
 }
 
 // --- INITIALIZATION & MUSIC AUTO-PLAY ---
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", async function() {
+  const openBtn = document.getElementById('openBtn');
+  
+  // KHÓA NÚT MỞ THIỆP NGAY TỪ ĐẦU
+  if (openBtn) {
+    openBtn.disabled = true;
+    openBtn.style.pointerEvents = 'none';
+    openBtn.dataset.originalText = openBtn.textContent || 'Mở thiệp';
+    openBtn.textContent = 'Đang tải tên...';
+  }
+
+  // Tải danh sách lời chúc (không làm gián đoạn luồng lấy tên)
   loadWishes();
-  loadGuestName();
+  
+  // Tải tên khách mời từ Supabase và chờ kết quả
+  const isGuestFound = await loadGuestName();
+
+  // CHỈ MỞ KHÓA nếu tìm thấy khách mời trong DB
+  if (isGuestFound && openBtn) {
+    openBtn.disabled = false;
+    openBtn.style.pointerEvents = 'auto';
+    openBtn.textContent = openBtn.dataset.originalText;
+  } else if (openBtn) {
+    // Không tìm thấy tên -> Giữ trạng thái khóa vĩnh viễn
+    openBtn.disabled = true;
+    openBtn.style.pointerEvents = 'none';
+    openBtn.textContent = 'Đang tải tên...';
+  }
 
   const bgMusic = document.getElementById('bgMusic');
   const musicToggle = document.getElementById('musicToggle');
-  const openBtn = document.getElementById('openBtn1');
 
-  function playMusic() {
+  function handleOpenCard(e) {
+    if (openBtn && openBtn.disabled) {
+      e.preventDefault();
+      e.stopPropagation();
+      return false;
+    }
+
     if (bgMusic && bgMusic.paused) {
-      bgMusic.play().then(() => {
+      bgMusic.plays().then(() => {
         if (musicToggle) musicToggle.classList.add('playing');
       }).catch(err => {
         console.log("Autoplay blocked:", err);
@@ -1715,7 +1753,7 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   if (openBtn) {
-    openBtn.addEventListener('click', playMusic);
+    openBtn.addEventListener('click', handleOpenCard);
   }
 
   if (musicToggle) {
@@ -1732,7 +1770,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 // --- 3. XỬ LÝ GỬI FORM RSVP ---
-document.getElementById('weddingRsvpForm').addEventListener('submit', async function(e) {
+document.getElementById('weddingRsvpForm')?.addEventListener('submit', async function(e) {
   e.preventDefault();
 
   const form = e.target;
@@ -1751,21 +1789,9 @@ document.getElementById('weddingRsvpForm').addEventListener('submit', async func
     message: formData.get('message') || ''
   };
 
-  async function insertWithRetry(data, retries = 2, delay = 1000) {
-    for (let i = 0; i <= retries; i++) {
-      try {
-        const res = await db.from('list').insert([data]);
-        if (!res.error) return res;
-        if (i === retries) throw res.error;
-      } catch (err) {
-        if (i === retries) throw err;
-        await new Promise(resolve => setTimeout(resolve, delay));
-      }
-    }
-  }
-
   try {
-    await insertWithRetry(wishData);
+    const { error } = await db.from('list').insert([wishData]);
+    if (error) throw error;
 
     alert('Gửi lời chúc thành công! ❤️');
     form.reset();
