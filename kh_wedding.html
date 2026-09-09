@@ -601,10 +601,6 @@
 
   /* SECTION TITLES */
   .section-title{ text-align:center; margin-bottom:56px; }
-  .section-eyebrow{
-    font-size:0.75rem; letter-spacing:0.3em; text-transform:uppercase;
-    color:var(--blush); margin-bottom:14px;
-  }
   .section-heading{
     font-family:'Cormorant Garamond', serif;
     font-size:clamp(2rem,4vw,2.8rem); font-weight:500; color:var(--ink);
@@ -622,7 +618,30 @@
     height: 1px;
     background: rgba(255, 251, 248, 0.6);
   }
+.schedule-section {
+  width: 100%;
+  margin: 30px 0;
+  text-align: center;
+}
 
+/* Thanh banner màu đỏ đô */
+.schedule-heading {
+  background-color: var(--ink);
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+/* Chữ tiêu đề LỊCH TRÌNH NGÀY CƯỚI */
+.schedule-heading h2 {
+  margin: 0;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 500;
+  color: var(--deep-pink);
+}
   /* TIMELINE MỚI CỐ ĐỊNH 2 CỘT */
   .timeline-clean {
     position: relative;
@@ -1458,7 +1477,6 @@
 <section class="album-section">
   <div>
     <div class="section-title reveal">
-      <div class="section-eyebrow">Kỷ niệm</div>
       <h2 class="section-heading">Bộ sưu tập ảnh cưới</h2>
     </div>
 
@@ -1501,10 +1519,11 @@
 <!-- LỊCH TRÌNH NGÀY CƯỚI -->
 <section id="timeline">
   <div class="reveal">
-    <div class="section-title">
-      <div class="section-eyebrow">Chương trình</div>
-      <h2 class="section-heading">Lịch trình ngày cưới</h2>
-    </div>
+    <div class="schedule-section">
+  <div class="schedule-heading">
+    <h2>Lịch trình ngày cưới</h2>
+  </div>
+</div>
 
     <div class="timeline-clean">
       <div class="tide-line-clean"></div>
@@ -1546,7 +1565,6 @@
 <section class="venue-section">
   <div class="reveal">
     <div class="section-title">
-      <div class="section-eyebrow">Địa điểm</div>
       <h2 class="section-heading">Nơi chúng mình nói lời yêu thương</h2>
     </div>
   </div>
@@ -1600,7 +1618,7 @@
 
     <div class="reveal">
       <p class="our-love-text">
-        Mỗi câu chuyện tình yêu đều có một hành trình riêng. Sau những ngày tháng cùng nhau trưởng thành, chúng tôi quyết định về chung một nhà và viết tiếp câu chuyện ấy bằng tình yêu, sự tin tưởng và hạnh phúc.
+        Hạnh phúc không phải là điểm đến, mà là hành trình - và chúng tôi đã tìm thấy bạn đồng hành.
       </p>
       <div class="divider-line"></div>
     </div>
@@ -1643,7 +1661,6 @@
 <section class="rsvp">
   <div class="reveal">
     <div class="section-title">
-      <div class="section-eyebrow">Xác nhận tham dự</div>
       <h2 class="section-heading">Gửi lời chúc</h2>
     </div>
 
