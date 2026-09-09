@@ -187,11 +187,7 @@
     transform: translateX(0);
     transition-delay: calc(0.5s + var(--char-index) * 0.06s);
   }
- /*button:disabled, #openBtn1:disabled {
-  opacity: 0.6;
-  cursor: not-allowed !important;
-  pointer-events: none !important;
-}*/
+
   /* SECTION BÌA THƯ */
   .envelope-intro-section {
     padding-top: 50px;
@@ -437,31 +433,73 @@
     line-height: 1.5;
   }
 
-  /* BỐ CỤC ALBUM */
+  /* BỐ CỤC ALBUM THEO MẪU BẢN VẼ */
+/* BỐ CỤC ALBUM ÉP KHOẢNG CÁCH ĐỀU 10PX KHÔNG BỊ PHỒNG */
   .album-wrap {
-    position: relative;
     max-width: 530px;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px !important; /* Ép cứng khoảng cách giữa các hàng là 10px */
   }
-  .album-grid-6 {
+
+  /* Hàng top: Ảnh đứng bên trái quyết định chiều cao */
+  .album-top-row {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px !important;
+    align-items: start;
+  }
+
+  /* Ép tỷ lệ cho ảnh đứng bên trái */
+  .album-top-row > .album-box.aspect-portrait-tall {
+    aspect-ratio: 3 / 4.15;
     width: 100%;
   }
-  .album-item-6 {
+
+  /* Cột bên phải: Ép 2 ảnh chia đều chiều cao còn lại */
+  .album-top-right {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: 10px !important;
+    height: 100%; /* Bằng đúng chiều cao ảnh đứng bên trái */
+  }
+
+  .album-top-right .album-box {
+    height: 100%;
+    width: 100%;
+  }
+
+  .album-top-right .album-box img {
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Hàng giữa và hàng dưới */
+  .album-mid-row {
+    width: 100%;
+  }
+
+  .album-bottom-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px !important;
+  }
+
+  /* Định dạng khung ảnh chung */
+  .album-box {
     position: relative;
     width: 100%;
-    aspect-ratio: 3 / 4;
     overflow: hidden;
     border-radius: 8px;
     cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
     opacity: 0;
-    transition: opacity 2.5s ease-out, transform 2.6s cubic-bezier(0.12, 0.85, 0.25, 1), box-shadow 0.3s ease;
+    transition: opacity 3s ease-out, transform 2.6s cubic-bezier(0.12, 0.85, 0.25, 1), box-shadow 0.3s ease;
     will-change: opacity, transform;
   }
-  .album-item-6 img.album-img {
+
+  .album-box img.album-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -470,21 +508,41 @@
     pointer-events: auto !important;
   }
 
-  .album-item-6:nth-child(odd) { transform: translateX(-100px); }
-  .album-item-6:nth-child(even) { transform: translateX(100px); }
-
-  .album-item-6.in {
-    opacity: 1;
-    transform: translateX(0);
+  /* Tỉ lệ khung hình theo bản vẽ */
+  .album-box.aspect-portrait-tall {
+    aspect-ratio: 3 / 4.15;
   }
 
-  .album-item-6:hover {
+  .album-box.aspect-landscape-short {
+    aspect-ratio: 16 / 10;
+  }
+
+  .album-box.aspect-wide {
+    aspect-ratio: 16 / 9;
+  }
+
+  .album-box.aspect-portrait {
+    aspect-ratio: 3 / 4.15;
+  }
+
+  /* Animation hiệu ứng xuất hiện */
+  .album-box.slide-left { transform: translateX(-100px); }
+  .album-box.slide-right { transform: translateX(100px); }
+
+  .album-box.in {
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+  }
+
+  .album-box:hover {
     transform: translateY(-4px) !important;
     box-shadow: 0 8px 25px rgba(0,0,0,0.4);
   }
 
   @media (max-width: 560px) {
-    .album-grid-6 { gap: 8px; }
+    .album-wrap { gap: 8px; }
+    .album-top-row, .album-bottom-row { gap: 8px; }
+    .album-top-right { gap: 8px; }
   }
 
   /* LIGHTBOX XEM ALBUM */
@@ -1095,24 +1153,22 @@
   color: var(--ink);
   font-size: 20px;
 }
-/* Đường kẻ bên trái (mờ dần về bên trái) */
 .cover-divider::before {
   content: "";
   flex: 1;
-  max-width: 100px; /* Độ dài tối đa của đường kẻ */
+  max-width: 100px;
   height: 1px;
   background: linear-gradient(to left, var(--ink), transparent);
-  margin-right: 15px; /* Khoảng cách tới biểu tượng ❦ */
+  margin-right: 15px;
 }
 
-/* Đường kẻ bên phải (mờ dần về bên phải) */
 .cover-divider::after {
   content: "";
   flex: 1;
-  max-width: 100px; /* Độ dài tối đa của đường kẻ */
+  max-width: 100px;
   height: 1px;
   background: linear-gradient(to right, var(--ink), transparent);
-  margin-left: 15px; /* Khoảng cách tới biểu tượng ❦ */
+  margin-left: 15px;
 }
   .cover-date{ font-size:1.5rem; letter-spacing:0.08em; color:var(--blush); margin-bottom:30px; opacity:0; animation:coverFadeUp 0.7s ease 0.55s forwards; }
   .cover-tagline{ font-size:0.8rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--blush); margin-bottom:26px; opacity:0; animation:coverFadeUp 0.7s ease 0.65s forwards; }
@@ -1400,7 +1456,7 @@
   </div>
 </section>
 
-<!-- BỘ SƯU TẬP ẢNH CƯỚI -->
+<!-- BỘ SƯU TẬP ẢNH CƯỚI (ĐÃ CẬP NHẬT THEO MẪU HÌNH VẼ) -->
 <section class="album-section">
   <div>
     <div class="section-title reveal">
@@ -1409,19 +1465,42 @@
     </div>
 
     <div class="album-wrap">
-      <div class="album-grid-6">
-        <div class="album-item-6 reveal"><img class="album-img" src="./image_wedding/3.jpg" alt="Ảnh cưới 1"></div>
-        <div class="album-item-6 reveal"><img class="album-img" src="./image_wedding/4.jpg" alt="Ảnh cưới 2"></div>
-        <div class="album-item-6 reveal"><img class="album-img" src="./image_wedding/5.jpg" alt="Ảnh cưới 3"></div>
-        <div class="album-item-6 reveal"><img class="album-img" src="./image_wedding/6.jpg" alt="Ảnh cưới 4"></div>
-        <div class="album-item-6 reveal"><img class="album-img" src="./image_wedding/7.jpg" alt="Ảnh cưới 5"></div>
-        <div class="album-item-6 reveal"><img class="album-img" src="./image_wedding/8.jpg" alt="Ảnh cưới 6"></div>
+      <!-- Hàng 1: 1 Ảnh dọc bên trái + 2 Ảnh ngang xếp chồng bên phải -->
+      <div class="album-top-row">
+        <div class="album-box aspect-portrait-tall reveal slide-left">
+          <img class="album-img" src="./image_wedding/3.jpg" alt="Ảnh cưới 1">
+        </div>
+        <div class="album-top-right">
+          <div class="album-box aspect-landscape-short reveal slide-right">
+            <img class="album-img" src="./image_wedding/4.jpg" alt="Ảnh cưới 2">
+          </div>
+          <div class="album-box aspect-landscape-short reveal slide-right">
+            <img class="album-img" src="./image_wedding/5.jpg" alt="Ảnh cưới 3">
+          </div>
+        </div>
+      </div>
+
+      <!-- Hàng 2: 1 Ảnh ngang rộng trải dài ở giữa -->
+      <div class="album-mid-row">
+        <div class="album-box aspect-wide reveal slide-left">
+          <img class="album-img" src="./image_wedding/6.jpg" alt="Ảnh cưới 4">
+        </div>
+      </div>
+
+      <!-- Hàng 3: 2 Ảnh dọc nằm song song bên dưới -->
+      <div class="album-bottom-row">
+        <div class="album-box aspect-portrait reveal slide-left">
+          <img class="album-img" src="./image_wedding/7.jpg" alt="Ảnh cưới 5">
+        </div>
+        <div class="album-box aspect-portrait reveal slide-right">
+          <img class="album-img" src="./image_wedding/8.jpg" alt="Ảnh cưới 6">
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- LỊCH TRÌNH NGÀY CƯỚI (ĐÃ CẬP NHẬT THEO MẪU 2 CỘT) -->
+<!-- LỊCH TRÌNH NGÀY CƯỚI -->
 <section id="timeline">
   <div class="reveal">
     <div class="section-title">
@@ -1661,6 +1740,7 @@
     container.appendChild(hi);
   }
 })();
+
 // --- CẤU HÌNH SUPABASE ---
 const SUPABASE_URL = 'https://xfeazemkmwiyhtfiyijc.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_7RY3lmAN5yLAxSIRlJUTPw_tBOLlQHp';
@@ -1713,7 +1793,6 @@ async function loadGuestName() {
   const nameInput = document.getElementById('guestNameInput');
   const guestNameElement = document.getElementById('guestName');
 
-  // Nếu không có tham số ?to= trên URL
   if (!guestSlug || guestSlug.trim() === '') return false;
 
   try {
@@ -1728,7 +1807,6 @@ async function loadGuestName() {
       return false;
     }
 
-    // Nếu tìm thấy khách mời hợp lệ trong Database
     if (guest && guest.name) {
       if (nameInput) nameInput.value = guest.name;
       if (guestNameElement) guestNameElement.textContent = guest.name;
@@ -1738,14 +1816,13 @@ async function loadGuestName() {
     console.error("Lỗi kết nối Supabase:", err);
   }
 
-  return false; // Không tìm thấy trong DB
+  return false;
 }
 
 // --- INITIALIZATION & MUSIC AUTO-PLAY ---
 document.addEventListener("DOMContentLoaded", async function() {
   const openBtn = document.getElementById('openBtn');
   
-  // KHÓA NÚT MỞ THIỆP NGAY TỪ ĐẦU
   if (openBtn) {
     openBtn.disabled = true;
     openBtn.style.pointerEvents = 'none';
@@ -1753,19 +1830,15 @@ document.addEventListener("DOMContentLoaded", async function() {
     openBtn.textContent = 'Đang tải tên...';
   }
 
-  // Tải danh sách lời chúc (không làm gián đoạn luồng lấy tên)
   loadWishes();
   
-  // Tải tên khách mời từ Supabase và chờ kết quả
   const isGuestFound = await loadGuestName();
 
-  // CHỈ MỞ KHÓA nếu tìm thấy khách mời trong DB
   if (isGuestFound && openBtn) {
     openBtn.disabled = false;
     openBtn.style.pointerEvents = 'auto';
     openBtn.textContent = openBtn.dataset.originalText;
   } else if (openBtn) {
-    // Không tìm thấy tên -> Giữ trạng thái khóa vĩnh viễn
     openBtn.disabled = true;
     openBtn.style.pointerEvents = 'none';
     openBtn.textContent = 'Đang tải tên...';
