@@ -375,6 +375,7 @@
     transform: scale(0.6);
     transition: transform 3s cubic-bezier(0.25, 1, 0.5, 1), opacity 1.8s ease;
     will-change: opacity, transform;
+    font-weight: 600;
   }
 
   .party-info-box.in {
@@ -1252,7 +1253,6 @@
     background: var(--ink);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.18);
     border-radius: 10px;
     padding: 12px 16px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
@@ -1262,8 +1262,7 @@
   }
 
   .wish-card:hover {
-    background: rgba(255, 255, 255, 0.18);
-    border-color: rgba(255, 255, 255, 0.3);
+    opacity:0.9;transform:translateY(-2px);
   }
 
   .wish-header {
