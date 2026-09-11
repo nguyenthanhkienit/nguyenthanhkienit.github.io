@@ -1428,7 +1428,7 @@
     <div class="envelope-intro-wrap">
       <div class="reveal envelope-date-big">01.10.2026</div>
       <p class="reveal envelope-intro-quote">
-        Hạnh phúc của chúng tôi sẽ càng trọn vẹn hơn khi được đón tiếp những người thân yêu trong ngày trọng đại.
+        Hạnh phúc của chúng mình sẽ càng trọn vẹn hơn khi được đón tiếp những người thân yêu trong ngày trọng đại.
       </p>
 
       <div class="envelope-graphic">
@@ -1635,7 +1635,7 @@
 
     <div class="reveal">
       <p class="our-love-text">
-        Hạnh phúc không phải là điểm đến, mà là hành trình - và chúng tôi đã tìm thấy bạn đồng hành.
+        Hạnh phúc không phải là điểm đến, mà là hành trình - và chúng mình đã tìm thấy bạn đồng hành.
       </p>
       <div class="divider-line"></div>
     </div>
@@ -1701,7 +1701,7 @@
     </form>
 
     <div class="rsvp-note" id="rsvpNote" style="display: none; margin-top: 15px;">
-      Cảm ơn bạn đã phản hồi 💕
+      Cảm ơn đã phản hồi 💕
     </div>
   </div>
   <div class="divider-line"></div>
@@ -1842,7 +1842,7 @@ async function loadGuestName() {
     if (guest && guest.name) {
       if (nameInput) nameInput.value = guest.name;
       if (guestNameElement) guestNameElement.textContent = guest.name;
-      if (titleElement) titleElement.innerHTML = `VỚI NIỀM VUI VÀ SỰ TRÂN TRỌNG<br>CHÚNG TÔI XIN MỜI ${guest.name}<br>ĐẾN DỰ LỄ CƯỚI CỦA CHÚNG TÔI`;
+      if (titleElement) titleElement.innerHTML = `VỚI NIỀM VUI VÀ SỰ TRÂN TRỌNG<br>CHÚNG TÔI XIN MỜI <span style="color: #FFD700; font-weight: 700;">${guest.name}</span><br>ĐẾN DỰ LỄ CƯỚI CỦA CHÚNG TÔI`;
       return true;
     }
   } catch (err) {
@@ -1887,13 +1887,13 @@ document.addEventListener("DOMContentLoaded", async function() {
       return false;
     }
 
-    if (bgMusic && bgMusic.paused) {
-      bgMusic.plays().then(() => {
-        if (musicToggle) musicToggle.classList.add('playing');
-      }).catch(err => {
-        console.log("Autoplay blocked:", err);
-      });
-    }
+    //if (bgMusic && bgMusic.paused) {
+    //  bgMusic.plays().then(() => {
+    //    if (musicToggle) musicToggle.classList.add('playing');
+    //  }).catch(err => {
+    //    console.log("Autoplay blocked:", err);
+    //  });
+    //}
   }
 
   if (openBtn) {
