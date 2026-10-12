@@ -294,35 +294,6 @@
     margin-top: 50px;
     margin-bottom: 32px;
   }
-  .family-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin-bottom: 36px;
-    font-family: 'Cormorant Garamond', serif;
-  }
-  .family-col {
-    text-align: center;
-  }
-  .family-label {
-    font-weight: 600;
-    font-size: 1.2rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--ink);
-    margin-bottom: 8px;
-  }
-  .family-names {
-    font-size: clamp(1.2rem, 2.5vw, 1.4rem);
-    line-height: 1.6;
-    color: var(--blush);
-  }
-  .family-location {
-    color: var(--ink);
-    display: inline-block;
-    margin-top: 10px;
-    font-style: italic;
-  }
   .couple-names-block {
     margin: 20px 0 40px;
     font-family: 'Cormorant Garamond', serif;
@@ -413,10 +384,6 @@
     font-size: clamp(2rem, 6vw, 2.6rem);
     letter-spacing: 0.05em;
     line-height: 1;
-  }
-  .lunar-date {
-    font-size: clamp(1.2rem, 2.5vw, 1.4rem);
-    margin-bottom: 24px;
   }
   .venue-type {
     font-size: clamp(1.5rem, 2.5vw, 1.7rem);
@@ -1042,7 +1009,11 @@
     position:fixed; inset:0; z-index:1001; display:flex; align-items:center; justify-content:center;
     opacity:1; transform:scale(1); transition:opacity 0.5s ease, transform 0.5s ease;
   }
-  #openToggle:checked ~ .cover .cover-frame{ opacity:0; transform:scale(1.06); pointer-events:none; }
+  #openToggle:checked ~ .cover .cover-frame{ opacity: 0;
+  transform: scale(1.06);
+  pointer-events: none;
+  visibility: hidden;
+  display: none; /* Ẩn hoàn toàn khỏi DOM rendering */ }
   .cover-frame-inner{
     border-radius:12px; padding:40px 40px;
     max-width:420px; width:calc(100% - 48px); background:rgba(136, 2, 22, 0.88);
@@ -1383,26 +1354,6 @@
     <div class="reveal">
       <h2 class="invitation-top-title" id="invitationTitle"></h2>
     </div>
-    <div class="reveal">
-      <div class="family-grid">
-        <div class="family-col">
-          <div class="family-label">NHÀ TRAI</div>
-          <div class="family-names">
-            Ông:<br>Nguyễn Văn Hải<br>
-            Bà:<br>Nguyễn Thị Tuyết<br>
-            <span class="family-location">Địa chỉ: Tịnh Khê - Quảng Ngãi</span>
-          </div>
-        </div>
-        <div class="family-col">
-          <div class="family-label">NHÀ GÁI</div>
-          <div class="family-names">
-            Ông:<br>Dương Văn Rượu<br>
-            Bà:<br>Phạm Thị Quá<br>
-            <span class="family-location">Địa chỉ: Tịnh Khê - Quảng Ngãi</span>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <div class="couple-names-block">
       <div class="groom-name">Thành Kiên</div>
@@ -1412,13 +1363,11 @@
 
     <div class="reveal party-info-box">
       <div class="party-title">BỮA TIỆC CHUNG VUI</div>
-      <div class="party-subtitle">ĐƯỢC TỔ CHỨC VÀO LÚC <br> 11:00 - THỨ BẢY</div>
+      <div class="party-subtitle">ĐƯỢC TỔ CHỨC VÀO LÚC <br> 17:30 - THỨ BẢY</div>
 
       <div class="date-display-wrap">
         <div class="solar-date">24.10.2026</div>
       </div>
-
-      <div class="lunar-date">(Tức ngày 21 tháng 08 năm Bính Ngọ)</div>
 
       <div class="venue-type">Thời Đại Garden</div>
       <div class="venue-address">
@@ -1480,7 +1429,7 @@
   <div class="reveal">
     <div class="schedule-section">
   <div class="schedule-heading">
-    <h2>Lịch trình ngày cưới</h2>
+    <h2>Lịch trình</h2>
   </div>
 </div>
 
@@ -1488,21 +1437,27 @@
       <div class="tide-line-clean"></div>
 
       <div class="t-row slide-from-left">
-        <div class="t-time-col">08:30</div>
+        <div class="t-time-col">17:30</div>
         <div class="t-dot-col"><span class="t-dot-clean"></span></div>
-        <div class="t-content-col">Nhà trai đến nhà gái</div>
+        <div class="t-content-col">Đón khách</div>
       </div>
 
       <div class="t-row slide-from-left">
-        <div class="t-time-col">10:00</div>
+        <div class="t-time-col">18:30</div>
         <div class="t-dot-col"><span class="t-dot-clean"></span></div>
-        <div class="t-content-col">Làm lễ</div>
+        <div class="t-content-col">Tiệc bắt đầu</div>
       </div>
 
       <div class="t-row slide-from-left">
-        <div class="t-time-col">11:00</div>
+        <div class="t-time-col">18:45</div>
         <div class="t-dot-col"><span class="t-dot-clean"></span></div>
-        <div class="t-content-col">Về nhà trai và khai tiệc đón khách</div>
+        <div class="t-content-col">Khai tiệc</div>
+      </div>
+
+      <div class="t-row slide-from-left">
+        <div class="t-time-col">21:00</div>
+        <div class="t-dot-col"><span class="t-dot-clean"></span></div>
+        <div class="t-content-col">Tiệc kết thúc</div>
       </div>
 
     </div>
@@ -1584,7 +1539,7 @@
         </div>
 
         <div class="countdown-note" id="countdownNote">
-          Hẹn gặp mọi người vào <br>11:00, thứ bảy, 24.10.2026
+          Hẹn gặp mọi người vào <br>17:30, thứ bảy, 24.10.2026
         </div>
       </div>
     
@@ -1759,7 +1714,7 @@ async function loadGuestName() {
     if (guest && guest.name) {
       if (nameInput) nameInput.value = guest.name;
       if (guestNameElement) guestNameElement.textContent = guest.name;
-      if (titleElement) titleElement.innerHTML = `VỚI NIỀM VUI VÀ SỰ TRÂN TRỌNG<br>CHÚNG TÔI XIN MỜI <span style="color: #FFD700; font-weight: 700;">${guest.name}</span><br>ĐẾN DỰ LỄ CƯỚI CỦA CHÚNG TÔI`;
+      if (titleElement) titleElement.innerHTML = `VỚI NIỀM VUI VÀ SỰ TRÂN TRỌNG<br>CHÚNG MÌNH XIN MỜI <span style="color: #FFD700; font-weight: 700;">${guest.name}</span><br>ĐẾN DỰ LỄ CƯỚI CỦA CHÚNG MÌNH`;
       return true;
     }
   } catch (err) {
@@ -2136,6 +2091,23 @@ if (marqueeTrack) {
 
   marqueeObserver.observe(marqueeTrack);
 }
+</script>
+
+<script>
+  document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'F12') {
+      e.preventDefault();
+    }
+    if (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S' || e.key === 'i' || e.key === 'I' || e.key === 'j' || e.key === 'J')) {
+      e.preventDefault();
+    }
+    if (e.ctrlKey && e.shiftKey && (e.key === 'C' || e.key === 'c' || e.key === 'I' || e.key === 'i')) {
+      e.preventDefault();
+    }
+  });
 </script>
 </body>
 </html>
