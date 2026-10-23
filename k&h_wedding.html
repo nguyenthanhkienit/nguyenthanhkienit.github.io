@@ -1291,6 +1291,9 @@
   pointer-events: none;
   transition: opacity 0.3s ease;
   visibility: hidden;
+  
+  /* Bổ sung để chặn gesture lướt trên mobile */
+  touch-action: none;
 }
 
 .qr-modal.open {
@@ -2238,34 +2241,56 @@ if (marqueeTrack) {
 </script>
 <script>
   // Xử lý bật/tắt Popup QR Code mừng cưới
+// Xử lý bật/tắt Popup QR Code mừng cưới (Chống cuộn nền triệt để trên Mobile)
 document.addEventListener('DOMContentLoaded', function() {
   const openBtn = document.getElementById('openQrBtn');
   const modal = document.getElementById('qrModal');
   const closeBtn = document.getElementById('qrCloseBtn');
 
-  if (openBtn && modal) {
-    openBtn.addEventListener('click', () => {
-      modal.classList.add('open');
-      document.body.style.overflow = 'hidden'; // Chặn cuộn trang khi mở modal
-    });
+  // Hàm chặn hành vi cuộn cảm ứng trên điện thoại
+  function preventTouchScroll(e) {
+    // Nếu điểm chạm nằm ngoài hoặc không thuộc khung nội dung thì chặn hoàn toàn
+    if (!e.target.closest('.qr-modal-content')) {
+      e.preventDefault();
+    }
   }
 
-  if (closeBtn && modal) {
-    closeBtn.addEventListener('click', () => {
-      modal.classList.remove('open');
-      document.body.style.overflow = ''; // Phục hồi cuộn trang
-    });
+  function openModal() {
+    if (!modal) return;
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    
+    // Khóa sự kiện vuốt màn hình trên điện thoại
+    window.addEventListener('touchmove', preventTouchScroll, { passive: false });
   }
 
-  // Bấm ra ngoài vùng nội dung modal thì tự đóng
+  function closeModal() {
+    if (!modal) return;
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+    
+    // Bỏ khóa sự kiện vuốt màn hình
+    window.removeEventListener('touchmove', preventTouchScroll);
+  }
+
+  if (openBtn) openBtn.addEventListener('click', openModal);
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+
+  // Click vào vùng đen bên ngoài khung để đóng Popup
   if (modal) {
     modal.addEventListener('click', (e) => {
       if (e.target === modal) {
-        modal.classList.remove('open');
-        document.body.style.overflow = '';
+        closeModal();
       }
     });
   }
+
+  // Đóng Popup khi bấm phím ESC (dành cho PC)
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal && modal.classList.contains('open')) {
+      closeModal();
+    }
+  });
 });
 </script>
 </body>
