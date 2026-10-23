@@ -1258,6 +1258,114 @@
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
   }
+  /* Nút bấm mở QR */
+.qr-trigger-btn {
+  font-family: 'Cormorant Garamond', serif;
+  background-color: var(--deep-pink, #740001);
+  color: var(--ink, #EFE8E1);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  padding: 20px 42px;
+  font-size: clamp(1.2rem, 2.5vw, 1.4rem);
+  font-weight: 700;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+}
+
+.qr-trigger-btn:hover {
+  transform: translateY(-2px);
+  opacity: 0.95;
+}
+
+/* Khung nền mờ Modal */
+.qr-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  visibility: hidden;
+}
+
+.qr-modal.open {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
+
+/* Nội dung hộp Modal */
+.qr-modal-content {
+  background: #EFE8E1;
+  color: #740001;
+  padding: 30px 24px;
+  border-radius: 20px;
+  max-width: 360px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  font-family: 'Cormorant Garamond', serif;
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+}
+
+.qr-modal.open .qr-modal-content {
+  transform: scale(1);
+}
+
+/* Nút đóng (X) */
+.qr-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: #740001;
+  line-height: 1;
+}
+
+.qr-modal-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.qr-modal-subtitle {
+  font-size: 1.1rem;
+  margin-bottom: 16px;
+  font-style: italic;
+}
+
+/* Khung chứa ảnh QR */
+.qr-img-box {
+  width: 220px;
+  height: 220px;
+  margin: 0 auto 16px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px dashed #740001;
+  padding: 6px;
+  background: #fff;
+}
+
+.qr-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.qr-bank-info {
+  font-size: 1.15rem;
+  line-height: 1.5;
+}
 </style>
 </head>
 <body>
@@ -1583,7 +1691,26 @@
     <div id="wishesList" class="wishes-list"></div>
   </div></div>
 </section>
+<!-- NÚT MỞ MÃ QR MỪNG CƯỚI -->
+<div class="qr-section-wrapper" style="text-align: center; margin: 40px 0;">
+  <button id="openQrBtn" class="qr-trigger-btn">Lì xì cô dâu & chú rể 💌</button>
+</div>
 
+<!-- MODAL HIỂN THỊ QR CODE -->
+<div class="qr-modal" id="qrModal">
+  <div class="qr-modal-content">
+    <div class="qr-modal-close" id="qrCloseBtn">&times;</div>
+    <h3 class="qr-modal-title">Hộp mừng cưới</h3>
+    <p class="qr-modal-subtitle">Chân thành cảm ơn tình cảm của quý khách!</p>
+    
+    <!-- Thay link ảnh QR của bạn vào đây -->
+    <div class="qr-img-box">
+      <img src="https://xfeazemkmwiyhtfiyijc.supabase.co/storage/v1/object/public/images_wedding/QR.png" alt="QR Code Mừng Cưới">
+    </div>
+    
+    <p class="qr-bank-info">Ngân hàng: <strong>Sacombank</strong><br>STK: <strong>050126458816</strong><br>Chủ tài khoản: <strong>NGUYỄN THÀNH KIÊN</strong></p>
+  </div>
+</div>
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox">
   <div class="lightbox-stage" id="lightboxStage">
@@ -2108,6 +2235,38 @@ if (marqueeTrack) {
       e.preventDefault();
     }
   });
+</script>
+<script>
+  // Xử lý bật/tắt Popup QR Code mừng cưới
+document.addEventListener('DOMContentLoaded', function() {
+  const openBtn = document.getElementById('openQrBtn');
+  const modal = document.getElementById('qrModal');
+  const closeBtn = document.getElementById('qrCloseBtn');
+
+  if (openBtn && modal) {
+    openBtn.addEventListener('click', () => {
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden'; // Chặn cuộn trang khi mở modal
+    });
+  }
+
+  if (closeBtn && modal) {
+    closeBtn.addEventListener('click', () => {
+      modal.classList.remove('open');
+      document.body.style.overflow = ''; // Phục hồi cuộn trang
+    });
+  }
+
+  // Bấm ra ngoài vùng nội dung modal thì tự đóng
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    });
+  }
+});
 </script>
 </body>
 </html>
