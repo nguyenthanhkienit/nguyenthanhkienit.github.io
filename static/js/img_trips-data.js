@@ -2,7 +2,7 @@ const allTrips = [
     {
         id: "trip4",
         title: "Hồ Trị An (Đồng Nai)",
-        date: "30/04/2026",
+        date: "30-04-2026",
         cover: "images/trip/trip4/14.jpg",
         images: [
             "images/trip/trip4/1.jpg",
@@ -45,7 +45,7 @@ const allTrips = [
     {
         id: "trip3",
         title: "Đồi Bát Úp - Thác Liêng Ài (Lâm Đồng)",
-        date: "Giỗ Tổ Hùng Vương - 26/04/2026",
+        date: "Giỗ Tổ Hùng Vương / 26-04-2026",
         cover: "images/trip/trip3/27.jpg",
         images: [
             "images/trip/trip3/1.jpg",
@@ -95,7 +95,7 @@ const allTrips = [
     {
         id: "trip2",
         title: "Hội An (Đà Nẵng)",
-        date: "Mùng 5 Tết 2026 - 21/02/2026",
+        date: "Mùng 5 Tết 2026 / 21-02-2026",
         cover: "images/trip/trip2/25.jpg",
         images: [
             "images/trip/trip2/1.jpg",
