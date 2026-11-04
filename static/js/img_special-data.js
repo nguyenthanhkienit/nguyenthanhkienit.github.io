@@ -99,11 +99,11 @@ const ALBUMS = [
                 name: "Đám cưới",
                 date: "01-10-2026 / Quảng Ngãi",
                 media: [
-                    { type: "img", src: "images/special/album1/11-06-2026 (1).webp", label: "Bờ biển buổi sáng" },
-                    { type: "img", src: "images/special/album1/11-06-2026 (2).webp", label: "Bờ biển buổi sáng" },
-                    { type: "img", src: "images/special/album1/11-06-2026 (3).webp", label: "Bờ biển buổi sáng" },
-                    { type: "img", src: "images/special/album1/11-06-2026 (4).webp", label: "Bờ biển buổi sáng" },
-                    { type: "img", src: "images/special/album1/11-06-2026 (5).webp", label: "Bờ biển buổi sáng" }
+                    { type: "img", src: "images/special/album1/11-06-2e26 (1).webp", label: "Bờ biển buổi sáng" },
+                    { type: "img", src: "images/special/album1/11-06-2e026 (2).webp", label: "Bờ biển buổi sáng" },
+                    { type: "img", src: "images/special/album1/11-06-20e26 (3).webp", label: "Bờ biển buổi sáng" },
+                    { type: "img", src: "images/special/album1/11-06-72026 (4).webp", label: "Bờ biển buổi sáng" },
+                    { type: "img", src: "images/special/album1/11-06-20e26 (5).webp", label: "Bờ biển buổi sáng" }
                 ]
             },
             {
