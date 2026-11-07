@@ -1,19 +1,10 @@
 // ============================================================
-// STATE CHO PHẦN ĐẶC BIỆT (Phân trang, Pinch-to-Zoom & Kéo sát mép theo từng ảnh)
+// STATE CHO PHẦN ĐẶC BIỆT (Phân trang, Pinch-to-Zoom & Kéo độc lập từng ảnh)
 // ============================================================
 let currentAlbum = null;
 let currentLimit = 12; // Số lượng ảnh hiển thị ban đầu mỗi khi mở album
 const stepLimit = 12;  // Số lượng ảnh hiện thêm mỗi khi bấm nút "Xem thêm"
 let lbIdx = 0;
-
-// Trạng thái phục vụ Zoom & Kéo đa điểm
-let scale = 1;
-let translateX = 0;
-let translateY = 0;
-let isDragging = false;
-let startX = 0, startY = 0;
-let initialDistance = 0;
-let initialScale = 1;
 
 // ============================================================
 // TRANG CHỦ ALBUM
@@ -123,7 +114,7 @@ function renderMedia() {
 }
 
 // ============================================================
-// LIGHTBOX (Xem ảnh lớn, Zoom & Kéo sát mép)
+// LIGHTBOX (Xem ảnh lớn, Zoom & Kéo độc lập từng slide)
 // ============================================================
 let lbOpen = false;
 let lbScrolling = false;
@@ -138,6 +129,7 @@ function mediaEl(m) {
 function renderLb() {
     const track = document.getElementById('lb-track');
     if (!track || !currentAlbum) return;
+    
     track.innerHTML = currentAlbum.media.map((m, i) =>
         `<div class="lb-slide" data-idx="${i}">${mediaEl(m)}</div>`
     ).join('');
@@ -147,6 +139,7 @@ function renderLb() {
 
     updateHint();
     watchScroll();
+    initZoomAndPanForSlides();
 }
 
 function updateHint() {
@@ -167,7 +160,7 @@ function watchScroll() {
             const newIdx = Math.round(track.scrollLeft / slideW);
             if (currentAlbum && newIdx !== lbIdx && newIdx >= 0 && newIdx < currentAlbum.media.length) {
                 lbIdx = newIdx;
-                resetZoomState(); // Chuyển ảnh khác thì reset trạng thái zoom của ảnh cũ
+                resetAllZoomStates(); // Chuyển ảnh khác thì reset toàn bộ zoom của ảnh cũ
                 updateHint();
             }
             if (Math.abs(track.scrollLeft - lbIdx * slideW) < 2) {
@@ -183,7 +176,6 @@ function watchScroll() {
 function openLb(idx) {
     lbIdx = idx;
     lbOpen = true;
-    resetZoomState();
 
     const track = document.getElementById('lb-track');
     if (track) track.style.visibility = 'hidden';
@@ -203,7 +195,7 @@ function openLb(idx) {
 }
 
 function closeLb() {
-    resetZoomState();
+    resetAllZoomStates();
     const lightbox = document.getElementById('lightbox');
     if (lightbox) lightbox.classList.remove('open');
     
@@ -214,7 +206,7 @@ function closeLb() {
 }
 
 function lbNav(d) {
-    resetZoomState();
+    resetAllZoomStates();
     if (!currentAlbum) return;
     const next = lbIdx + d;
     if (next < 0 || next >= currentAlbum.media.length) return;
@@ -224,142 +216,136 @@ function lbNav(d) {
     track.scrollTo({ left: next * slideW, behavior: 'smooth' });
 }
 
-// Lấy đúng ảnh của slide đang active hiện tại
-function getCurrentSlideImg() {
-    const slide = document.querySelector(`#lb-track .lb-slide[data-idx="${lbIdx}"]`);
-    return slide ? slide.querySelector('img') : null;
-}
-
 // ============================================================
-// HỆ THỐNG XỬ LÝ ZOOM ĐA ĐIỂM & KÉO THEO TỪNG ẢNH ĐANG XEM
+// LOGIC ZOOM & KÉO ĐỘC LẬP CHO TỪNG SLIDE (HỖ TRỢ 2 NGÓN TAY & MÁY TÍNH)
 // ============================================================
-function getDistance(touches) {
-    return Math.hypot(
-        touches[0].clientX - touches[1].clientX,
-        touches[0].clientY - touches[1].clientY
-    );
-}
+function initZoomAndPanForSlides() {
+    const slides = document.querySelectorAll('#lb-track .lb-slide');
 
-function updateTransform(img) {
-    if (!img) return;
-    scale = Math.max(1, Math.min(scale, 4));
+    slides.forEach(slide => {
+        const img = slide.querySelector('img');
+        if (!img) return;
 
-    const track = document.getElementById('lb-track');
-    if (scale === 1) {
-        translateX = 0;
-        translateY = 0;
-        img.classList.remove('zoomed');
-        if (track) track.style.overflowX = 'scroll';
-    } else {
-        img.classList.add('zoomed');
-        if (track) track.style.overflowX = 'hidden';
+        let scale = 1;
+        let translateX = 0;
+        let translateY = 0;
+        let isDragging = false;
+        let startX = 0, startY = 0;
+        let initialDistance = 0;
+        let initialScale = 1;
 
-        const maxX = (img.clientWidth * (scale - 1)) / 2;
-        const maxY = (img.clientHeight * (scale - 1)) / 2;
-        translateX = Math.max(-maxX, Math.min(maxX, translateX));
-        translateY = Math.max(-maxY, Math.min(maxY, translateY));
-    }
+        function updateImgTransform() {
+            scale = Math.max(1, Math.min(scale, 4));
+            const track = document.getElementById('lb-track');
 
-    requestAnimationFrame(() => {
-        img.style.transform = `translate3d(${translateX}px, ${translateY}px, 0px) scale(${scale})`;
+            if (scale === 1) {
+                translateX = 0;
+                translateY = 0;
+                img.classList.remove('zoomed');
+                if (track) track.style.overflowX = 'scroll';
+            } else {
+                img.classList.add('zoomed');
+                if (track) track.style.overflowX = 'hidden';
+
+                const maxX = (img.clientWidth * (scale - 1)) / 2;
+                const maxY = (img.clientHeight * (scale - 1)) / 2;
+                translateX = Math.max(-maxX, Math.min(maxX, translateX));
+                translateY = Math.max(-maxY, Math.min(maxY, translateY));
+            }
+
+            requestAnimationFrame(() => {
+                img.style.transform = `translate3d(${translateX}px, ${translateY}px, 0px) scale(${scale})`;
+            });
+        }
+
+        // --- Chuột máy tính (Mouse) ---
+        img.addEventListener('mousedown', e => {
+            if (scale > 1) {
+                isDragging = true;
+                startX = e.clientX - translateX;
+                startY = e.clientY - translateY;
+                e.preventDefault();
+            }
+        });
+
+        window.addEventListener('mousemove', e => {
+            if (!isDragging) return;
+            translateX = e.clientX - startX;
+            translateY = e.clientY - startY;
+            updateImgTransform();
+        });
+
+        window.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        // Double click để phóng to/thu nhỏ nhanh đúng bức ảnh đó
+        img.addEventListener('dblclick', () => {
+            if (scale === 1) {
+                scale = 2.5;
+                translateX = 0;
+                translateY = 0;
+            } else {
+                scale = 1;
+                translateX = 0;
+                translateY = 0;
+            }
+            updateImgTransform();
+        });
+
+        // Click đơn để chuyển đổi trạng thái zoom cơ bản
+        let clickStartX = 0, clickStartY = 0;
+        img.addEventListener('mousedown', e => { clickStartX = e.clientX; clickStartY = e.clientY; });
+        img.addEventListener('click', e => {
+            if (Math.abs(e.clientX - clickStartX) > 5 || Math.abs(e.clientY - downY > 5)) return; // Nếu đang kéo thì bỏ qua click
+            // Nếu không dùng double click thì có thể bật tính năng click chuyển zoom tại đây nếu muốn
+        });
+
+        // --- Cảm ứng điện thoại (Touch / Pinch-to-Zoom 2 ngón) ---
+        function getTouchDist(touches) {
+            return Math.hypot(touches[0].clientX - touches[1].clientX, touches[0].clientY - touches[1].clientY);
+        }
+
+        img.addEventListener('touchstart', e => {
+            if (e.touches.length === 2) {
+                isDragging = false;
+                initialDistance = getTouchDist(e.touches);
+                initialScale = scale;
+            } else if (e.touches.length === 1 && scale > 1) {
+                isDragging = true;
+                startX = e.touches[0].clientX - translateX;
+                startY = e.touches[0].clientY - translateY;
+            }
+        });
+
+        img.addEventListener('touchmove', e => {
+            if (e.touches.length === 2) {
+                e.preventDefault();
+                const currentDist = getTouchDist(e.touches);
+                if (initialDistance > 0) {
+                    scale = initialScale * (currentDist / initialDistance);
+                    updateImgTransform();
+                }
+            } else if (e.touches.length === 1 && isDragging && scale > 1) {
+                translateX = e.touches[0].clientX - startX;
+                translateY = e.touches[0].clientY - startY;
+                updateImgTransform();
+            }
+        }, { passive: false });
+
+        img.addEventListener('touchend', e => {
+            if (e.touches.length < 2) initialDistance = 0;
+            if (e.touches.length === 0) isDragging = false;
+        });
     });
 }
 
-// --- Xử lý sự kiện chuột (Desktop) ---
-document.addEventListener('mousedown', e => {
-    const img = getCurrentSlideImg();
-    if (img && e.target === img && scale > 1) {
-        isDragging = true;
-        startX = e.clientX - translateX;
-        startY = e.clientY - translateY;
-        e.preventDefault();
-    }
-});
-
-document.addEventListener('mousemove', e => {
-    if (!isDragging) return;
-    const img = getCurrentSlideImg();
-    if (!img) return;
-
-    translateX = e.clientX - startX;
-    translateY = e.clientY - startY;
-    updateTransform(img);
-});
-
-document.addEventListener('mouseup', () => {
-    isDragging = false;
-});
-
-// Double click để phóng to/thu nhỏ nhanh đúng bức ảnh đang xem
-document.addEventListener('dblclick', e => {
-    const img = getCurrentSlideImg();
-    if (img && e.target === img) {
-        if (scale === 1) {
-            scale = 2.5;
-            translateX = 0;
-            translateY = 0;
-        } else {
-            scale = 1;
-            translateX = 0;
-            translateY = 0;
-        }
-        updateTransform(img);
-    }
-});
-
-// --- Xử lý sự kiện cảm ứng đa điểm (Mobile Pinch-to-Zoom & Drag) ---
-document.addEventListener('touchstart', e => {
-    const img = getCurrentSlideImg();
-    if (!img || e.target !== img) return;
-
-    if (e.touches.length === 2) {
-        isDragging = false;
-        initialDistance = getDistance(e.touches);
-        initialScale = scale;
-    } else if (e.touches.length === 1 && scale > 1) {
-        isDragging = true;
-        startX = e.touches[0].clientX - translateX;
-        startY = e.touches[0].clientY - translateY;
-    }
-});
-
-document.addEventListener('touchmove', e => {
-    const img = getCurrentSlideImg();
-    if (!img || e.target !== img) return;
-
-    if (e.touches.length === 2) {
-        e.preventDefault();
-        const currentDistance = getDistance(e.touches);
-        if (initialDistance > 0) {
-            scale = initialScale * (currentDistance / initialDistance);
-            updateTransform(img);
-        }
-    } else if (e.touches.length === 1 && isDragging && scale > 1) {
-        translateX = e.touches[0].clientX - startX;
-        translateY = e.touches[0].clientY - startY;
-        updateTransform(img);
-    }
-}, { passive: false });
-
-document.addEventListener('touchend', e => {
-    if (e.touches.length < 2) {
-        initialDistance = 0;
-    }
-    if (e.touches.length === 0) {
-        isDragging = false;
-    }
-});
-
-function resetZoomState() {
+function resetAllZoomStates() {
     const imgs = document.querySelectorAll('#lb-track .lb-slide img');
     imgs.forEach(img => {
         img.classList.remove('zoomed');
         img.style.transform = '';
     });
-    scale = 1;
-    translateX = 0;
-    translateY = 0;
-    isDragging = false;
     const track = document.getElementById('lb-track');
     if (track) track.style.overflowX = 'scroll';
 }
