@@ -1034,18 +1034,24 @@
         max-height: 100%;
         border-radius: 5px;
         object-fit: contain;
-        cursor: zoom-in; /* Đổi con trỏ chuột thành hình kính lúp */
-        transition: transform 0.3s ease; /* Hiệu ứng chuyển động mượt */
+        cursor: zoom-in;
+        transition: transform 0.3s ease;
         user-select: none;
         -webkit-user-select: none;
+        transform-origin: center center; /* Phóng to từ tâm */
         box-shadow: 0 8px 40px rgba(0, 0, 0, .6);
     }
 
     .lb-slide img.zoomed {
-    transform: scale(2.2); /* Phóng to gấp 2.2 lần */
-    cursor: zoom-out;
-    z-index: 500;
-}
+        transform: scale(2.5); /* Mức độ phóng to (có thể chỉnh lên 3 nếu muốn to hơn) */
+        cursor: grab;          /* Đổi con trỏ thành hình bàn tay để kéo */
+        z-index: 500;
+        transition: transform 0.3s ease, translate 0s; /* Phóng to mượt nhưng kéo thì di chuyển tức thì */
+    }
+
+    .lb-slide img.zoomed:active {
+        cursor: grabbing;      /* Đổi thành bàn tay đang nắm khi đang kéo */
+    }
 
     .lb-slide video {
         pointer-events: auto
