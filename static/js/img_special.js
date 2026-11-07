@@ -1,5 +1,5 @@
 // ============================================================
-// STATE CHO PHẦN ĐẶC BIỆT (Phân trang, Pinch-to-Zoom & Kéo sát mép)
+// STATE CHO PHẦN ĐẶC BIỆT (Phân trang, Pinch-to-Zoom & Kéo sát mép theo từng ảnh)
 // ============================================================
 let currentAlbum = null;
 let currentLimit = 12; // Số lượng ảnh hiển thị ban đầu mỗi khi mở album
@@ -123,7 +123,7 @@ function renderMedia() {
 }
 
 // ============================================================
-// LIGHTBOX (Xem ảnh lớn, Zoom 2 ngón tay & Kéo sát mép)
+// LIGHTBOX (Xem ảnh lớn, Zoom & Kéo sát mép)
 // ============================================================
 let lbOpen = false;
 let lbScrolling = false;
@@ -167,6 +167,7 @@ function watchScroll() {
             const newIdx = Math.round(track.scrollLeft / slideW);
             if (currentAlbum && newIdx !== lbIdx && newIdx >= 0 && newIdx < currentAlbum.media.length) {
                 lbIdx = newIdx;
+                resetZoomState(); // Chuyển ảnh khác thì reset trạng thái zoom của ảnh cũ
                 updateHint();
             }
             if (Math.abs(track.scrollLeft - lbIdx * slideW) < 2) {
@@ -223,8 +224,14 @@ function lbNav(d) {
     track.scrollTo({ left: next * slideW, behavior: 'smooth' });
 }
 
+// Lấy đúng ảnh của slide đang active hiện tại
+function getCurrentSlideImg() {
+    const slide = document.querySelector(`#lb-track .lb-slide[data-idx="${lbIdx}"]`);
+    return slide ? slide.querySelector('img') : null;
+}
+
 // ============================================================
-// HỆ THỐNG XỬ LÝ ZOOM ĐA ĐIỂM (PINCH-TO-ZOOM) & PAN CHUẨN XÁC
+// HỆ THỐNG XỬ LÝ ZOOM ĐA ĐIỂM & KÉO THEO TỪNG ẢNH ĐANG XEM
 // ============================================================
 function getDistance(touches) {
     return Math.hypot(
@@ -234,21 +241,19 @@ function getDistance(touches) {
 }
 
 function updateTransform(img) {
-    // Giới hạn scale từ 1x đến 4x
+    if (!img) return;
     scale = Math.max(1, Math.min(scale, 4));
 
+    const track = document.getElementById('lb-track');
     if (scale === 1) {
         translateX = 0;
         translateY = 0;
         img.classList.remove('zoomed');
-        const track = document.getElementById('lb-track');
         if (track) track.style.overflowX = 'scroll';
     } else {
         img.classList.add('zoomed');
-        const track = document.getElementById('lb-track');
         if (track) track.style.overflowX = 'hidden';
 
-        // Tự động tính biên độ dựa trên kích thước thực để mép ảnh chạm khít mép màn hình
         const maxX = (img.clientWidth * (scale - 1)) / 2;
         const maxY = (img.clientHeight * (scale - 1)) / 2;
         translateX = Math.max(-maxX, Math.min(maxX, translateX));
@@ -262,7 +267,7 @@ function updateTransform(img) {
 
 // --- Xử lý sự kiện chuột (Desktop) ---
 document.addEventListener('mousedown', e => {
-    const img = document.querySelector('#lb-track .lb-slide img');
+    const img = getCurrentSlideImg();
     if (img && e.target === img && scale > 1) {
         isDragging = true;
         startX = e.clientX - translateX;
@@ -273,7 +278,7 @@ document.addEventListener('mousedown', e => {
 
 document.addEventListener('mousemove', e => {
     if (!isDragging) return;
-    const img = document.querySelector('#lb-track .lb-slide img.zoomed');
+    const img = getCurrentSlideImg();
     if (!img) return;
 
     translateX = e.clientX - startX;
@@ -285,9 +290,9 @@ document.addEventListener('mouseup', () => {
     isDragging = false;
 });
 
-// Double click để phóng to/thu nhỏ nhanh trên máy tính
+// Double click để phóng to/thu nhỏ nhanh đúng bức ảnh đang xem
 document.addEventListener('dblclick', e => {
-    const img = document.querySelector('#lb-track .lb-slide img');
+    const img = getCurrentSlideImg();
     if (img && e.target === img) {
         if (scale === 1) {
             scale = 2.5;
@@ -304,16 +309,14 @@ document.addEventListener('dblclick', e => {
 
 // --- Xử lý sự kiện cảm ứng đa điểm (Mobile Pinch-to-Zoom & Drag) ---
 document.addEventListener('touchstart', e => {
-    const img = document.querySelector('#lb-track .lb-slide img');
+    const img = getCurrentSlideImg();
     if (!img || e.target !== img) return;
 
     if (e.touches.length === 2) {
-        // Bắt đầu chụm 2 ngón tay để zoom
         isDragging = false;
         initialDistance = getDistance(e.touches);
         initialScale = scale;
     } else if (e.touches.length === 1 && scale > 1) {
-        // Kéo di chuyển ảnh khi đang zoom
         isDragging = true;
         startX = e.touches[0].clientX - translateX;
         startY = e.touches[0].clientY - translateY;
@@ -321,11 +324,10 @@ document.addEventListener('touchstart', e => {
 });
 
 document.addEventListener('touchmove', e => {
-    const img = document.querySelector('#lb-track .lb-slide img');
+    const img = getCurrentSlideImg();
     if (!img || e.target !== img) return;
 
     if (e.touches.length === 2) {
-        // Đang dùng 2 ngón tay phóng to/thu nhỏ
         e.preventDefault();
         const currentDistance = getDistance(e.touches);
         if (initialDistance > 0) {
@@ -333,7 +335,6 @@ document.addEventListener('touchmove', e => {
             updateTransform(img);
         }
     } else if (e.touches.length === 1 && isDragging && scale > 1) {
-        // Đang kéo di chuyển 1 ngón tay khi đã zoom
         translateX = e.touches[0].clientX - startX;
         translateY = e.touches[0].clientY - startY;
         updateTransform(img);
