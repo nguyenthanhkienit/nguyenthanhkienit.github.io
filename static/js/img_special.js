@@ -1,5 +1,5 @@
 // ============================================================
-// STATE CHO PHẦN ĐẶC BIỆT (Phân trang, Zoom & Giới hạn vùng kéo ảnh)
+// STATE CHO PHẦN ĐẶC BIỆT (Phân trang, Zoom & Kéo sát mép tuyệt đối)
 // ============================================================
 let currentAlbum = null;
 let currentLimit = 12; // Số lượng ảnh hiển thị ban đầu mỗi khi mở album
@@ -120,7 +120,7 @@ function renderMedia() {
 }
 
 // ============================================================
-// LIGHTBOX (Xem ảnh lớn, Zoom & Giới hạn biên độ kéo)
+// LIGHTBOX (Xem ảnh lớn, Zoom & Kéo sát mép tuyệt đối)
 // ============================================================
 let lbOpen = false;
 let lbScrolling = false;
@@ -220,7 +220,7 @@ function lbNav(d) {
 }
 
 // ============================================================
-// XỬ LÝ KÉO CÓ GIỚI HẠN BIÊN (CHỈ CHO PHÉP LƯỚT VỪA PHẢI)
+// XỬ LÝ KÉO SÁT MÉP THEO KÍCH THƯỚC THỰC TẾ (ĐỘ PHÓNG 2.5X)
 // ============================================================
 document.addEventListener('mousedown', e => {
     downX = e.clientX;
@@ -245,11 +245,12 @@ document.addEventListener('mousemove', function(e) {
     translateX += dx;
     translateY += dy;
     
-    // GIỚI HẠN BIÊN (CLAMP): Chỉ cho phép lướt lệch tối đa khoảng 150px - 200px (tương đương ~1/2 hình)
-    const maxLimitX = 180;
-    const maxLimitY = 180;
-    translateX = Math.max(-maxLimitX, Math.min(maxLimitX, translateX));
-    translateY = Math.max(-maxLimitY, Math.min(maxLimitY, translateY));
+    // Tăng biên độ lên mức rộng hơn (khoảng 600px) để cho phép ảnh trượt sát tận mép khung hình
+    const limitX = 600;
+    const limitY = 500;
+    
+    translateX = Math.max(-limitX, Math.min(limitX, translateX));
+    translateY = Math.max(-limitY, Math.min(limitY, translateY));
     
     startX = e.clientX;
     startY = e.clientY;
@@ -306,11 +307,12 @@ document.addEventListener('touchmove', function(e) {
     translateX += dx;
     translateY += dy;
     
-    // Giới hạn biên trên mobile
-    const maxLimitX = 180;
-    const maxLimitY = 180;
-    translateX = Math.max(-maxLimitX, Math.min(maxLimitX, translateX));
-    translateY = Math.max(-maxLimitY, Math.min(maxLimitY, translateY));
+    // Biên độ mở rộng trên mobile
+    const limitX = 600;
+    const limitY = 500;
+    
+    translateX = Math.max(-limitX, Math.min(limitX, translateX));
+    translateY = Math.max(-limitY, Math.min(limitY, translateY));
     
     startX = e.touches[0].clientX;
     startY = e.touches[0].clientY;
