@@ -1,5 +1,5 @@
 // ============================================================
-// STATE CHO PHẦN ĐẶC BIỆT (Phân trang, Zoom & Kéo ảnh mượt mà)
+// STATE CHO PHẦN ĐẶC BIỆT (Phân trang, Zoom & Giới hạn vùng kéo ảnh)
 // ============================================================
 let currentAlbum = null;
 let currentLimit = 12; // Số lượng ảnh hiển thị ban đầu mỗi khi mở album
@@ -50,7 +50,7 @@ function renderAlbums() {
 function openAlbum(id) {
     currentAlbum = ALBUMS.find(a => a.id === id);
     if (!currentAlbum) return;
-    currentLimit = 12; // Khởi tạo chỉ load 12 mục đầu tiên
+    currentLimit = 12; 
     document.getElementById('album-title').textContent = currentAlbum.name;
     document.getElementById('album-sub').textContent = currentAlbum.media.length + ' mục';
     
@@ -65,7 +65,6 @@ function showHome() {
     document.getElementById('album-page').classList.remove('open');
     document.body.style.overflow = '';
     
-    // Xóa sạch nội dung bên trong khi đóng để giải phóng RAM hoàn toàn
     setTimeout(() => {
         const mediaGrid = document.getElementById('media-grid');
         if (mediaGrid) mediaGrid.innerHTML = '';
@@ -96,7 +95,6 @@ function renderMedia() {
       </div>`;
     }).join('');
 
-    // Xử lý nút "Xem thêm"
     let loadMoreBtn = document.getElementById('special-load-more');
     
     if (currentLimit < currentAlbum.media.length) {
@@ -122,7 +120,7 @@ function renderMedia() {
 }
 
 // ============================================================
-// LIGHTBOX (Xem ảnh lớn, Zoom & Kéo ảnh)
+// LIGHTBOX (Xem ảnh lớn, Zoom & Giới hạn biên độ kéo)
 // ============================================================
 let lbOpen = false;
 let lbScrolling = false;
@@ -200,7 +198,7 @@ function openLb(idx) {
 }
 
 function closeLb() {
-    resetZoom(); // Reset trạng thái zoom và vị trí kéo khi đóng
+    resetZoom(); 
     const lightbox = document.getElementById('lightbox');
     if (lightbox) lightbox.classList.remove('open');
     
@@ -211,7 +209,7 @@ function closeLb() {
 }
 
 function lbNav(d) {
-    resetZoom(); // Reset trạng thái zoom khi chuyển ảnh
+    resetZoom(); 
     if (!currentAlbum) return;
     const next = lbIdx + d;
     if (next < 0 || next >= currentAlbum.media.length) return;
@@ -222,7 +220,7 @@ function lbNav(d) {
 }
 
 // ============================================================
-// XỬ LÝ SỰ KIỆN ZOOM & KÉO ẢNH MƯỢT MÀ (CÓ ĐỘ TRỄ/ĐẦM TAY)
+// XỬ LÝ KÉO CÓ GIỚI HẠN BIÊN (CHỈ CHO PHÉP LƯỚT VỪA PHẢI)
 // ============================================================
 document.addEventListener('mousedown', e => {
     downX = e.clientX;
@@ -240,7 +238,6 @@ document.addEventListener('mousedown', e => {
 document.addEventListener('mousemove', function(e) {
     if (!isDragging) return;
     
-    // Hệ số ma sát (0.6 giúp kéo đầm tay, không bị lướt quá nhanh)
     const sensitivity = 0.6;
     const dx = (e.clientX - startX) * sensitivity;
     const dy = (e.clientY - startY) * sensitivity;
@@ -248,12 +245,20 @@ document.addEventListener('mousemove', function(e) {
     translateX += dx;
     translateY += dy;
     
+    // GIỚI HẠN BIÊN (CLAMP): Chỉ cho phép lướt lệch tối đa khoảng 150px - 200px (tương đương ~1/2 hình)
+    const maxLimitX = 180;
+    const maxLimitY = 180;
+    translateX = Math.max(-maxLimitX, Math.min(maxLimitX, translateX));
+    translateY = Math.max(-maxLimitY, Math.min(maxLimitY, translateY));
+    
     startX = e.clientX;
     startY = e.clientY;
     
     const img = document.querySelector('#lb-track .lb-slide img.zoomed');
     if (img) {
-        img.style.transform = `scale(2.5) translate(${translateX}px, ${translateY}px)`;
+        requestAnimationFrame(() => {
+            img.style.transform = `scale(2.5) translate3d(${translateX}px, ${translateY}px, 0px)`;
+        });
     }
 });
 
@@ -261,7 +266,7 @@ document.addEventListener('mouseup', function() {
     isDragging = false;
 });
 
-// Click vào ảnh để phóng to hoặc thu nhỏ lại
+// Click để phóng to hoặc thu nhỏ lại
 document.addEventListener('click', function(e) {
     if (e.target.matches('#lb-track .lb-slide img')) {
         if (Math.abs(e.clientX - downX) > 5 || Math.abs(e.clientY - downY) > 5) return;
@@ -278,7 +283,7 @@ document.addEventListener('click', function(e) {
     }
 });
 
-// Hỗ trợ cảm ứng kéo trên điện thoại (Mobile Touch)
+// Hỗ trợ cảm ứng vuốt trên điện thoại
 document.addEventListener('touchstart', function(e) {
     downX = e.touches[0].clientX;
     downY = e.touches[0].clientY;
@@ -294,19 +299,27 @@ document.addEventListener('touchstart', function(e) {
 document.addEventListener('touchmove', function(e) {
     if (!isDragging || e.touches.length !== 1) return;
     
-    const sensitivity = 0.7; // Độ nhạy khi vuốt trên màn hình cảm ứng
+    const sensitivity = 0.7;
     const dx = (e.touches[0].clientX - startX) * sensitivity;
     const dy = (e.touches[0].clientY - startY) * sensitivity;
     
     translateX += dx;
     translateY += dy;
     
+    // Giới hạn biên trên mobile
+    const maxLimitX = 180;
+    const maxLimitY = 180;
+    translateX = Math.max(-maxLimitX, Math.min(maxLimitX, translateX));
+    translateY = Math.max(-maxLimitY, Math.min(maxLimitY, translateY));
+    
     startX = e.touches[0].clientX;
     startY = e.touches[0].clientY;
     
     const img = document.querySelector('#lb-track .lb-slide img.zoomed');
     if (img) {
-        img.style.transform = `scale(2.5) translate(${translateX}px, ${translateY}px)`;
+        requestAnimationFrame(() => {
+            img.style.transform = `scale(2.5) translate3d(${translateX}px, ${translateY}px, 0px)`;
+        });
     }
 });
 
