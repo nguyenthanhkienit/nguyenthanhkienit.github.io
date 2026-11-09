@@ -1,10 +1,19 @@
 // ============================================================
-// STATE CHO PHẦN ĐẶC BIỆT (Phân trang, Pinch-to-Zoom & Kéo độc lập từng ảnh)
+// STATE CHO PHẦN ĐẶC BIỆT (Zoom nét căng & Kéo mượt không reset)
 // ============================================================
 let currentAlbum = null;
-let currentLimit = 12; // Số lượng ảnh hiển thị ban đầu mỗi khi mở album
-const stepLimit = 12;  // Số lượng ảnh hiện thêm mỗi khi bấm nút "Xem thêm"
+let currentLimit = 12;
+const stepLimit = 12;
 let lbIdx = 0;
+let lbOpen = false;
+
+// Trạng thái Zoom & Pan
+let scale = 1;
+let translateX = 0;
+let translateY = 0;
+let isDragging = false;
+let startX = 0, startY = 0;
+let pointerHasMoved = false;
 
 // ============================================================
 // TRANG CHỦ ALBUM
@@ -12,6 +21,8 @@ let lbIdx = 0;
 function renderAlbums() {
     const g = document.getElementById('album-grid');
     if (!g) return;
+    if (typeof ALBUMS === 'undefined' || !ALBUMS.length) return;
+    
     g.innerHTML = ALBUMS.map(a => {
         const imgs = a.media.filter(m => m.type === 'img').slice(0, 4);
         const imgsCount = a.media.filter(m => m.type === 'img').length;
@@ -20,7 +31,7 @@ function renderAlbums() {
         if (imgs.length >= 4) {
             thumb = `<div class="album-thumb-grid">${imgs.map(i => `<img src="${i.src}" loading="lazy" alt="">`).join('')}</div>`;
         } else {
-            const first = a.media[0];
+            const first = a.media[0] || { src: '' };
             thumb = `<img class="album-thumb" src="${first.poster || first.src}" loading="lazy" alt="">`;
         }
         return `
@@ -39,7 +50,7 @@ function renderAlbums() {
 }
 
 // ============================================================
-// MỞ ALBUM (Reset về giới hạn ban đầu)
+// MỞ ALBUM & PHÂN TRANG
 // ============================================================
 function openAlbum(id) {
     currentAlbum = ALBUMS.find(a => a.id === id);
@@ -67,9 +78,6 @@ function showHome() {
     }, 400);
 }
 
-// ============================================================
-// RENDER MEDIA THEO TỪNG PHẦN (CÓ NÚT XEM THÊM)
-// ============================================================
 function renderMedia() {
     const g = document.getElementById('media-grid');
     if (!g || !currentAlbum) return;
@@ -90,7 +98,6 @@ function renderMedia() {
     }).join('');
 
     let loadMoreBtn = document.getElementById('special-load-more');
-    
     if (currentLimit < currentAlbum.media.length) {
         if (!loadMoreBtn) {
             loadMoreBtn = document.createElement('button');
@@ -107,253 +114,179 @@ function renderMedia() {
             loadMoreBtn.style.display = 'block';
         }
     } else {
-        if (loadMoreBtn) {
-            loadMoreBtn.style.display = 'none';
-        }
+        if (loadMoreBtn) loadMoreBtn.style.display = 'none';
     }
 }
 
 // ============================================================
-// LIGHTBOX (Xem ảnh lớn, Zoom & Kéo độc lập từng slide)
+// LIGHTBOX: HIỂN THỊ VÀ ZOOM NÉT CĂNG
 // ============================================================
-let lbOpen = false;
-let lbScrolling = false;
-
-function mediaEl(m) {
-    if (m.type === 'video') {
-        return `<video src="${m.src}" poster="${m.poster}" controls style="max-width:100%;max-height:100%;border-radius:5px"></video>`;
-    }
-    return `<img src="${m.src}" alt="">`;
-}
-
-function renderLb() {
-    const track = document.getElementById('lb-track');
-    if (!track || !currentAlbum) return;
-    
-    track.innerHTML = currentAlbum.media.map((m, i) =>
-        `<div class="lb-slide" data-idx="${i}">${mediaEl(m)}</div>`
-    ).join('');
-
-    const slideW = track.offsetWidth + 24;
-    track.scrollLeft = lbIdx * slideW;
-
-    updateHint();
-    watchScroll();
-    initZoomAndPanForSlides();
-}
-
-function updateHint() {
-    const hintEl = document.getElementById('lb-hint');
-    if (hintEl && currentAlbum) {
-        hintEl.textContent = `${lbIdx + 1} / ${currentAlbum.media.length}`;
-    }
-}
-
-function watchScroll() {
-    const track = document.getElementById('lb-track');
-    if (!track) return;
-    track.onscroll = () => {
-        if (lbScrolling) return;
-        lbScrolling = true;
-        const check = () => {
-            const slideW = track.offsetWidth + 24;
-            const newIdx = Math.round(track.scrollLeft / slideW);
-            if (currentAlbum && newIdx !== lbIdx && newIdx >= 0 && newIdx < currentAlbum.media.length) {
-                lbIdx = newIdx;
-                resetAllZoomStates(); // Chuyển ảnh khác thì reset toàn bộ zoom của ảnh cũ
-                updateHint();
-            }
-            if (Math.abs(track.scrollLeft - lbIdx * slideW) < 2) {
-                lbScrolling = false;
-            } else {
-                requestAnimationFrame(check);
-            }
-        };
-        requestAnimationFrame(check);
-    };
-}
-
 function openLb(idx) {
     lbIdx = idx;
     lbOpen = true;
-
-    const track = document.getElementById('lb-track');
-    if (track) track.style.visibility = 'hidden';
+    resetZoomState();
 
     const lightbox = document.getElementById('lightbox');
     if (lightbox) lightbox.classList.add('open');
-    
-    const albumPage = document.getElementById('album-page');
-    if (albumPage) albumPage.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
 
-    requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-            renderLb();
-            if (track) track.style.visibility = '';
-        });
-    });
+    renderCurrentLbItem();
 }
 
 function closeLb() {
-    resetAllZoomStates();
+    resetZoomState();
     const lightbox = document.getElementById('lightbox');
     if (lightbox) lightbox.classList.remove('open');
-    
-    const albumPage = document.getElementById('album-page');
-    if (albumPage) albumPage.style.overflow = 'auto';
-    
+    document.body.style.overflow = '';
     lbOpen = false;
 }
 
 function lbNav(d) {
-    resetAllZoomStates();
     if (!currentAlbum) return;
     const next = lbIdx + d;
     if (next < 0 || next >= currentAlbum.media.length) return;
-    const track = document.getElementById('lb-track');
-    if (!track) return;
-    const slideW = track.offsetWidth + 24;
-    track.scrollTo({ left: next * slideW, behavior: 'smooth' });
+    lbIdx = next;
+    resetZoomState();
+    renderCurrentLbItem();
 }
 
-// ============================================================
-// LOGIC ZOOM & KÉO ĐỘC LẬP CHO TỪNG SLIDE (HỖ TRỢ 2 NGÓN TAY & MÁY TÍNH)
-// ============================================================
-function initZoomAndPanForSlides() {
-    const slides = document.querySelectorAll('#lb-track .lb-slide');
+function renderCurrentLbItem() {
+    const container = document.getElementById('lb-content-wrapper');
+    const hintEl = document.getElementById('lb-hint');
+    if (!container || !currentAlbum) return;
 
-    slides.forEach(slide => {
-        const img = slide.querySelector('img');
-        if (!img) return;
+    const m = currentAlbum.media[lbIdx];
+    if (!m) return;
 
-        let scale = 1;
-        let translateX = 0;
-        let translateY = 0;
-        let isDragging = false;
-        let startX = 0, startY = 0;
-        let initialDistance = 0;
-        let initialScale = 1;
+    if (m.type === 'video') {
+        container.innerHTML = `<video src="${m.src}" poster="${m.poster}" controls autoplay style="max-width:85vw;max-height:85vh;border-radius:5px"></video>`;
+    } else {
+        // Thêm thuộc tính srcset hoặc ép trình duyệt nhận diện file ảnh gốc với kích thước tối đa
+        container.innerHTML = `<img src="${m.src}" alt="Media Item" style="width: auto; height: auto; max-width: 90vw; max-height: 90vh; object-fit: contain; border-radius: 5px;">`;
+    }
 
-        function updateImgTransform() {
-            scale = Math.max(1, Math.min(scale, 4));
-            const track = document.getElementById('lb-track');
-
-            if (scale === 1) {
-                translateX = 0;
-                translateY = 0;
-                img.classList.remove('zoomed');
-                if (track) track.style.overflowX = 'scroll';
-            } else {
-                img.classList.add('zoomed');
-                if (track) track.style.overflowX = 'hidden';
-
-                const maxX = (img.clientWidth * (scale - 1)) / 2;
-                const maxY = (img.clientHeight * (scale - 1)) / 2;
-                translateX = Math.max(-maxX, Math.min(maxX, translateX));
-                translateY = Math.max(-maxY, Math.min(maxY, translateY));
-            }
-
-            requestAnimationFrame(() => {
-                img.style.transform = `translate3d(${translateX}px, ${translateY}px, 0px) scale(${scale})`;
-            });
-        }
-
-        // --- Chuột máy tính (Mouse) ---
-        img.addEventListener('mousedown', e => {
-            if (scale > 1) {
-                isDragging = true;
-                startX = e.clientX - translateX;
-                startY = e.clientY - translateY;
-                e.preventDefault();
-            }
-        });
-
-        window.addEventListener('mousemove', e => {
-            if (!isDragging) return;
-            translateX = e.clientX - startX;
-            translateY = e.clientY - startY;
-            updateImgTransform();
-        });
-
-        window.addEventListener('mouseup', () => {
-            isDragging = false;
-        });
-
-        // Double click để phóng to/thu nhỏ nhanh đúng bức ảnh đó
-        img.addEventListener('dblclick', () => {
-            if (scale === 1) {
-                scale = 2.5;
-                translateX = 0;
-                translateY = 0;
-            } else {
-                scale = 1;
-                translateX = 0;
-                translateY = 0;
-            }
-            updateImgTransform();
-        });
-
-        // Click đơn để chuyển đổi trạng thái zoom cơ bản
-        let clickStartX = 0, clickStartY = 0;
-        img.addEventListener('mousedown', e => { clickStartX = e.clientX; clickStartY = e.clientY; });
-        img.addEventListener('click', e => {
-            if (Math.abs(e.clientX - clickStartX) > 5 || Math.abs(e.clientY - downY > 5)) return; // Nếu đang kéo thì bỏ qua click
-            // Nếu không dùng double click thì có thể bật tính năng click chuyển zoom tại đây nếu muốn
-        });
-
-        // --- Cảm ứng điện thoại (Touch / Pinch-to-Zoom 2 ngón) ---
-        function getTouchDist(touches) {
-            return Math.hypot(touches[0].clientX - touches[1].clientX, touches[0].clientY - touches[1].clientY);
-        }
-
-        img.addEventListener('touchstart', e => {
-            if (e.touches.length === 2) {
-                isDragging = false;
-                initialDistance = getTouchDist(e.touches);
-                initialScale = scale;
-            } else if (e.touches.length === 1 && scale > 1) {
-                isDragging = true;
-                startX = e.touches[0].clientX - translateX;
-                startY = e.touches[0].clientY - translateY;
-            }
-        });
-
-        img.addEventListener('touchmove', e => {
-            if (e.touches.length === 2) {
-                e.preventDefault();
-                const currentDist = getTouchDist(e.touches);
-                if (initialDistance > 0) {
-                    scale = initialScale * (currentDist / initialDistance);
-                    updateImgTransform();
-                }
-            } else if (e.touches.length === 1 && isDragging && scale > 1) {
-                translateX = e.touches[0].clientX - startX;
-                translateY = e.touches[0].clientY - startY;
-                updateImgTransform();
-            }
-        }, { passive: false });
-
-        img.addEventListener('touchend', e => {
-            if (e.touches.length < 2) initialDistance = 0;
-            if (e.touches.length === 0) isDragging = false;
-        });
-    });
+    if (hintEl) {
+        hintEl.textContent = `${lbIdx + 1} / ${currentAlbum.media.length}`;
+    }
 }
 
-function resetAllZoomStates() {
-    const imgs = document.querySelectorAll('#lb-track .lb-slide img');
-    imgs.forEach(img => {
+function resetZoomState() {
+    scale = 1;
+    translateX = 0;
+    translateY = 0;
+    isDragging = false;
+    pointerHasMoved = false;
+    
+    const img = document.querySelector('#lb-content-wrapper img');
+    if (img) {
         img.classList.remove('zoomed');
         img.style.transform = '';
-    });
-    const track = document.getElementById('lb-track');
-    if (track) track.style.overflowX = 'scroll';
+        img.style.width = '';
+        img.style.height = '';
+    }
 }
 
-document.getElementById('lightbox')?.addEventListener('click', function (e) {
-    if (e.target === this || e.target.classList.contains('lb-slide')) { 
-        closeLb(); 
+function updateImageTransform(img) {
+    if (!img) return;
+
+    if (scale === 1) {
+        translateX = 0;
+        translateY = 0;
+        img.classList.remove('zoomed');
+        img.style.transform = '';
+    } else {
+        img.classList.add('zoomed');
+        
+        // Tính toán khoảng không gian vượt quá màn hình khi zoom để cho phép kéo tới tận cùng các mép
+        const overflowX = Math.max(0, (img.offsetWidth * scale - window.innerWidth) / 2);
+        const overflowY = Math.max(0, (img.offsetHeight * scale - window.innerHeight) / 2);
+        
+        // Cho phép kéo dư ra một chút (thêm 150px) để dễ dàng nhìn thấy phần trên và dưới cùng
+        const maxX = overflowX + 150;
+        const maxY = overflowY + 150;
+        
+        translateX = Math.max(-maxX, Math.min(maxX, translateX));
+        translateY = Math.max(-maxY, Math.min(maxY, translateY));
+
+        requestAnimationFrame(() => {
+            img.style.transform = `translate3d(${translateX}px, ${translateY}px, 0px) scale(${scale})`;
+        });
     }
+}
+
+// ============================================================
+// XỬ LÝ SỰ KIỆN CLICK & KÉO
+// ============================================================
+document.addEventListener('click', e => {
+    if (!lbOpen) return;
+    const img = document.querySelector('#lb-content-wrapper img');
+    if (img && e.target === img) {
+        if (pointerHasMoved) return;
+        
+        if (scale === 1) {
+            scale = 1.3; // Tỷ lệ phóng to nét chuẩn
+            translateX = 0;
+            translateY = 0;
+        } else {
+            scale = 1;
+            translateX = 0;
+            translateY = 0;
+        }
+        updateImageTransform(img);
+    }
+});
+
+document.addEventListener('mousedown', e => {
+    if (!lbOpen) return;
+    const img = document.querySelector('#lb-content-wrapper img');
+    if (img && e.target === img && scale > 1) {
+        isDragging = true;
+        pointerHasMoved = false;
+        startX = e.clientX - translateX;
+        startY = e.clientY - translateY;
+        e.preventDefault();
+    }
+});
+
+document.addEventListener('mousemove', e => {
+    if (!isDragging || !lbOpen) return;
+    const img = document.querySelector('#lb-content-wrapper img');
+    if (!img) return;
+
+    pointerHasMoved = true;
+    translateX = e.clientX - startX;
+    translateY = e.clientY - startY;
+    updateImageTransform(img);
+});
+
+document.addEventListener('mouseup', () => {
+    isDragging = false;
+});
+
+document.addEventListener('touchstart', e => {
+    if (!lbOpen) return;
+    const img = document.querySelector('#lb-content-wrapper img');
+    if (img && e.target === img && e.touches.length === 1 && scale > 1) {
+        isDragging = true;
+        pointerHasMoved = false;
+        startX = e.touches[0].clientX - translateX;
+        startY = e.touches[0].clientY - translateY;
+    }
+});
+
+document.addEventListener('touchmove', e => {
+    if (!isDragging || !lbOpen || e.touches.length !== 1) return;
+    const img = document.querySelector('#lb-content-wrapper img');
+    if (!img) return;
+
+    pointerHasMoved = true;
+    translateX = e.touches[0].clientX - startX;
+    translateY = e.touches[0].clientY - startY;
+    updateImageTransform(img);
+}, { passive: true });
+
+document.addEventListener('touchend', () => {
+    isDragging = false;
 });
 
 document.addEventListener('keydown', e => {
@@ -363,5 +296,5 @@ document.addEventListener('keydown', e => {
     if (e.key === 'Escape') closeLb();
 });
 
-// Khởi chạy khi tải trang
+// Khởi chạy
 renderAlbums();
