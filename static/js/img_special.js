@@ -217,14 +217,12 @@ function updateImageTransform(img) {
 // ============================================================
 // XỬ LÝ SỰ KIỆN CLICK & KÉO
 // ============================================================
-document.addEventListener('click', e => {
+document.addEventListener('dblclick', e => {
     if (!lbOpen) return;
     const img = document.querySelector('#lb-content-wrapper img');
     if (img && e.target === img) {
-        if (pointerHasMoved) return;
-        
         if (scale === 1) {
-            scale = 1.3; // Tỷ lệ phóng to nét chuẩn
+            scale = 1.3; // Tỷ lệ zoom vừa phải, nét căng
             translateX = 0;
             translateY = 0;
         } else {
