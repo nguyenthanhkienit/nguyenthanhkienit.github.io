@@ -224,7 +224,7 @@ document.addEventListener('dblclick', e => {
         if (scale === 1) {
             // Kiểm tra nếu là mobile (màn hình nhỏ hơn 768px) thì cho zoom to hơn (2.2), PC thì 1.7
             const isMobile = window.innerWidth <= 768;
-            scale = isMobile ? 2.2 : 1.1; 
+            scale = isMobile ? 1.001 : 1.1; 
             
             translateX = 0;
             translateY = 0;
