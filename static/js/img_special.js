@@ -222,7 +222,7 @@ document.addEventListener('dblclick', e => {
     const img = document.querySelector('#lb-content-wrapper img');
     if (img && e.target === img) {
         if (scale === 1) {
-            scale = 1.3; // Tỷ lệ zoom vừa phải, nét căng
+            scale = 1.1; // Tỷ lệ zoom vừa phải, nét căng
             translateX = 0;
             translateY = 0;
         } else {
